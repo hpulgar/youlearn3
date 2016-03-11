@@ -1,5 +1,6 @@
 package VIEWS.util;
 
+import ENTITIES.Ciudad;
 import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
@@ -19,6 +20,20 @@ public class JsfUtil {
         }
         for (Object x : entities) {
             items[i++] = new SelectItem(x, x.toString());
+        }
+        return items;
+    }
+    
+     public static SelectItem[] getSelectItemsCiudad(List<Ciudad> entities, boolean selectOne) {
+        int size = selectOne ? entities.size() + 1 : entities.size();
+        SelectItem[] items = new SelectItem[size];
+        int i = 0;
+        if (selectOne) {
+            items[0] = new SelectItem("", "Seleccione una opcion");
+            i++;
+        }
+        for (Ciudad x : entities) {
+            items[i++] = new SelectItem(x.getIdCiudad(), x.getNombreCiudad());
         }
         return items;
     }

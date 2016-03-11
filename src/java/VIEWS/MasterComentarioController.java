@@ -1,11 +1,17 @@
 package VIEWS;
 
 import ENTITIES.MasterComentario;
+import ENTITIES.MasterPft;
+import ENTITIES.Usuario;
 import VIEWS.util.JsfUtil;
 import VIEWS.util.PaginationHelper;
 import MODELS.MasterComentarioFacade;
 
 import java.io.Serializable;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
 import java.util.ResourceBundle;
 import javax.ejb.EJB;
 import javax.inject.Named;
@@ -23,6 +29,8 @@ import javax.faces.model.SelectItem;
 public class MasterComentarioController implements Serializable {
 
     private MasterComentario current;
+    private List<MasterComentario> comentariosForo;     
+    private List<MasterComentario> comentariosForo2;  
     private DataModel items = null;
     @EJB
     private MODELS.MasterComentarioFacade ejbFacade;
@@ -31,7 +39,33 @@ public class MasterComentarioController implements Serializable {
 
     public MasterComentarioController() {
     }
+/////////////////////////////////
+    public List<MasterComentario> comentariosForo() {
+        MasterComentario foro = new MasterComentario();        
+        this.comentariosForo = ejbFacade.verC();        
+        for(int i=0;i>=comentariosForo.size();i++)
+        {
+        
+            if((comentariosForo.get(i).getIdPft().getIdPft()==2) &&(comentariosForo.get(i).getIdPublicacion()==4))
+                {
+                    foro = comentariosForo.get(i);
+                    this.comentariosForo2.add(foro);
+                } 
+        }
+        return comentariosForo2;
+        
+    }
+    
+   ///////////////////// 
+    
+    public void setComentariosForo(List<MasterComentario> comentariosForo) {
+        this.comentariosForo = comentariosForo;
+    }
 
+    public List<MasterComentario> getComentariosForo() {
+        return comentariosForo;
+    }
+    
     public MasterComentario getSelected() {
         if (current == null) {
             current = new MasterComentario();
@@ -179,6 +213,65 @@ public class MasterComentarioController implements Serializable {
         recreateModel();
         return "List";
     }
+    
+    //CODIGO RECONCHESUMARE
+    
+    public String CrearComentario(int idComentador,int idPublicacion,int pft){
+    try
+    {
+        
+        //id comentario no va
+        //id_pft viene por parametro --
+        //comentario se define en xhtml
+        //fecha comentario se moldea --
+        //id usuario viene por parametro --
+        //id publicacion viene por parametro --
+        
+        MasterComentario mc = new MasterComentario();
+        mc.setIdPublicacion(idPublicacion);
+        Usuario ou = new Usuario();
+        ou.setIdUsuario(idComentador);
+        MasterPft mpft =  new MasterPft();
+        mpft.setIdPft(pft);
+                
+        DateFormat dateFormat = new SimpleDateFormat("yyyy/mm/dd HH:mm:ss");
+        Date date = new Date();
+        String fecha = dateFormat.format(date);
+        
+        
+        current.setIdPft(mpft);
+        current.setFechaComentario(dateFormat.parse(fecha));
+        current.setIdUsuario(ou);
+        current.setIdPublicacion(idPublicacion);
+        
+        getFacade().create(current);
+        current = null;
+        
+        return "/blog-single.xhtml";
+        
+    }catch(Exception e){
+        
+        System.out.println("Si la wea tira error es este --> "+e);
+        return "/blog-single.xhtml";}
+    
+    
+    
+    
+    
+    
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    //fin
 
     public SelectItem[] getItemsAvailableSelectMany() {
         return JsfUtil.getSelectItems(ejbFacade.findAll(), false);

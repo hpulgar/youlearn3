@@ -1,15 +1,19 @@
 package VIEWS;
 
+import ENTITIES.Perfil;
 import ENTITIES.Usuario;
 import VIEWS.util.JsfUtil;
 import VIEWS.util.PaginationHelper;
 import MODELS.UsuarioFacade;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
@@ -17,6 +21,10 @@ import javax.faces.convert.FacesConverter;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 @Named("usuarioController")
 @SessionScoped
@@ -25,9 +33,69 @@ public class UsuarioController implements Serializable {
     private Usuario current;
     private DataModel items = null;
     @EJB
-    private MODELS.UsuarioFacade ejbFacade;
+      private MODELS.UsuarioFacade ejbFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
+   private String nombreUsuario,contraseña,message;
+
+    public String getNombreUsuario() {
+        return nombreUsuario;
+    }
+
+    public void setNombreUsuario(String nombreUsuario) {
+        this.nombreUsuario = nombreUsuario;
+    }
+
+    public String getContraseña() {
+        return contraseña;
+    }
+
+    public void setContraseña(String contraseña) {
+        this.contraseña = contraseña;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    public List<Usuario> getIdp() {
+        return idp;
+    }
+
+    public void setIdp(List<Usuario> idp) {
+        this.idp = idp;
+    }
+
+    public List<Usuario> getCargaP() {
+        return cargaP;
+    }
+
+    public void setCargaP(List<Usuario> cargaP) {
+        this.cargaP = cargaP;
+    }
+
+    public int getIdProfile() {
+        return idProfile;
+    }
+
+    public void setIdProfile(int idProfile) {
+        this.idProfile = idProfile;
+    }
+   private List<Usuario> idp = new ArrayList();
+    private List<Usuario> cargaP = new ArrayList();
+    private int idProfile;
+
+
+ private int id_user;
+    private String correo;
+    private int id_muro;
+  
+
+  
 
     public UsuarioController() {
     }
@@ -42,6 +110,14 @@ public class UsuarioController implements Serializable {
 
     private UsuarioFacade getFacade() {
         return ejbFacade;
+    }
+
+     public int getId_user() {
+        return id_user;
+    }
+
+    public void setId_user(int id_user) {
+        this.id_user = id_user;
     }
 
     public PaginationHelper getPagination() {
@@ -78,6 +154,128 @@ public class UsuarioController implements Serializable {
         selectedItemIndex = -1;
         return "Create";
     }
+
+    
+        //carga username
+    public String verUsername(int idp){
+        System.out.println("IMRPIMIENDO EL ID DEL USUARIO "+idp);
+        Usuario uo = new Usuario();
+        uo = ejbFacade.cargaUsername(idp).get(0);
+        System.out.println("IMRPIMIENDO EL nombre DEL USUARIO "+uo.getUsername());
+    
+        return uo.getUsername();
+    }
+    
+    
+     private int getPerfil(String nomU,String PassUS)
+     {
+         //Usuario uss;
+         idp = ejbFacade.log(nomU, PassUS);
+         for(int i = 0;i<idp.size();i++)
+         {
+             setIdProfile((int) idp.get(i).getIdPerfil().getIdPerfil());
+             setId_user((int) idp.get(i).getIdUsuario());
+         }
+         return getIdProfile();
+         
+     }
+    
+        private boolean verifica(String nombreU,String passU)
+    {
+        
+        getPerfil(nombreU,passU);
+        return !ejbFacade.log(nombreU, passU).isEmpty();
+       
+    }
+     public String acceso()
+   {
+       if(verifica(getNombreUsuario(), getContraseña()))
+       {
+         
+           HttpSession session = Util.getSession();
+          
+       
+             session.setAttribute("id_perfil", getIdProfile());
+             session.setAttribute("username", getNombreUsuario());
+              session.setAttribute("id_usuario", getId_user());
+              
+         
+          
+           setCookie("CookieValue","CookieStorage",3000000);
+           getCookie("CookieValue");
+           
+
+           
+            return "/index";
+       }
+       else
+       {
+           FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_WARN,
+                    "Login Invalido,Intentalo denuevo",
+                    "Intentalo denuevo"));
+                    return "login";
+           
+       }
+   }
+     
+    
+     
+     public String logout() {
+      HttpSession session = Util.getSession();
+      session.invalidate();
+      return "/login";
+   }
+
+
+  public void setCookie(String name, String value, int expiry) {
+
+    FacesContext facesContext = FacesContext.getCurrentInstance();
+
+    HttpServletRequest request = (HttpServletRequest) facesContext.getExternalContext().getRequest();
+    Cookie cookie = null;
+
+    Cookie[] userCookies = request.getCookies();
+    if (userCookies != null && userCookies.length > 0 ) {
+        for (int i = 0; i < userCookies.length; i++) {
+            if (userCookies[i].getName().equals(name)) {
+                cookie = userCookies[i];
+                break;
+            }
+        }
+    }
+
+    if (cookie != null) {
+        cookie.setValue(value);
+    } else {
+        cookie = new Cookie(name, value);
+        cookie.setPath(request.getContextPath());
+    }
+
+    cookie.setMaxAge(expiry);
+
+    HttpServletResponse response = (HttpServletResponse) facesContext.getExternalContext().getResponse();
+    response.addCookie(cookie);
+  }
+
+  public Cookie getCookie(String name) {
+
+    FacesContext facesContext = FacesContext.getCurrentInstance();
+
+    HttpServletRequest request = (HttpServletRequest) facesContext.getExternalContext().getRequest();
+    Cookie cookie = null;
+
+    Cookie[] userCookies = request.getCookies();
+    if (userCookies != null && userCookies.length > 0 ) {
+        for (int i = 0; i < userCookies.length; i++) {
+            if (userCookies[i].getName().equals(name)) {
+                cookie = userCookies[i];
+                return cookie;
+            }
+        }
+    }
+    return null;
+  }
+///////////////////////////////////////////////// fin
 
     public String create() {
         try {

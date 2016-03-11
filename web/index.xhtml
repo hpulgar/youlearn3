@@ -1,13 +1,608 @@
-<?xml version='1.0' encoding='UTF-8' ?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <h:head>
-        <title>Facelet Title</title>
+
+
+        <!--Meta Tags-->
+        <meta name="viewport" content="width=device-width; initial-scale=1.0"></meta>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+        <!--Title-->
+        <title>Youlearn - Pagina principal</title>
         <h:outputStylesheet name="css/jsfcrud.css"/>
+
+
+        <link rel="stylesheet" href="css/style.css" type="text/css"  media="all" />
+        <link rel="stylesheet" href="css/colour.css" type="text/css"  media="all" />
+        <link rel="stylesheet" href="css/flexslider.css" type="text/css"  media="all" />
+        <link rel="stylesheet" href="css/superfish.css" type="text/css"  media="all" />
+        <link rel="stylesheet" href="css/responsive.css" type="text/css"  media="all" />
+        <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic' rel='stylesheet' type='text/css'></link>
+        <link href='http://fonts.googleapis.com/css?family=Merriweather:400,300,700,900' rel='stylesheet' type='text/css'></link>
+
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
+        <script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js'></script>
+        <script type="text/javascript" src="js/superfish.js"></script>
+        <script type="text/javascript" src="js/jquery.flexslider-min.js"></script>
+        <script type="text/javascript" src="js/tinynav.min.js"></script>
+        <script type="text/javascript" src="js/jquery.uniform.js"></script>
+        <script type="text/javascript" src="js/scripts.js"></script>
+
+        <!-- END head -->
     </h:head>
-    <h:body>
-        Hello from Facelets
+
+    <h:body id="top" class="loading">
+
+
+
+        <!-- BEGIN body -->
+
+
+        <!-- BEGIN #header-wrapper -->
+        <div id="header-wrapper">
+
+            <!-- BEGIN #header-border -->
+            <div id="header-border">
+
+                <!-- BEGIN #header-top -->
+                <div id="header-top" class="clearfix">
+
+                    <ul class="top-left-nav clearfix">
+                        <h:outputText  value="Bienvenido: #{perfilController.nPerfil(usuarioController.idProfile)}"/><br/>
+                        <h:form>
+                            <h:commandLink  action="#{usuarioController.logout()}" value="Logout " rendered="#{menuController.logeado()}"/>
+                        </h:form>
+                        <h:link value="Iniciar sesion" outcome="login.xhtml" rendered="#{menuController.noLogeado()}"/><br/>
+
+                    </ul>
+
+
+
+                    <!-- END #header-top -->
+                </div>
+
+                <!-- BEGIN #header-content-wrapper -->
+                <div id="header-content-wrapper" class="clearfix">
+
+                    <div id="logo">
+                        <h1><a href="index.xhtml"><span>You</span>Learn</a></h1>
+                    </div>
+
+
+                    <!-- END #header-content-wrapper -->
+                </div>
+
+                <!-- BEGIN #main-menu-wrapper -->
+                <div id="main-menu-wrapper" class="clearfix">
+
+                    <!-- BEGIN #main-menu -->
+                    <ul id="main-menu">
+
+                        <li class="current_page_item"><a href="index.xhtml">Home</a></li>
+                            <h:form>
+
+                            <li><h:commandLink  value="Perfil"  action="perfil.xhtml" rendered="#{menuController.logeado()}"></h:commandLink>
+                                    <ul>
+                                        <li><a href="cuenta.xhtml">Mi cuenta</a></li>
+                                        <li><a href="#">Dashboard</a></li> 
+
+                                    </ul>
+                                </li>
+                        </h:form>
+
+
+                        <li><a href="courses.html">Cursos</a>
+                            <ul>
+                                <li><h:commandLink  value="Mis cursos" rendered="#{menuController.logeado()}"></h:commandLink></li>
+                                    <li><a href="#">Buscar cursos</a></li>
+                                    <li><h:commandLink  value="Crear un curso" rendered="#{menuController.logeado()}"></h:commandLink></li>
+
+                                </ul>
+                            </li>
+                            <li><h:commandLink  value="Foro"  action="foro.xhtml" rendered="#{menuController.logeado()}"></h:commandLink></li>
+                            <li><a href="typography.html">Caracteristicas</a>
+                                <ul>
+                                    <li><a href="events.html">Events</a></li>
+                                    <li><a href="events-single.html">Events Single</a></li>
+                                    <li><a href="teachers1.html">Teachers #1</a></li>
+                                    <li><a href="teachers2.html">Teachers #2</a></li>
+                                    <li><a href="portfolio.html">Portfolio</a></li>
+                                    <li><a href="portfolio-single.html">Portfolio Single</a></li>
+                                    <li><a href="photo-gallery-2-col.html">Gallery - 2 Columns</a></li>
+                                    <li><a href="photo-gallery-3-col.html">Gallery - 3 Columns</a></li>
+                                    <li><a href="photo-gallery-4-col.html">Gallery - 4 Columns</a></li>
+                                    <li><a href="full-width.html">Full Width</a></li>
+                                    <li><a href="left-sidebar.html">Left Sidebar</a></li>
+                                    <li><a href="right-sidebar.html">Right Sidebar</a></li>
+                                    <li><a href="columns.html">Columns</a></li>
+                                    <li><a href="js-elements.html">JS Elements</a></li>
+                                    <li><a href="typography.html">Typography</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="typography.html">Nosotros</a></li>
+                            <li><a href="contact.html">Contacto</a></li>
+
+                            <!-- END #main-menu -->
+                        </ul>
+
+                        <div class="menu-search-button"></div>
+                        <form method="get" action="#" class="menu-search-form">
+                            <input class="menu-search-field" type="text" onBlur="if (this.value == '')
+                                        this.value = 'To search, type and hit enter';" onFocus="if (this.value == 'To search, type and hit enter')
+                                                    this.value = '';" value="Ingrese una busqueda" name="s" />
+                        </form>
+
+                        <!-- END #main-menu-wrapper -->
+                    </div>
+
+                    <!-- END #header-border -->
+                </div>
+
+                <!-- END #header-wrapper -->
+            </div>
+
+            <!-- BEGIN .slider -->
+            <div class="slider clearfix">
+
+                <ul class="slides slide-loader">
+
+                    <li style="background:url(images/slide_01.jpg) no-repeat bottom center">
+
+                        <div class="flex-caption-wrapper">
+                            <div class="flex-caption">
+                                <p>Se parte de la comunidad</p>
+                                <div class="clearboth"></div>
+                                <p>Participa!</p>
+                            </div>
+                        </div>
+
+                    </li>
+
+                    <li style="background:url(images/slide_02.jpg) no-repeat bottom center">
+
+                        <div class="flex-caption-wrapper">
+                            <div class="flex-caption">
+                                <p>Novedosos cursos</p>
+                                <div class="clearboth"></div>
+                                <p>Aprende hoy!</p>
+                            </div>
+                        </div>
+
+                    </li>
+
+                    <li style="background:url(images/slide_03.jpg) no-repeat bottom center">
+
+                    </li>
+
+                </ul>
+
+                <!-- END .slider -->
+            </div>
+
+            <div class="header-block-wrapper clearfix">
+
+                <div class="header-block-inner">
+
+
+                <h:link outcome="register.xhtml" class="header-block-5 header-block-style-2 clearfix" rendered="#{menuController.noLogeado()}">
+                    <img src="images/header_icon_01.png" alt="" />
+                    <h2>Registro</h2>
+                </h:link>
+
+                <h:link outcome="foro.xhtml" class="header-block-5 header-block-style-2 clearfix" rendered="#{menuController.logeado()}">
+                    <img src="images/header_icon_01.png" alt="" />
+                    <h2>Foro</h2>
+                </h:link>
+
+
+
+                <a href="contact.html" class="header-block-5 header-block-style-2 clearfix">
+                    <img src="images/header_icon_02.png" alt="" />
+                    <h2>Contenidos</h2>
+                </a>
+
+                <a href="js-elements.html" class="header-block-5 header-block-style-3 clearfix">
+                    <img src="images/header_icon_03.png" alt="" />
+                    <h2>Premium</h2>
+                </a>
+
+                <a href="typography.html" class="header-block-5 header-block-style-4 clearfix">
+                    <img src="images/header_icon_04.png" alt="" />
+                    <h2>La plataforma</h2>
+                </a>
+
+                <a href="typography.html" class="header-block-5 header-block-style-5 clearfix">
+                    <img src="images/header_icon_05.png" alt="" />
+                    <h2>Tomar un tour</h2>
+                </a>
+
+            </div>
+
+        </div>
+
+        <!-- BEGIN .content-wrapper -->
+        <div class="content-wrapper clearfix">
+
+            <!-- BEGIN .content-wrapper-inner -->
+            <div class="content-wrapper-inner clearfix">
+
+                <!-- BEGIN .sidebar-left -->
+                <div class="sidebar-left page-content">
+
+                    <!-- BEGIN .content-block -->
+                    <div class="content-block">
+
+                        <h3 class="block-title">Buscador</h3>
+                        <p>Selecciona un criterio de busqueda</p>
+
+                        <form method="get" action="#" class="course-finder-form clearfix">
+
+                            <select name="keyword-type">
+                                <option value="Course ID">ID Curso</option>
+
+                            </select>
+
+                            <input type="text" value="Ingrese una busqueda" name="keywords" />
+                            <input type="submit" value="Buscar" />
+
+                        </form>
+
+                        <!-- END .content-block -->	
+                    </div>
+
+                    <!-- BEGIN .content-block -->
+
+                    <!-- BEGIN .content-block -->
+
+
+                    <!-- END .sidebar-left -->
+                </div>
+
+                <!-- BEGIN .center-content -->
+                <div class="center-content page-content">
+
+                    <!-- BEGIN .content-block -->
+                    <div class="content-block">
+
+                        <h3 class="block-title"><a href="blog.html">Noticias</a></h3>
+
+                        <!-- BEGIN .slider-blocks -->
+                        <div class="slider-blocks clearfix">
+
+                            <!-- BEGIN .slides -->
+                            <ul class="slides slide-loader2">
+
+                                <!-- BEGIN .slides li -->
+                                <li>
+
+                                    <!-- BEGIN .news-items -->
+                                    <ul class="news-items">
+
+
+
+                                        <li class="clearfix">
+
+                                            <div class="news-image">
+                                                <a href="blog-single.html"><img src="images/01_demo_image.jpg" alt="" /></a>
+                                            </div>
+                                            <div class="news-content">
+                                                <h4><a href="blog-single.html"></a></h4>
+                                                <p class="news-date"></p>
+                                                <p class="news-date"></p>
+
+                                            </div>
+                                        </li>
+
+
+
+
+
+
+
+                                        <!-- END .news-items -->
+                                    </ul>
+
+                                    <!-- END .slides li -->
+                                </li>
+
+                                <!-- BEGIN .slides li -->
+                                <li>
+
+                                    <!-- BEGIN .news-items -->
+                                    <ul class="news-items">
+
+                                        <li class="clearfix">
+                                            <div class="news-image">
+                                                <a href="blog-single.html"><img src="images/01_demo_image.jpg" alt="" /></a>
+                                            </div>
+                                            <div class="news-content">
+                                                <h4><a href="blog-single.html">Phasellus tempor purus sed odio metus</a></h4>
+                                                <p class="news-date">April 19th, 2013</p>
+                                                <p class="news-excerpt">Sed turpis tortor ultricies non adipiscing ultrices in orci ut a metus quis</p>
+                                            </div>
+                                        </li>
+
+                                        <li class="clearfix">
+                                            <div class="news-image">
+                                                <a href="blog-single.html"><img src="images/10_demo_image.jpg" alt="" /></a>
+                                            </div>
+                                            <div class="news-content">
+                                                <h4><a href="blog-single.html">Phasellus tempor purus sed odio metus</a></h4>
+                                                <p class="news-date">April 19th, 2013</p>
+                                                <p class="news-excerpt">Sed turpis tortor ultricies non adipiscing ultrices in orci ut a metus quis</p>
+                                            </div>
+                                        </li>
+
+                                        <li class="clearfix">
+                                            <div class="news-image">
+                                                <a href="blog-single.html"><img src="images/11_demo_image.jpg" alt="" /></a>
+                                            </div>
+                                            <div class="news-content">
+                                                <h4><a href="blog-single.html">Phasellus tempor purus sed odio metus</a></h4>
+                                                <p class="news-date">April 19th, 2013</p>
+                                                <p class="news-excerpt">Sed turpis tortor ultricies non adipiscing ultrices in orci ut a metus quis</p>
+                                            </div>
+                                        </li>
+
+                                        <!-- END .news-items -->
+                                    </ul>
+
+                                    <!-- END .slides li -->
+                                </li>
+
+                                <!-- END .slides -->
+                            </ul>
+
+                            <!-- END .slider-blocks -->
+                        </div>
+
+                        <!-- END .content-block -->	
+                    </div>
+
+                    <!-- BEGIN .content-block -->
+
+
+                    <!-- END .center-content -->
+                </div>
+
+                <!-- BEGIN .sidebar-right -->
+                <div class="sidebar-right page-content">
+
+                    <!-- BEGIN .content-block -->
+                    <div class="content-block">
+
+                        <h3 class="block-title">Ultimos cursos nuevos</h3>
+
+                        <ul>
+                            <li>
+
+                            </li>
+                        </ul>
+
+                        <!-- END .content-block -->	
+                    </div>
+
+                    <div class="content-block">
+
+                        <h3 class="block-title">Ultimos comentarios</h3>
+
+                        <ul>
+                            <li>
+
+                            </li>
+                        </ul>
+
+                        <!-- END .content-block -->	
+                    </div>
+
+
+
+
+
+                    <!-- END .sidebar-right -->
+                </div>
+
+                <!-- END .content-wrapper-inner -->
+            </div>
+
+            <!-- END .content-wrapper -->
+        </div>
+
+        <!-- BEGIN #footer-wrapper -->
+        <div id="footer-wrapper">
+
+            <!-- BEGIN #footer -->
+            <div id="footer">
+
+                <ul class="columns-4 clearfix">
+
+                    <li class="col">
+                        <div class="widget-title clearfix">
+                            <h4>Nosotros</h4>
+                            <div class="widget-title-block"></div>
+                        </div>
+                        <p></p>
+                    </li>
+
+                    <li class="col">
+                        <div class="widget-title clearfix">
+                            <h4>Creditos</h4>
+                            <div class="widget-title-block"></div>
+                        </div>
+                        <p></p>
+                    </li>
+
+                    <li class="col">
+                        <div class="widget-title clearfix">
+                            <h4>Mapa del sitio</h4>
+                            <div class="widget-title-block"></div>
+                        </div>
+                        <p></p>
+                    </li>
+
+
+                    <li class="col">
+                        <div class="widget-title clearfix">
+                            <h4>Redes sociales</h4>
+                            <div class="widget-title-block"></div>
+                        </div>
+                        <p></p>
+                    </li>
+
+
+                </ul>
+
+                <div id="footer-bottom" class="clearfix">
+                    <p class="fl">  <a href="#">YouLearn</a></p>
+                    <p class="go-up fr"><a href="#top" class="scrollup">Top</a></p>
+                </div>
+
+                <!-- END #footer -->
+            </div>
+
+            <!-- END #footer-wrapper -->
+        </div>
+
+        <!-- END body -->
+        <br />
+        <h:link outcome="/amigos/List" value="Show All Amigos Items"/>
+        <br />
+        <h:link outcome="/archivo/List" value="Show All Archivo Items"/>
+        <br />
+        <h:link outcome="/ciudad/List" value="Show All Ciudad Items"/>
+        <br />
+        <h:link outcome="/curso/List" value="Show All Curso Items"/>
+        <br />
+        <h:link outcome="/cursoCategoria/List" value="Show All CursoCategoria Items"/>
+        <br />
+        <h:link outcome="/cursoSubCat/List" value="Show All CursoSubCat Items"/>
+        <br />
+        <h:link outcome="/foroCategoria/List" value="Show All ForoCategoria Items"/>
+        <br />
+        <h:link outcome="/foroPosteos/List" value="Show All ForoPosteos Items"/>
+        <br />
+        <h:link outcome="/foroSubcategoria/List" value="Show All ForoSubcategoria Items"/>
+        <br />
+        <h:link outcome="/inscripcionCurso/List" value="Show All InscripcionCurso Items"/>
+        <br />
+        <h:link outcome="/logStreaming/List" value="Show All LogStreaming Items"/>
+        <br />
+        <h:link outcome="/logSubidas/List" value="Show All LogSubidas Items"/>
+        <br />
+        <h:link outcome="/masterComentario/List" value="Show All MasterComentario Items"/>
+        <br />
+        <h:link outcome="/masterPft/List" value="Show All MasterPft Items"/>
+        <br />
+        <h:link outcome="/masterRespuestas/List" value="Show All MasterRespuestas Items"/>
+        <br />
+        <h:link outcome="/mensaje/List" value="Show All Mensaje Items"/>
+        <br />
+        <h:link outcome="/menu/List" value="Show All Menu Items"/>
+        <br />
+        <h:link outcome="/notificaciones/List" value="Show All Notificaciones Items"/>
+        <br />
+        <h:link outcome="/pais/List" value="Show All Pais Items"/>
+        <br />
+        <h:link outcome="/perfil/List" value="Show All Perfil Items"/>
+        <br />
+        <h:link outcome="/permisos/List" value="Show All Permisos Items"/>
+        <br />
+        <h:link outcome="/persona/List" value="Show All Persona Items"/>
+        <br />
+        <h:link outcome="/pregunta/List" value="Show All Pregunta Items"/>
+        <br />
+        <h:link outcome="/preguntasData/List" value="Show All PreguntasData Items"/>
+        <br />
+        <h:link outcome="/publicacionPerfil/List" value="Show All PublicacionPerfil Items"/>
+        <br />
+        <h:link outcome="/quiz/List" value="Show All Quiz Items"/>
+        <br />
+        <h:link outcome="/quizImagen/List" value="Show All QuizImagen Items"/>
+        <br />
+        <h:link outcome="/quizUsuario/List" value="Show All QuizUsuario Items"/>
+        <br />
+        <h:link outcome="/respuestas/List" value="Show All Respuestas Items"/>
+        <br />
+        <h:link outcome="/sesion/List" value="Show All Sesion Items"/>
+        <br />
+        <h:link outcome="/tablero/List" value="Show All Tablero Items"/>
+        <br />
+        <h:link outcome="/tipoAlumno/List" value="Show All TipoAlumno Items"/>
+        <br />
+        <h:link outcome="/tipoArchivo/List" value="Show All TipoArchivo Items"/>
+        <br />
+        <h:link outcome="/usuario/List" value="Show All Usuario Items"/>
+        <br />
+        <h:link outcome="/amigos/List" value="Show All Amigos Items"/>
+        <br />
+        <h:link outcome="/archivo/List" value="Show All Archivo Items"/>
+        <br />
+        <h:link outcome="/ciudad/List" value="Show All Ciudad Items"/>
+        <br />
+        <h:link outcome="/curso/List" value="Show All Curso Items"/>
+        <br />
+        <h:link outcome="/cursoCategoria/List" value="Show All CursoCategoria Items"/>
+        <br />
+        <h:link outcome="/cursoSubCat/List" value="Show All CursoSubCat Items"/>
+        <br />
+        <h:link outcome="/foroCategoria/List" value="Show All ForoCategoria Items"/>
+        <br />
+        <h:link outcome="/foroPosteos/List" value="Show All ForoPosteos Items"/>
+        <br />
+        <h:link outcome="/foroSubcategoria/List" value="Show All ForoSubcategoria Items"/>
+        <br />
+        <h:link outcome="/inscripcionCurso/List" value="Show All InscripcionCurso Items"/>
+        <br />
+        <h:link outcome="/logStreaming/List" value="Show All LogStreaming Items"/>
+        <br />
+        <h:link outcome="/logSubidas/List" value="Show All LogSubidas Items"/>
+        <br />
+        <h:link outcome="/masterComentario/List" value="Show All MasterComentario Items"/>
+        <br />
+        <h:link outcome="/masterPft/List" value="Show All MasterPft Items"/>
+        <br />
+        <h:link outcome="/masterRespuestas/List" value="Show All MasterRespuestas Items"/>
+        <br />
+        <h:link outcome="/mensaje/List" value="Show All Mensaje Items"/>
+        <br />
+        <h:link outcome="/menu/List" value="Show All Menu Items"/>
+        <br />
+        <h:link outcome="/notificaciones/List" value="Show All Notificaciones Items"/>
+        <br />
+        <h:link outcome="/pais/List" value="Show All Pais Items"/>
+        <br />
+        <h:link outcome="/perfil/List" value="Show All Perfil Items"/>
+        <br />
+        <h:link outcome="/permisos/List" value="Show All Permisos Items"/>
+        <br />
+        <h:link outcome="/persona/List" value="Show All Persona Items"/>
+        <br />
+        <h:link outcome="/pregunta/List" value="Show All Pregunta Items"/>
+        <br />
+        <h:link outcome="/preguntasData/List" value="Show All PreguntasData Items"/>
+        <br />
+        <h:link outcome="/publicacionPerfil/List" value="Show All PublicacionPerfil Items"/>
+        <br />
+        <h:link outcome="/quiz/List" value="Show All Quiz Items"/>
+        <br />
+        <h:link outcome="/quizImagen/List" value="Show All QuizImagen Items"/>
+        <br />
+        <h:link outcome="/quizUsuario/List" value="Show All QuizUsuario Items"/>
+        <br />
+        <h:link outcome="/respuestas/List" value="Show All Respuestas Items"/>
+        <br />
+        <h:link outcome="/sesion/List" value="Show All Sesion Items"/>
+        <br />
+        <h:link outcome="/tablero/List" value="Show All Tablero Items"/>
+        <br />
+        <h:link outcome="/tipoAlumno/List" value="Show All TipoAlumno Items"/>
+        <br />
+        <h:link outcome="/tipoArchivo/List" value="Show All TipoArchivo Items"/>
+        <br />
+        <h:link outcome="/usuario/List" value="Show All Usuario Items"/>
         <br />
         <h:link outcome="/amigos/List" value="Show All Amigos Items"/>
         <br />
@@ -111,5 +706,73 @@
 
 
 
-</html>
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</html>

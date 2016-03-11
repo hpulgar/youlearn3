@@ -6,9 +6,11 @@
 package MODELS;
 
 import ENTITIES.Usuario;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -27,6 +29,33 @@ public class UsuarioFacade extends AbstractFacade<Usuario> {
 
     public UsuarioFacade() {
         super(Usuario.class);
+    }
+    
+        public List<Usuario> log(String name,String pass)
+    {
+        EntityManager em2 = getEntityManager();
+        Query q = em2.createNamedQuery("Usuario.logIn")
+                .setParameter("username", name)
+                .setParameter("password", pass);
+       
+        return q.getResultList();
+        
+    }
+       
+//    public List <Usuario> cargaPerfiles(int id)
+//     {
+//         EntityManager em2 = getEntityManager();
+//         Query q = em2.createNamedQuery("Usuario.findByIdUsuario").setParameter("idUsuario", id);
+//         return q.getResultList();
+//         
+//     }   
+       
+    public List<Usuario> cargaUsername(int idp)
+    {
+        EntityManager em3 = getEntityManager();
+        Query q= em3.createNamedQuery("Usuario.findByIdUsuario").setParameter("idUsuario",idp);
+        return q.getResultList();
+                
     }
     
 }

@@ -17,6 +17,7 @@ import javax.faces.convert.FacesConverter;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
+import javax.servlet.http.HttpSession;
 
 @Named("menuController")
 @SessionScoped
@@ -128,6 +129,24 @@ public class MenuController implements Serializable {
             return "List";
         }
     }
+
+     public boolean logeado()
+     {
+         boolean value= true;
+         HttpSession sess = Util.getSession();
+        if (sess.getAttribute("username")== null)
+        {
+           value=false;
+        }
+        return value;
+     }
+     
+    
+     public boolean noLogeado()
+     {
+         HttpSession sess = Util.getSession();
+        return sess.getAttribute("username") == null;
+     }
 
     private void performDestroy() {
         try {

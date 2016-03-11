@@ -17,6 +17,7 @@ import javax.faces.convert.FacesConverter;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
+import javax.servlet.http.HttpSession;
 
 @Named("perfilController")
 @SessionScoped
@@ -150,6 +151,18 @@ public class PerfilController implements Serializable {
         }
         if (selectedItemIndex >= 0) {
             current = getFacade().findRange(new int[]{selectedItemIndex, selectedItemIndex + 1}).get(0);
+        }
+    }
+
+      public String nPerfil(int idperfil)
+    {
+        HttpSession s = Util.getSession();
+        if(s.getAttribute("username")==null)
+        {
+            return "Invitado";// si no esta logeado el sistema muestra Invitado por defecto
+        }else
+        {
+            return ejbFacade.find(idperfil).getNomPerfil();// este metodo devuleve el tipo de usuario
         }
     }
 

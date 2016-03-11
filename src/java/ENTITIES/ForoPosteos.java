@@ -33,6 +33,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "foro_posteos")
 @XmlRootElement
 @NamedQueries({
+      @NamedQuery(name = "ForoPosteos.verPost", query = "SELECT f FROM ForoPosteos f WHERE f.idPost = :idPost"), //NUEVO
     @NamedQuery(name = "ForoPosteos.findAll", query = "SELECT f FROM ForoPosteos f"),
     @NamedQuery(name = "ForoPosteos.findByIdPost", query = "SELECT f FROM ForoPosteos f WHERE f.idPost = :idPost"),
     @NamedQuery(name = "ForoPosteos.findByFecha", query = "SELECT f FROM ForoPosteos f WHERE f.fecha = :fecha"),

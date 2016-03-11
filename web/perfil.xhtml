@@ -1,0 +1,350 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+
+
+	<!--Meta Tags-->
+        <meta name="viewport" content="width=device-width; initial-scale=1.0"></meta>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		
+	<!--Title-->
+	<title>Youlearn - Perfil</title>
+        
+        
+
+
+	<link rel="stylesheet" href="css/style.css" type="text/css"  media="all" />
+	<link rel="stylesheet" href="css/colour.css" type="text/css"  media="all" />
+	<link rel="stylesheet" href="css/flexslider.css" type="text/css"  media="all" />
+	<link rel="stylesheet" href="css/superfish.css" type="text/css"  media="all" />
+	<link rel="stylesheet" href="css/responsive.css" type="text/css"  media="all" />
+        <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic' rel='stylesheet' type='text/css'></link>
+        <link href='http://fonts.googleapis.com/css?family=Merriweather:400,300,700,900' rel='stylesheet' type='text/css'></link>
+
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
+	<script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js'></script>
+	<script type="text/javascript" src="js/superfish.js"></script>
+	<script type="text/javascript" src="js/jquery.flexslider-min.js"></script>
+	<script type="text/javascript" src="js/tinynav.min.js"></script>
+	<script type="text/javascript" src="js/jquery.uniform.js"></script>
+	<script type="text/javascript" src="js/scripts.js"></script>
+	
+<!-- END head -->
+   </h:head>
+    
+    <h:body id="top" class="loading">
+  <!-- BEGIN #header-wrapper -->
+	<div id="header-wrapper">
+		
+		<!-- BEGIN #header-border -->
+		<div id="header-border">
+		
+			<!-- BEGIN #header-top -->
+			<div id="header-top" class="clearfix">
+			
+			  <ul class="top-left-nav clearfix">
+                              <h:outputText  value="Bienvenido: #{perfilController.nPerfil(usuarioController.idProfile)}"/><br/>
+                              <h:form>
+                              <h:commandLink  action="#{usuarioController.logout()}" value="Logout " rendered="#{menuController.logeado()}"/>
+                              </h:form>
+                       <h:link value="Iniciar sesion" outcome="login.xhtml" rendered="#{menuController.noLogeado()}"/><br/>
+				
+				</ul>
+			
+				
+			
+			<!-- END #header-top -->
+			</div>
+			
+			<!-- BEGIN #header-content-wrapper -->
+			<div id="header-content-wrapper" class="clearfix">
+			
+				<div id="logo">
+					<h1><a href="index-2.html"><span>You</span>Learn</a></h1>
+				</div>
+			
+			
+			<!-- END #header-content-wrapper -->
+			</div>
+		
+			<!-- BEGIN #main-menu-wrapper -->
+			<div id="main-menu-wrapper" class="clearfix">
+		
+				<!-- BEGIN #main-menu -->
+				<ul id="main-menu">
+					
+					<li class="current_page_item"><a href="index.xhtml">Home</a></li>
+                                        <h:form>
+                                          
+                                            <li><h:commandLink  value="Perfil" action="perfil.xhtml" rendered="#{menuController.logeado()}"></h:commandLink>
+                                                <ul>
+                                                    <li><a href="cuenta.xhtml">Mi cuenta</a></li>
+							<li><a href="#">Dashboard</a></li> 
+                                                        
+                                                </ul>
+                                            </li>
+                                        </h:form>
+                                       
+                                        
+					<li><a href="courses.html">Cursos</a>
+						<ul>
+                                                    <li><h:commandLink  value="Mis cursos" rendered="#{menuController.logeado()}"></h:commandLink></li>
+							<li><a href="#">Buscar cursos</a></li>
+                                                        <li><h:commandLink  value="Crear un curso" rendered="#{menuController.logeado()}"></h:commandLink></li>
+
+						</ul>
+					</li>
+			
+					<li><a href="typography.html">Caracteristicas</a>
+						<ul>
+							<li><a href="events.html">Events</a></li>
+							<li><a href="events-single.html">Events Single</a></li>
+							<li><a href="teachers1.html">Teachers #1</a></li>
+							<li><a href="teachers2.html">Teachers #2</a></li>
+							<li><a href="portfolio.html">Portfolio</a></li>
+							<li><a href="portfolio-single.html">Portfolio Single</a></li>
+							<li><a href="photo-gallery-2-col.html">Gallery - 2 Columns</a></li>
+							<li><a href="photo-gallery-3-col.html">Gallery - 3 Columns</a></li>
+							<li><a href="photo-gallery-4-col.html">Gallery - 4 Columns</a></li>
+							<li><a href="full-width.html">Full Width</a></li>
+							<li><a href="left-sidebar.html">Left Sidebar</a></li>
+							<li><a href="right-sidebar.html">Right Sidebar</a></li>
+							<li><a href="columns.html">Columns</a></li>
+							<li><a href="js-elements.html">JS Elements</a></li>
+							<li><a href="typography.html">Typography</a></li>
+						</ul>
+					</li>
+                                         <li><a href="typography.html">Nosotros</a></li>
+					<li><a href="contact.html">Contacto</a></li>
+					
+				<!-- END #main-menu -->
+				</ul>
+		
+				<div class="menu-search-button"></div>
+				<form method="get" action="#" class="menu-search-form">
+					<input class="menu-search-field" type="text" onblur="if(this.value=='')this.value='To search, type and hit enter';" onfocus="if(this.value=='To search, type and hit enter')this.value='';" value="To search, type and hit enter" name="s" />
+				</form>
+		
+			<!-- END #main-menu-wrapper -->
+			</div>
+		
+		<!-- END #header-border -->
+		</div>
+                
+                
+	
+	<!-- END #header-wrapper -->
+	</div>
+	
+	<!-- BEGIN .page-header -->
+	<div class="page-header clearfix">
+		
+		<div class="page-header-inner clearfix">
+		
+		<div class="page-title">	
+			<h2>Mi perfil</h2>
+			<div class="page-title-block"></div>
+		</div>
+		
+		<div class="breadcrumbs">
+			<p><a href="index-2.html">Home</a> &#187; Perfil</p>
+		</div>
+		
+		</div>
+		
+	<!-- END .page-header -->
+	</div>
+	
+	<!-- BEGIN .content-wrapper -->
+	<div class="content-wrapper page-content-wrapper clearfix">
+		
+		<!-- BEGIN .main-content -->
+		<div class="main-content page-content">
+			
+			<!-- BEGIN .inner-content-wrapper -->
+			<div class="inner-content-wrapper">
+				
+				<!-- BEGIN .teacher-entry -->
+				
+				
+				<!-- BEGIN .teacher-entry -->
+                                 <c:forEach items="#{personaController.cargaDatos2(usuarioController.id_user)}" var="vv" rendered="#{personaController.datosVacios()}">
+				<div class="teacher-entry clearfix">
+					
+					<div class="teacher-image">
+						<img src="images/18_demo_image.jpg" alt="" />
+                                           
+					</div>
+					
+					<div class="teacher-content">	
+						
+						<div class="title1 clearfix">
+                                                    <h4>#{vv.nombre} #{vv.apellido}</h4>
+							<div class="title-block"></div>
+						</div>
+                                            
+                                            <p>#{vv.descripcion}</p>
+                                   
+						
+						<ul class="teacher-contact">
+	
+							<li><span class="contact-email">Enviar un mensaje privado</span></li>
+						</ul>
+						
+					</div>
+				
+				<!-- END .teacher-entry -->
+				</div>
+                                  </c:forEach>
+				
+                                  <div id="respond">
+						
+						<h3 class="block-title">Muro</h3>
+						 <c:forEach items="#{publicacionPerfilController.cargaPublicaciones(usuarioController.id_user)}" var="pp"  rendered="false"> 
+						<ul class="comments">
+
+							<li class="comment-entry clearfix">
+
+								<!-- BEGIN .comment-left -->
+								<div class="comment-left">
+									<div class="comment-image"></div>
+								<!-- END .comment-left -->
+								</div>
+
+								<!-- BEGIN .comment-right -->
+								<div class="comment-right">
+
+                                                                    <p class="comment-info">#{pp.idUsuario.username} <span>#{pp.fechaPublicacion} </span></p>
+                                                                    <p class="comment-text">#{pp.publicacion}</p>
+									<p class="reply"><a href="#">Reply</a></p>
+
+								<!-- END .comment-right -->
+								</div>
+
+
+							</li>
+
+							
+
+						</ul>
+                                                 </c:forEach>
+						
+						<h3 class="block-title">Dejar un mensaje</h3>
+						
+						<h:form>
+
+						
+
+							<div class="field-row">
+								<label for="message_text">Escribe algo...</label>
+                                                                  <p:inputTextarea value="#{publicacionPerfilController.selected.publicacion}" rows="5" cols="30" autoResize="false" />
+							</div>
+
+                                                    <h:commandButton class="button1" value="Dejar un mensaje!" action="#{publicacionPerfilController.crearPublicacion(usuarioController.id_muro,usuarioController.id_user)}"/>
+
+						</h:form>
+						
+					<!-- END #respond -->
+					</div>
+				
+				
+				
+				
+				<div class="clearboth"></div>
+			
+			<!-- END .inner-content-wrapper -->
+			</div>
+			
+		<!-- END .main-content -->
+		</div>
+		
+		<!-- BEGIN .sidebar-right -->
+		<div class="sidebar-right page-content">
+			
+			<!-- BEGIN .content-block -->
+			<div class="content-block">
+				
+				<h3 class="block-title">Acceso rapido</h3>
+				
+				<ul>
+					<li><a href="cuenta.xhtml">Mi cuenta</a></li>
+					<li><a href="#">Mis mensajes</a></li>
+					<li><a href="#">Dashboard</a></li>
+				
+				</ul>
+				
+			<!-- END .content-block -->	
+			</div>
+			
+			
+		
+		<!-- END .sidebar-right -->
+		</div>
+	
+	<!-- END .content-wrapper -->
+	</div>
+        
+      
+	
+	<!-- BEGIN #footer-wrapper -->
+	<div id="footer-wrapper">
+		
+		<!-- BEGIN #footer -->
+		<div id="footer">
+			
+			<ul class="columns-4 clearfix">
+				
+				<li class="col">
+					<div class="widget-title clearfix">
+						<h4>Nosotros</h4>
+						<div class="widget-title-block"></div>
+					</div>
+					<p></p>
+				</li>
+				
+                            <li class="col">
+					<div class="widget-title clearfix">
+						<h4>Creditos</h4>
+						<div class="widget-title-block"></div>
+					</div>
+					<p></p>
+				</li>
+				
+				<li class="col">
+					<div class="widget-title clearfix">
+						<h4>Mapa del sitio</h4>
+						<div class="widget-title-block"></div>
+					</div>
+					<p></p>
+				</li>
+				
+                            
+                            <li class="col">
+					<div class="widget-title clearfix">
+						<h4>Redes sociales</h4>
+						<div class="widget-title-block"></div>
+					</div>
+					<p></p>
+				</li>
+				
+			
+			</ul>
+			
+			<div id="footer-bottom" class="clearfix">
+				<p class="fl">  <a href="#">YouLearn</a></p>
+				<p class="go-up fr"><a href="#top" class="scrollup">Top</a></p>
+			</div>
+		<!-- END #footer -->
+		</div>
+	
+	<!-- END #footer-wrapper -->
+	</div>
+
+<!-- END body -->
+ </h:body>
+    
+</html>
