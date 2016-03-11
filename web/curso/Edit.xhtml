@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.EditCursoTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.EditCursoLabel_idCurso}" for="idCurso" />
+                    <h:inputText id="idCurso" value="#{cursoController.selected.idCurso}" title="#{bundle.EditCursoTitle_idCurso}" required="true" requiredMessage="#{bundle.EditCursoRequiredMessage_idCurso}"/>
+                    <h:outputLabel value="#{bundle.EditCursoLabel_nomCurso}" for="nomCurso" />
+                    <h:inputText id="nomCurso" value="#{cursoController.selected.nomCurso}" title="#{bundle.EditCursoTitle_nomCurso}" required="true" requiredMessage="#{bundle.EditCursoRequiredMessage_nomCurso}"/>
+                    <h:outputLabel value="#{bundle.EditCursoLabel_personasInscritas}" for="personasInscritas" />
+                    <h:inputText id="personasInscritas" value="#{cursoController.selected.personasInscritas}" title="#{bundle.EditCursoTitle_personasInscritas}" required="true" requiredMessage="#{bundle.EditCursoRequiredMessage_personasInscritas}"/>
+                    <h:outputLabel value="#{bundle.EditCursoLabel_descripcionCurso}" for="descripcionCurso" />
+                    <h:inputTextarea rows="4" cols="30" id="descripcionCurso" value="#{cursoController.selected.descripcionCurso}" title="#{bundle.EditCursoTitle_descripcionCurso}" required="true" requiredMessage="#{bundle.EditCursoRequiredMessage_descripcionCurso}"/>
+                    <h:outputLabel value="#{bundle.EditCursoLabel_autorizado}" for="autorizado" />
+                    <h:inputText id="autorizado" value="#{cursoController.selected.autorizado}" title="#{bundle.EditCursoTitle_autorizado}" required="true" requiredMessage="#{bundle.EditCursoRequiredMessage_autorizado}"/>
+                    <h:outputLabel value="#{bundle.EditCursoLabel_contenidos}" for="contenidos" />
+                    <h:inputTextarea rows="4" cols="30" id="contenidos" value="#{cursoController.selected.contenidos}" title="#{bundle.EditCursoTitle_contenidos}" required="true" requiredMessage="#{bundle.EditCursoRequiredMessage_contenidos}"/>
+                    <h:outputLabel value="#{bundle.EditCursoLabel_seguidores}" for="seguidores" />
+                    <h:inputText id="seguidores" value="#{cursoController.selected.seguidores}" title="#{bundle.EditCursoTitle_seguidores}" required="true" requiredMessage="#{bundle.EditCursoRequiredMessage_seguidores}"/>
+                    <h:outputLabel value="#{bundle.EditCursoLabel_idCat}" for="idCat" />
+                    <h:selectOneMenu id="idCat" value="#{cursoController.selected.idCat}" title="#{bundle.EditCursoTitle_idCat}" required="true" requiredMessage="#{bundle.EditCursoRequiredMessage_idCat}">
+                        <f:selectItems value="#{cursoSubCatController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.EditCursoLabel_idUsuario}" for="idUsuario" />
+                    <h:selectOneMenu id="idUsuario" value="#{cursoController.selected.idUsuario}" title="#{bundle.EditCursoTitle_idUsuario}" required="true" requiredMessage="#{bundle.EditCursoRequiredMessage_idUsuario}">
+                        <f:selectItems value="#{usuarioController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <h:commandLink action="#{cursoController.update}" value="#{bundle.EditCursoSaveLink}"/>
+                <br />
+                <br />
+                <h:link outcome="View" value="#{bundle.EditCursoViewLink}"/>
+                <br />
+                <h:commandLink action="#{cursoController.prepareList}" value="#{bundle.EditCursoShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.EditCursoIndexLink}" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

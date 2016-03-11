@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.CreateSesionTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.CreateSesionLabel_idSesion}" for="idSesion" />
+                    <h:inputText id="idSesion" value="#{sesionController.selected.idSesion}" title="#{bundle.CreateSesionTitle_idSesion}" required="true" requiredMessage="#{bundle.CreateSesionRequiredMessage_idSesion}"/>
+                    <h:outputLabel value="#{bundle.CreateSesionLabel_ip}" for="ip" />
+                    <h:inputText id="ip" value="#{sesionController.selected.ip}" title="#{bundle.CreateSesionTitle_ip}" required="true" requiredMessage="#{bundle.CreateSesionRequiredMessage_ip}"/>
+                    <h:outputLabel value="#{bundle.CreateSesionLabel_inicio}" for="inicio" />
+                    <h:inputText id="inicio" value="#{sesionController.selected.inicio}" title="#{bundle.CreateSesionTitle_inicio}" required="true" requiredMessage="#{bundle.CreateSesionRequiredMessage_inicio}">
+                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.CreateSesionLabel_fin}" for="fin" />
+                    <h:inputText id="fin" value="#{sesionController.selected.fin}" title="#{bundle.CreateSesionTitle_fin}" required="true" requiredMessage="#{bundle.CreateSesionRequiredMessage_fin}">
+                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.CreateSesionLabel_idUsuario}" for="idUsuario" />
+                    <h:selectOneMenu id="idUsuario" value="#{sesionController.selected.idUsuario}" title="#{bundle.CreateSesionTitle_idUsuario}" required="true" requiredMessage="#{bundle.CreateSesionRequiredMessage_idUsuario}">
+                        <f:selectItems value="#{usuarioController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{sesionController.create}" value="#{bundle.CreateSesionSaveLink}" />
+                <br />
+                <br />
+                <h:commandLink action="#{sesionController.prepareList}" value="#{bundle.CreateSesionShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.CreateSesionIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

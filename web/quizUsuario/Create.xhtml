@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.CreateQuizUsuarioTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.CreateQuizUsuarioLabel_idQuizUsuario}" for="idQuizUsuario" />
+                    <h:inputText id="idQuizUsuario" value="#{quizUsuarioController.selected.idQuizUsuario}" title="#{bundle.CreateQuizUsuarioTitle_idQuizUsuario}" required="true" requiredMessage="#{bundle.CreateQuizUsuarioRequiredMessage_idQuizUsuario}"/>
+                    <h:outputLabel value="#{bundle.CreateQuizUsuarioLabel_idUsuario}" for="idUsuario" />
+                    <h:inputText id="idUsuario" value="#{quizUsuarioController.selected.idUsuario}" title="#{bundle.CreateQuizUsuarioTitle_idUsuario}" required="true" requiredMessage="#{bundle.CreateQuizUsuarioRequiredMessage_idUsuario}"/>
+                    <h:outputLabel value="#{bundle.CreateQuizUsuarioLabel_fechaFinalizacion}" for="fechaFinalizacion" />
+                    <h:inputText id="fechaFinalizacion" value="#{quizUsuarioController.selected.fechaFinalizacion}" title="#{bundle.CreateQuizUsuarioTitle_fechaFinalizacion}" required="true" requiredMessage="#{bundle.CreateQuizUsuarioRequiredMessage_fechaFinalizacion}">
+                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.CreateQuizUsuarioLabel_puntaje}" for="puntaje" />
+                    <h:inputText id="puntaje" value="#{quizUsuarioController.selected.puntaje}" title="#{bundle.CreateQuizUsuarioTitle_puntaje}" required="true" requiredMessage="#{bundle.CreateQuizUsuarioRequiredMessage_puntaje}"/>
+                    <h:outputLabel value="#{bundle.CreateQuizUsuarioLabel_idQuiz}" for="idQuiz" />
+                    <h:selectOneMenu id="idQuiz" value="#{quizUsuarioController.selected.idQuiz}" title="#{bundle.CreateQuizUsuarioTitle_idQuiz}" required="true" requiredMessage="#{bundle.CreateQuizUsuarioRequiredMessage_idQuiz}">
+                        <f:selectItems value="#{quizController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{quizUsuarioController.create}" value="#{bundle.CreateQuizUsuarioSaveLink}" />
+                <br />
+                <br />
+                <h:commandLink action="#{quizUsuarioController.prepareList}" value="#{bundle.CreateQuizUsuarioShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.CreateQuizUsuarioIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

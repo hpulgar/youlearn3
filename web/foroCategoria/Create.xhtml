@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.CreateForoCategoriaTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.CreateForoCategoriaLabel_idCategoria}" for="idCategoria" />
+                    <h:inputText id="idCategoria" value="#{foroCategoriaController.selected.idCategoria}" title="#{bundle.CreateForoCategoriaTitle_idCategoria}" required="true" requiredMessage="#{bundle.CreateForoCategoriaRequiredMessage_idCategoria}"/>
+                    <h:outputLabel value="#{bundle.CreateForoCategoriaLabel_titulo}" for="titulo" />
+                    <h:inputTextarea rows="4" cols="30" id="titulo" value="#{foroCategoriaController.selected.titulo}" title="#{bundle.CreateForoCategoriaTitle_titulo}" required="true" requiredMessage="#{bundle.CreateForoCategoriaRequiredMessage_titulo}"/>
+                    <h:outputLabel value="#{bundle.CreateForoCategoriaLabel_descripcion}" for="descripcion" />
+                    <h:inputTextarea rows="4" cols="30" id="descripcion" value="#{foroCategoriaController.selected.descripcion}" title="#{bundle.CreateForoCategoriaTitle_descripcion}" required="true" requiredMessage="#{bundle.CreateForoCategoriaRequiredMessage_descripcion}"/>
+                    <h:outputLabel value="#{bundle.CreateForoCategoriaLabel_cateFecha}" for="cateFecha" />
+                    <h:inputText id="cateFecha" value="#{foroCategoriaController.selected.cateFecha}" title="#{bundle.CreateForoCategoriaTitle_cateFecha}" required="true" requiredMessage="#{bundle.CreateForoCategoriaRequiredMessage_cateFecha}">
+                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                    </h:inputText>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{foroCategoriaController.create}" value="#{bundle.CreateForoCategoriaSaveLink}" />
+                <br />
+                <br />
+                <h:commandLink action="#{foroCategoriaController.prepareList}" value="#{bundle.CreateForoCategoriaShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.CreateForoCategoriaIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

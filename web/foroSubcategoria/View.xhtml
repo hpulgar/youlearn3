@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ViewForoSubcategoriaTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputText value="#{bundle.ViewForoSubcategoriaLabel_idSubcategoria}"/>
+                    <h:outputText value="#{foroSubcategoriaController.selected.idSubcategoria}" title="#{bundle.ViewForoSubcategoriaTitle_idSubcategoria}"/>
+                    <h:outputText value="#{bundle.ViewForoSubcategoriaLabel_titulo}"/>
+                    <h:outputText value="#{foroSubcategoriaController.selected.titulo}" title="#{bundle.ViewForoSubcategoriaTitle_titulo}"/>
+                    <h:outputText value="#{bundle.ViewForoSubcategoriaLabel_descripcion}"/>
+                    <h:outputText value="#{foroSubcategoriaController.selected.descripcion}" title="#{bundle.ViewForoSubcategoriaTitle_descripcion}"/>
+                    <h:outputText value="#{bundle.ViewForoSubcategoriaLabel_subcateFecha}"/>
+                    <h:outputText value="#{foroSubcategoriaController.selected.subcateFecha}" title="#{bundle.ViewForoSubcategoriaTitle_subcateFecha}">
+                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                    </h:outputText>
+                    <h:outputText value="#{bundle.ViewForoSubcategoriaLabel_idCategoria}"/>
+                    <h:outputText value="#{foroSubcategoriaController.selected.idCategoria}" title="#{bundle.ViewForoSubcategoriaTitle_idCategoria}"/>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{foroSubcategoriaController.destroyAndView}" value="#{bundle.ViewForoSubcategoriaDestroyLink}"/>
+                <br />
+                <br />
+                <h:link outcome="Edit" value="#{bundle.ViewForoSubcategoriaEditLink}"/>
+                <br />
+                <h:commandLink action="#{foroSubcategoriaController.prepareCreate}" value="#{bundle.ViewForoSubcategoriaCreateLink}" />
+                <br />
+                <h:commandLink action="#{foroSubcategoriaController.prepareList}" value="#{bundle.ViewForoSubcategoriaShowAllLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ViewForoSubcategoriaIndexLink}"/>
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListAmigosTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:form styleClass="jsfcrud_list_form">
+                <h:panelGroup id="messagePanel" layout="block">
+                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                </h:panelGroup>
+                <h:outputText escape="false" value="#{bundle.ListAmigosEmpty}" rendered="#{amigosController.items.rowCount == 0}"/>
+                <h:panelGroup rendered="#{amigosController.items.rowCount > 0}">
+                    <h:outputText value="#{amigosController.pagination.pageFirstItem + 1}..#{amigosController.pagination.pageLastItem + 1}/#{amigosController.pagination.itemsCount}"/>&nbsp;
+                    <h:commandLink action="#{amigosController.previous}" value="#{bundle.Previous} #{amigosController.pagination.pageSize}" rendered="#{amigosController.pagination.hasPreviousPage}"/>&nbsp;
+                    <h:commandLink action="#{amigosController.next}" value="#{bundle.Next} #{amigosController.pagination.pageSize}" rendered="#{amigosController.pagination.hasNextPage}"/>&nbsp;
+                    <h:dataTable value="#{amigosController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListAmigosTitle_idAmistad}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idAmistad}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListAmigosTitle_aprobado}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.aprobado}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListAmigosTitle_idUsuario1}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idUsuario1}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListAmigosTitle_idUsuario2}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idUsuario2}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="&nbsp;"/>
+                            </f:facet>
+                            <h:commandLink action="#{amigosController.prepareView}" value="#{bundle.ListAmigosViewLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{amigosController.prepareEdit}" value="#{bundle.ListAmigosEditLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{amigosController.destroy}" value="#{bundle.ListAmigosDestroyLink}"/>
+                        </h:column>
+                    </h:dataTable>
+                </h:panelGroup>
+                <br />
+                <h:commandLink action="#{amigosController.prepareCreate}" value="#{bundle.ListAmigosCreateLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ListAmigosIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

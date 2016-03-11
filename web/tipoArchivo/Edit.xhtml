@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.EditTipoArchivoTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.EditTipoArchivoLabel_idTipo}" for="idTipo" />
+                    <h:inputText id="idTipo" value="#{tipoArchivoController.selected.idTipo}" title="#{bundle.EditTipoArchivoTitle_idTipo}" required="true" requiredMessage="#{bundle.EditTipoArchivoRequiredMessage_idTipo}"/>
+                    <h:outputLabel value="#{bundle.EditTipoArchivoLabel_nomTipo}" for="nomTipo" />
+                    <h:inputText id="nomTipo" value="#{tipoArchivoController.selected.nomTipo}" title="#{bundle.EditTipoArchivoTitle_nomTipo}" required="true" requiredMessage="#{bundle.EditTipoArchivoRequiredMessage_nomTipo}"/>
+                    <h:outputLabel value="#{bundle.EditTipoArchivoLabel_descripcion}" for="descripcion" />
+                    <h:inputTextarea rows="4" cols="30" id="descripcion" value="#{tipoArchivoController.selected.descripcion}" title="#{bundle.EditTipoArchivoTitle_descripcion}" required="true" requiredMessage="#{bundle.EditTipoArchivoRequiredMessage_descripcion}"/>
+                </h:panelGrid>
+                <h:commandLink action="#{tipoArchivoController.update}" value="#{bundle.EditTipoArchivoSaveLink}"/>
+                <br />
+                <br />
+                <h:link outcome="View" value="#{bundle.EditTipoArchivoViewLink}"/>
+                <br />
+                <h:commandLink action="#{tipoArchivoController.prepareList}" value="#{bundle.EditTipoArchivoShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.EditTipoArchivoIndexLink}" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

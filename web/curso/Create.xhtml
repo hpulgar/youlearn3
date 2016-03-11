@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.CreateCursoTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.CreateCursoLabel_idCurso}" for="idCurso" />
+                    <h:inputText id="idCurso" value="#{cursoController.selected.idCurso}" title="#{bundle.CreateCursoTitle_idCurso}" required="true" requiredMessage="#{bundle.CreateCursoRequiredMessage_idCurso}"/>
+                    <h:outputLabel value="#{bundle.CreateCursoLabel_nomCurso}" for="nomCurso" />
+                    <h:inputText id="nomCurso" value="#{cursoController.selected.nomCurso}" title="#{bundle.CreateCursoTitle_nomCurso}" required="true" requiredMessage="#{bundle.CreateCursoRequiredMessage_nomCurso}"/>
+                    <h:outputLabel value="#{bundle.CreateCursoLabel_personasInscritas}" for="personasInscritas" />
+                    <h:inputText id="personasInscritas" value="#{cursoController.selected.personasInscritas}" title="#{bundle.CreateCursoTitle_personasInscritas}" required="true" requiredMessage="#{bundle.CreateCursoRequiredMessage_personasInscritas}"/>
+                    <h:outputLabel value="#{bundle.CreateCursoLabel_descripcionCurso}" for="descripcionCurso" />
+                    <h:inputTextarea rows="4" cols="30" id="descripcionCurso" value="#{cursoController.selected.descripcionCurso}" title="#{bundle.CreateCursoTitle_descripcionCurso}" required="true" requiredMessage="#{bundle.CreateCursoRequiredMessage_descripcionCurso}"/>
+                    <h:outputLabel value="#{bundle.CreateCursoLabel_autorizado}" for="autorizado" />
+                    <h:inputText id="autorizado" value="#{cursoController.selected.autorizado}" title="#{bundle.CreateCursoTitle_autorizado}" required="true" requiredMessage="#{bundle.CreateCursoRequiredMessage_autorizado}"/>
+                    <h:outputLabel value="#{bundle.CreateCursoLabel_contenidos}" for="contenidos" />
+                    <h:inputTextarea rows="4" cols="30" id="contenidos" value="#{cursoController.selected.contenidos}" title="#{bundle.CreateCursoTitle_contenidos}" required="true" requiredMessage="#{bundle.CreateCursoRequiredMessage_contenidos}"/>
+                    <h:outputLabel value="#{bundle.CreateCursoLabel_seguidores}" for="seguidores" />
+                    <h:inputText id="seguidores" value="#{cursoController.selected.seguidores}" title="#{bundle.CreateCursoTitle_seguidores}" required="true" requiredMessage="#{bundle.CreateCursoRequiredMessage_seguidores}"/>
+                    <h:outputLabel value="#{bundle.CreateCursoLabel_idCat}" for="idCat" />
+                    <h:selectOneMenu id="idCat" value="#{cursoController.selected.idCat}" title="#{bundle.CreateCursoTitle_idCat}" required="true" requiredMessage="#{bundle.CreateCursoRequiredMessage_idCat}">
+                        <f:selectItems value="#{cursoSubCatController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.CreateCursoLabel_idUsuario}" for="idUsuario" />
+                    <h:selectOneMenu id="idUsuario" value="#{cursoController.selected.idUsuario}" title="#{bundle.CreateCursoTitle_idUsuario}" required="true" requiredMessage="#{bundle.CreateCursoRequiredMessage_idUsuario}">
+                        <f:selectItems value="#{usuarioController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{cursoController.create}" value="#{bundle.CreateCursoSaveLink}" />
+                <br />
+                <br />
+                <h:commandLink action="#{cursoController.prepareList}" value="#{bundle.CreateCursoShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.CreateCursoIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

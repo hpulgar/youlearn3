@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListArchivoTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:form styleClass="jsfcrud_list_form">
+                <h:panelGroup id="messagePanel" layout="block">
+                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                </h:panelGroup>
+                <h:outputText escape="false" value="#{bundle.ListArchivoEmpty}" rendered="#{archivoController.items.rowCount == 0}"/>
+                <h:panelGroup rendered="#{archivoController.items.rowCount > 0}">
+                    <h:outputText value="#{archivoController.pagination.pageFirstItem + 1}..#{archivoController.pagination.pageLastItem + 1}/#{archivoController.pagination.itemsCount}"/>&nbsp;
+                    <h:commandLink action="#{archivoController.previous}" value="#{bundle.Previous} #{archivoController.pagination.pageSize}" rendered="#{archivoController.pagination.hasPreviousPage}"/>&nbsp;
+                    <h:commandLink action="#{archivoController.next}" value="#{bundle.Next} #{archivoController.pagination.pageSize}" rendered="#{archivoController.pagination.hasNextPage}"/>&nbsp;
+                    <h:dataTable value="#{archivoController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListArchivoTitle_idArchivo}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idArchivo}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListArchivoTitle_nomArchivo}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.nomArchivo}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListArchivoTitle_descripcion}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.descripcion}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListArchivoTitle_ubicacion}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.ubicacion}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListArchivoTitle_autorizado}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.autorizado}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListArchivoTitle_idCurso}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idCurso}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListArchivoTitle_idTipoArchivo}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idTipoArchivo}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="&nbsp;"/>
+                            </f:facet>
+                            <h:commandLink action="#{archivoController.prepareView}" value="#{bundle.ListArchivoViewLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{archivoController.prepareEdit}" value="#{bundle.ListArchivoEditLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{archivoController.destroy}" value="#{bundle.ListArchivoDestroyLink}"/>
+                        </h:column>
+                    </h:dataTable>
+                </h:panelGroup>
+                <br />
+                <h:commandLink action="#{archivoController.prepareCreate}" value="#{bundle.ListArchivoCreateLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ListArchivoIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

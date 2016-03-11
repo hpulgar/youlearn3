@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListSesionTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:form styleClass="jsfcrud_list_form">
+                <h:panelGroup id="messagePanel" layout="block">
+                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                </h:panelGroup>
+                <h:outputText escape="false" value="#{bundle.ListSesionEmpty}" rendered="#{sesionController.items.rowCount == 0}"/>
+                <h:panelGroup rendered="#{sesionController.items.rowCount > 0}">
+                    <h:outputText value="#{sesionController.pagination.pageFirstItem + 1}..#{sesionController.pagination.pageLastItem + 1}/#{sesionController.pagination.itemsCount}"/>&nbsp;
+                    <h:commandLink action="#{sesionController.previous}" value="#{bundle.Previous} #{sesionController.pagination.pageSize}" rendered="#{sesionController.pagination.hasPreviousPage}"/>&nbsp;
+                    <h:commandLink action="#{sesionController.next}" value="#{bundle.Next} #{sesionController.pagination.pageSize}" rendered="#{sesionController.pagination.hasNextPage}"/>&nbsp;
+                    <h:dataTable value="#{sesionController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListSesionTitle_idSesion}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idSesion}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListSesionTitle_ip}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.ip}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListSesionTitle_inicio}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.inicio}">
+                                <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                            </h:outputText>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListSesionTitle_fin}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.fin}">
+                                <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                            </h:outputText>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListSesionTitle_idUsuario}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idUsuario}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="&nbsp;"/>
+                            </f:facet>
+                            <h:commandLink action="#{sesionController.prepareView}" value="#{bundle.ListSesionViewLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{sesionController.prepareEdit}" value="#{bundle.ListSesionEditLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{sesionController.destroy}" value="#{bundle.ListSesionDestroyLink}"/>
+                        </h:column>
+                    </h:dataTable>
+                </h:panelGroup>
+                <br />
+                <h:commandLink action="#{sesionController.prepareCreate}" value="#{bundle.ListSesionCreateLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ListSesionIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

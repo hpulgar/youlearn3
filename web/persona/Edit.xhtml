@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.EditPersonaTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.EditPersonaLabel_idPersona}" for="idPersona" />
+                    <h:inputText id="idPersona" value="#{personaController.selected.idPersona}" title="#{bundle.EditPersonaTitle_idPersona}" required="true" requiredMessage="#{bundle.EditPersonaRequiredMessage_idPersona}"/>
+                    <h:outputLabel value="#{bundle.EditPersonaLabel_nombre}" for="nombre" />
+                    <h:inputText id="nombre" value="#{personaController.selected.nombre}" title="#{bundle.EditPersonaTitle_nombre}" required="true" requiredMessage="#{bundle.EditPersonaRequiredMessage_nombre}"/>
+                    <h:outputLabel value="#{bundle.EditPersonaLabel_apellido}" for="apellido" />
+                    <h:inputText id="apellido" value="#{personaController.selected.apellido}" title="#{bundle.EditPersonaTitle_apellido}" required="true" requiredMessage="#{bundle.EditPersonaRequiredMessage_apellido}"/>
+                    <h:outputLabel value="#{bundle.EditPersonaLabel_fechaNac}" for="fechaNac" />
+                    <h:inputText id="fechaNac" value="#{personaController.selected.fechaNac}" title="#{bundle.EditPersonaTitle_fechaNac}" required="true" requiredMessage="#{bundle.EditPersonaRequiredMessage_fechaNac}">
+                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.EditPersonaLabel_ocupacion}" for="ocupacion" />
+                    <h:inputText id="ocupacion" value="#{personaController.selected.ocupacion}" title="#{bundle.EditPersonaTitle_ocupacion}" required="true" requiredMessage="#{bundle.EditPersonaRequiredMessage_ocupacion}"/>
+                    <h:outputLabel value="#{bundle.EditPersonaLabel_genero}" for="genero" />
+                    <h:inputText id="genero" value="#{personaController.selected.genero}" title="#{bundle.EditPersonaTitle_genero}" required="true" requiredMessage="#{bundle.EditPersonaRequiredMessage_genero}"/>
+                    <h:outputLabel value="#{bundle.EditPersonaLabel_descripcion}" for="descripcion" />
+                    <h:inputTextarea rows="4" cols="30" id="descripcion" value="#{personaController.selected.descripcion}" title="#{bundle.EditPersonaTitle_descripcion}" />
+                    <h:outputLabel value="#{bundle.EditPersonaLabel_idCiudad}" for="idCiudad" />
+                    <h:selectOneMenu id="idCiudad" value="#{personaController.selected.idCiudad}" title="#{bundle.EditPersonaTitle_idCiudad}" required="true" requiredMessage="#{bundle.EditPersonaRequiredMessage_idCiudad}">
+                        <f:selectItems value="#{ciudadController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.EditPersonaLabel_idUsuario}" for="idUsuario" />
+                    <h:selectOneMenu id="idUsuario" value="#{personaController.selected.idUsuario}" title="#{bundle.EditPersonaTitle_idUsuario}" required="true" requiredMessage="#{bundle.EditPersonaRequiredMessage_idUsuario}">
+                        <f:selectItems value="#{usuarioController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <h:commandLink action="#{personaController.update}" value="#{bundle.EditPersonaSaveLink}"/>
+                <br />
+                <br />
+                <h:link outcome="View" value="#{bundle.EditPersonaViewLink}"/>
+                <br />
+                <h:commandLink action="#{personaController.prepareList}" value="#{bundle.EditPersonaShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.EditPersonaIndexLink}" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

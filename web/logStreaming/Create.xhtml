@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.CreateLogStreamingTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.CreateLogStreamingLabel_idStreaming}" for="idStreaming" />
+                    <h:inputText id="idStreaming" value="#{logStreamingController.selected.idStreaming}" title="#{bundle.CreateLogStreamingTitle_idStreaming}" required="true" requiredMessage="#{bundle.CreateLogStreamingRequiredMessage_idStreaming}"/>
+                    <h:outputLabel value="#{bundle.CreateLogStreamingLabel_titulo}" for="titulo" />
+                    <h:inputText id="titulo" value="#{logStreamingController.selected.titulo}" title="#{bundle.CreateLogStreamingTitle_titulo}" required="true" requiredMessage="#{bundle.CreateLogStreamingRequiredMessage_titulo}"/>
+                    <h:outputLabel value="#{bundle.CreateLogStreamingLabel_viewers}" for="viewers" />
+                    <h:inputText id="viewers" value="#{logStreamingController.selected.viewers}" title="#{bundle.CreateLogStreamingTitle_viewers}" required="true" requiredMessage="#{bundle.CreateLogStreamingRequiredMessage_viewers}"/>
+                    <h:outputLabel value="#{bundle.CreateLogStreamingLabel_fechaInicio}" for="fechaInicio" />
+                    <h:inputText id="fechaInicio" value="#{logStreamingController.selected.fechaInicio}" title="#{bundle.CreateLogStreamingTitle_fechaInicio}" required="true" requiredMessage="#{bundle.CreateLogStreamingRequiredMessage_fechaInicio}">
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.CreateLogStreamingLabel_fechaFin}" for="fechaFin" />
+                    <h:inputText id="fechaFin" value="#{logStreamingController.selected.fechaFin}" title="#{bundle.CreateLogStreamingTitle_fechaFin}" required="true" requiredMessage="#{bundle.CreateLogStreamingRequiredMessage_fechaFin}">
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.CreateLogStreamingLabel_idCurso}" for="idCurso" />
+                    <h:selectOneMenu id="idCurso" value="#{logStreamingController.selected.idCurso}" title="#{bundle.CreateLogStreamingTitle_idCurso}" required="true" requiredMessage="#{bundle.CreateLogStreamingRequiredMessage_idCurso}">
+                        <f:selectItems value="#{cursoController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.CreateLogStreamingLabel_idUsuario}" for="idUsuario" />
+                    <h:selectOneMenu id="idUsuario" value="#{logStreamingController.selected.idUsuario}" title="#{bundle.CreateLogStreamingTitle_idUsuario}" required="true" requiredMessage="#{bundle.CreateLogStreamingRequiredMessage_idUsuario}">
+                        <f:selectItems value="#{usuarioController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{logStreamingController.create}" value="#{bundle.CreateLogStreamingSaveLink}" />
+                <br />
+                <br />
+                <h:commandLink action="#{logStreamingController.prepareList}" value="#{bundle.CreateLogStreamingShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.CreateLogStreamingIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

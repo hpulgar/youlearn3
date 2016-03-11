@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ViewCursoCategoriaTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputText value="#{bundle.ViewCursoCategoriaLabel_idCat}"/>
+                    <h:outputText value="#{cursoCategoriaController.selected.idCat}" title="#{bundle.ViewCursoCategoriaTitle_idCat}"/>
+                    <h:outputText value="#{bundle.ViewCursoCategoriaLabel_nomCat}"/>
+                    <h:outputText value="#{cursoCategoriaController.selected.nomCat}" title="#{bundle.ViewCursoCategoriaTitle_nomCat}"/>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{cursoCategoriaController.destroyAndView}" value="#{bundle.ViewCursoCategoriaDestroyLink}"/>
+                <br />
+                <br />
+                <h:link outcome="Edit" value="#{bundle.ViewCursoCategoriaEditLink}"/>
+                <br />
+                <h:commandLink action="#{cursoCategoriaController.prepareCreate}" value="#{bundle.ViewCursoCategoriaCreateLink}" />
+                <br />
+                <h:commandLink action="#{cursoCategoriaController.prepareList}" value="#{bundle.ViewCursoCategoriaShowAllLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ViewCursoCategoriaIndexLink}"/>
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

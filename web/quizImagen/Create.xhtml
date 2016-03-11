@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.CreateQuizImagenTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.CreateQuizImagenLabel_idImagen}" for="idImagen" />
+                    <h:inputText id="idImagen" value="#{quizImagenController.selected.idImagen}" title="#{bundle.CreateQuizImagenTitle_idImagen}" required="true" requiredMessage="#{bundle.CreateQuizImagenRequiredMessage_idImagen}"/>
+                    <h:outputLabel value="#{bundle.CreateQuizImagenLabel_url}" for="url" />
+                    <h:inputText id="url" value="#{quizImagenController.selected.url}" title="#{bundle.CreateQuizImagenTitle_url}" required="true" requiredMessage="#{bundle.CreateQuizImagenRequiredMessage_url}"/>
+                    <h:outputLabel value="#{bundle.CreateQuizImagenLabel_idPregunta}" for="idPregunta" />
+                    <h:selectOneMenu id="idPregunta" value="#{quizImagenController.selected.idPregunta}" title="#{bundle.CreateQuizImagenTitle_idPregunta}" required="true" requiredMessage="#{bundle.CreateQuizImagenRequiredMessage_idPregunta}">
+                        <f:selectItems value="#{preguntaController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{quizImagenController.create}" value="#{bundle.CreateQuizImagenSaveLink}" />
+                <br />
+                <br />
+                <h:commandLink action="#{quizImagenController.prepareList}" value="#{bundle.CreateQuizImagenShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.CreateQuizImagenIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

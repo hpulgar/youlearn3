@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.CreateTableroTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.CreateTableroLabel_idTablero}" for="idTablero" />
+                    <h:inputText id="idTablero" value="#{tableroController.selected.idTablero}" title="#{bundle.CreateTableroTitle_idTablero}" required="true" requiredMessage="#{bundle.CreateTableroRequiredMessage_idTablero}"/>
+                    <h:outputLabel value="#{bundle.CreateTableroLabel_titulo}" for="titulo" />
+                    <h:inputTextarea rows="4" cols="30" id="titulo" value="#{tableroController.selected.titulo}" title="#{bundle.CreateTableroTitle_titulo}" required="true" requiredMessage="#{bundle.CreateTableroRequiredMessage_titulo}"/>
+                    <h:outputLabel value="#{bundle.CreateTableroLabel_descripcion}" for="descripcion" />
+                    <h:inputTextarea rows="4" cols="30" id="descripcion" value="#{tableroController.selected.descripcion}" title="#{bundle.CreateTableroTitle_descripcion}" required="true" requiredMessage="#{bundle.CreateTableroRequiredMessage_descripcion}"/>
+                    <h:outputLabel value="#{bundle.CreateTableroLabel_idCurso}" for="idCurso" />
+                    <h:selectOneMenu id="idCurso" value="#{tableroController.selected.idCurso}" title="#{bundle.CreateTableroTitle_idCurso}" required="true" requiredMessage="#{bundle.CreateTableroRequiredMessage_idCurso}">
+                        <f:selectItems value="#{cursoController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.CreateTableroLabel_idUsuario}" for="idUsuario" />
+                    <h:selectOneMenu id="idUsuario" value="#{tableroController.selected.idUsuario}" title="#{bundle.CreateTableroTitle_idUsuario}" required="true" requiredMessage="#{bundle.CreateTableroRequiredMessage_idUsuario}">
+                        <f:selectItems value="#{usuarioController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{tableroController.create}" value="#{bundle.CreateTableroSaveLink}" />
+                <br />
+                <br />
+                <h:commandLink action="#{tableroController.prepareList}" value="#{bundle.CreateTableroShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.CreateTableroIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

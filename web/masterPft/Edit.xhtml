@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.EditMasterPftTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.EditMasterPftLabel_idPft}" for="idPft" />
+                    <h:inputText id="idPft" value="#{masterPftController.selected.idPft}" title="#{bundle.EditMasterPftTitle_idPft}" required="true" requiredMessage="#{bundle.EditMasterPftRequiredMessage_idPft}"/>
+                    <h:outputLabel value="#{bundle.EditMasterPftLabel_descripcion}" for="descripcion" />
+                    <h:inputText id="descripcion" value="#{masterPftController.selected.descripcion}" title="#{bundle.EditMasterPftTitle_descripcion}" />
+                </h:panelGrid>
+                <h:commandLink action="#{masterPftController.update}" value="#{bundle.EditMasterPftSaveLink}"/>
+                <br />
+                <br />
+                <h:link outcome="View" value="#{bundle.EditMasterPftViewLink}"/>
+                <br />
+                <h:commandLink action="#{masterPftController.prepareList}" value="#{bundle.EditMasterPftShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.EditMasterPftIndexLink}" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

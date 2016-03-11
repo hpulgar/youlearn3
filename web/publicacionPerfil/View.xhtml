@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ViewPublicacionPerfilTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputText value="#{bundle.ViewPublicacionPerfilLabel_idPublicacion}"/>
+                    <h:outputText value="#{publicacionPerfilController.selected.idPublicacion}" title="#{bundle.ViewPublicacionPerfilTitle_idPublicacion}"/>
+                    <h:outputText value="#{bundle.ViewPublicacionPerfilLabel_publicacion}"/>
+                    <h:outputText value="#{publicacionPerfilController.selected.publicacion}" title="#{bundle.ViewPublicacionPerfilTitle_publicacion}"/>
+                    <h:outputText value="#{bundle.ViewPublicacionPerfilLabel_fechaPublicacion}"/>
+                    <h:outputText value="#{publicacionPerfilController.selected.fechaPublicacion}" title="#{bundle.ViewPublicacionPerfilTitle_fechaPublicacion}">
+                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                    </h:outputText>
+                    <h:outputText value="#{bundle.ViewPublicacionPerfilLabel_idPublicador}"/>
+                    <h:outputText value="#{publicacionPerfilController.selected.idPublicador}" title="#{bundle.ViewPublicacionPerfilTitle_idPublicador}"/>
+                    <h:outputText value="#{bundle.ViewPublicacionPerfilLabel_idUsuario}"/>
+                    <h:outputText value="#{publicacionPerfilController.selected.idUsuario}" title="#{bundle.ViewPublicacionPerfilTitle_idUsuario}"/>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{publicacionPerfilController.destroyAndView}" value="#{bundle.ViewPublicacionPerfilDestroyLink}"/>
+                <br />
+                <br />
+                <h:link outcome="Edit" value="#{bundle.ViewPublicacionPerfilEditLink}"/>
+                <br />
+                <h:commandLink action="#{publicacionPerfilController.prepareCreate}" value="#{bundle.ViewPublicacionPerfilCreateLink}" />
+                <br />
+                <h:commandLink action="#{publicacionPerfilController.prepareList}" value="#{bundle.ViewPublicacionPerfilShowAllLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ViewPublicacionPerfilIndexLink}"/>
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

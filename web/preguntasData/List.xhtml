@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListPreguntasDataTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:form styleClass="jsfcrud_list_form">
+                <h:panelGroup id="messagePanel" layout="block">
+                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                </h:panelGroup>
+                <h:outputText escape="false" value="#{bundle.ListPreguntasDataEmpty}" rendered="#{preguntasDataController.items.rowCount == 0}"/>
+                <h:panelGroup rendered="#{preguntasDataController.items.rowCount > 0}">
+                    <h:outputText value="#{preguntasDataController.pagination.pageFirstItem + 1}..#{preguntasDataController.pagination.pageLastItem + 1}/#{preguntasDataController.pagination.itemsCount}"/>&nbsp;
+                    <h:commandLink action="#{preguntasDataController.previous}" value="#{bundle.Previous} #{preguntasDataController.pagination.pageSize}" rendered="#{preguntasDataController.pagination.hasPreviousPage}"/>&nbsp;
+                    <h:commandLink action="#{preguntasDataController.next}" value="#{bundle.Next} #{preguntasDataController.pagination.pageSize}" rendered="#{preguntasDataController.pagination.hasNextPage}"/>&nbsp;
+                    <h:dataTable value="#{preguntasDataController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListPreguntasDataTitle_idPreguntasData}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idPreguntasData}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListPreguntasDataTitle_idCurso}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idCurso}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListPreguntasDataTitle_idPregunta}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idPregunta}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListPreguntasDataTitle_idQuiz}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idQuiz}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListPreguntasDataTitle_idRespuesta}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idRespuesta}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="&nbsp;"/>
+                            </f:facet>
+                            <h:commandLink action="#{preguntasDataController.prepareView}" value="#{bundle.ListPreguntasDataViewLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{preguntasDataController.prepareEdit}" value="#{bundle.ListPreguntasDataEditLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{preguntasDataController.destroy}" value="#{bundle.ListPreguntasDataDestroyLink}"/>
+                        </h:column>
+                    </h:dataTable>
+                </h:panelGroup>
+                <br />
+                <h:commandLink action="#{preguntasDataController.prepareCreate}" value="#{bundle.ListPreguntasDataCreateLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ListPreguntasDataIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

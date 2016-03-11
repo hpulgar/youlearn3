@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListForoPosteosTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:form styleClass="jsfcrud_list_form">
+                <h:panelGroup id="messagePanel" layout="block">
+                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                </h:panelGroup>
+                <h:outputText escape="false" value="#{bundle.ListForoPosteosEmpty}" rendered="#{foroPosteosController.items.rowCount == 0}"/>
+                <h:panelGroup rendered="#{foroPosteosController.items.rowCount > 0}">
+                    <h:outputText value="#{foroPosteosController.pagination.pageFirstItem + 1}..#{foroPosteosController.pagination.pageLastItem + 1}/#{foroPosteosController.pagination.itemsCount}"/>&nbsp;
+                    <h:commandLink action="#{foroPosteosController.previous}" value="#{bundle.Previous} #{foroPosteosController.pagination.pageSize}" rendered="#{foroPosteosController.pagination.hasPreviousPage}"/>&nbsp;
+                    <h:commandLink action="#{foroPosteosController.next}" value="#{bundle.Next} #{foroPosteosController.pagination.pageSize}" rendered="#{foroPosteosController.pagination.hasNextPage}"/>&nbsp;
+                    <h:dataTable value="#{foroPosteosController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListForoPosteosTitle_idPost}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idPost}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListForoPosteosTitle_titulo}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.titulo}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListForoPosteosTitle_contenido}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.contenido}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListForoPosteosTitle_fecha}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.fecha}">
+                                <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                            </h:outputText>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListForoPosteosTitle_autorizado}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.autorizado}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListForoPosteosTitle_idSubcategoria}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idSubcategoria}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListForoPosteosTitle_idUser}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idUser}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="&nbsp;"/>
+                            </f:facet>
+                            <h:commandLink action="#{foroPosteosController.prepareView}" value="#{bundle.ListForoPosteosViewLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{foroPosteosController.prepareEdit}" value="#{bundle.ListForoPosteosEditLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{foroPosteosController.destroy}" value="#{bundle.ListForoPosteosDestroyLink}"/>
+                        </h:column>
+                    </h:dataTable>
+                </h:panelGroup>
+                <br />
+                <h:commandLink action="#{foroPosteosController.prepareCreate}" value="#{bundle.ListForoPosteosCreateLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ListForoPosteosIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

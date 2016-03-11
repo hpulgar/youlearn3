@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.EditPreguntasDataTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.EditPreguntasDataLabel_idPreguntasData}" for="idPreguntasData" />
+                    <h:inputText id="idPreguntasData" value="#{preguntasDataController.selected.idPreguntasData}" title="#{bundle.EditPreguntasDataTitle_idPreguntasData}" required="true" requiredMessage="#{bundle.EditPreguntasDataRequiredMessage_idPreguntasData}"/>
+                    <h:outputLabel value="#{bundle.EditPreguntasDataLabel_idCurso}" for="idCurso" />
+                    <h:selectOneMenu id="idCurso" value="#{preguntasDataController.selected.idCurso}" title="#{bundle.EditPreguntasDataTitle_idCurso}" required="true" requiredMessage="#{bundle.EditPreguntasDataRequiredMessage_idCurso}">
+                        <f:selectItems value="#{cursoController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.EditPreguntasDataLabel_idPregunta}" for="idPregunta" />
+                    <h:selectOneMenu id="idPregunta" value="#{preguntasDataController.selected.idPregunta}" title="#{bundle.EditPreguntasDataTitle_idPregunta}" required="true" requiredMessage="#{bundle.EditPreguntasDataRequiredMessage_idPregunta}">
+                        <f:selectItems value="#{preguntaController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.EditPreguntasDataLabel_idQuiz}" for="idQuiz" />
+                    <h:selectOneMenu id="idQuiz" value="#{preguntasDataController.selected.idQuiz}" title="#{bundle.EditPreguntasDataTitle_idQuiz}" required="true" requiredMessage="#{bundle.EditPreguntasDataRequiredMessage_idQuiz}">
+                        <f:selectItems value="#{quizController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.EditPreguntasDataLabel_idRespuesta}" for="idRespuesta" />
+                    <h:selectOneMenu id="idRespuesta" value="#{preguntasDataController.selected.idRespuesta}" title="#{bundle.EditPreguntasDataTitle_idRespuesta}" required="true" requiredMessage="#{bundle.EditPreguntasDataRequiredMessage_idRespuesta}">
+                        <f:selectItems value="#{respuestasController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <h:commandLink action="#{preguntasDataController.update}" value="#{bundle.EditPreguntasDataSaveLink}"/>
+                <br />
+                <br />
+                <h:link outcome="View" value="#{bundle.EditPreguntasDataViewLink}"/>
+                <br />
+                <h:commandLink action="#{preguntasDataController.prepareList}" value="#{bundle.EditPreguntasDataShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.EditPreguntasDataIndexLink}" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

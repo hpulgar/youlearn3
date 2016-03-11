@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.CreateLogSubidasTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.CreateLogSubidasLabel_idLog}" for="idLog" />
+                    <h:inputText id="idLog" value="#{logSubidasController.selected.idLog}" title="#{bundle.CreateLogSubidasTitle_idLog}" required="true" requiredMessage="#{bundle.CreateLogSubidasRequiredMessage_idLog}"/>
+                    <h:outputLabel value="#{bundle.CreateLogSubidasLabel_fecha}" for="fecha" />
+                    <h:inputText id="fecha" value="#{logSubidasController.selected.fecha}" title="#{bundle.CreateLogSubidasTitle_fecha}" required="true" requiredMessage="#{bundle.CreateLogSubidasRequiredMessage_fecha}">
+                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.CreateLogSubidasLabel_informacion}" for="informacion" />
+                    <h:inputTextarea rows="4" cols="30" id="informacion" value="#{logSubidasController.selected.informacion}" title="#{bundle.CreateLogSubidasTitle_informacion}" required="true" requiredMessage="#{bundle.CreateLogSubidasRequiredMessage_informacion}"/>
+                    <h:outputLabel value="#{bundle.CreateLogSubidasLabel_idArchivo}" for="idArchivo" />
+                    <h:selectOneMenu id="idArchivo" value="#{logSubidasController.selected.idArchivo}" title="#{bundle.CreateLogSubidasTitle_idArchivo}" required="true" requiredMessage="#{bundle.CreateLogSubidasRequiredMessage_idArchivo}">
+                        <f:selectItems value="#{archivoController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.CreateLogSubidasLabel_idSesion}" for="idSesion" />
+                    <h:selectOneMenu id="idSesion" value="#{logSubidasController.selected.idSesion}" title="#{bundle.CreateLogSubidasTitle_idSesion}" required="true" requiredMessage="#{bundle.CreateLogSubidasRequiredMessage_idSesion}">
+                        <f:selectItems value="#{sesionController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{logSubidasController.create}" value="#{bundle.CreateLogSubidasSaveLink}" />
+                <br />
+                <br />
+                <h:commandLink action="#{logSubidasController.prepareList}" value="#{bundle.CreateLogSubidasShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.CreateLogSubidasIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

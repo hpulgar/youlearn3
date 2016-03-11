@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.CreatePermisosTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.CreatePermisosLabel_idMenu}" for="idMenu" />
+                    <h:inputText id="idMenu" value="#{permisosController.selected.idMenu}" title="#{bundle.CreatePermisosTitle_idMenu}" required="true" requiredMessage="#{bundle.CreatePermisosRequiredMessage_idMenu}"/>
+                    <h:outputLabel value="#{bundle.CreatePermisosLabel_login}" for="login" />
+                    <h:inputText id="login" value="#{permisosController.selected.login}" title="#{bundle.CreatePermisosTitle_login}" required="true" requiredMessage="#{bundle.CreatePermisosRequiredMessage_login}"/>
+                    <h:outputLabel value="#{bundle.CreatePermisosLabel_administrarCursos}" for="administrarCursos" />
+                    <h:inputText id="administrarCursos" value="#{permisosController.selected.administrarCursos}" title="#{bundle.CreatePermisosTitle_administrarCursos}" required="true" requiredMessage="#{bundle.CreatePermisosRequiredMessage_administrarCursos}"/>
+                    <h:outputLabel value="#{bundle.CreatePermisosLabel_verCursos}" for="verCursos" />
+                    <h:inputText id="verCursos" value="#{permisosController.selected.verCursos}" title="#{bundle.CreatePermisosTitle_verCursos}" required="true" requiredMessage="#{bundle.CreatePermisosRequiredMessage_verCursos}"/>
+                    <h:outputLabel value="#{bundle.CreatePermisosLabel_panelAdministrativo}" for="panelAdministrativo" />
+                    <h:inputText id="panelAdministrativo" value="#{permisosController.selected.panelAdministrativo}" title="#{bundle.CreatePermisosTitle_panelAdministrativo}" required="true" requiredMessage="#{bundle.CreatePermisosRequiredMessage_panelAdministrativo}"/>
+                    <h:outputLabel value="#{bundle.CreatePermisosLabel_panelModerador}" for="panelModerador" />
+                    <h:inputText id="panelModerador" value="#{permisosController.selected.panelModerador}" title="#{bundle.CreatePermisosTitle_panelModerador}" required="true" requiredMessage="#{bundle.CreatePermisosRequiredMessage_panelModerador}"/>
+                    <h:outputLabel value="#{bundle.CreatePermisosLabel_foroGeneral}" for="foroGeneral" />
+                    <h:inputText id="foroGeneral" value="#{permisosController.selected.foroGeneral}" title="#{bundle.CreatePermisosTitle_foroGeneral}" required="true" requiredMessage="#{bundle.CreatePermisosRequiredMessage_foroGeneral}"/>
+                    <h:outputLabel value="#{bundle.CreatePermisosLabel_suscripcion}" for="suscripcion" />
+                    <h:inputText id="suscripcion" value="#{permisosController.selected.suscripcion}" title="#{bundle.CreatePermisosTitle_suscripcion}" required="true" requiredMessage="#{bundle.CreatePermisosRequiredMessage_suscripcion}"/>
+                    <h:outputLabel value="#{bundle.CreatePermisosLabel_mensajeria}" for="mensajeria" />
+                    <h:inputText id="mensajeria" value="#{permisosController.selected.mensajeria}" title="#{bundle.CreatePermisosTitle_mensajeria}" required="true" requiredMessage="#{bundle.CreatePermisosRequiredMessage_mensajeria}"/>
+                    <h:outputLabel value="#{bundle.CreatePermisosLabel_accesoTablero}" for="accesoTablero" />
+                    <h:inputText id="accesoTablero" value="#{permisosController.selected.accesoTablero}" title="#{bundle.CreatePermisosTitle_accesoTablero}" required="true" requiredMessage="#{bundle.CreatePermisosRequiredMessage_accesoTablero}"/>
+                    <h:outputLabel value="#{bundle.CreatePermisosLabel_idPerfil}" for="idPerfil" />
+                    <h:selectOneMenu id="idPerfil" value="#{permisosController.selected.idPerfil}" title="#{bundle.CreatePermisosTitle_idPerfil}" required="true" requiredMessage="#{bundle.CreatePermisosRequiredMessage_idPerfil}">
+                        <f:selectItems value="#{perfilController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{permisosController.create}" value="#{bundle.CreatePermisosSaveLink}" />
+                <br />
+                <br />
+                <h:commandLink action="#{permisosController.prepareList}" value="#{bundle.CreatePermisosShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.CreatePermisosIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

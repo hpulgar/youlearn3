@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.EditForoPosteosTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.EditForoPosteosLabel_idPost}" for="idPost" />
+                    <h:inputText id="idPost" value="#{foroPosteosController.selected.idPost}" title="#{bundle.EditForoPosteosTitle_idPost}" required="true" requiredMessage="#{bundle.EditForoPosteosRequiredMessage_idPost}"/>
+                    <h:outputLabel value="#{bundle.EditForoPosteosLabel_titulo}" for="titulo" />
+                    <h:inputTextarea rows="4" cols="30" id="titulo" value="#{foroPosteosController.selected.titulo}" title="#{bundle.EditForoPosteosTitle_titulo}" required="true" requiredMessage="#{bundle.EditForoPosteosRequiredMessage_titulo}"/>
+                    <h:outputLabel value="#{bundle.EditForoPosteosLabel_contenido}" for="contenido" />
+                    <h:inputTextarea rows="4" cols="30" id="contenido" value="#{foroPosteosController.selected.contenido}" title="#{bundle.EditForoPosteosTitle_contenido}" required="true" requiredMessage="#{bundle.EditForoPosteosRequiredMessage_contenido}"/>
+                    <h:outputLabel value="#{bundle.EditForoPosteosLabel_fecha}" for="fecha" />
+                    <h:inputText id="fecha" value="#{foroPosteosController.selected.fecha}" title="#{bundle.EditForoPosteosTitle_fecha}" required="true" requiredMessage="#{bundle.EditForoPosteosRequiredMessage_fecha}">
+                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.EditForoPosteosLabel_autorizado}" for="autorizado" />
+                    <h:inputText id="autorizado" value="#{foroPosteosController.selected.autorizado}" title="#{bundle.EditForoPosteosTitle_autorizado}" required="true" requiredMessage="#{bundle.EditForoPosteosRequiredMessage_autorizado}"/>
+                    <h:outputLabel value="#{bundle.EditForoPosteosLabel_idSubcategoria}" for="idSubcategoria" />
+                    <h:selectOneMenu id="idSubcategoria" value="#{foroPosteosController.selected.idSubcategoria}" title="#{bundle.EditForoPosteosTitle_idSubcategoria}" required="true" requiredMessage="#{bundle.EditForoPosteosRequiredMessage_idSubcategoria}">
+                        <f:selectItems value="#{foroSubcategoriaController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.EditForoPosteosLabel_idUser}" for="idUser" />
+                    <h:selectOneMenu id="idUser" value="#{foroPosteosController.selected.idUser}" title="#{bundle.EditForoPosteosTitle_idUser}" required="true" requiredMessage="#{bundle.EditForoPosteosRequiredMessage_idUser}">
+                        <f:selectItems value="#{usuarioController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <h:commandLink action="#{foroPosteosController.update}" value="#{bundle.EditForoPosteosSaveLink}"/>
+                <br />
+                <br />
+                <h:link outcome="View" value="#{bundle.EditForoPosteosViewLink}"/>
+                <br />
+                <h:commandLink action="#{foroPosteosController.prepareList}" value="#{bundle.EditForoPosteosShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.EditForoPosteosIndexLink}" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

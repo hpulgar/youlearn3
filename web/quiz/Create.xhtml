@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.CreateQuizTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.CreateQuizLabel_idQuiz}" for="idQuiz" />
+                    <h:inputText id="idQuiz" value="#{quizController.selected.idQuiz}" title="#{bundle.CreateQuizTitle_idQuiz}" required="true" requiredMessage="#{bundle.CreateQuizRequiredMessage_idQuiz}"/>
+                    <h:outputLabel value="#{bundle.CreateQuizLabel_titulo}" for="titulo" />
+                    <h:inputTextarea rows="4" cols="30" id="titulo" value="#{quizController.selected.titulo}" title="#{bundle.CreateQuizTitle_titulo}" required="true" requiredMessage="#{bundle.CreateQuizRequiredMessage_titulo}"/>
+                    <h:outputLabel value="#{bundle.CreateQuizLabel_descripcion}" for="descripcion" />
+                    <h:inputTextarea rows="4" cols="30" id="descripcion" value="#{quizController.selected.descripcion}" title="#{bundle.CreateQuizTitle_descripcion}" required="true" requiredMessage="#{bundle.CreateQuizRequiredMessage_descripcion}"/>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{quizController.create}" value="#{bundle.CreateQuizSaveLink}" />
+                <br />
+                <br />
+                <h:commandLink action="#{quizController.prepareList}" value="#{bundle.CreateQuizShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.CreateQuizIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

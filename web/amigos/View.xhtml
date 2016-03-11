@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ViewAmigosTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputText value="#{bundle.ViewAmigosLabel_idAmistad}"/>
+                    <h:outputText value="#{amigosController.selected.idAmistad}" title="#{bundle.ViewAmigosTitle_idAmistad}"/>
+                    <h:outputText value="#{bundle.ViewAmigosLabel_aprobado}"/>
+                    <h:outputText value="#{amigosController.selected.aprobado}" title="#{bundle.ViewAmigosTitle_aprobado}"/>
+                    <h:outputText value="#{bundle.ViewAmigosLabel_idUsuario1}"/>
+                    <h:outputText value="#{amigosController.selected.idUsuario1}" title="#{bundle.ViewAmigosTitle_idUsuario1}"/>
+                    <h:outputText value="#{bundle.ViewAmigosLabel_idUsuario2}"/>
+                    <h:outputText value="#{amigosController.selected.idUsuario2}" title="#{bundle.ViewAmigosTitle_idUsuario2}"/>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{amigosController.destroyAndView}" value="#{bundle.ViewAmigosDestroyLink}"/>
+                <br />
+                <br />
+                <h:link outcome="Edit" value="#{bundle.ViewAmigosEditLink}"/>
+                <br />
+                <h:commandLink action="#{amigosController.prepareCreate}" value="#{bundle.ViewAmigosCreateLink}" />
+                <br />
+                <h:commandLink action="#{amigosController.prepareList}" value="#{bundle.ViewAmigosShowAllLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ViewAmigosIndexLink}"/>
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

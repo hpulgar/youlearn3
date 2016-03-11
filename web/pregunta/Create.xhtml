@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.CreatePreguntaTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.CreatePreguntaLabel_idPregunta}" for="idPregunta" />
+                    <h:inputText id="idPregunta" value="#{preguntaController.selected.idPregunta}" title="#{bundle.CreatePreguntaTitle_idPregunta}" required="true" requiredMessage="#{bundle.CreatePreguntaRequiredMessage_idPregunta}"/>
+                    <h:outputLabel value="#{bundle.CreatePreguntaLabel_pregunta}" for="pregunta" />
+                    <h:inputTextarea rows="4" cols="30" id="pregunta" value="#{preguntaController.selected.pregunta}" title="#{bundle.CreatePreguntaTitle_pregunta}" required="true" requiredMessage="#{bundle.CreatePreguntaRequiredMessage_pregunta}"/>
+                    <h:outputLabel value="#{bundle.CreatePreguntaLabel_informacion}" for="informacion" />
+                    <h:inputTextarea rows="4" cols="30" id="informacion" value="#{preguntaController.selected.informacion}" title="#{bundle.CreatePreguntaTitle_informacion}" required="true" requiredMessage="#{bundle.CreatePreguntaRequiredMessage_informacion}"/>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{preguntaController.create}" value="#{bundle.CreatePreguntaSaveLink}" />
+                <br />
+                <br />
+                <h:commandLink action="#{preguntaController.prepareList}" value="#{bundle.CreatePreguntaShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.CreatePreguntaIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

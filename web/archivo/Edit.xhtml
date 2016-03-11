@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.EditArchivoTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.EditArchivoLabel_idArchivo}" for="idArchivo" />
+                    <h:inputText id="idArchivo" value="#{archivoController.selected.idArchivo}" title="#{bundle.EditArchivoTitle_idArchivo}" required="true" requiredMessage="#{bundle.EditArchivoRequiredMessage_idArchivo}"/>
+                    <h:outputLabel value="#{bundle.EditArchivoLabel_nomArchivo}" for="nomArchivo" />
+                    <h:inputText id="nomArchivo" value="#{archivoController.selected.nomArchivo}" title="#{bundle.EditArchivoTitle_nomArchivo}" required="true" requiredMessage="#{bundle.EditArchivoRequiredMessage_nomArchivo}"/>
+                    <h:outputLabel value="#{bundle.EditArchivoLabel_descripcion}" for="descripcion" />
+                    <h:inputTextarea rows="4" cols="30" id="descripcion" value="#{archivoController.selected.descripcion}" title="#{bundle.EditArchivoTitle_descripcion}" required="true" requiredMessage="#{bundle.EditArchivoRequiredMessage_descripcion}"/>
+                    <h:outputLabel value="#{bundle.EditArchivoLabel_ubicacion}" for="ubicacion" />
+                    <h:inputText id="ubicacion" value="#{archivoController.selected.ubicacion}" title="#{bundle.EditArchivoTitle_ubicacion}" required="true" requiredMessage="#{bundle.EditArchivoRequiredMessage_ubicacion}"/>
+                    <h:outputLabel value="#{bundle.EditArchivoLabel_autorizado}" for="autorizado" />
+                    <h:inputText id="autorizado" value="#{archivoController.selected.autorizado}" title="#{bundle.EditArchivoTitle_autorizado}" required="true" requiredMessage="#{bundle.EditArchivoRequiredMessage_autorizado}"/>
+                    <h:outputLabel value="#{bundle.EditArchivoLabel_idCurso}" for="idCurso" />
+                    <h:selectOneMenu id="idCurso" value="#{archivoController.selected.idCurso}" title="#{bundle.EditArchivoTitle_idCurso}" required="true" requiredMessage="#{bundle.EditArchivoRequiredMessage_idCurso}">
+                        <f:selectItems value="#{cursoController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.EditArchivoLabel_idTipoArchivo}" for="idTipoArchivo" />
+                    <h:selectOneMenu id="idTipoArchivo" value="#{archivoController.selected.idTipoArchivo}" title="#{bundle.EditArchivoTitle_idTipoArchivo}" required="true" requiredMessage="#{bundle.EditArchivoRequiredMessage_idTipoArchivo}">
+                        <f:selectItems value="#{tipoArchivoController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <h:commandLink action="#{archivoController.update}" value="#{bundle.EditArchivoSaveLink}"/>
+                <br />
+                <br />
+                <h:link outcome="View" value="#{bundle.EditArchivoViewLink}"/>
+                <br />
+                <h:commandLink action="#{archivoController.prepareList}" value="#{bundle.EditArchivoShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.EditArchivoIndexLink}" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

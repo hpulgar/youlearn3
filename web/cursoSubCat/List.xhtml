@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListCursoSubCatTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:form styleClass="jsfcrud_list_form">
+                <h:panelGroup id="messagePanel" layout="block">
+                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                </h:panelGroup>
+                <h:outputText escape="false" value="#{bundle.ListCursoSubCatEmpty}" rendered="#{cursoSubCatController.items.rowCount == 0}"/>
+                <h:panelGroup rendered="#{cursoSubCatController.items.rowCount > 0}">
+                    <h:outputText value="#{cursoSubCatController.pagination.pageFirstItem + 1}..#{cursoSubCatController.pagination.pageLastItem + 1}/#{cursoSubCatController.pagination.itemsCount}"/>&nbsp;
+                    <h:commandLink action="#{cursoSubCatController.previous}" value="#{bundle.Previous} #{cursoSubCatController.pagination.pageSize}" rendered="#{cursoSubCatController.pagination.hasPreviousPage}"/>&nbsp;
+                    <h:commandLink action="#{cursoSubCatController.next}" value="#{bundle.Next} #{cursoSubCatController.pagination.pageSize}" rendered="#{cursoSubCatController.pagination.hasNextPage}"/>&nbsp;
+                    <h:dataTable value="#{cursoSubCatController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListCursoSubCatTitle_idSubcat}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idSubcat}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListCursoSubCatTitle_nomSubcat}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.nomSubcat}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListCursoSubCatTitle_descripcion}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.descripcion}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListCursoSubCatTitle_idCategoria}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idCategoria}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="&nbsp;"/>
+                            </f:facet>
+                            <h:commandLink action="#{cursoSubCatController.prepareView}" value="#{bundle.ListCursoSubCatViewLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{cursoSubCatController.prepareEdit}" value="#{bundle.ListCursoSubCatEditLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{cursoSubCatController.destroy}" value="#{bundle.ListCursoSubCatDestroyLink}"/>
+                        </h:column>
+                    </h:dataTable>
+                </h:panelGroup>
+                <br />
+                <h:commandLink action="#{cursoSubCatController.prepareCreate}" value="#{bundle.ListCursoSubCatCreateLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ListCursoSubCatIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListPublicacionPerfilTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:form styleClass="jsfcrud_list_form">
+                <h:panelGroup id="messagePanel" layout="block">
+                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                </h:panelGroup>
+                <h:outputText escape="false" value="#{bundle.ListPublicacionPerfilEmpty}" rendered="#{publicacionPerfilController.items.rowCount == 0}"/>
+                <h:panelGroup rendered="#{publicacionPerfilController.items.rowCount > 0}">
+                    <h:outputText value="#{publicacionPerfilController.pagination.pageFirstItem + 1}..#{publicacionPerfilController.pagination.pageLastItem + 1}/#{publicacionPerfilController.pagination.itemsCount}"/>&nbsp;
+                    <h:commandLink action="#{publicacionPerfilController.previous}" value="#{bundle.Previous} #{publicacionPerfilController.pagination.pageSize}" rendered="#{publicacionPerfilController.pagination.hasPreviousPage}"/>&nbsp;
+                    <h:commandLink action="#{publicacionPerfilController.next}" value="#{bundle.Next} #{publicacionPerfilController.pagination.pageSize}" rendered="#{publicacionPerfilController.pagination.hasNextPage}"/>&nbsp;
+                    <h:dataTable value="#{publicacionPerfilController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListPublicacionPerfilTitle_idPublicacion}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idPublicacion}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListPublicacionPerfilTitle_publicacion}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.publicacion}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListPublicacionPerfilTitle_fechaPublicacion}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.fechaPublicacion}">
+                                <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                            </h:outputText>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListPublicacionPerfilTitle_idPublicador}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idPublicador}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListPublicacionPerfilTitle_idUsuario}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idUsuario}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="&nbsp;"/>
+                            </f:facet>
+                            <h:commandLink action="#{publicacionPerfilController.prepareView}" value="#{bundle.ListPublicacionPerfilViewLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{publicacionPerfilController.prepareEdit}" value="#{bundle.ListPublicacionPerfilEditLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{publicacionPerfilController.destroy}" value="#{bundle.ListPublicacionPerfilDestroyLink}"/>
+                        </h:column>
+                    </h:dataTable>
+                </h:panelGroup>
+                <br />
+                <h:commandLink action="#{publicacionPerfilController.prepareCreate}" value="#{bundle.ListPublicacionPerfilCreateLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ListPublicacionPerfilIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

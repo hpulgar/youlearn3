@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ViewCursoTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputText value="#{bundle.ViewCursoLabel_idCurso}"/>
+                    <h:outputText value="#{cursoController.selected.idCurso}" title="#{bundle.ViewCursoTitle_idCurso}"/>
+                    <h:outputText value="#{bundle.ViewCursoLabel_nomCurso}"/>
+                    <h:outputText value="#{cursoController.selected.nomCurso}" title="#{bundle.ViewCursoTitle_nomCurso}"/>
+                    <h:outputText value="#{bundle.ViewCursoLabel_personasInscritas}"/>
+                    <h:outputText value="#{cursoController.selected.personasInscritas}" title="#{bundle.ViewCursoTitle_personasInscritas}"/>
+                    <h:outputText value="#{bundle.ViewCursoLabel_descripcionCurso}"/>
+                    <h:outputText value="#{cursoController.selected.descripcionCurso}" title="#{bundle.ViewCursoTitle_descripcionCurso}"/>
+                    <h:outputText value="#{bundle.ViewCursoLabel_autorizado}"/>
+                    <h:outputText value="#{cursoController.selected.autorizado}" title="#{bundle.ViewCursoTitle_autorizado}"/>
+                    <h:outputText value="#{bundle.ViewCursoLabel_contenidos}"/>
+                    <h:outputText value="#{cursoController.selected.contenidos}" title="#{bundle.ViewCursoTitle_contenidos}"/>
+                    <h:outputText value="#{bundle.ViewCursoLabel_seguidores}"/>
+                    <h:outputText value="#{cursoController.selected.seguidores}" title="#{bundle.ViewCursoTitle_seguidores}"/>
+                    <h:outputText value="#{bundle.ViewCursoLabel_idCat}"/>
+                    <h:outputText value="#{cursoController.selected.idCat}" title="#{bundle.ViewCursoTitle_idCat}"/>
+                    <h:outputText value="#{bundle.ViewCursoLabel_idUsuario}"/>
+                    <h:outputText value="#{cursoController.selected.idUsuario}" title="#{bundle.ViewCursoTitle_idUsuario}"/>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{cursoController.destroyAndView}" value="#{bundle.ViewCursoDestroyLink}"/>
+                <br />
+                <br />
+                <h:link outcome="Edit" value="#{bundle.ViewCursoEditLink}"/>
+                <br />
+                <h:commandLink action="#{cursoController.prepareCreate}" value="#{bundle.ViewCursoCreateLink}" />
+                <br />
+                <h:commandLink action="#{cursoController.prepareList}" value="#{bundle.ViewCursoShowAllLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ViewCursoIndexLink}"/>
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

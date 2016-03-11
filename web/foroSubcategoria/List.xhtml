@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListForoSubcategoriaTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:form styleClass="jsfcrud_list_form">
+                <h:panelGroup id="messagePanel" layout="block">
+                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                </h:panelGroup>
+                <h:outputText escape="false" value="#{bundle.ListForoSubcategoriaEmpty}" rendered="#{foroSubcategoriaController.items.rowCount == 0}"/>
+                <h:panelGroup rendered="#{foroSubcategoriaController.items.rowCount > 0}">
+                    <h:outputText value="#{foroSubcategoriaController.pagination.pageFirstItem + 1}..#{foroSubcategoriaController.pagination.pageLastItem + 1}/#{foroSubcategoriaController.pagination.itemsCount}"/>&nbsp;
+                    <h:commandLink action="#{foroSubcategoriaController.previous}" value="#{bundle.Previous} #{foroSubcategoriaController.pagination.pageSize}" rendered="#{foroSubcategoriaController.pagination.hasPreviousPage}"/>&nbsp;
+                    <h:commandLink action="#{foroSubcategoriaController.next}" value="#{bundle.Next} #{foroSubcategoriaController.pagination.pageSize}" rendered="#{foroSubcategoriaController.pagination.hasNextPage}"/>&nbsp;
+                    <h:dataTable value="#{foroSubcategoriaController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListForoSubcategoriaTitle_idSubcategoria}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idSubcategoria}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListForoSubcategoriaTitle_titulo}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.titulo}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListForoSubcategoriaTitle_descripcion}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.descripcion}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListForoSubcategoriaTitle_subcateFecha}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.subcateFecha}">
+                                <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                            </h:outputText>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListForoSubcategoriaTitle_idCategoria}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idCategoria}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="&nbsp;"/>
+                            </f:facet>
+                            <h:commandLink action="#{foroSubcategoriaController.prepareView}" value="#{bundle.ListForoSubcategoriaViewLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{foroSubcategoriaController.prepareEdit}" value="#{bundle.ListForoSubcategoriaEditLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{foroSubcategoriaController.destroy}" value="#{bundle.ListForoSubcategoriaDestroyLink}"/>
+                        </h:column>
+                    </h:dataTable>
+                </h:panelGroup>
+                <br />
+                <h:commandLink action="#{foroSubcategoriaController.prepareCreate}" value="#{bundle.ListForoSubcategoriaCreateLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ListForoSubcategoriaIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

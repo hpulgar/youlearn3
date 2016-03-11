@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ViewMasterComentarioTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputText value="#{bundle.ViewMasterComentarioLabel_idComentario}"/>
+                    <h:outputText value="#{masterComentarioController.selected.idComentario}" title="#{bundle.ViewMasterComentarioTitle_idComentario}"/>
+                    <h:outputText value="#{bundle.ViewMasterComentarioLabel_comentario}"/>
+                    <h:outputText value="#{masterComentarioController.selected.comentario}" title="#{bundle.ViewMasterComentarioTitle_comentario}"/>
+                    <h:outputText value="#{bundle.ViewMasterComentarioLabel_fechaComentario}"/>
+                    <h:outputText value="#{masterComentarioController.selected.fechaComentario}" title="#{bundle.ViewMasterComentarioTitle_fechaComentario}">
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:outputText>
+                    <h:outputText value="#{bundle.ViewMasterComentarioLabel_idPublicacion}"/>
+                    <h:outputText value="#{masterComentarioController.selected.idPublicacion}" title="#{bundle.ViewMasterComentarioTitle_idPublicacion}"/>
+                    <h:outputText value="#{bundle.ViewMasterComentarioLabel_idPft}"/>
+                    <h:outputText value="#{masterComentarioController.selected.idPft}" title="#{bundle.ViewMasterComentarioTitle_idPft}"/>
+                    <h:outputText value="#{bundle.ViewMasterComentarioLabel_idUsuario}"/>
+                    <h:outputText value="#{masterComentarioController.selected.idUsuario}" title="#{bundle.ViewMasterComentarioTitle_idUsuario}"/>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{masterComentarioController.destroyAndView}" value="#{bundle.ViewMasterComentarioDestroyLink}"/>
+                <br />
+                <br />
+                <h:link outcome="Edit" value="#{bundle.ViewMasterComentarioEditLink}"/>
+                <br />
+                <h:commandLink action="#{masterComentarioController.prepareCreate}" value="#{bundle.ViewMasterComentarioCreateLink}" />
+                <br />
+                <h:commandLink action="#{masterComentarioController.prepareList}" value="#{bundle.ViewMasterComentarioShowAllLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ViewMasterComentarioIndexLink}"/>
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

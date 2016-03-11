@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.EditAmigosTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.EditAmigosLabel_idAmistad}" for="idAmistad" />
+                    <h:inputText id="idAmistad" value="#{amigosController.selected.idAmistad}" title="#{bundle.EditAmigosTitle_idAmistad}" required="true" requiredMessage="#{bundle.EditAmigosRequiredMessage_idAmistad}"/>
+                    <h:outputLabel value="#{bundle.EditAmigosLabel_aprobado}" for="aprobado" />
+                    <h:inputText id="aprobado" value="#{amigosController.selected.aprobado}" title="#{bundle.EditAmigosTitle_aprobado}" required="true" requiredMessage="#{bundle.EditAmigosRequiredMessage_aprobado}"/>
+                    <h:outputLabel value="#{bundle.EditAmigosLabel_idUsuario1}" for="idUsuario1" />
+                    <h:selectOneMenu id="idUsuario1" value="#{amigosController.selected.idUsuario1}" title="#{bundle.EditAmigosTitle_idUsuario1}" required="true" requiredMessage="#{bundle.EditAmigosRequiredMessage_idUsuario1}">
+                        <f:selectItems value="#{usuarioController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.EditAmigosLabel_idUsuario2}" for="idUsuario2" />
+                    <h:selectOneMenu id="idUsuario2" value="#{amigosController.selected.idUsuario2}" title="#{bundle.EditAmigosTitle_idUsuario2}" required="true" requiredMessage="#{bundle.EditAmigosRequiredMessage_idUsuario2}">
+                        <f:selectItems value="#{usuarioController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <h:commandLink action="#{amigosController.update}" value="#{bundle.EditAmigosSaveLink}"/>
+                <br />
+                <br />
+                <h:link outcome="View" value="#{bundle.EditAmigosViewLink}"/>
+                <br />
+                <h:commandLink action="#{amigosController.prepareList}" value="#{bundle.EditAmigosShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.EditAmigosIndexLink}" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

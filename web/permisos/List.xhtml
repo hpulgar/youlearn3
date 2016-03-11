@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListPermisosTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:form styleClass="jsfcrud_list_form">
+                <h:panelGroup id="messagePanel" layout="block">
+                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                </h:panelGroup>
+                <h:outputText escape="false" value="#{bundle.ListPermisosEmpty}" rendered="#{permisosController.items.rowCount == 0}"/>
+                <h:panelGroup rendered="#{permisosController.items.rowCount > 0}">
+                    <h:outputText value="#{permisosController.pagination.pageFirstItem + 1}..#{permisosController.pagination.pageLastItem + 1}/#{permisosController.pagination.itemsCount}"/>&nbsp;
+                    <h:commandLink action="#{permisosController.previous}" value="#{bundle.Previous} #{permisosController.pagination.pageSize}" rendered="#{permisosController.pagination.hasPreviousPage}"/>&nbsp;
+                    <h:commandLink action="#{permisosController.next}" value="#{bundle.Next} #{permisosController.pagination.pageSize}" rendered="#{permisosController.pagination.hasNextPage}"/>&nbsp;
+                    <h:dataTable value="#{permisosController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListPermisosTitle_idMenu}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idMenu}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListPermisosTitle_login}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.login}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListPermisosTitle_administrarCursos}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.administrarCursos}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListPermisosTitle_verCursos}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.verCursos}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListPermisosTitle_panelAdministrativo}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.panelAdministrativo}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListPermisosTitle_panelModerador}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.panelModerador}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListPermisosTitle_foroGeneral}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.foroGeneral}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListPermisosTitle_suscripcion}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.suscripcion}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListPermisosTitle_mensajeria}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.mensajeria}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListPermisosTitle_accesoTablero}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.accesoTablero}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListPermisosTitle_idPerfil}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idPerfil}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="&nbsp;"/>
+                            </f:facet>
+                            <h:commandLink action="#{permisosController.prepareView}" value="#{bundle.ListPermisosViewLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{permisosController.prepareEdit}" value="#{bundle.ListPermisosEditLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{permisosController.destroy}" value="#{bundle.ListPermisosDestroyLink}"/>
+                        </h:column>
+                    </h:dataTable>
+                </h:panelGroup>
+                <br />
+                <h:commandLink action="#{permisosController.prepareCreate}" value="#{bundle.ListPermisosCreateLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ListPermisosIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

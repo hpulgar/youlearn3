@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.CreateCursoSubCatTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.CreateCursoSubCatLabel_idSubcat}" for="idSubcat" />
+                    <h:inputText id="idSubcat" value="#{cursoSubCatController.selected.idSubcat}" title="#{bundle.CreateCursoSubCatTitle_idSubcat}" required="true" requiredMessage="#{bundle.CreateCursoSubCatRequiredMessage_idSubcat}"/>
+                    <h:outputLabel value="#{bundle.CreateCursoSubCatLabel_nomSubcat}" for="nomSubcat" />
+                    <h:inputText id="nomSubcat" value="#{cursoSubCatController.selected.nomSubcat}" title="#{bundle.CreateCursoSubCatTitle_nomSubcat}" required="true" requiredMessage="#{bundle.CreateCursoSubCatRequiredMessage_nomSubcat}"/>
+                    <h:outputLabel value="#{bundle.CreateCursoSubCatLabel_descripcion}" for="descripcion" />
+                    <h:inputTextarea rows="4" cols="30" id="descripcion" value="#{cursoSubCatController.selected.descripcion}" title="#{bundle.CreateCursoSubCatTitle_descripcion}" required="true" requiredMessage="#{bundle.CreateCursoSubCatRequiredMessage_descripcion}"/>
+                    <h:outputLabel value="#{bundle.CreateCursoSubCatLabel_idCategoria}" for="idCategoria" />
+                    <h:selectOneMenu id="idCategoria" value="#{cursoSubCatController.selected.idCategoria}" title="#{bundle.CreateCursoSubCatTitle_idCategoria}" required="true" requiredMessage="#{bundle.CreateCursoSubCatRequiredMessage_idCategoria}">
+                        <f:selectItems value="#{cursoCategoriaController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{cursoSubCatController.create}" value="#{bundle.CreateCursoSubCatSaveLink}" />
+                <br />
+                <br />
+                <h:commandLink action="#{cursoSubCatController.prepareList}" value="#{bundle.CreateCursoSubCatShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.CreateCursoSubCatIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

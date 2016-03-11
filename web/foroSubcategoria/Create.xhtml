@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.CreateForoSubcategoriaTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.CreateForoSubcategoriaLabel_idSubcategoria}" for="idSubcategoria" />
+                    <h:inputText id="idSubcategoria" value="#{foroSubcategoriaController.selected.idSubcategoria}" title="#{bundle.CreateForoSubcategoriaTitle_idSubcategoria}" required="true" requiredMessage="#{bundle.CreateForoSubcategoriaRequiredMessage_idSubcategoria}"/>
+                    <h:outputLabel value="#{bundle.CreateForoSubcategoriaLabel_titulo}" for="titulo" />
+                    <h:inputTextarea rows="4" cols="30" id="titulo" value="#{foroSubcategoriaController.selected.titulo}" title="#{bundle.CreateForoSubcategoriaTitle_titulo}" required="true" requiredMessage="#{bundle.CreateForoSubcategoriaRequiredMessage_titulo}"/>
+                    <h:outputLabel value="#{bundle.CreateForoSubcategoriaLabel_descripcion}" for="descripcion" />
+                    <h:inputTextarea rows="4" cols="30" id="descripcion" value="#{foroSubcategoriaController.selected.descripcion}" title="#{bundle.CreateForoSubcategoriaTitle_descripcion}" required="true" requiredMessage="#{bundle.CreateForoSubcategoriaRequiredMessage_descripcion}"/>
+                    <h:outputLabel value="#{bundle.CreateForoSubcategoriaLabel_subcateFecha}" for="subcateFecha" />
+                    <h:inputText id="subcateFecha" value="#{foroSubcategoriaController.selected.subcateFecha}" title="#{bundle.CreateForoSubcategoriaTitle_subcateFecha}" required="true" requiredMessage="#{bundle.CreateForoSubcategoriaRequiredMessage_subcateFecha}">
+                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.CreateForoSubcategoriaLabel_idCategoria}" for="idCategoria" />
+                    <h:selectOneMenu id="idCategoria" value="#{foroSubcategoriaController.selected.idCategoria}" title="#{bundle.CreateForoSubcategoriaTitle_idCategoria}" required="true" requiredMessage="#{bundle.CreateForoSubcategoriaRequiredMessage_idCategoria}">
+                        <f:selectItems value="#{foroCategoriaController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{foroSubcategoriaController.create}" value="#{bundle.CreateForoSubcategoriaSaveLink}" />
+                <br />
+                <br />
+                <h:commandLink action="#{foroSubcategoriaController.prepareList}" value="#{bundle.CreateForoSubcategoriaShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.CreateForoSubcategoriaIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

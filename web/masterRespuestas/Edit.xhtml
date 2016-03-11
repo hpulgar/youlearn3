@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.EditMasterRespuestasTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.EditMasterRespuestasLabel_idRespuestas}" for="idRespuestas" />
+                    <h:inputText id="idRespuestas" value="#{masterRespuestasController.selected.idRespuestas}" title="#{bundle.EditMasterRespuestasTitle_idRespuestas}" required="true" requiredMessage="#{bundle.EditMasterRespuestasRequiredMessage_idRespuestas}"/>
+                    <h:outputLabel value="#{bundle.EditMasterRespuestasLabel_respuesta}" for="respuesta" />
+                    <h:inputTextarea rows="4" cols="30" id="respuesta" value="#{masterRespuestasController.selected.respuesta}" title="#{bundle.EditMasterRespuestasTitle_respuesta}" required="true" requiredMessage="#{bundle.EditMasterRespuestasRequiredMessage_respuesta}"/>
+                    <h:outputLabel value="#{bundle.EditMasterRespuestasLabel_fechaRespuesta}" for="fechaRespuesta" />
+                    <h:inputText id="fechaRespuesta" value="#{masterRespuestasController.selected.fechaRespuesta}" title="#{bundle.EditMasterRespuestasTitle_fechaRespuesta}" required="true" requiredMessage="#{bundle.EditMasterRespuestasRequiredMessage_fechaRespuesta}">
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.EditMasterRespuestasLabel_idComentario}" for="idComentario" />
+                    <h:selectOneMenu id="idComentario" value="#{masterRespuestasController.selected.idComentario}" title="#{bundle.EditMasterRespuestasTitle_idComentario}" required="true" requiredMessage="#{bundle.EditMasterRespuestasRequiredMessage_idComentario}">
+                        <f:selectItems value="#{masterComentarioController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.EditMasterRespuestasLabel_idUsuario}" for="idUsuario" />
+                    <h:selectOneMenu id="idUsuario" value="#{masterRespuestasController.selected.idUsuario}" title="#{bundle.EditMasterRespuestasTitle_idUsuario}" required="true" requiredMessage="#{bundle.EditMasterRespuestasRequiredMessage_idUsuario}">
+                        <f:selectItems value="#{usuarioController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <h:commandLink action="#{masterRespuestasController.update}" value="#{bundle.EditMasterRespuestasSaveLink}"/>
+                <br />
+                <br />
+                <h:link outcome="View" value="#{bundle.EditMasterRespuestasViewLink}"/>
+                <br />
+                <h:commandLink action="#{masterRespuestasController.prepareList}" value="#{bundle.EditMasterRespuestasShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.EditMasterRespuestasIndexLink}" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

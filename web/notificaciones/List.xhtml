@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListNotificacionesTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:form styleClass="jsfcrud_list_form">
+                <h:panelGroup id="messagePanel" layout="block">
+                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                </h:panelGroup>
+                <h:outputText escape="false" value="#{bundle.ListNotificacionesEmpty}" rendered="#{notificacionesController.items.rowCount == 0}"/>
+                <h:panelGroup rendered="#{notificacionesController.items.rowCount > 0}">
+                    <h:outputText value="#{notificacionesController.pagination.pageFirstItem + 1}..#{notificacionesController.pagination.pageLastItem + 1}/#{notificacionesController.pagination.itemsCount}"/>&nbsp;
+                    <h:commandLink action="#{notificacionesController.previous}" value="#{bundle.Previous} #{notificacionesController.pagination.pageSize}" rendered="#{notificacionesController.pagination.hasPreviousPage}"/>&nbsp;
+                    <h:commandLink action="#{notificacionesController.next}" value="#{bundle.Next} #{notificacionesController.pagination.pageSize}" rendered="#{notificacionesController.pagination.hasNextPage}"/>&nbsp;
+                    <h:dataTable value="#{notificacionesController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListNotificacionesTitle_idNotificacion}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idNotificacion}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListNotificacionesTitle_tipo}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.tipo}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListNotificacionesTitle_detalle}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.detalle}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListNotificacionesTitle_enlace}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.enlace}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListNotificacionesTitle_idUsuario}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idUsuario}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="&nbsp;"/>
+                            </f:facet>
+                            <h:commandLink action="#{notificacionesController.prepareView}" value="#{bundle.ListNotificacionesViewLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{notificacionesController.prepareEdit}" value="#{bundle.ListNotificacionesEditLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{notificacionesController.destroy}" value="#{bundle.ListNotificacionesDestroyLink}"/>
+                        </h:column>
+                    </h:dataTable>
+                </h:panelGroup>
+                <br />
+                <h:commandLink action="#{notificacionesController.prepareCreate}" value="#{bundle.ListNotificacionesCreateLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ListNotificacionesIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

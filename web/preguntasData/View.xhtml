@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ViewPreguntasDataTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputText value="#{bundle.ViewPreguntasDataLabel_idPreguntasData}"/>
+                    <h:outputText value="#{preguntasDataController.selected.idPreguntasData}" title="#{bundle.ViewPreguntasDataTitle_idPreguntasData}"/>
+                    <h:outputText value="#{bundle.ViewPreguntasDataLabel_idCurso}"/>
+                    <h:outputText value="#{preguntasDataController.selected.idCurso}" title="#{bundle.ViewPreguntasDataTitle_idCurso}"/>
+                    <h:outputText value="#{bundle.ViewPreguntasDataLabel_idPregunta}"/>
+                    <h:outputText value="#{preguntasDataController.selected.idPregunta}" title="#{bundle.ViewPreguntasDataTitle_idPregunta}"/>
+                    <h:outputText value="#{bundle.ViewPreguntasDataLabel_idQuiz}"/>
+                    <h:outputText value="#{preguntasDataController.selected.idQuiz}" title="#{bundle.ViewPreguntasDataTitle_idQuiz}"/>
+                    <h:outputText value="#{bundle.ViewPreguntasDataLabel_idRespuesta}"/>
+                    <h:outputText value="#{preguntasDataController.selected.idRespuesta}" title="#{bundle.ViewPreguntasDataTitle_idRespuesta}"/>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{preguntasDataController.destroyAndView}" value="#{bundle.ViewPreguntasDataDestroyLink}"/>
+                <br />
+                <br />
+                <h:link outcome="Edit" value="#{bundle.ViewPreguntasDataEditLink}"/>
+                <br />
+                <h:commandLink action="#{preguntasDataController.prepareCreate}" value="#{bundle.ViewPreguntasDataCreateLink}" />
+                <br />
+                <h:commandLink action="#{preguntasDataController.prepareList}" value="#{bundle.ViewPreguntasDataShowAllLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ViewPreguntasDataIndexLink}"/>
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

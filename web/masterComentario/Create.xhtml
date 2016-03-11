@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.CreateMasterComentarioTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.CreateMasterComentarioLabel_idComentario}" for="idComentario" />
+                    <h:inputText id="idComentario" value="#{masterComentarioController.selected.idComentario}" title="#{bundle.CreateMasterComentarioTitle_idComentario}" required="true" requiredMessage="#{bundle.CreateMasterComentarioRequiredMessage_idComentario}"/>
+                    <h:outputLabel value="#{bundle.CreateMasterComentarioLabel_comentario}" for="comentario" />
+                    <h:inputTextarea rows="4" cols="30" id="comentario" value="#{masterComentarioController.selected.comentario}" title="#{bundle.CreateMasterComentarioTitle_comentario}" required="true" requiredMessage="#{bundle.CreateMasterComentarioRequiredMessage_comentario}"/>
+                    <h:outputLabel value="#{bundle.CreateMasterComentarioLabel_fechaComentario}" for="fechaComentario" />
+                    <h:inputText id="fechaComentario" value="#{masterComentarioController.selected.fechaComentario}" title="#{bundle.CreateMasterComentarioTitle_fechaComentario}" required="true" requiredMessage="#{bundle.CreateMasterComentarioRequiredMessage_fechaComentario}">
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.CreateMasterComentarioLabel_idPublicacion}" for="idPublicacion" />
+                    <h:inputText id="idPublicacion" value="#{masterComentarioController.selected.idPublicacion}" title="#{bundle.CreateMasterComentarioTitle_idPublicacion}" required="true" requiredMessage="#{bundle.CreateMasterComentarioRequiredMessage_idPublicacion}"/>
+                    <h:outputLabel value="#{bundle.CreateMasterComentarioLabel_idPft}" for="idPft" />
+                    <h:selectOneMenu id="idPft" value="#{masterComentarioController.selected.idPft}" title="#{bundle.CreateMasterComentarioTitle_idPft}" required="true" requiredMessage="#{bundle.CreateMasterComentarioRequiredMessage_idPft}">
+                        <f:selectItems value="#{masterPftController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.CreateMasterComentarioLabel_idUsuario}" for="idUsuario" />
+                    <h:selectOneMenu id="idUsuario" value="#{masterComentarioController.selected.idUsuario}" title="#{bundle.CreateMasterComentarioTitle_idUsuario}" required="true" requiredMessage="#{bundle.CreateMasterComentarioRequiredMessage_idUsuario}">
+                        <f:selectItems value="#{usuarioController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{masterComentarioController.create}" value="#{bundle.CreateMasterComentarioSaveLink}" />
+                <br />
+                <br />
+                <h:commandLink action="#{masterComentarioController.prepareList}" value="#{bundle.CreateMasterComentarioShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.CreateMasterComentarioIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

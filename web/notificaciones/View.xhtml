@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ViewNotificacionesTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputText value="#{bundle.ViewNotificacionesLabel_idNotificacion}"/>
+                    <h:outputText value="#{notificacionesController.selected.idNotificacion}" title="#{bundle.ViewNotificacionesTitle_idNotificacion}"/>
+                    <h:outputText value="#{bundle.ViewNotificacionesLabel_tipo}"/>
+                    <h:outputText value="#{notificacionesController.selected.tipo}" title="#{bundle.ViewNotificacionesTitle_tipo}"/>
+                    <h:outputText value="#{bundle.ViewNotificacionesLabel_detalle}"/>
+                    <h:outputText value="#{notificacionesController.selected.detalle}" title="#{bundle.ViewNotificacionesTitle_detalle}"/>
+                    <h:outputText value="#{bundle.ViewNotificacionesLabel_enlace}"/>
+                    <h:outputText value="#{notificacionesController.selected.enlace}" title="#{bundle.ViewNotificacionesTitle_enlace}"/>
+                    <h:outputText value="#{bundle.ViewNotificacionesLabel_idUsuario}"/>
+                    <h:outputText value="#{notificacionesController.selected.idUsuario}" title="#{bundle.ViewNotificacionesTitle_idUsuario}"/>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{notificacionesController.destroyAndView}" value="#{bundle.ViewNotificacionesDestroyLink}"/>
+                <br />
+                <br />
+                <h:link outcome="Edit" value="#{bundle.ViewNotificacionesEditLink}"/>
+                <br />
+                <h:commandLink action="#{notificacionesController.prepareCreate}" value="#{bundle.ViewNotificacionesCreateLink}" />
+                <br />
+                <h:commandLink action="#{notificacionesController.prepareList}" value="#{bundle.ViewNotificacionesShowAllLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ViewNotificacionesIndexLink}"/>
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

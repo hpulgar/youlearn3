@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ViewPermisosTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputText value="#{bundle.ViewPermisosLabel_idMenu}"/>
+                    <h:outputText value="#{permisosController.selected.idMenu}" title="#{bundle.ViewPermisosTitle_idMenu}"/>
+                    <h:outputText value="#{bundle.ViewPermisosLabel_login}"/>
+                    <h:outputText value="#{permisosController.selected.login}" title="#{bundle.ViewPermisosTitle_login}"/>
+                    <h:outputText value="#{bundle.ViewPermisosLabel_administrarCursos}"/>
+                    <h:outputText value="#{permisosController.selected.administrarCursos}" title="#{bundle.ViewPermisosTitle_administrarCursos}"/>
+                    <h:outputText value="#{bundle.ViewPermisosLabel_verCursos}"/>
+                    <h:outputText value="#{permisosController.selected.verCursos}" title="#{bundle.ViewPermisosTitle_verCursos}"/>
+                    <h:outputText value="#{bundle.ViewPermisosLabel_panelAdministrativo}"/>
+                    <h:outputText value="#{permisosController.selected.panelAdministrativo}" title="#{bundle.ViewPermisosTitle_panelAdministrativo}"/>
+                    <h:outputText value="#{bundle.ViewPermisosLabel_panelModerador}"/>
+                    <h:outputText value="#{permisosController.selected.panelModerador}" title="#{bundle.ViewPermisosTitle_panelModerador}"/>
+                    <h:outputText value="#{bundle.ViewPermisosLabel_foroGeneral}"/>
+                    <h:outputText value="#{permisosController.selected.foroGeneral}" title="#{bundle.ViewPermisosTitle_foroGeneral}"/>
+                    <h:outputText value="#{bundle.ViewPermisosLabel_suscripcion}"/>
+                    <h:outputText value="#{permisosController.selected.suscripcion}" title="#{bundle.ViewPermisosTitle_suscripcion}"/>
+                    <h:outputText value="#{bundle.ViewPermisosLabel_mensajeria}"/>
+                    <h:outputText value="#{permisosController.selected.mensajeria}" title="#{bundle.ViewPermisosTitle_mensajeria}"/>
+                    <h:outputText value="#{bundle.ViewPermisosLabel_accesoTablero}"/>
+                    <h:outputText value="#{permisosController.selected.accesoTablero}" title="#{bundle.ViewPermisosTitle_accesoTablero}"/>
+                    <h:outputText value="#{bundle.ViewPermisosLabel_idPerfil}"/>
+                    <h:outputText value="#{permisosController.selected.idPerfil}" title="#{bundle.ViewPermisosTitle_idPerfil}"/>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{permisosController.destroyAndView}" value="#{bundle.ViewPermisosDestroyLink}"/>
+                <br />
+                <br />
+                <h:link outcome="Edit" value="#{bundle.ViewPermisosEditLink}"/>
+                <br />
+                <h:commandLink action="#{permisosController.prepareCreate}" value="#{bundle.ViewPermisosCreateLink}" />
+                <br />
+                <h:commandLink action="#{permisosController.prepareList}" value="#{bundle.ViewPermisosShowAllLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ViewPermisosIndexLink}"/>
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

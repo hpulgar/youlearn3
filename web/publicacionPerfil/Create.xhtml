@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.CreatePublicacionPerfilTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.CreatePublicacionPerfilLabel_idPublicacion}" for="idPublicacion" />
+                    <h:inputText id="idPublicacion" value="#{publicacionPerfilController.selected.idPublicacion}" title="#{bundle.CreatePublicacionPerfilTitle_idPublicacion}" required="true" requiredMessage="#{bundle.CreatePublicacionPerfilRequiredMessage_idPublicacion}"/>
+                    <h:outputLabel value="#{bundle.CreatePublicacionPerfilLabel_publicacion}" for="publicacion" />
+                    <h:inputText id="publicacion" value="#{publicacionPerfilController.selected.publicacion}" title="#{bundle.CreatePublicacionPerfilTitle_publicacion}" required="true" requiredMessage="#{bundle.CreatePublicacionPerfilRequiredMessage_publicacion}"/>
+                    <h:outputLabel value="#{bundle.CreatePublicacionPerfilLabel_fechaPublicacion}" for="fechaPublicacion" />
+                    <h:inputText id="fechaPublicacion" value="#{publicacionPerfilController.selected.fechaPublicacion}" title="#{bundle.CreatePublicacionPerfilTitle_fechaPublicacion}" required="true" requiredMessage="#{bundle.CreatePublicacionPerfilRequiredMessage_fechaPublicacion}">
+                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.CreatePublicacionPerfilLabel_idPublicador}" for="idPublicador" />
+                    <h:selectOneMenu id="idPublicador" value="#{publicacionPerfilController.selected.idPublicador}" title="#{bundle.CreatePublicacionPerfilTitle_idPublicador}" required="true" requiredMessage="#{bundle.CreatePublicacionPerfilRequiredMessage_idPublicador}">
+                        <f:selectItems value="#{usuarioController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.CreatePublicacionPerfilLabel_idUsuario}" for="idUsuario" />
+                    <h:selectOneMenu id="idUsuario" value="#{publicacionPerfilController.selected.idUsuario}" title="#{bundle.CreatePublicacionPerfilTitle_idUsuario}" required="true" requiredMessage="#{bundle.CreatePublicacionPerfilRequiredMessage_idUsuario}">
+                        <f:selectItems value="#{usuarioController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{publicacionPerfilController.create}" value="#{bundle.CreatePublicacionPerfilSaveLink}" />
+                <br />
+                <br />
+                <h:commandLink action="#{publicacionPerfilController.prepareList}" value="#{bundle.CreatePublicacionPerfilShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.CreatePublicacionPerfilIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

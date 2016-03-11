@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.EditMasterComentarioTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.EditMasterComentarioLabel_idComentario}" for="idComentario" />
+                    <h:inputText id="idComentario" value="#{masterComentarioController.selected.idComentario}" title="#{bundle.EditMasterComentarioTitle_idComentario}" required="true" requiredMessage="#{bundle.EditMasterComentarioRequiredMessage_idComentario}"/>
+                    <h:outputLabel value="#{bundle.EditMasterComentarioLabel_comentario}" for="comentario" />
+                    <h:inputTextarea rows="4" cols="30" id="comentario" value="#{masterComentarioController.selected.comentario}" title="#{bundle.EditMasterComentarioTitle_comentario}" required="true" requiredMessage="#{bundle.EditMasterComentarioRequiredMessage_comentario}"/>
+                    <h:outputLabel value="#{bundle.EditMasterComentarioLabel_fechaComentario}" for="fechaComentario" />
+                    <h:inputText id="fechaComentario" value="#{masterComentarioController.selected.fechaComentario}" title="#{bundle.EditMasterComentarioTitle_fechaComentario}" required="true" requiredMessage="#{bundle.EditMasterComentarioRequiredMessage_fechaComentario}">
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.EditMasterComentarioLabel_idPublicacion}" for="idPublicacion" />
+                    <h:inputText id="idPublicacion" value="#{masterComentarioController.selected.idPublicacion}" title="#{bundle.EditMasterComentarioTitle_idPublicacion}" required="true" requiredMessage="#{bundle.EditMasterComentarioRequiredMessage_idPublicacion}"/>
+                    <h:outputLabel value="#{bundle.EditMasterComentarioLabel_idPft}" for="idPft" />
+                    <h:selectOneMenu id="idPft" value="#{masterComentarioController.selected.idPft}" title="#{bundle.EditMasterComentarioTitle_idPft}" required="true" requiredMessage="#{bundle.EditMasterComentarioRequiredMessage_idPft}">
+                        <f:selectItems value="#{masterPftController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.EditMasterComentarioLabel_idUsuario}" for="idUsuario" />
+                    <h:selectOneMenu id="idUsuario" value="#{masterComentarioController.selected.idUsuario}" title="#{bundle.EditMasterComentarioTitle_idUsuario}" required="true" requiredMessage="#{bundle.EditMasterComentarioRequiredMessage_idUsuario}">
+                        <f:selectItems value="#{usuarioController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <h:commandLink action="#{masterComentarioController.update}" value="#{bundle.EditMasterComentarioSaveLink}"/>
+                <br />
+                <br />
+                <h:link outcome="View" value="#{bundle.EditMasterComentarioViewLink}"/>
+                <br />
+                <h:commandLink action="#{masterComentarioController.prepareList}" value="#{bundle.EditMasterComentarioShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.EditMasterComentarioIndexLink}" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>
