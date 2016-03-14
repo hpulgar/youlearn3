@@ -38,7 +38,16 @@ public class MasterComentarioController implements Serializable {
     private PaginationHelper pagination;
     private int selectedItemIndex;
     private int idCom;
+    private int cuenta;
 
+    public int getCuenta() {
+        return cuenta;
+    }
+
+    public void setCuenta(int cuenta) {
+        this.cuenta = cuenta;
+    }
+    
     public int getIdCom() {
         return idCom;
     }
@@ -259,11 +268,16 @@ public class MasterComentarioController implements Serializable {
                    ob.add(comentariosForo.get(i));
                 } 
         }
+        
+        this.setCuenta(ob.size());
         return ob;
     }
     
-    
-    
+    public int cuentaComentarios()
+    {   
+        return this.getCuenta();   
+    }
+     
     
     //fin
 

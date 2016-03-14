@@ -33,16 +33,13 @@
 	<script>
 $(document).ready(function(){
      $("#comment-right").hide();
-    $("#responder").click(function(){
-        $("#comment-right").show();
-         $("#responder").hide();
-           $('#respuesta').focus();
+     $("#responder").hide();
+   /* $("responder").click(function(){
+        $("comment-right").show();
+         $("responder").hide();*/
+         
     });
-    
-    $("#respuesta").focusout(function(){
- $("#responder").show();
-   $("#comment-right").hide();
-});
+   
 });
 </script>
 <!-- END head -->
@@ -217,7 +214,7 @@ $(document).ready(function(){
                                                     <li><strong>En categoria</strong></li>
                                                     <li>#{bi.idSubcategoria.descripcion}</li>
                                                     <li><strong>Commentarios</strong></li> 
-                                                    <li>(Count)</li>
+                                                    <li>#{masterComentarioController.cuentaComentarios()}</li>
                                                     </c:forEach>
 						</ul>
                                                  
@@ -248,7 +245,8 @@ $(document).ready(function(){
 						
 						<h3 class="block-title">Comentarios> en este posteo</h3>
 						<c:forEach items="#{masterComentarioController.cargaComentarios(foroPosteosController.idPosteo,2)}" var="mc">
-						<ul class="comments">
+						
+                                                    <ul class="comments">
                                                     
                                                     
 							<li class="comment-entry clearfix">
