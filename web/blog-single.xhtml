@@ -247,10 +247,10 @@ $(document).ready(function(){
 					<div id="respond">
 						
 						<h3 class="block-title">Comentarios> en este posteo</h3>
-						
+						<c:forEach items="#{masterComentarioController.cargaComentarios(foroPosteosController.idPosteo,2)}" var="mc">
 						<ul class="comments">
                                                     
-
+                                                    
 							<li class="comment-entry clearfix">
 
 								<!-- BEGIN .comment-left -->
@@ -260,22 +260,23 @@ $(document).ready(function(){
 								</div>
 
 								<!-- BEGIN .comment-right -->
-                                                                
+                                                               
 								<div class="comment-right">
-                                                                    <c:forEach items="#{masterComentarioController.cargaComentarios()}" var="mc">
+                                                                    
                                                                         
                                                                    
                                                     
                                                                         <p class="comment-info">#{mc.idUsuario.username} <span> #{mc.fechaComentario} </span></p>
                                                                         <p class="comment-text">#{mc.comentario}</p>
 									<p class="reply"><a id="responder">Responder</a></p>
-                                                                        #{masterComentarioController.setIdCom(mc.idComentario)}
+                                                                      
+                                                                        
                                                                         
                                                                         
                                                                    
 								<!-- END .comment-right -->
                                                                 
-                                                                </c:forEach>
+                                                                
                                                                 
 								</div>
                                                                 
@@ -296,10 +297,12 @@ $(document).ready(function(){
 								</ul>
 
 							</li>
-
+                                                   
 							
 
-						</ul>
+						</ul> 
+                                                </c:forEach>
+
 						
                                                 <h3 class="block-title"><a>Comentando como : </a>#{usuarioController.verUsername(usuarioController.id_user)}</h3>
 						

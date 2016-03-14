@@ -246,14 +246,14 @@ public class MasterComentarioController implements Serializable {
     
     }
     
-    public List<MasterComentario> cargaComentarios()
+    public List<MasterComentario> cargaComentarios(int idPublicacion,int idPtf)
     {        
         List<MasterComentario> ob = new ArrayList<MasterComentario>();        
         ob.clear();   
         comentariosForo = ejbFacade.findAll();                
         for(int i=0;i<comentariosForo.size();i++)
         {
-            if((comentariosForo.get(i).getIdPft().getIdPft()==2) &&(comentariosForo.get(i).getIdPublicacion()==1))
+            if((comentariosForo.get(i).getIdPft().getIdPft()==idPtf) &&(comentariosForo.get(i).getIdPublicacion()==idPublicacion))
                 {
                    //System.out.println(" comentario>>>> "+comentariosForo.get(i));
                    ob.add(comentariosForo.get(i));
