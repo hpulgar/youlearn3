@@ -212,7 +212,7 @@ $(document).ready(function(){
                                                     <li><h:outputText value="#{bi.fecha}">
                                                                <f:convertDateTime type="date" pattern="dd-M-yyyy HH:mm"/>
                                                          </h:outputText></li>
-                                                    <li><strong>Inicia|o por </strong></li>
+                                                    <li><strong>Iniciado por </strong></li>
                                                     <li> #{bi.idUser.username}</li>                                       
                                                     <li><strong>En categoria</strong></li>
                                                     <li>#{bi.idSubcategoria.descripcion}</li>
@@ -246,9 +246,10 @@ $(document).ready(function(){
 					
 					<div id="respond">
 						
-						<h3 class="block-title">numComentarios> en este posteo</h3>
+						<h3 class="block-title">Comentarios> en este posteo</h3>
 						
 						<ul class="comments">
+                                                    
 
 							<li class="comment-entry clearfix">
 
@@ -259,19 +260,25 @@ $(document).ready(function(){
 								</div>
 
 								<!-- BEGIN .comment-right -->
-                                                                 <c:forEach items="#{masterComentarioController.comentariosForo}" var="mc">
+                                                                
 								<div class="comment-right">
-                                                                    
+                                                                    <c:forEach items="#{masterComentarioController.cargaComentarios()}" var="mc">
                                                                         
                                                                    
                                                     
                                                                         <p class="comment-info">#{mc.idUsuario.username} <span> #{mc.fechaComentario} </span></p>
                                                                         <p class="comment-text">#{mc.comentario}</p>
 									<p class="reply"><a id="responder">Responder</a></p>
+                                                                        #{masterComentarioController.setIdCom(mc.idComentario)}
+                                                                        
+                                                                        
                                                                    
 								<!-- END .comment-right -->
-								</div>
+                                                                
                                                                 </c:forEach>
+                                                                
+								</div>
+                                                                
 								<ul>
 									<li class="comment-entry clearfix">
 

@@ -34,6 +34,7 @@ public class MasterComentarioFacade extends AbstractFacade<MasterComentario> {
     {
          EntityManager m2 =  getEntityManager();
         Query q= m2.createNamedQuery("MasterComentario.findAll");
+        
         return q.getResultList();
 }
     

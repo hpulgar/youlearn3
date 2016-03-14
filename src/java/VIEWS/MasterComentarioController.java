@@ -10,6 +10,7 @@ import MODELS.MasterComentarioFacade;
 import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -36,27 +37,16 @@ public class MasterComentarioController implements Serializable {
     private MODELS.MasterComentarioFacade ejbFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
+    private int idCom;
 
-    public MasterComentarioController() {
+    public int getIdCom() {
+        return idCom;
     }
-/////////////////////////////////
-    public List<MasterComentario> comentariosForo() {
-        MasterComentario foro = new MasterComentario();        
-        this.comentariosForo = ejbFacade.verC();        
-        for(int i=0;i>=comentariosForo.size();i++)
-        {
-        
-            if((comentariosForo.get(i).getIdPft().getIdPft()==2) &&(comentariosForo.get(i).getIdPublicacion()==4))
-                {
-                    foro = comentariosForo.get(i);
-                    this.comentariosForo2.add(foro);
-                } 
-        }
-        return comentariosForo2;
-        
+
+    public void setIdCom(int idCom) {
+        this.idCom = idCom;
     }
-    
-   ///////////////////// 
+
     
     public void setComentariosForo(List<MasterComentario> comentariosForo) {
         this.comentariosForo = comentariosForo;
@@ -251,22 +241,26 @@ public class MasterComentarioController implements Serializable {
         
     }catch(Exception e){
         
-        System.out.println("Si la wea tira error es este --> "+e);
+        System.out.println("Si tira error es este --> "+e);
         return "/blog-single.xhtml";}
-    
-    
-    
-    
-    
     
     }
     
-    
-    
-    
-    
-    
-    
+    public List<MasterComentario> cargaComentarios()
+    {        
+        List<MasterComentario> ob = new ArrayList<MasterComentario>();        
+        ob.clear();   
+        comentariosForo = ejbFacade.findAll();                
+        for(int i=0;i<comentariosForo.size();i++)
+        {
+            if((comentariosForo.get(i).getIdPft().getIdPft()==2) &&(comentariosForo.get(i).getIdPublicacion()==1))
+                {
+                   //System.out.println(" comentario>>>> "+comentariosForo.get(i));
+                   ob.add(comentariosForo.get(i));
+                } 
+        }
+        return ob;
+    }
     
     
     
