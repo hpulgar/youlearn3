@@ -44,11 +44,16 @@
                 {                   
                     $("#response"+i).hide(); 
                 }   
-                    $("#responder4").click(function()
+                    $(".comment-right .responder4").click(function()
                     {
                         
                         $("#"+$(this).attr("id")).hide();
-                        $("#response"+($(this).attr("id")).substr(-1)).show();  
+                        $("#response"+($(this).attr("id")).substr(-1)).show();
+                            
+        $("#response"+($(this).attr("id")).substr(-1)).focusout(function()
+        {
+            $("#"+$(this).attr("id")).hide();
+        });
                         
                     });   
                 
@@ -279,7 +284,7 @@
                                                                         <p class="comment-text">#{mc.comentario}</p>
                                                                        
                                                                        
-                                                                        <p class="reply"><a id="#{masterComentarioController.ShowResponder(mc.idComentario)}" >Responder</a></p>
+                                                                        <p class="reply"><a class="responder4"  id="#{masterComentarioController.ShowResponder(mc.idComentario)}" >Responder</a></p>
                                                                         
                                                                         
 								<!-- END .comment-right -->
@@ -291,7 +296,7 @@
 									<li class="comment-entry clearfix">	
                                                                              
 										<div id ="comment-right" class="comment-right">
-											 <input class="comment-info" value="some text" />
+											
 												<input type="text" name="respuesta" id="respuesta" class="text_input" value="" />
 											<!--<p class="reply"><a href="#">Reply</a></p> -->
 										<!-- END .comment-right -->
