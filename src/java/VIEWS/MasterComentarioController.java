@@ -39,6 +39,15 @@ public class MasterComentarioController implements Serializable {
     private int selectedItemIndex;
     private int idCom;
     private int cuenta;
+    private int bigId;
+
+    public int getBigId() {
+        return bigId;
+    }
+
+    public void setBigId(int bigId) {
+        this.bigId = bigId;
+    }    
 
     public int getCuenta() {
         return cuenta;
@@ -265,11 +274,14 @@ public class MasterComentarioController implements Serializable {
             if((comentariosForo.get(i).getIdPft().getIdPft()==idPtf) &&(comentariosForo.get(i).getIdPublicacion()==idPublicacion))
                 {
                    //System.out.println(" comentario>>>> "+comentariosForo.get(i));
+                   this.setBigId(comentariosForo.get(i).getIdComentario());
                    ob.add(comentariosForo.get(i));
                 } 
         }
         
+        
         this.setCuenta(ob.size());
+        
         return ob;
     }
     
@@ -278,7 +290,31 @@ public class MasterComentarioController implements Serializable {
         return this.getCuenta();   
     }
      
+    public int mayorIdComentarios()
+    {   
+        System.out.println("QUIERO IMPRIMIR EL MAYOR ID: "+this.getBigId());
+        return this.getBigId();   
+    }
     
+    
+    public String ShowResponse(int i)
+    {
+        String a = "response"+i;
+        System.out.println("IMPRIMIENDO Response: "+a);
+        
+        return a;
+    }
+    
+    public String ShowResponder(int i)
+    {
+            String b = "responder"+i;
+            System.out.println("IMPRIMIENDO RESPONDER: "+b);
+            
+        return b;
+    }
+    
+    
+       
     //fin
 
     public SelectItem[] getItemsAvailableSelectMany() {
@@ -334,3 +370,29 @@ public class MasterComentarioController implements Serializable {
     }
 
 }
+
+
+/* 
+               function responder(var largo)
+               {
+                   for(var i=0;i<5;i++)
+                  {
+                        var a ="responder"+i;                          
+                  }
+                   return a;
+               }
+               
+               function responder(var largo)
+               {
+                   for(var i=0;i<5;i++)
+                  {
+                        var b ="response"+i;
+                          
+                  }
+                   return b;
+               }*/
+
+//$("#responder").click(function() {
+          //           $("#responder").hide();
+            //         $("#response").show();
+              //    });

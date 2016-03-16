@@ -30,17 +30,31 @@
 	<script type="text/javascript" src="js/tinynav.min.js"></script>
 	<script type="text/javascript" src="js/jquery.uniform.js"></script>
 	<script type="text/javascript" src="js/scripts.js"></script>
-	<script>
-$(document).ready(function(){
-     $("#comment-right").hide();
-     $("#responder").hide();
-   /* $("responder").click(function(){
-        $("comment-right").show();
-         $("responder").hide();*/
-         
-    });
-   
-});
+        <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+
+      
+	<script type="text/javascript">
+    //<![CDATA[
+        
+       
+            $(document).ready(function() 
+            {
+                
+                for(i=0;i<=#{masterComentarioController.mayorIdComentarios()};i++)
+                {                   
+                    $("#response"+i).hide(); 
+                }   
+                    $("#responder4").click(function()
+                    {
+                        
+                        $("#"+$(this).attr("id")).hide();
+                        $("#response"+($(this).attr("id")).substr(-1)).show();  
+                        
+                    });   
+                
+            });
+            
+         //]]>>   
 </script>
 <!-- END head -->
    </h:head>
@@ -244,7 +258,8 @@ $(document).ready(function(){
 					<div id="respond">
 						
 						<h3 class="block-title">Comentarios> en este posteo</h3>
-						<c:forEach items="#{masterComentarioController.cargaComentarios(foroPosteosController.idPosteo,2)}" var="mc">
+						
+                                                <c:forEach items="#{masterComentarioController.cargaComentarios(foroPosteosController.idPosteo,2)}" var="mc">
 						
                                                     <ul class="comments">
                                                     
@@ -260,39 +275,30 @@ $(document).ready(function(){
 								<!-- BEGIN .comment-right -->
                                                                
 								<div class="comment-right">
-                                                                    
-                                                                        
-                                                                   
-                                                    
                                                                         <p class="comment-info">#{mc.idUsuario.username} <span> #{mc.fechaComentario} </span></p>
                                                                         <p class="comment-text">#{mc.comentario}</p>
-									<p class="reply"><a id="responder">Responder</a></p>
-                                                                      
+                                                                       
+                                                                       
+                                                                        <p class="reply"><a id="#{masterComentarioController.ShowResponder(mc.idComentario)}" >Responder</a></p>
                                                                         
                                                                         
-                                                                        
-                                                                   
 								<!-- END .comment-right -->
-                                                                
-                                                                
-                                                                
 								</div>
                                                                 
+                                                                   
+                                                                <div id="#{masterComentarioController.ShowResponse(mc.idComentario)}" > 
 								<ul>
-									<li class="comment-entry clearfix">
-
-				
+									<li class="comment-entry clearfix">	
+                                                                             
 										<div id ="comment-right" class="comment-right">
-
-											 <h:inputHidden  class="comment-info" value="some text" />
+											 <input class="comment-info" value="some text" />
 												<input type="text" name="respuesta" id="respuesta" class="text_input" value="" />
 											<!--<p class="reply"><a href="#">Reply</a></p> -->
-
 										<!-- END .comment-right -->
 										</div>
-
 									</li>
 								</ul>
+                                                               </div>
 
 							</li>
                                                    
