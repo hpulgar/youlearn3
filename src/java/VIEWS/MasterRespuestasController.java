@@ -242,11 +242,14 @@ public class MasterRespuestasController implements Serializable {
                 current.setIdUsuario(ou);
                 current.setFechaRespuesta(dateFormat.parse(fecha));
 
-
+                
+                System.out.println("la respuesta "+current.getRespuesta());
+                
                 if(!current.getRespuesta().isEmpty())
                 {
-                    //getFacade().create(current);
+                    getFacade().create(current);
                     System.out.println("ID DEL COMENTARIO ->>>>>>>>>>>"+id_comentario);
+                    System.out.println("la respuesta "+current.getRespuesta());
                     current = null;
                 }
                 return "/blog-single.xhtml";

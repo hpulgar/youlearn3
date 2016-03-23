@@ -4,7 +4,7 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:p="http://primefaces.org/ui" >
+ >
       
       <h:head>
 
@@ -310,24 +310,20 @@
 
 								<!-- BEGIN .comment-right -->
                                                                
-								<div class="comment-right">
-                                                                        <p class="comment-info">#{mc.idUsuario.username} <span> #{mc.fechaComentario} </span></p>
-                                                                        <p class="comment-text">#{mc.comentario}</p>
-                                                                       
-                                                                       
-                                                                        <p class="reply"><a class="responder"  id="#{masterComentarioController.ShowResponder(mc.idComentario)}" >Responder</a></p>
-                                                                        
-                                                                        <c:forEach items="#{masterRespuestasController.cargaRespuesta(mc.idComentario)}" var="mrl">
-                                                               
-                                                                            <p class="comment-info">#{mrl.idUsuario.username} <span> #{mrl.respuesta} </span></p>
-                                                                   
-                                                                        
-								<!-- END .comment-right -->
-								
-                                                                </c:forEach>
-                                                                        
-								<!-- END .comment-right -->
-								</div>
+                                                                    <div class="comment-right">
+                                                                            <p class="comment-info">#{mc.idUsuario.username} <span> #{mc.fechaComentario} </span></p>
+                                                                            <p class="comment-text">#{mc.comentario}</p>
+
+
+                                                                            <p class="reply"><a class="responder"  id="#{masterComentarioController.ShowResponder(mc.idComentario)}" >Responder</a></p>
+
+                                                                            <c:forEach items="#{masterRespuestasController.cargaRespuesta(mc.idComentario)}" var="mrl">
+                                                                                <p class="comment-info">#{mrl.idUsuario.username} <span> #{mrl.respuesta} </span></p>
+                                                                                
+                                                                             </c:forEach>
+
+                                                                    <!-- END .comment-right -->
+                                                                    </div>
                                                                 
                                                                 <!-- ESTO ES PARA MOSTRAR LAS RESPUESTAS -->
                                                                 
@@ -340,14 +336,15 @@
                                                                              
 										<div id ="comment-rightResp" class="comment-right">
                                                                                     
+                                                                                    <h:form id="#{masterComentarioController.ShowResponse(mc.idComentario)}" onkeypress="if (event.keyCode == 13) this.submit();">
                                                                                     
-                                                                                    
-                                                                                    <input type="text" name="respuesta" onkeydown="#{masterRespuestasController.crearRespuesta(mc.idComentario,usuarioController.id_user)}" id="#{masterComentarioController.ShowResponse(mc.idComentario)}" class="submit_on_enter" value="#{masterRespuestasController.selected.respuesta}"  />
-                                                                                       
-                                                                                            #{mc.idComentario}
-                                                                                      
-                                                                                            <!--<h:inputText id="#{masterComentarioController.ShowResponse(mc.idComentario)}" onkeypress="if(event.keyCode === 13){#{masterRespuestasController.crearRespuesta(mc.idComentario,usuarioController.id_user)}};" class="text_input" value="#{masterRespuestasController.selected.respuesta}"  />	-->
-                                                                                       
+                                                                                        <h:inputText  id="textbox" class="text_input" value="#{masterRespuestasController.selected.respuesta}"  />
+
+                                                                                        <h:commandButton id="hidden" style="visibility: hidden;" action="#{masterRespuestasController.crearRespuesta(mc.idComentario,usuarioController.id_user)}" />  
+
+                                                                                        #{mc.idComentario}
+                                                                                     </h:form>
+                                                                                         
                                                                                     <!--<p class="reply"><a href="#">Reply</a></p>  -->
 										<!-- END .comment-right -->
                                                                                     
