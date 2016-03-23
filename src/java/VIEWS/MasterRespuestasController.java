@@ -1,11 +1,18 @@
 package VIEWS;
 
+import ENTITIES.MasterComentario;
 import ENTITIES.MasterRespuestas;
+import ENTITIES.Usuario;
 import VIEWS.util.JsfUtil;
 import VIEWS.util.PaginationHelper;
 import MODELS.MasterRespuestasFacade;
 
 import java.io.Serializable;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 import java.util.ResourceBundle;
 import javax.ejb.EJB;
 import javax.inject.Named;
@@ -28,10 +35,21 @@ public class MasterRespuestasController implements Serializable {
     private MODELS.MasterRespuestasFacade ejbFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
+    private List<MasterRespuestas> listaRespuestas;
+    
+    
 
     public MasterRespuestasController() {
     }
 
+    public List<MasterRespuestas> getListaRespuestas() {
+        return listaRespuestas;
+    }
+
+    public void setListaRespuestas(List<MasterRespuestas> listaRespuestas) {
+        this.listaRespuestas = listaRespuestas;
+    }
+    
     public MasterRespuestas getSelected() {
         if (current == null) {
             current = new MasterRespuestas();
@@ -191,6 +209,81 @@ public class MasterRespuestasController implements Serializable {
     public MasterRespuestas getMasterRespuestas(java.lang.Integer id) {
         return ejbFacade.find(id);
     }
+    
+    public String crearRespuesta(int id_comentario,int id_usuario){
+    
+        //if(!current.getRespuesta().isEmpty())
+        //{
+            try
+            {
+
+                //id_respuesta
+                //id_comentario
+                //reespuesta
+                //id_usuario
+                //fecha respuesta
+
+                MasterRespuestas mr = new MasterRespuestas();
+
+                Usuario ou = new Usuario();
+                ou.setIdUsuario(id_usuario);
+
+                MasterComentario mc= new MasterComentario();
+                mc.setIdComentario(id_comentario);
+
+
+
+                DateFormat dateFormat = new SimpleDateFormat("yyyy/mm/dd HH:mm:ss");
+                Date date = new Date();
+                String fecha = dateFormat.format(date);
+
+
+                current.setIdComentario(mc);
+                current.setIdUsuario(ou);
+                current.setFechaRespuesta(dateFormat.parse(fecha));
+
+
+                if(!current.getRespuesta().isEmpty())
+                {
+                    //getFacade().create(current);
+                    System.out.println("ID DEL COMENTARIO ->>>>>>>>>>>"+id_comentario);
+                    current = null;
+                }
+                return "/blog-single.xhtml";
+
+            }catch(Exception e){
+
+                System.out.println("Si tira error es este -----------------> "+e);
+                return "/blog-single.xhtml";
+            }
+           
+        //}
+        
+    }
+    
+     public List<MasterRespuestas> cargaRespuesta(int id_comentario)
+    {        
+        List<MasterRespuestas> mrl = new ArrayList<MasterRespuestas>(); 
+        MasterRespuestas mr = new MasterRespuestas();
+        mrl.clear();   
+        listaRespuestas = ejbFacade.findAll();                
+        for(int i=0;i<listaRespuestas.size();i++)
+        {
+            if((listaRespuestas.get(i).getIdComentario().getIdComentario())==id_comentario)
+                {
+                   //System.out.println(" comentario>>>> "+comentariosForo.get(i));
+                   
+                   mrl.add(listaRespuestas.get(i));
+                } 
+        }
+        
+        
+       
+        
+        return mrl;
+    }
+    
+    
 
     @FacesConverter(forClass = MasterRespuestas.class)
     public static class MasterRespuestasControllerConverter implements Converter {

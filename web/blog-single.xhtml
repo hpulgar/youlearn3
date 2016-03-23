@@ -3,8 +3,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
-    <h:head>
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui" >
+      
+      <h:head>
 
 
 	<!--Meta Tags-->
@@ -39,7 +41,6 @@
        
             $(document).ready(function() 
             {
-                
                 for(i=0;i<=#{masterComentarioController.mayorIdComentarios()};i++)
                 {                   
                     $("#response"+i).hide(); 
@@ -56,7 +57,7 @@
                             {
                                 $("#responder"+($(this).attr("id")).substr(-1)).show();
                                 $("#response"+($(this).attr("id")).substr(-1)).hide();
-
+                                $("#response"+($(this).attr("id")).substr(-1)).val("");
                             });
                         }if($(this).attr("id").length === 11)
                         {
@@ -68,6 +69,7 @@
                             {
                                 $("#responder"+($(this).attr("id")).substr(-2)).show();
                                 $("#response"+($(this).attr("id")).substr(-2)).hide();
+                                $("#response"+($(this).attr("id")).substr(-2)).val("");
 
                             });
                         }if($(this).attr("id").length === 12)
@@ -80,6 +82,7 @@
                             {
                                 $("#responder"+($(this).attr("id")).substr(-3)).show();
                                 $("#response"+($(this).attr("id")).substr(-3)).hide();
+                                $("#response"+($(this).attr("id")).substr(-3)).val("");
 
                             });
                         }
@@ -314,9 +317,20 @@
                                                                        
                                                                         <p class="reply"><a class="responder"  id="#{masterComentarioController.ShowResponder(mc.idComentario)}" >Responder</a></p>
                                                                         
+                                                                        <c:forEach items="#{masterRespuestasController.cargaRespuesta(mc.idComentario)}" var="mrl">
+                                                               
+                                                                            <p class="comment-info">#{mrl.idUsuario.username} <span> #{mrl.respuesta} </span></p>
+                                                                   
+                                                                        
+								<!-- END .comment-right -->
+								
+                                                                </c:forEach>
                                                                         
 								<!-- END .comment-right -->
 								</div>
+                                                                
+                                                                <!-- ESTO ES PARA MOSTRAR LAS RESPUESTAS -->
+                                                                
                                                                 
                                                                    
                                                                 
@@ -325,11 +339,19 @@
 									<li class="comment-entry clearfix">	
                                                                              
 										<div id ="comment-rightResp" class="comment-right">
-											
-												<input type="text" name="respuesta" id="#{masterComentarioController.ShowResponse(mc.idComentario)}" class="text_input" value="" />
-											<!--<p class="reply"><a href="#">Reply</a></p> -->
+                                                                                    
+                                                                                    
+                                                                                    
+                                                                                    <input type="text" name="respuesta" onkeydown="#{masterRespuestasController.crearRespuesta(mc.idComentario,usuarioController.id_user)}" id="#{masterComentarioController.ShowResponse(mc.idComentario)}" class="submit_on_enter" value="#{masterRespuestasController.selected.respuesta}"  />
+                                                                                       
+                                                                                            #{mc.idComentario}
+                                                                                      
+                                                                                            <!--<h:inputText id="#{masterComentarioController.ShowResponse(mc.idComentario)}" onkeypress="if(event.keyCode === 13){#{masterRespuestasController.crearRespuesta(mc.idComentario,usuarioController.id_user)}};" class="text_input" value="#{masterRespuestasController.selected.respuesta}"  />	-->
+                                                                                       
+                                                                                    <!--<p class="reply"><a href="#">Reply</a></p>  -->
 										<!-- END .comment-right -->
-										</div>
+                                                                                    
+                                                                                </div>
 									</li>
                                                                     </ul>
                                                                
