@@ -41,57 +41,24 @@
        
             $(document).ready(function() 
             {
+                $(".response").hide();
                 
-                for(i=0;i<=#{masterComentarioController.mayorIdComentarios()};i++)
-                {                   
+                $(".responder").click(function(){
                     
-                    $("#response"+i).hide(); 
-                }   
-                    $(".comment-right .responder").click(function()
-                    {   
+                    $(".responder").hide();
+                    $(".response").show();
+                    $(".response").focus();
+                    
+                    $(".response").focusout(function()
+                    {
+                        $(".responder").show();
+                        $(".response").hide();
+                        $(".response").val("");
                         
-                        if($(this).attr("id").length === 10)
-                        {
-                            
-                            $("#"+$(this).attr("id")).hide();
-                            $("#response"+($(this).attr("id")).substr(-1)).show();
-                            $(".algo").focus();
-                            
-                            $("#response"+($(this).attr("id")).substr(-1)).focusout(function()
-                            {
-                                $("#responder"+($(this).attr("id")).substr(-1)).show();
-                                $("#response"+($(this).attr("id")).substr(-1)).hide();
-                                $("#response"+($(this).attr("id")).substr(-1)).val("");
-                            });
-                        }if($(this).attr("id").length === 11)
-                        {
-                            $("#"+$(this).attr("id")).hide();
-                            $("#response"+($(this).attr("id")).substr(-2)).show();
-                            $(".algo").focus();
-
-                            $("#response"+($(this).attr("id")).substr(-2)).focusout(function()
-                            {
-                                $("#responder"+($(this).attr("id")).substr(-2)).show();
-                                $("#response"+($(this).attr("id")).substr(-2)).hide();
-                                $("#response"+($(this).attr("id")).substr(-2)).val("");
-
-                            });
-                        }if($(this).attr("id").length === 12)
-                        {
-                            $("#"+$(this).attr("id")).hide();
-                            $("#response"+($(this).attr("id")).substr(-3)).show();
-                            $("#response"+($(this).attr("id")).substr(-3)).focus();
-
-                            $("#response"+($(this).attr("id")).substr(-3)).focusout(function()
-                            {
-                                $("#responder"+($(this).attr("id")).substr(-3)).show();
-                                $("#response"+($(this).attr("id")).substr(-3)).hide();
-                                $("#response"+($(this).attr("id")).substr(-3)).val("");
-
-                            });
-                        }
-                    });   
+                    });
+                });
                 
+               
             });
             
          //]]>>   
@@ -317,22 +284,29 @@
                                                                     <div class="comment-right">
                                                                             <p class="comment-info">#{mc.idUsuario.username} <span> #{mc.fechaComentario} </span></p>
                                                                             <p class="comment-text">#{mc.comentario}</p>
-                                                                            <p class="reply"><a class="responder" id="#{masterComentarioController.ShowResponder(mc.idComentario)}" >Responder</a></p>
+                                                                            <p class="reply"><a class="responder" id="responder" >Responder</a></p>
 
                                                                             <c:forEach items="#{masterRespuestasController.cargaRespuesta(mc.idComentario)}" var="mrl">
                                                                                 <p class="comment-info">#{mrl.idUsuario.username} <span> #{mrl.respuesta} </span></p>
                                                                                 
-                                                                            </c:forEach>
+                                                                             </c:forEach>
+
                                                                     <!-- END .comment-right -->
                                                                     </div>
+                                                                
                                                                 <!-- ESTO ES PARA MOSTRAR LAS RESPUESTAS -->
+                                                                
+                                                                
+                                                                   
+                                                                
+								
                                                                     <ul>
 									<li class="comment-entry clearfix">	
                                                                              
 										<div id ="comment-rightResp" class="comment-right">
-                                                                                    <h:form id="#{masterComentarioController.ShowResponse(mc.idComentario)}" onkeypress="if (event.keyCode == 13) this.submit();" >
+                                                                                    <h:form  id="response" onkeypress="if (event.keyCode == 13) this.submit();" >
                                                                                         
-                                                                                        <h:inputText  id ="responder2" class="algo"  value="#{masterRespuestasController.selected.respuesta}"  />
+                                                                                        <h:inputText  id ="algo" class="response"  value="#{masterRespuestasController.selected.respuesta}"  />
                                                                                         <h:commandButton id="hidden" style="visibility: hidden;" action="#{masterRespuestasController.crearRespuesta(mc.idComentario,usuarioController.id_user)}" />  
                                                                                      </h:form>
                                                                                          
@@ -358,6 +332,7 @@
 
 							<div class="field-row">
 								<label for="contact_name"></label>
+							   	
 							</div>
 
 							
