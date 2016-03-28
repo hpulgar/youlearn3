@@ -252,31 +252,33 @@
 					
 					<div class="blog-info">
                                            
+                                            <c:forEach items="#{foroPosteosController.cargaUno(foroPosteosController.idPosteo)}" var="bi">
+                                                <div>
                                             
-					<div class="blog-date">
-							<h3>FotoAvatarPosteador</h3>
+                                            <h3><img src="#{bi.idUser.imagen_foto_perfil}" class="blog-date" /></h3>
 						</div>	
                                            
 						<ul class="blog-meta">
-                                                    <c:forEach items="#{foroPosteosController.cargaUno(foroPosteosController.idPosteo)}" var="bi">
+                                                    
                                                     <li> <strong>Fecha </strong></li>
                                                     <li><h:outputText value="#{bi.fecha}">
                                                                <f:convertDateTime type="date" pattern="dd-M-yyyy HH:mm"/>
                                                          </h:outputText></li>
                                                     <li><strong>Iniciado por </strong></li>
-                                                    <li> #{bi.idUser.username}</li>                                       
+                                                    <li> #{bi.idUser.username}</li>    
                                                     <li><strong>En categoria</strong></li>
                                                     <li>#{bi.idSubcategoria.descripcion}</li>
                                                     <li><strong>Commentarios</strong></li> 
                                                     <li>#{masterComentarioController.cuentaComentarios()}</li>
-                                                    </c:forEach>
+                                                    
 						</ul>
-                                                 
+                                                </c:forEach> 
 					</div>
 					
 					<div class="blog-content blog-content-single">	
-						<a href="#"><img src="images/02_demo_image.jpg" alt="" class="blog-image" /></a>
-						<c:forEach items="#{foroPosteosController.cargaUno(foroPosteosController.idPosteo)}" var="fp2"> 
+                                            <c:forEach items="#{foroPosteosController.cargaUno(foroPosteosController.idPosteo)}" var="fp2"> 
+                                                <img src="#{fp2.imagen_foro_posteos}" alt="" class="blog-image" />
+						
                                                 <p>#{fp2.contenido}</p>
 						
 						
@@ -308,8 +310,8 @@
 
 								<!-- BEGIN .comment-left -->
 								<div class="comment-left">
-									<div class="comment-image"></div>
-								<!-- END .comment-left -->
+                                                                    <div ><img src="#{mc.idUsuario.imagen_foto_perfil}" class="comment-image" /> </div>
+								
 								</div>
 
 								<!-- BEGIN .comment-right -->
