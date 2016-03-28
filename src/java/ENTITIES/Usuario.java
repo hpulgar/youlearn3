@@ -72,6 +72,21 @@ public class Usuario implements Serializable {
     private String correo;
     @Column(name = "creditos")
     private Integer creditos;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 200)
+    @Column(name = "imagen_portada_perfil")
+    private String imagen_portada_perfil;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 200)
+    @Column(name = "imagen_dashboard")
+    private String imagen_dashboard;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 200)
+    @Column(name = "imagen_foto_perfil")
+    private String imagen_foto_perfil;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idUsuario")
     private List<Sesion> sesionList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idPublicador")
@@ -115,11 +130,14 @@ public class Usuario implements Serializable {
         this.idUsuario = idUsuario;
     }
 
-    public Usuario(Integer idUsuario, String username, String password, Date fechaCreacion) {
+    public Usuario(Integer idUsuario, String username, String password, Date fechaCreacion, String imagen_portada_perfil, String imagen_dashboard, String imagen_foto_perfil) {
         this.idUsuario = idUsuario;
         this.username = username;
         this.password = password;
         this.fechaCreacion = fechaCreacion;
+        this.imagen_portada_perfil = imagen_portada_perfil;
+        this.imagen_dashboard = imagen_dashboard;
+        this.imagen_foto_perfil = imagen_foto_perfil;
     }
 
     public Integer getIdUsuario() {
@@ -168,6 +186,30 @@ public class Usuario implements Serializable {
 
     public void setCreditos(Integer creditos) {
         this.creditos = creditos;
+    }
+    
+    public String getImagen_portada_perfil() {
+        return imagen_portada_perfil;
+    }
+
+    public void setImagen_portada_perfil(String imagen_portada_perfil) {
+        this.imagen_portada_perfil = imagen_portada_perfil;
+    }
+
+    public String getImagen_dashboard() {
+        return imagen_dashboard;
+    }
+
+    public void setImagen_dashboard(String imagen_dashboard) {
+        this.imagen_dashboard = imagen_dashboard;
+    }
+
+    public String getImagen_foto_perfil() {
+        return imagen_foto_perfil;
+    }
+
+    public void setImagen_foto_perfil(String imagen_foto_perfil) {
+        this.imagen_foto_perfil = imagen_foto_perfil;
     }
 
     @XmlTransient

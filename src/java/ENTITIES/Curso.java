@@ -77,6 +77,17 @@ public class Curso implements Serializable {
     @NotNull
     @Column(name = "seguidores")
     private int seguidores;
+    @Basic(optional = false)
+    @NotNull
+    @Lob
+    @Size(min = 1, max = 65535)
+    @Column(name = "introduccion_curso")
+    private String introduccion_curso;
+     @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 200)
+    @Column(name = "imagen_portada_curso")
+    private String imagen_portada_curso;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idCurso")
     private List<Archivo> archivoList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idCurso")
@@ -101,7 +112,8 @@ public class Curso implements Serializable {
         this.idCurso = idCurso;
     }
 
-    public Curso(Integer idCurso, String nomCurso, int personasInscritas, String descripcionCurso, boolean autorizado, String contenidos, int seguidores) {
+    public Curso(Integer idCurso, String nomCurso, int personasInscritas, String descripcionCurso, boolean autorizado, String contenidos, int seguidores, String imagen_portada_curso
+    , String introduccion_curso) {
         this.idCurso = idCurso;
         this.nomCurso = nomCurso;
         this.personasInscritas = personasInscritas;
@@ -109,6 +121,8 @@ public class Curso implements Serializable {
         this.autorizado = autorizado;
         this.contenidos = contenidos;
         this.seguidores = seguidores;
+        this.imagen_portada_curso = imagen_portada_curso;
+        this.introduccion_curso = introduccion_curso;
     }
 
     public Integer getIdCurso() {
@@ -165,6 +179,22 @@ public class Curso implements Serializable {
 
     public void setSeguidores(int seguidores) {
         this.seguidores = seguidores;
+    }
+    
+     public String getImagen_portada_curso() {
+        return imagen_portada_curso;
+    }
+
+    public void setImagen_portada_curso(String imagen_portada_curso) {
+        this.imagen_portada_curso = imagen_portada_curso;
+    }
+    
+     public String getIntroduccion_curso() {
+        return introduccion_curso;
+    }
+
+    public void setIntroduccion_curso(String introduccion_curso) {
+        this.introduccion_curso = introduccion_curso;
     }
 
     @XmlTransient

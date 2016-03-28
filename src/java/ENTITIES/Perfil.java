@@ -67,10 +67,11 @@ public class Perfil implements Serializable {
         this.idPerfil = idPerfil;
     }
 
-    public Perfil(Integer idPerfil, String nomPerfil, String descripcion) {
+    public Perfil(Integer idPerfil, String nomPerfil, String descripcion ) {
         this.idPerfil = idPerfil;
         this.nomPerfil = nomPerfil;
         this.descripcion = descripcion;
+     
     }
 
     public Integer getIdPerfil() {
@@ -96,6 +97,8 @@ public class Perfil implements Serializable {
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
+    
+    
 
     @XmlTransient
     public List<Menu> getMenuList() {

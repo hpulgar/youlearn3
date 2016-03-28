@@ -67,6 +67,11 @@ public class ForoPosteos implements Serializable {
     @NotNull
     @Column(name = "Autorizado")
     private boolean autorizado;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 200)
+    @Column(name = "imagen_foro_posteos")
+    private String imagen_foro_posteos;
     @JoinColumn(name = "id_subcategoria", referencedColumnName = "id_subcategoria")
     @ManyToOne(optional = false)
     private ForoSubcategoria idSubcategoria;
@@ -81,12 +86,13 @@ public class ForoPosteos implements Serializable {
         this.idPost = idPost;
     }
 
-    public ForoPosteos(Integer idPost, String titulo, String contenido, Date fecha, boolean autorizado) {
+    public ForoPosteos(Integer idPost, String titulo, String contenido, Date fecha, boolean autorizado, String imagen_foro_posteos) {
         this.idPost = idPost;
         this.titulo = titulo;
         this.contenido = contenido;
         this.fecha = fecha;
         this.autorizado = autorizado;
+        this.imagen_foro_posteos = imagen_foro_posteos;
     }
 
     public Integer getIdPost() {
@@ -127,6 +133,15 @@ public class ForoPosteos implements Serializable {
 
     public void setAutorizado(boolean autorizado) {
         this.autorizado = autorizado;
+    }
+    
+    
+    public String getImagen_foro_posteos() {
+        return imagen_foro_posteos;
+    }
+
+    public void setImagen_foro_posteos(String imagen_foro_posteos) {
+        this.imagen_foro_posteos = imagen_foro_posteos;
     }
 
     public ForoSubcategoria getIdSubcategoria() {
