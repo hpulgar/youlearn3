@@ -6,6 +6,7 @@ import VIEWS.util.PaginationHelper;
 import MODELS.ForoSubcategoriaFacade;
 
 import java.io.Serializable;
+import java.util.*;
 import java.util.ResourceBundle;
 import javax.ejb.EJB;
 import javax.inject.Named;
@@ -28,6 +29,7 @@ public class ForoSubcategoriaController implements Serializable {
     private MODELS.ForoSubcategoriaFacade ejbFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
+    private int id_subCat;
 
     public ForoSubcategoriaController() {
     }
@@ -38,6 +40,14 @@ public class ForoSubcategoriaController implements Serializable {
             selectedItemIndex = -1;
         }
         return current;
+    }
+
+    public int getId_subCat() {
+        return id_subCat;
+    }
+
+    public void setId_subCat(int id_subCat) {
+        this.id_subCat = id_subCat;
     }
 
     private ForoSubcategoriaFacade getFacade() {
@@ -192,6 +202,29 @@ public class ForoSubcategoriaController implements Serializable {
         return ejbFacade.find(id);
     }
 
+    
+    public List<ForoSubcategoria> listaCategorias(int id_categoria)
+    {
+        List<ForoSubcategoria> fsc = new ArrayList<ForoSubcategoria>();
+        fsc = ejbFacade.findAll();
+        List<ForoSubcategoria> fsc2 = new ArrayList<ForoSubcategoria>();
+        
+        for(int i=0;i<fsc.size();i++)
+        {
+            if(fsc.get(i).getIdCategoria().getIdCategoria()==id_categoria)
+            {
+                fsc2.add(fsc.get(i));
+            }
+        }
+        return fsc2;
+    }
+    
+    
+    
+    
+    
+    
+    
     @FacesConverter(forClass = ForoSubcategoria.class)
     public static class ForoSubcategoriaControllerConverter implements Converter {
 

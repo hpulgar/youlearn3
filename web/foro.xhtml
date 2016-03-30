@@ -165,9 +165,13 @@
 			
 			<!-- BEGIN .inner-content-wrapper -->
 			<div class="inner-content-wrapper">
-				
 				<h3 class="block-title">Nombre foro</h3>
-				<table style="width:100%;">
+                                    
+                                <h:form>
+                               <h:commandButton value="Crear Foro" style="float: right"/>
+                                </h:form>
+				
+                                <table style="width:100%;">
 					<thead>
 						<tr>
 							<th>Fecha</th>
@@ -193,8 +197,9 @@
                                                     
                                                     
                                                     <td data-title="iniciado_por">#{f.idUser.username}</td>
-							<td data-title="Mensajes">#{f.idPost}</td>
-                                                        <td data-title="Visitas">#{foroPosteosController.setIdPosteo(f.idPost)}</td>
+                                                    <td data-title="Mensajes">#{masterComentarioController.cuentaMensajes(f.idPost)}</td>
+                                                    
+                                                        <td data-title="Visitas">#{foroPosteosController.setIdPosteo(f.idPost)} #{f.idPost}</td>
                                                         
 						</tr>
                                                     </h:form>

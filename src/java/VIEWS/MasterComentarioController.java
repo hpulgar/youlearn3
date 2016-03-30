@@ -289,6 +289,21 @@ public class MasterComentarioController implements Serializable {
     {   
         return this.getCuenta();   
     }
+    
+    public int cuentaMensajes(int idpost)
+    {   
+        int c=0;
+        comentariosForo = ejbFacade.findAll();
+        
+        for(int i=0;i<comentariosForo.size();i++)
+        {
+            if(comentariosForo.get(i).getIdPublicacion() == idpost)
+            {
+                c = c+1;
+            }
+        }
+        return c;  
+    }
      
     public int mayorIdComentarios()
     {   

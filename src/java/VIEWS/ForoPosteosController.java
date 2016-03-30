@@ -1,12 +1,17 @@
 package VIEWS;
 
 import ENTITIES.ForoPosteos;
+import ENTITIES.ForoSubcategoria;
+import ENTITIES.Usuario;
 import VIEWS.util.JsfUtil;
 import VIEWS.util.PaginationHelper;
 import MODELS.ForoPosteosFacade;
 
 import java.io.Serializable;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 import javax.ejb.EJB;
@@ -211,12 +216,52 @@ public class ForoPosteosController implements Serializable {
         
          }
          
-         public String verPost(int id)//metodo para cambiar de pagina USAR CON ¡¡¡¡COMMANDLINK!!!!
-         {
+    public String verPost(int id)//metodo para cambiar de pagina USAR CON ¡¡¡¡COMMANDLINK!!!!
+    {
              setIdPosteo(id);
              return "/blog-single.xhtml";
-         }
+    }
 
+         
+         
+    public String crearForo(int id_subcategoria,int id_usuario)
+    {
+        //  id Post - autoincrement -OK
+        //  id_subcategoria - parametrizado(tambien puede ser rescatado)-OK
+        //  id usuario - parametrizado -OK
+        //  titulo - se rescata
+        //  contenido se rescata
+        //  fecha - automatica -OK
+        //  autorizado - predefinido en 0 -OK
+        //  imagen_foro_posteo - se rescata
+        
+        try{
+        ForoSubcategoria fsc = new ForoSubcategoria();
+        fsc.setIdSubcategoria(id_subcategoria);
+        Usuario ou = new Usuario();
+        ou.setIdUsuario(id_usuario);
+        DateFormat dateFormat = new SimpleDateFormat("yyyy/mm/dd HH:mm:ss");
+        Date date = new Date();
+        String fecha = dateFormat.format(date);
+        
+        
+        
+        current.setFecha(dateFormat.parse(fecha));
+        current.setIdUser(ou);
+        current.setIdSubcategoria(fsc);
+        current.setAutorizado(false);
+        
+        getFacade().create(current);
+        current = null;
+        
+        return "algo";
+        
+        }catch(Exception e)
+        {
+            return "algo";
+        }
+            
+    }
     public SelectItem[] getItemsAvailableSelectMany() {
         return JsfUtil.getSelectItems(ejbFacade.findAll(), false);
     }
