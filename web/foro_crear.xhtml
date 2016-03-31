@@ -2,7 +2,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <h:head>
 
 
@@ -176,60 +177,69 @@
 			
 			<p>&nbsp;</p>
 			
-			<h:form  id="contactform" class="clearfix">
-
+			<h:form  id="contactform2" class="clearfix">
+                            
 				<div class="field-row">
 					<label for="categoria">Categoria</label>
-                                 
-                                        <h:selectOneMenu>
-   <f:selectItem itemValue="1" itemLabel="Item 1" />
-   <f:selectItem itemValue="2" itemLabel="Item 2" />	   							
-</h:selectOneMenu>	
+                                       
+                                        <h:selectOneMenu value="#{foroCategoriaController.id_cat}" onchange="this.form.submit()">
+                                                
+                                            <f:selectItem itemValue="0" itemLabel="Seleccione una Categoria" noSelectionOption="true" /> 
+                                                <c:forEach items="#{foroCategoriaController.listaCategorias()}" var="c"> 
+                                                    <f:selectItem itemValue="#{c.idCategoria}" itemLabel="#{c.titulo}" />   
+                                                </c:forEach>
+                                             </h:selectOneMenu>
+                                      
+                                            
 				</div>
-
+                             </h:form>
+                        <h:form  id="contactform" class="clearfix">
 				<div class="field-row">
 				  <label for="subcategoria">Subcategoria</label>
-			
-                                <h:selectOneMenu>
-   <f:selectItem itemValue="1" itemLabel="Item 1" />
-   <f:selectItem itemValue="2" itemLabel="Item 2" />	   							
-</h:selectOneMenu>	
+                                  
+                                 
+                                  <h:selectOneMenu value="#{foroSubcategoriaController.id_subCat}" >
+                                        
+                                      <f:selectItem itemValue="0" itemLabel="Seleccione una Categoria"  noSelectionOption="true"/> 
+                                        <c:forEach items="#{foroSubcategoriaController.listaCategorias(foroCategoriaController.id_cat)}" var="fsc"  >
+                                        <f:selectItem itemValue="#{fsc.idSubcategoria}" itemLabel="#{fsc.titulo}" />
+                                        </c:forEach>
+                                     </h:selectOneMenu>	
+                                  
 				</div>
                             
+                       
+                             
+                        
                             <div class="field-row">
 				  <label for="titulo">Titulo</label>
-			
-                                 <h:inputText class="text_input" id="titulo" size="10" />
+                                  <h:inputText value="#{foroPosteosController.selected.titulo}" class="text_input" id="titulo" size="10" />
 				</div>
                             
                              
                             <div class="field-row">
 				  <label for="imagenUrl">Adjuntar una imagen mediante url</label>
 			
-                                 <h:inputText class="text_input" id="imagenSubida" size="10" /><br></br>
+                                  <h:inputText value="#{foroPosteosController.selected.imagen_foro_posteos}" class="text_input" id="imagenSubida" size="10" /><br></br>
                                  <label for="imagenSubida">Subir una imagen</label><br></br>
-                                  <h:inputFile value="">
+                                <!--  <h:inputFile value="">
                                  
-                                 </h:inputFile>
+                                 </h:inputFile>-->
                                  <br></br>
 				</div>
                             
                              <br></br><div class="field-row">
 				  <label for="contenido">Contenido</label>
 			
-                                  <h:inputTextarea id="contenido" ></h:inputTextarea>
+                                  <h:inputTextarea value="#{foroPosteosController.selected.contenido}" id="contenido" ></h:inputTextarea>
 				</div>
-
+                            
                              <div class="field-row">
 
 				<p>
-                                    <h:commandButton class="button1" type="submit"  style="float:right" value="Crear foro" id="submit">
-                                  </h:commandButton>
-                                  
-				  </p>
-				
-                                 
-              </div>
+                                    <h:commandButton action="#{foroPosteosController.crearForo(foroSubcategoriaController.id_subCat, usuarioController.id_user)}" class="button1" type="submit"  style="float:right" value="Crear foro" id="submit"/>
+                                </p>
+                            </div>
                                
                         </h:form>
 			

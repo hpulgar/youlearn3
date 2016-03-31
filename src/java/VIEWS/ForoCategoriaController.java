@@ -210,12 +210,11 @@ public class ForoCategoriaController implements Serializable {
         return fc;
     }
     
-    
-    
-    
-    
-    
-    
+    public void cprint()
+    {
+        System.out.println("aca el valor del select "+ this.getId_cat());
+    }
+            
     
     
     @FacesConverter(forClass = ForoCategoria.class)

@@ -244,7 +244,7 @@ public class ForoPosteosController implements Serializable {
         Date date = new Date();
         String fecha = dateFormat.format(date);
         
-        
+        System.out.println("el id subcat "+id_subcategoria);
         
         current.setFecha(dateFormat.parse(fecha));
         current.setIdUser(ou);
@@ -254,11 +254,12 @@ public class ForoPosteosController implements Serializable {
         getFacade().create(current);
         current = null;
         
-        return "algo";
+        return "/foro.xhtml";
         
         }catch(Exception e)
         {
-            return "algo";
+            System.out.println("EL ERRORR"+ e);
+            return "/foro_crear.xhtml";
         }
             
     }
