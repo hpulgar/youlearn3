@@ -165,11 +165,32 @@
 			
 			<!-- BEGIN .inner-content-wrapper -->
 			<div class="inner-content-wrapper">
-				<h3 class="block-title">Nombre foro</h3>
-                                    
-                                <h:form>
+			 <h:form>
                                     <h:commandButton action="foro_crear.xhtml" value="Crear Foro" style="float: right"/>
-                                </h:form>
+                                </h:form>	
+                            <h3 class="block-title">Nombre foro</h3>
+                               
+                                <div class="course-finder-full clearfix">	
+                                <div class="course-finder-icon"></div>  
+                                <div class="course-finder-full-form">
+						
+						<h:form class="clearfix">
+
+							<select name="keyword-type">
+								<option value="Course ID">Course ID</option>
+								<option value="Course ID">Course ID</option>
+								<option value="Course ID">Course ID</option>
+							</select>
+
+							<h:inputText  value="Keywords" />
+							<h:commandButton type="submit" value="Search" />
+
+                                                </h:form>
+						
+					
+                             
+                                        </div>
+                                </div>
 				
                                 <table style="width:100%;">
 					<thead>
