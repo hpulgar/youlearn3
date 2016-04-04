@@ -318,38 +318,20 @@
                                                                
                                                                 <div class="comment-right clearfix">
                                                                             <p class="comment-info">#{mc.idUsuario.username} <span> #{mc.fechaComentario} </span></p>
-                                                                            <p class="comment-text">#{mc.comentario}</p>
+                                                                            <div style="word-wrap: break-word; width: 400px">
+                                                                                <p class="comment-info"  >#{mc.comentario}</p>
+                                                                            </div>
                                                                             <p class="reply"><a class="responder" id="#{masterComentarioController.ShowResponder(mc.idComentario)}" >Responder</a></p>
 
                                                                             <c:forEach items="#{masterRespuestasController.cargaRespuesta(mc.idComentario)}" var="mrl">
+                                                                                <div style="word-wrap: break-word; width: 400px">
                                                                                 <p class="comment-info clearfix">#{mrl.idUsuario.username} <span> #{mrl.respuesta} </span></p>
+                                                                                </div>
                                                                                 
                                                                             </c:forEach>
                                                                     <!-- END .comment-right -->
                                                                     </div>
-                                                                <ul class="event-list">
-				
-					<!-- BEGIN .event-wrapper -->
-					<li class="event-wrapper event-full event-single clearfix">
-					
-				
-						<div class="event-info">
-							
-							
-							
-							
-							
-							<div style="height: 30px;"></div>
-							 <p class="comment-text">#{mc.comentario}</p>
-							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec nunc mi, ultricies eget aliquet interdum, dapibus in arcu. Praesent facilisis congue nulla vitae semper. Aenean vel euismod nibh. Morbi euismod, elit ut ornare varius, ipsum nisi tristique nisi, at volutpat odio leo sit amet justo. Nulla facilisi. Donec sed elit neque. Curabitur a nisi nunc. Cras fermentum auctor vulputate.</p>
-
-							
-						</div>
-				
-					<!-- END .event-wrapper -->
-					</li>
-				
-				</ul>
+                                                               
                                                                 <!-- ESTO ES PARA MOSTRAR LAS RESPUESTAS -->
                                                                     <ul>
 									<li class="comment-entry clearfix">	
