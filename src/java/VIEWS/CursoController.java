@@ -1,11 +1,18 @@
 package VIEWS;
 
 import ENTITIES.Curso;
+import ENTITIES.CursoSubCat;
+import ENTITIES.Usuario;
 import VIEWS.util.JsfUtil;
 import VIEWS.util.PaginationHelper;
 import MODELS.CursoFacade;
 
 import java.io.Serializable;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 import java.util.ResourceBundle;
 import javax.ejb.EJB;
 import javax.inject.Named;
@@ -28,10 +35,35 @@ public class CursoController implements Serializable {
     private MODELS.CursoFacade ejbFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
+    private int idCurso;
+    private List<Curso> arCurso = new ArrayList();
+
+    public List<Curso> getArCurso() {
+        return arCurso;
+    }
+
+    public void setArCurso(List<Curso> arCurso) {
+        this.arCurso = arCurso;
+    }
+    
+
+    
 
     public CursoController() {
     }
 
+    public int getIdCurso() {
+        return idCurso;
+    }
+
+    public void setIdCurso(int idCurso) {
+        this.idCurso = idCurso;
+    }
+
+   
+
+    
+    
     public Curso getSelected() {
         if (current == null) {
             current = new Curso();
@@ -192,6 +224,88 @@ public class CursoController implements Serializable {
         return ejbFacade.find(id);
     }
 
+    ////////////////////////////////CURSO///////////////////////////////////////////////////
+        
+        // INT IDCURSO
+        //INT ID SUBCAT
+        //ID_USUARIO
+        //NOMBRE_CURSO
+        //PERSONAS_INSCRITAS
+        //DESCRIPCION_CURSO
+        //AUTORIZADO 
+        //CONTENIDOS
+        //SEGUIDORES
+        //INTRODUCCION
+        //IMAGEN
+        
+        
+        
+        public List<Curso> listaCursos()
+        {
+            this.arCurso.clear();
+            arCurso = ejbFacade.findAll();
+            
+            return arCurso;
+        }
+        
+        public Curso verCurso(int idCurso)
+        {
+            Curso objC;
+            objC = ejbFacade.find(idCurso);
+            
+            
+            return objC;
+        }
+        
+        
+        public String CrearCurso(int id_scat_curso,int id_usuario)
+        {
+            try{
+                
+        // 1 INT IDCURSO automatico
+        // 2 INT ID SUBCAT por parametro X
+        // 3 ID_USUARIO por parametro  X
+        // 4 NOMBRE_CURSO selecterd 
+        // 5 PERSONAS_INSCRITAS defecto 0 X
+        // 6 DESCRIPCION_CURSO selected 
+        // 7 AUTORIZADO  por defecto 0 X
+        // 8 CONTENIDOS selected 
+        // 9 SEGUIDORES por defecto 0 X
+        // 10 INTRODUCCION selected 
+        // 11 IMAGEN selected
+                
+                
+                CursoSubCat csc = new CursoSubCat();
+                csc.setIdSubcat(id_scat_curso);
+        
+                Usuario ou = new Usuario();
+                ou.setIdUsuario(id_usuario);
+                
+//                DateFormat dateFormat = new SimpleDateFormat("yyyy/mm/dd HH:mm:ss");
+//                Date date = new Date();
+//                String fecha = dateFormat.format(date);
+
+             
+
+               // current.setfechaCurso(dateFormat.parse(fecha));
+                current.setIdUsuario(ou);
+                current.setIdCat(csc);
+                current.setAutorizado(false);
+                current.setSeguidores(0);
+                current.setPersonasInscritas(0);
+                getFacade().create(current);
+                current = null;
+
+                return "/Por Definir";
+
+                }catch(Exception e)
+                {
+                    System.out.println("EL ERRORR"+ e);
+                    return "/Por Definir";
+                }
+        }
+        
+        
     @FacesConverter(forClass = Curso.class)
     public static class CursoControllerConverter implements Converter {
 
@@ -217,6 +331,10 @@ public class CursoController implements Serializable {
             return sb.toString();
         }
 
+        
+       
+        
+        
         @Override
         public String getAsString(FacesContext facesContext, UIComponent component, Object object) {
             if (object == null) {

@@ -1,6 +1,8 @@
 package VIEWS;
 
+import ENTITIES.Curso;
 import ENTITIES.Tablero;
+import ENTITIES.Usuario;
 import VIEWS.util.JsfUtil;
 import VIEWS.util.PaginationHelper;
 import MODELS.TableroFacade;
@@ -17,6 +19,7 @@ import javax.faces.convert.FacesConverter;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
+import java.util.*;
 
 @Named("tableroController")
 @SessionScoped
@@ -28,10 +31,22 @@ public class TableroController implements Serializable {
     private MODELS.TableroFacade ejbFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
-
+    private List<Tablero> arTablero = new ArrayList();
+    
+    
+    
     public TableroController() {
     }
 
+    public List<Tablero> getArTablero() {
+        return arTablero;
+    }
+
+    public void setArTablero(List<Tablero> arTablero) {
+        this.arTablero = arTablero;
+    }
+
+    
     public Tablero getSelected() {
         if (current == null) {
             current = new Tablero();
@@ -192,6 +207,73 @@ public class TableroController implements Serializable {
         return ejbFacade.find(id);
     }
 
+    //////////////////////////////////////////////////////////////////////
+    
+    //    int id tablero
+    //    int id_usuario
+    //    int id_curso
+    //    String titulo
+    //    String escripcion        
+    
+    public List<Tablero> verTableros()
+    {
+        arTablero.clear();
+        arTablero = ejbFacade.findAll();
+        
+        return arTablero;
+    }
+    
+    public Tablero unTablero(int id_tablero)
+    {
+        Tablero objT;
+        
+        objT = ejbFacade.find(id_tablero);
+        
+        return objT;
+        
+    }
+    
+    
+     public String crearForo(int id_curso,int id_usuario)
+    {
+        
+        
+        try{
+        //    int id tablero auto 
+        //    int id_usuario parametro
+        //    int id_curso  parametro 
+        //    String titulo selected
+        //    String escripcion selected
+        
+        
+        
+        Usuario ou = new Usuario();
+        ou.setIdUsuario(id_usuario);
+      
+        Curso oc = new Curso();
+        oc.setIdCurso(id_curso);
+ 
+        
+    
+        current.setIdUsuario(ou);
+        current.setIdCurso(oc);
+        
+        getFacade().create(current);
+        current = null;
+        
+        return "/Por Definir";
+        
+        }catch(Exception e)
+        {
+            System.out.println("EL ERRORR"+ e);
+            return "/Por Definir";
+        }
+            
+    }
+    
+    
+    
+    
     @FacesConverter(forClass = Tablero.class)
     public static class TableroControllerConverter implements Converter {
 

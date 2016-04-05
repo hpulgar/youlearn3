@@ -35,7 +35,7 @@ public class ForoPosteosController implements Serializable {
     private MODELS.ForoPosteosFacade ejbFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
-        private List<ForoPosteos> carga = new ArrayList();
+    private List<ForoPosteos> carga = new ArrayList();
     private List<ForoPosteos> cargaNoticias = new ArrayList();
     private int idPosteo;
 
