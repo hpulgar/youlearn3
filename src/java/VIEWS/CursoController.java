@@ -262,16 +262,16 @@ public class CursoController implements Serializable {
         {
             try{
                 
-        // 1 INT IDCURSO automatico
+        // 1 INT IDCURSO automatico x
         // 2 INT ID SUBCAT por parametro X
         // 3 ID_USUARIO por parametro  X
-        // 4 NOMBRE_CURSO selecterd 
+        // 4 NOMBRE_CURSO selecterd X
         // 5 PERSONAS_INSCRITAS defecto 0 X
-        // 6 DESCRIPCION_CURSO selected 
+        // 6 DESCRIPCION_CURSO selected X
         // 7 AUTORIZADO  por defecto 0 X
-        // 8 CONTENIDOS selected 
+        // 8 CONTENIDOS selected X
         // 9 SEGUIDORES por defecto 0 X
-        // 10 INTRODUCCION selected 
+        // 10 INTRODUCCION selected X
         // 11 IMAGEN selected
                 
                 
@@ -296,12 +296,12 @@ public class CursoController implements Serializable {
                 getFacade().create(current);
                 current = null;
 
-                return "/Por Definir";
+                return "/foro.xhtml";
 
                 }catch(Exception e)
                 {
                     System.out.println("EL ERRORR"+ e);
-                    return "/Por Definir";
+                    return "/curso_crear.xhtml";
                 }
         }
         

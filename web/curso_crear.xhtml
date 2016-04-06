@@ -182,11 +182,11 @@
 				<div class="field-row">
 					<label for="categoria">Categoria del curso</label>
                                        
-                                        <h:selectOneMenu value="#{foroCategoriaController.id_cat}" onchange="this.form.submit()">
+                                        <h:selectOneMenu value="#{cursoCategoriaController.id_curso_cat}" onchange="this.form.submit()">
                                                 
                                             <f:selectItem itemValue="0" itemLabel="Seleccione una Categoria" noSelectionOption="true" /> 
-                                                <c:forEach items="#{foroCategoriaController.listaCategorias()}" var="c"> 
-                                                    <f:selectItem itemValue="#{c.idCategoria}" itemLabel="#{c.titulo}" />   
+                                            <c:forEach items="#{cursoCategoriaController.cCats()}" var="c"> 
+                                                <f:selectItem itemValue="#{c.idCat}" itemLabel="#{c.nomCat}" />   
                                                 </c:forEach>
                                              </h:selectOneMenu>
                                       
@@ -198,11 +198,11 @@
 				  <label for="subcategoria">Subcategoria del curso</label>
                                   
                                  
-                                  <h:selectOneMenu value="#{foroSubcategoriaController.id_subCat}" >
+                                  <h:selectOneMenu value="#{cursoSubCatController.id_cSub_cat}" >
                                         
                                       <f:selectItem itemValue="0" itemLabel="Seleccione una Categoria"  noSelectionOption="true"/> 
-                                        <c:forEach items="#{foroSubcategoriaController.listaCategorias(foroCategoriaController.id_cat)}" var="fsc"  >
-                                        <f:selectItem itemValue="#{fsc.idSubcategoria}" itemLabel="#{fsc.titulo}" />
+                                      <c:forEach items="#{cursoSubCatController.listaSubCategorias(cursoCategoriaController.id_curso_cat)}" var="fsc"  >
+                                          <f:selectItem itemValue="#{fsc.idSubcat}" itemLabel="#{fsc.nomSubcat}" />
                                         </c:forEach>
                                      </h:selectOneMenu>	
                                   
@@ -213,19 +213,25 @@
                         
                             <div class="field-row">
 				  <label for="titulo">Nomre del curso</label>
-                                  <h:inputText value="#{foroPosteosController.selected.titulo}" class="text_input" id="titulo" size="10" />
+                                  <h:inputText value="#{cursoController.selected.nomCurso}" class="text_input" id="nombre" size="10" />
+				</div>
+                            
+                            <div class="field-row">
+				  <label for="introduccion">Introduccion del curso</label>
+			
+                                  <h:inputTextarea value="#{cursoController.selected.introduccion_curso}" id="Introduccion_Curso" ></h:inputTextarea>
 				</div>
                             
                             <div class="field-row">
 				  <label for="descripcion">Descripcion del curso</label>
 			
-                                  <h:inputTextarea value="#{foroPosteosController.selected.contenido}" id="descripcion" ></h:inputTextarea>
+                                  <h:inputTextarea value="#{cursoController.selected.descripcionCurso}" id="Descripcion_Curso" ></h:inputTextarea>
 				</div>
                              
                             <div class="field-row">
 				  <label for="imagenUrl">Adjuntar una imagen mediante url para portada del curso</label>
 			
-                                  <h:inputText value="#{foroPosteosController.selected.imagen_foro_posteos}" class="text_input" id="imagenSubida" size="10" /><br></br>
+                                  <h:inputText value="#{cursoController.selected.imagen_portada_curso}" class="text_input" id="imagenSubida" size="10" /><br></br>
                                  <label for="imagenSubida">Subir una imagen</label><br></br>
                                 <!--  <h:inputFile value="">
                                  
@@ -236,13 +242,13 @@
                              <br></br><div class="field-row">
 				  <label for="contenido">Contenidos del curso</label>
 			
-                                  <h:inputTextarea value="#{foroPosteosController.selected.contenido}" id="contenido" ></h:inputTextarea>
+                                  <h:inputTextarea value="#{cursoController.selected.contenidos}" id="contenido" ></h:inputTextarea>
 				</div>
                             
                              <div class="field-row">
 
 				<p>
-                                    <h:commandButton action="#{foroPosteosController.crearForo(foroSubcategoriaController.id_subCat, usuarioController.id_user)}" class="button1" type="submit"  style="float:right" value="Crear foro" id="submit"/>
+                                    <h:commandButton action="#{cursoController.CrearCurso(cursoSubCatController.id_cSub_cat,usuarioController.id_user)}" class="button1" type="submit"  style="float:right" value="Crear Curso" id="submit"/>
                                 </p>
                             </div>
                                

@@ -17,6 +17,7 @@ import javax.faces.convert.FacesConverter;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
+import java.util.*;
 
 @Named("cursoCategoriaController")
 @SessionScoped
@@ -28,10 +29,28 @@ public class CursoCategoriaController implements Serializable {
     private MODELS.CursoCategoriaFacade ejbFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
+    private int id_curso_cat;
+    private List<CursoCategoria> arCursoCat = new ArrayList();
 
     public CursoCategoriaController() {
     }
 
+    public int getId_curso_cat() {
+        return id_curso_cat;
+    }
+
+    public void setId_curso_cat(int id_curso_cat) {
+        this.id_curso_cat = id_curso_cat;
+    }
+
+    public List<CursoCategoria> getArCursoCat() {
+        return arCursoCat;
+    }
+
+    public void setArCursoCat(List<CursoCategoria> arCursoCat) {
+        this.arCursoCat = arCursoCat;
+    }
+    
     public CursoCategoria getSelected() {
         if (current == null) {
             current = new CursoCategoria();
@@ -191,6 +210,21 @@ public class CursoCategoriaController implements Serializable {
     public CursoCategoria getCursoCategoria(java.lang.Integer id) {
         return ejbFacade.find(id);
     }
+    
+    public List<CursoCategoria> cCats()
+    {
+        arCursoCat.clear();
+        arCursoCat = ejbFacade.findAll();
+        
+       
+        return arCursoCat;
+    }
+    
+    
+    
+    
+    
+    
 
     @FacesConverter(forClass = CursoCategoria.class)
     public static class CursoCategoriaControllerConverter implements Converter {

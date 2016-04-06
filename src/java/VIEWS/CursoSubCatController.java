@@ -17,6 +17,7 @@ import javax.faces.convert.FacesConverter;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
+import java.util.*;
 
 @Named("cursoSubCatController")
 @SessionScoped
@@ -28,8 +29,26 @@ public class CursoSubCatController implements Serializable {
     private MODELS.CursoSubCatFacade ejbFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
-
+    private int id_cSub_cat;
+    private List<CursoSubCat> arCursoSubCat = new ArrayList();
+    private List<CursoSubCat> arCursoSubCat2 = new ArrayList();
     public CursoSubCatController() {
+    }
+
+    public int getId_cSub_cat() {
+        return id_cSub_cat;
+    }
+
+    public void setId_cSub_cat(int id_cSub_cat) {
+        this.id_cSub_cat = id_cSub_cat;
+    }
+
+    public List<CursoSubCat> getArCursoSubCat() {
+        return arCursoSubCat;
+    }
+
+    public void setArCursoSubCat(List<CursoSubCat> arCursoSubCat) {
+        this.arCursoSubCat = arCursoSubCat;
     }
 
     public CursoSubCat getSelected() {
@@ -38,6 +57,14 @@ public class CursoSubCatController implements Serializable {
             selectedItemIndex = -1;
         }
         return current;
+    }
+
+    public List<CursoSubCat> getArCursoSubCat2() {
+        return arCursoSubCat2;
+    }
+
+    public void setArCursoSubCat2(List<CursoSubCat> arCursoSubCat2) {
+        this.arCursoSubCat2 = arCursoSubCat2;
     }
 
     private CursoSubCatFacade getFacade() {
@@ -192,6 +219,26 @@ public class CursoSubCatController implements Serializable {
         return ejbFacade.find(id);
     }
 
+    
+    public List<CursoSubCat> listaSubCategorias(int id_categoria)
+    {
+        arCursoSubCat.clear();
+        arCursoSubCat2.clear();
+        arCursoSubCat = ejbFacade.findAll();
+        
+        for(int i=0;i<arCursoSubCat.size();i++)
+        {
+            if(arCursoSubCat.get(i).getIdSubcat() == id_categoria)
+            {
+                arCursoSubCat2.add(arCursoSubCat.get(i));
+            }
+        }
+         return arCursoSubCat2;
+    }
+    
+       
+    
+    
     @FacesConverter(forClass = CursoSubCat.class)
     public static class CursoSubCatControllerConverter implements Converter {
 
