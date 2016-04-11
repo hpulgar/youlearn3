@@ -6,6 +6,7 @@
 package ENTITIES;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -21,6 +22,8 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -47,48 +50,68 @@ public class Curso implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id_curso")
+    
     private Integer idCurso;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 45)
     @Column(name = "nom_curso")
+    
     private String nomCurso;
     @Basic(optional = false)
     @NotNull
     @Column(name = "personas_inscritas")
+    
     private int personasInscritas;
     @Basic(optional = false)
     @NotNull
     @Lob
     @Size(min = 1, max = 65535)
     @Column(name = "descripcion_curso")
+   
     private String descripcionCurso;
     @Basic(optional = false)
     @NotNull
     @Column(name = "Autorizado")
+   
     private boolean autorizado;
     @Basic(optional = false)
     @NotNull
     @Lob
     @Size(min = 1, max = 65535)
     @Column(name = "contenidos")
+    
     private String contenidos;
     @Basic(optional = false)
     @NotNull
     @Column(name = "seguidores")
+    
     private int seguidores;
     @Basic(optional = false)
     @NotNull
+    
+    
+    @Column(name = "fecha")
+    @Temporal(TemporalType.TIMESTAMP)   
+    private Date fecha;
+    @Basic(optional = false)
+    @NotNull   
+    
     @Lob
     @Size(min = 1, max = 65535)
-    @Column(name = "introduccion_curso")
+    @Column(name = "introduccion_curso")    
     private String introduccion_curso;
-     @Basic(optional = false)
+    @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 200)
-    @Column(name = "imagen_portada_curso")
+    
+    @Column(name = "imagen_portada_curso")    
     private String imagen_portada_curso;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idCurso")
+    
+    
+    
+    
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idCurso")    
     private List<Archivo> archivoList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idCurso")
     private List<LogStreaming> logStreamingList;
@@ -113,7 +136,7 @@ public class Curso implements Serializable {
     }
 
     public Curso(Integer idCurso, String nomCurso, int personasInscritas, String descripcionCurso, boolean autorizado, String contenidos, int seguidores, String imagen_portada_curso
-    , String introduccion_curso) {
+    , String introduccion_curso, Date fecha) {
         this.idCurso = idCurso;
         this.nomCurso = nomCurso;
         this.personasInscritas = personasInscritas;
@@ -123,6 +146,7 @@ public class Curso implements Serializable {
         this.seguidores = seguidores;
         this.imagen_portada_curso = imagen_portada_curso;
         this.introduccion_curso = introduccion_curso;
+        this.fecha = fecha;
     }
 
     public Integer getIdCurso() {
@@ -196,10 +220,21 @@ public class Curso implements Serializable {
     public void setIntroduccion_curso(String introduccion_curso) {
         this.introduccion_curso = introduccion_curso;
     }
+    
+    
+    public Date getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(Date fecha) {
+        this.fecha = fecha;
+    }
 
     @XmlTransient
     public List<Archivo> getArchivoList() {
         return archivoList;
+        
+        
     }
 
     public void setArchivoList(List<Archivo> archivoList) {

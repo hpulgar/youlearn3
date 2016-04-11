@@ -287,13 +287,13 @@ public class CursoController implements Serializable {
                 Usuario ou = new Usuario();
                 ou.setIdUsuario(id_usuario);
                 
-//                DateFormat dateFormat = new SimpleDateFormat("yyyy/mm/dd HH:mm:ss");
-//                Date date = new Date();
-//                String fecha = dateFormat.format(date);
+                DateFormat dateFormat = new SimpleDateFormat("yyyy/mm/dd HH:mm:ss");
+                Date date = new Date();
+                String fecha = dateFormat.format(date);
 
              
 
-               // current.setfechaCurso(dateFormat.parse(fecha));
+                current.setFecha(dateFormat.parse(fecha));
                 current.setIdUsuario(ou);
                 current.setIdCat(csc);
                 current.setAutorizado(false);

@@ -228,7 +228,7 @@ public class CursoSubCatController implements Serializable {
         
         for(int i=0;i<arCursoSubCat.size();i++)
         {
-            if(arCursoSubCat.get(i).getIdSubcat() == id_categoria)
+           if(arCursoSubCat.get(i).getIdCategoria().getIdCat() == id_categoria)
             {
                 arCursoSubCat2.add(arCursoSubCat.get(i));
             }

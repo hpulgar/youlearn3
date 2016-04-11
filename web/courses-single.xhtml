@@ -4,26 +4,28 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
-      
-      <h:head>
-
+<h:head>
 
 	<!--Meta Tags-->
-        <meta name="viewport" content="width=device-width; initial-scale=1.0"></meta>
+	<meta name="viewport" content="width=device-width; initial-scale=1.0"/>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 		
 	<!--Title-->
-	<title>Youlearn - Pagina principal</title>
+	<title>Park College - A Premium HTML Template for Learning Organizations</title>
 
-
+	<!--Stylesheets-->
 	<link rel="stylesheet" href="css/style.css" type="text/css"  media="all" />
 	<link rel="stylesheet" href="css/colour.css" type="text/css"  media="all" />
 	<link rel="stylesheet" href="css/flexslider.css" type="text/css"  media="all" />
 	<link rel="stylesheet" href="css/superfish.css" type="text/css"  media="all" />
 	<link rel="stylesheet" href="css/responsive.css" type="text/css"  media="all" />
-        <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic' rel='stylesheet' type='text/css'></link>
-        <link href='http://fonts.googleapis.com/css?family=Merriweather:400,300,700,900' rel='stylesheet' type='text/css'></link>
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic' rel='stylesheet' type='text/css'/>
+	<link href='http://fonts.googleapis.com/css?family=Merriweather:400,300,700,900' rel='stylesheet' type='text/css'/>
 
+	<!--Favicon-->
+	<link rel="shortcut icon" href="favicon.html" type="image/x-icon" />
+
+	<!--JavaScript-->
 	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
 	<script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js'></script>
 	<script type="text/javascript" src="js/superfish.js"></script>
@@ -31,43 +33,12 @@
 	<script type="text/javascript" src="js/tinynav.min.js"></script>
 	<script type="text/javascript" src="js/jquery.uniform.js"></script>
 	<script type="text/javascript" src="js/scripts.js"></script>
-        <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+	
 
-      
-	<script type="text/javascript">
-    //<![CDATA[
-        
-       
-            $(document).ready(function() 
-            {
-                $(".response").hide();
-                
-                $(".responder").click(function(){
-                    
-                    $(".responder").hide();
-                    $(".response").show();
-                    $(".response").focus();
-                    
-                    $(".response").focusout(function()
-                    {
-                        $(".responder").show();
-                        $(".response").hide();
-                        $(".response").val("");
-                        
-                    });
-                });
-                
-               
-            });
-            
-         //]]>>   
-</script>
-<!-- END head -->
-   </h:head>
+</h:head>
 
 <!-- BEGIN body -->
- <h:body id="top" class="loading">
-     
+<h:body id="top" class="loading">
 
 	<!-- BEGIN #header-wrapper -->
 	<div id="header-wrapper">
@@ -124,7 +95,7 @@
 					
 					<li><a href="index-2.html">Home</a></li>
 					<li><a href="typography.html">About Us</a></li>
-					<li><a href="courses.html">Courses</a>
+					<li class="current_page_item"><a href="courses.html">Courses</a>
 						<ul>
 							<li><a href="courses-single.html">Course Name #1</a></li>
 							<li><a href="courses-single.html">Course Name #2</a></li>
@@ -140,7 +111,7 @@
 							<li><a href="courses-single.html">Course Name #6</a></li>
 						</ul>
 					</li>
-					<li class="current_page_item"><a href="blog.html">Blog</a></li>
+					<li><a href="blog.html">Blog</a></li>
 					<li><a href="typography.html">Features</a>
 						<ul>
 							<li><a href="events.html">Events</a></li>
@@ -185,18 +156,12 @@
 		<div class="page-header-inner clearfix">
 		
 		<div class="page-title">	
-			<h2>Título
-                            <c:forEach items="#{foroPosteosController.cargaUno(foroPosteosController.idPosteo)}" var="fp"> 
-                            
-                            #{fp.titulo}
-                            
-                            </c:forEach>              
-                        </h2>
+			<h2>MA Advertising and Design</h2>
 			<div class="page-title-block"></div>
 		</div>
 		
 		<div class="breadcrumbs">
-			<p><a href="index-2.html">Home</a> &#187; Blog</p>
+			<p><a href="index-2.html">Home</a> &#187; Courses</p>
 		</div>
 		
 		</div>
@@ -213,146 +178,121 @@
 			<!-- BEGIN .inner-content-wrapper -->
 			<div class="inner-content-wrapper">
 				
-				<!-- BEGIN .blog-entry -->
-				<div class="blog-entry clearfix">
-					
-					<div class="blog-info">
-                                           
-                                            
-					<div class="blog-date">
-							<h3>FotoAvatarPosteador</h3>
-						</div>	
-                                           
-						<ul class="blog-meta">
-                                                    <c:forEach items="#{foroPosteosController.cargaUno(foroPosteosController.idPosteo)}" var="bi">
-                                                    <li> <strong>Fecha </strong></li>
-                                                    <li><h:outputText value="#{bi.fecha}">
-                                                               <f:convertDateTime type="date" pattern="dd-M-yyyy HH:mm"/>
-                                                         </h:outputText></li>
-                                                    <li><strong>Iniciado por </strong></li>
-                                                    <li> #{bi.idUser.username}</li>                                       
-                                                    <li><strong>En categoria</strong></li>
-                                                    <li>#{bi.idSubcategoria.descripcion}</li>
-                                                    <li><strong>Commentarios</strong></li> 
-                                                    <li>#{masterComentarioController.cuentaComentarios()}</li>
-                                                    </c:forEach>
-						</ul>
-                                                 
-					</div>
-					
-					<div class="blog-content blog-content-single">	
-						<a href="#"><img src="images/02_demo_image.jpg" alt="" class="blog-image" /></a>
-						<c:forEach items="#{foroPosteosController.cargaUno(foroPosteosController.idPosteo)}" var="fp2"> 
-                                                <p>#{fp2.contenido}</p>
-						
-						
-						</c:forEach> 
-					</div>
+				<div class="title1 clearfix">
+					<h4>Course Code: 001</h4>
+					<div class="title-block"></div>
+				</div>
 				
-					<div class="clearboth"></div>
-					
-					<div class="news-social-links">
-						<ul class="clearfix">
-							<li class="tweet-link"><a href="#">Tweetear este contenido</a></li>
-							<li class="facebook-link"><a href="#">ompartir en Facebook</a></li>
-							
-						</ul>
-					</div>
-					
-					<div class="clearboth"></div>
-					
-					<div id="respond">
-						
-						<h3 class="block-title">Comentarios> en este posteo</h3>
-						
-                                                <c:forEach items="#{masterComentarioController.cargaComentarios(foroPosteosController.idPosteo,2)}" var="mc">
-						
-                                                    <ul class="comments">
-                                                    
-                                                    
-							<li class="comment-entry clearfix">
-
-								<!-- BEGIN .comment-left -->
-								<div class="comment-left">
-									<div class="comment-image"></div>
-								<!-- END .comment-left -->
-								</div>
-
-								<!-- BEGIN .comment-right -->
-                                                               
-                                                                    <div class="comment-right">
-                                                                            <p class="comment-info">#{mc.idUsuario.username} <span> #{mc.fechaComentario} </span></p>
-                                                                            <p class="comment-text">#{mc.comentario}</p>
-                                                                            <p class="reply"><a class="responder" id="responder" >Responder</a></p>
-
-                                                                            <c:forEach items="#{masterRespuestasController.cargaRespuesta(mc.idComentario)}" var="mrl">
-                                                                                <p class="comment-info">#{mrl.idUsuario.username} <span> #{mrl.respuesta} </span></p>
-                                                                                
-                                                                             </c:forEach>
-
-                                                                    <!-- END .comment-right -->
-                                                                    </div>
-                                                                
-                                                                <!-- ESTO ES PARA MOSTRAR LAS RESPUESTAS -->
-                                                                
-                                                                
-                                                                   
-                                                                
-								
-                                                                    <ul>
-									<li class="comment-entry clearfix">	
-                                                                             
-										<div id ="comment-rightResp" class="comment-right">
-                                                                                    <h:form  id="response" onkeypress="if (event.keyCode == 13) this.submit();" >
-                                                                                        
-                                                                                        <h:inputText  id ="algo" class="response"  value="#{masterRespuestasController.selected.respuesta}"  />
-                                                                                        <h:commandButton id="hidden" style="visibility: hidden;" action="#{masterRespuestasController.crearRespuesta(mc.idComentario,usuarioController.id_user)}" />  
-                                                                                     </h:form>
-                                                                                         
-                                                                                    <!--<p class="reply"><a href="#">Reply</a></p>  -->
-										<!-- END .comment-right -->
-                                                                                    
-                                                                                </div>
-									</li>
-                                                                    </ul>
-                                                               
-
-							</li>
-                                                   
-							
-
-						</ul> 
-                                                </c:forEach>
-
-						
-                                                <h3 class="block-title"><a>Comentando como : </a>#{usuarioController.verUsername(usuarioController.id_user)}</h3>
-						
-						<h:form id="commentform">
-
-							<div class="field-row">
-								<label for="contact_name"></label>
-							   	
-							</div>
-
-							
-
-							
-
-							<div class="field-row">
-								<label for="message_text">Comentario <span>(requerido)</span></label>
-                                                                <h:inputTextarea value="#{masterComentarioController.selected.comentario}"/>
-							</div>
-
-                                                    
-                                                    <h:commandButton class="button1" onclick="history.go(0)" action="#{masterComentarioController.CrearComentario(usuarioController.id_user,foroPosteosController.idPosteo,2)}" value ="Comentar"/>
-						</h:form>
-						
-					<!-- END #respond -->
-					</div>
-					
-				<!-- END .blog-entry -->
+				<div class="course-desc-wrapper clearfix">
+					<img src="images/06_demo_image.jpg" alt="" class="course-image" />
+					<p class="course-desc">Fusce sit amet nibh ac dui ultricies adipiscing. Nam nibh nunc, varius vitae tincidunt sed, facilisis in diam. Nullam convallis blandit tortor quis vulputate. Morbi mattis tellus eget nisl aliquam in aliquam augue ullamcorper. Proin a dolor et leo suscipit rhoncus. Nulla scelerisque scelerisque felis, in porta libero hendrerit eget. Duis elementum porttitor quam, a egestas arcu consequat in. </p>
 				</div>
 			
+				<div id="tabs">
+					
+					<ul class="nav clearfix">
+						<li><a href="#tabs-tab-title-1">Overview</a></li>
+						<li><a href="#tabs-tab-title-2">Course Structure</a></li>
+						<li><a href="#tabs-tab-title-3">Entry Requirements</a></li>
+						<li><a href="#tabs-tab-title-4">Apply</a></li>
+					</ul>
+					
+					<div id="tabs-tab-title-1">
+						
+						<div class="title1 clearfix">
+							<h4>Introduction</h4>
+							<div class="title-block"></div>
+						</div>
+						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam aliquam placerat tortor at suscipit. Nunc iaculis libero a quam consequat molestie. Cras volutpat ornare lectus, ut pulvinar neque pretium eu. Pellentesque ultricies sem in risus lobortis condimentum.</p>
+						
+						<div class="title1 clearfix">
+							<h4>Course Benefits</h4>
+							<div class="title-block"></div>
+						</div>
+						<ul class="list3">
+							<li>Nunc iaculis consectetur adipiscing elit</li>
+							<li>Lorem ipsum dolor sit amet</li>
+							<li>Nullam aliquam placerat tortor at suscipit nunc iaculis libero</li>
+						</ul>
+						
+					</div>
+					
+					<div id="tabs-tab-title-2">
+						
+						<div class="title1 clearfix">
+							<h4>Units</h4>
+							<div class="title-block"></div>
+						</div>
+						
+						<table style="width:100%;">
+							<thead>
+								<tr>
+									<th>Unit ID</th>
+									<th>Unit Name</th>
+									<th>Duration</th>
+									<th>Prerequisites</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td data-title="Column 1">001</td>
+									<td data-title="Column 1">Design Basics</td>
+									<td data-title="Column 1">3 Months</td>
+									<td data-title="Column 1">Units 005, 001 and 010</td>
+								</tr>
+								<tr>
+									<td data-title="Column 2">002</td>
+									<td data-title="Column 2">Marketing</td>
+									<td data-title="Column 2">3 Months</td>
+									<td data-title="Column 2">None</td>
+								</tr>
+								<tr>
+									<td data-title="Column 3">003</td>
+									<td data-title="Column 3">Colour Theory</td>
+									<td data-title="Column 3">1 Month</td>
+									<td data-title="Column 3">Unit 001</td>
+								</tr>
+								<tr>
+									<td data-title="Column 4">004</td>
+									<td data-title="Column 4">Business Studies</td>
+									<td data-title="Column 4">5 Months</td>
+									<td data-title="Column 4">Units 007 and 009</td>
+								</tr>
+							</tbody>
+						</table>
+						
+					</div>
+					
+					<div id="tabs-tab-title-3">
+						
+						<div class="title1 clearfix">
+							<h4>Details</h4>
+							<div class="title-block"></div>
+						</div>
+
+						<ul class="list3">
+							<li>Nunc iaculis consectetur adipiscing elit</li>
+							<li>Lorem ipsum dolor sit amet</li>
+							<li>Nullam aliquam placerat tortor at suscipit nunc iaculis libero</li>
+						</ul>
+						
+					</div>
+					
+					<div id="tabs-tab-title-4">
+						
+						<div class="title1 clearfix">
+							<h4>Getting Started</h4>
+							<div class="title-block"></div>
+						</div>
+						
+						<p>Ut bibendum ullamcorper tortor, eget aliquet odio facilisis quis. Nulla interdum aliquet scelerisque. Curabitur ante metus, laoreet eu convallis a, tristique a arcu. Donec id erat sed lectus congue tempor</p>
+						
+						<p style="display: block;margin: 20px 0 0 0;"><a href="#" class="button2">Apply Now</a></p>
+					
+					</div>
+				
+				</div>
+				
 			<!-- END .inner-content-wrapper -->
 			</div>
 			
