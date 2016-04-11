@@ -178,23 +178,29 @@
 				
 				
 					<!-- BEGIN .event-wrapper -->
+                                        
+                                        <c:forEach items="#{cursoController.listaCursos()}" var="lc" >
 					<li class="event-wrapper event-full clearfix">
 					
 						<div class="event-date">
-							<div class="event-m">Feb</div>
-							<div class="event-d">08</div>	
+							<div class="event-m">FECHA</div>
+							<div class="event-d">FE</div>	
 						</div>
 				
 						<div class="event-info">	
 							<div class="event-meta">
-								<h4><a href="events-single.html">Dasellus ac nibh urna donec ac urna &raquo;</a></h4>
-								<p><strong>Time:</strong> 7pm</p>
-								<p><strong>Location:</strong> London, UK</p>
-							</div>
+								
+                                                            <h:form id="cursoForm">
+                                                                <h4> <h:commandLink action="#{cursoController.cargarCurso(lc.idCurso)}" value="#{lc.nomCurso}" /> &raquo; </h4>
+                                                                <p><strong>Seguidores: </strong>#{lc.seguidores}</p>
+                                                                <p><strong>SubCategoria:</strong>#{lc.idCat.nomSubcat}</p>
+                                                            </h:form>
+                                                        </div>
 						</div>
 				
 					<!-- END .event-wrapper -->
 					</li>
+                                        </c:forEach>
 				
 				</ul>
 			

@@ -9,6 +9,8 @@ import ENTITIES.Curso;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.util.*;
+import javax.persistence.Query;
 
 /**
  *
@@ -28,5 +30,14 @@ public class CursoFacade extends AbstractFacade<Curso> {
     public CursoFacade() {
         super(Curso.class);
     }
+    public List<Curso> verC(int idCurso)
+    {
+        EntityManager m2 = getEntityManager();
+        Query q=m2.createNamedQuery("Curso.buscarIdCurso").setParameter("idCurso", idCurso);
+        
+        return q.getResultList();
+    }
+    
+    
     
 }

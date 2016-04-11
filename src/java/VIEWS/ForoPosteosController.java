@@ -200,7 +200,7 @@ public class ForoPosteosController implements Serializable {
         recreateModel();
         return "List";
     }
-        public List<ForoPosteos> cargaUno(int id)
+     public List<ForoPosteos> cargaUno(int id)
     {
         carga.clear();
         carga = ejbFacade.verP(id);

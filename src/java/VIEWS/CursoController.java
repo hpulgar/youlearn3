@@ -248,15 +248,19 @@ public class CursoController implements Serializable {
             return arCurso;
         }
         
-        public Curso verCurso(int idCurso)
+        public List<Curso> verCurso(int idCurso)
         {
-            Curso objC;
-            objC = ejbFacade.find(idCurso);
-            
-            
-            return objC;
+            arCurso.clear();
+            arCurso = ejbFacade.verC(idCurso);
+            return arCurso;
         }
         
+        public String cargarCurso(int idc)
+        {
+            
+            setIdCurso(idc);
+            return "/curso.xhtml";
+        }
         
         public String CrearCurso(int id_scat_curso,int id_usuario)
         {
@@ -274,6 +278,8 @@ public class CursoController implements Serializable {
         // 10 INTRODUCCION selected X
         // 11 IMAGEN selected
                 
+        
+        ///////AGREGAR FECHA
                 
                 CursoSubCat csc = new CursoSubCat();
                 csc.setIdSubcat(id_scat_curso);
@@ -296,7 +302,7 @@ public class CursoController implements Serializable {
                 getFacade().create(current);
                 current = null;
 
-                return "/foro.xhtml";
+                return "/cursos_listado.xhtml";////////momentaneo
 
                 }catch(Exception e)
                 {

@@ -2,7 +2,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
  <h:head>
 
 
@@ -178,35 +179,58 @@
 				<ul class="event-list">
 				
 					<!-- BEGIN .event-wrapper -->
+                                         <h:form id="curso">
+                                        <c:forEach items="#{cursoController.verCurso(cursoController.idCurso)}" var="cs" >
 					<li class="event-wrapper event-full event-single clearfix">
-					
-						<div class="event-date">
-							<div class="event-m">Feb</div>
-							<div class="event-d">08</div>	
-						</div>
-				
-						<div class="event-info">
-							
-							<div class="event-meta">
-								<p><strong>Time:</strong> 7pm</p>
-								<p><strong>Location:</strong> London, UK</p>
-							</div>
-							
-							<img src="images/03_demo_image.jpg" alt="" class="event-image" />
-							
-							<div style="height: 30px;"></div>
-							
-							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec nunc mi, ultricies eget aliquet interdum, dapibus in arcu. Praesent facilisis congue nulla vitae semper. Aenean vel euismod nibh. Morbi euismod, elit ut ornare varius, ipsum nisi tristique nisi, at volutpat odio leo sit amet justo. Nulla facilisi. Donec sed elit neque. Curabitur a nisi nunc. Cras fermentum auctor vulputate.</p>
+                                                   
+                                                         <div class="event-date">
+                                                            <div class="course-desc-wrapper clearfix">
+                                                                <img src="#{cs.idUsuario.imagen_foto_perfil}" alt="" class="course-image" style='height: 100%; width: 100%;' />
+                                                            </div> 
+                                                            <div class="event-m">Feb</div>
+                                                            <div class="event-d">08</div>	
+                                                            <div class="event-m">2016</div>
+                                                        </div>
+                                                     
+                                                    <div class="event-info">
+                                                        
+                                                            
+                                                            <div class="event-meta">
+                                                                    <p><strong>Nombre: </strong>#{cs.nomCurso}</p>
+                                                                    <p><strong>Categoria: </strong>#{cs.idCat.idCategoria.nomCat}</p>
+                                                                    <p><strong>Subcategoria: </strong>#{cs.idCat.nomSubcat}</p>
+                                                                    <p><strong>Autor: </strong>#{cs.idUsuario.username}</p>
+                                                            </div>
 
-                                                        <p>Ut malesuada libero ut nisl auctor scelerisque. Suspendisse mauris augue, scelerisque a cursus et, fringilla in ante. Aenean at quam nec purus tincidunt ultricies. Cras blandit, turpis vitae venenatis facilisis, nunc nisi condimentum odio, id sodales ligula lectus vel sem. Aenean eget arcu ipsum, nec consequat erat. Nullam pellentesque venenatis commodo. Cras dignissim hendrerit purus, sit amet tempus nisi viverra sollicitudin. Ut auctor orci lectus, non semper tortor. Pellentesque aliquam pellentesque purus, id consectetur ligula auctor in.</p>
+                                                            <img src="#{cs.imagen_portada_curso}"  class="event-image" />
 
-							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque id nisl eu sem malesuada viverra. Aenean facilisis erat id risus condimentum ut imperdiet diam ultricies. Nulla lacus libero, euismod id vehicula sed, ultricies feugiat lorem. Nam sit amet justo metus. Maecenas commodo augue nec velit blandit ultrices. Nullam at erat non lorem porta feugiat nec id lorem. Suspendisse potenti. Mauris cursus sagittis nisl ut consequat. Donec lobortis sodales augue, ut bibendum felis faucibus vitae. Donec vel odio massa.</p>
-							
-						</div>
+                                                            <div style="height: 30px;"></div>
+                                                            
+                                                            
+                                                            <div class="event-meta">
+                                                                <p><strong>Personas Inscritas: </strong>#{cs.personasInscritas}</p>
+                                                                <p><strong>Seguidores: </strong>#{cs.seguidores}</p>
+                                                                <p><strong>Autor: </strong>#{cs.idUsuario.username}</p>
+                                                            </div>
+                                                                <br/>
+                                                                <br/>
+                                                            
+                                                            <p><strong>Introduccion</strong></p>
+                                                            <p>#{cs.introduccion_curso}</p>
+                                                            <br/>
+                                                            <p><strong>Descripcion</strong></p>
+                                                            <p>#{cs.descripcionCurso}</p>
+                                                            <br/>
+                                                            <p><strong>Contenido</strong></p>
+                                                            <p>#{cs.contenidos}</p>
+
+                                                    </div>
+                                             
 				
 					<!-- END .event-wrapper -->
 					</li>
-				
+                                                </c:forEach>
+                                            </h:form>
 				</ul>
 			
 			<!-- END .inner-content-wrapper -->
