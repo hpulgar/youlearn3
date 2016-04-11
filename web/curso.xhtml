@@ -187,9 +187,11 @@
                                                             <div class="course-desc-wrapper clearfix">
                                                                 <img src="#{cs.idUsuario.imagen_foto_perfil}" alt="" class="course-image" style='height: 100%; width: 100%;' />
                                                             </div> 
-                                                            <div class="event-m">Feb</div>
-                                                            <div class="event-d">08</div>	
-                                                            <div class="event-m">2016</div>
+                                                             <div class="event-m">#{cs.fecha.toGMTString().substring(2,6)}</div>
+                                                             <div class="event-d">#{cs.fecha.day}</div>	
+                                                             <div class="event-m">#{cs.fecha.year}</div>
+                                                             
+                                                            
                                                         </div>
                                                      
                                                     <div class="event-info">

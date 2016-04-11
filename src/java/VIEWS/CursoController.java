@@ -259,8 +259,15 @@ public class CursoController implements Serializable {
         {
             
             setIdCurso(idc);
+            return "/detalles_curso.xhtml";
+        }
+        
+        public String cursoCont()
+        {
             return "/curso.xhtml";
         }
+        
+        
         
         public String CrearCurso(int id_scat_curso,int id_usuario)
         {

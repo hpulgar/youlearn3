@@ -1632,6 +1632,7 @@ div.selector.disabled span, div.selector.disabled.active span {
 .comment-image {
 	width: 60px;
 	height: 60px;
+        object-fit: cover;
 	background: #f2f2f2;
 	border-radius: 30px;
 }

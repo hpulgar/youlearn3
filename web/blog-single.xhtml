@@ -255,7 +255,7 @@
                                             <c:forEach items="#{foroPosteosController.cargaUno(foroPosteosController.idPosteo)}" var="bi">
                                                 <div>
                                             
-                                                <h3><img src="#{bi.idUser.imagen_foto_perfil}" class="blog-date" /></h3>
+                                                    <h3><img src="#{bi.idUser.imagen_foto_perfil}" class="blog-date"  style=" object-fit: cover;"/></h3>
 						
                                                 </div>	
                                            
@@ -326,7 +326,9 @@
 
                                                                             <c:forEach items="#{masterRespuestasController.cargaRespuesta(mc.idComentario)}" var="mrl">
                                                                                 <div style="word-wrap: break-word; width: 400px">
-                                                                                <p class="comment-info clearfix">#{mrl.idUsuario.username} <span> #{mrl.respuesta} </span></p>
+                                                                                    
+                                                                                    <p class="comment-info clearfix"> <img src="#{mc.idUsuario.imagen_foto_perfil}" class="course-image" style='height: 30px; width: 30px; object-fit: cover;'></img> 
+                                                                                        #{mrl.idUsuario.username} <span> #{mrl.respuesta} </span></p>
                                                                                 </div>
                                                                                 
                                                                             </c:forEach>

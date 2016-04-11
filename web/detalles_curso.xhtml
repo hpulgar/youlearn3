@@ -156,7 +156,7 @@
 		<div class="page-header-inner clearfix">
 		
 		<div class="page-title">	
-			<h2>MA Advertising and Design</h2>
+			<h2>Detalle del Curso</h2>
 			<div class="page-title-block"></div>
 		</div>
 		
@@ -177,15 +177,19 @@
 			
 			<!-- BEGIN .inner-content-wrapper -->
 			<div class="inner-content-wrapper">
+                            
+                            
+                            
+                            <c:forEach items="#{cursoController.verCurso(cursoController.idCurso)}" var="vc" >
 				
 				<div class="title1 clearfix">
-					<h4>Course Code: 001</h4>
+                                    <h4>#{vc.nomCurso}</h4>
 					<div class="title-block"></div>
 				</div>
 				
 				<div class="course-desc-wrapper clearfix">
-					<img src="images/06_demo_image.jpg" alt="" class="course-image" />
-					<p class="course-desc">Fusce sit amet nibh ac dui ultricies adipiscing. Nam nibh nunc, varius vitae tincidunt sed, facilisis in diam. Nullam convallis blandit tortor quis vulputate. Morbi mattis tellus eget nisl aliquam in aliquam augue ullamcorper. Proin a dolor et leo suscipit rhoncus. Nulla scelerisque scelerisque felis, in porta libero hendrerit eget. Duis elementum porttitor quam, a egestas arcu consequat in. </p>
+                                    <img src="#{vc.imagen_portada_curso}" alt="" class="course-image" />
+                                        <p class="course-desc">#{vc.descripcionCurso}</p>
 				</div>
 			
 				<div id="tabs">
@@ -203,16 +207,17 @@
 							<h4>Introduction</h4>
 							<div class="title-block"></div>
 						</div>
-						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam aliquam placerat tortor at suscipit. Nunc iaculis libero a quam consequat molestie. Cras volutpat ornare lectus, ut pulvinar neque pretium eu. Pellentesque ultricies sem in risus lobortis condimentum.</p>
+                                            <p>#{vc.introduccion_curso}</p>
 						
 						<div class="title1 clearfix">
-							<h4>Course Benefits</h4>
+							<h4>Detalles Usuario</h4>
 							<div class="title-block"></div>
 						</div>
+                                            <img src="#{vc.idUsuario.imagen_foto_perfil}" style='height: 10%; width: 10%;'></img>
 						<ul class="list3">
-							<li>Nunc iaculis consectetur adipiscing elit</li>
-							<li>Lorem ipsum dolor sit amet</li>
-							<li>Nullam aliquam placerat tortor at suscipit nunc iaculis libero</li>
+                                                    
+                                                    <li><strong>Autor: </strong>#{vc.idUsuario.username}</li>
+							<li> I CAN FAP TO THIS</li>
 						</ul>
 						
 					</div>
@@ -271,9 +276,9 @@
 						</div>
 
 						<ul class="list3">
-							<li>Nunc iaculis consectetur adipiscing elit</li>
-							<li>Lorem ipsum dolor sit amet</li>
-							<li>Nullam aliquam placerat tortor at suscipit nunc iaculis libero</li>
+							<li>Copyright</li>
+							<li>> 18 años</li>
+							<li>y que se sho</li>
 						</ul>
 						
 					</div>
@@ -285,14 +290,18 @@
 							<div class="title-block"></div>
 						</div>
 						
-						<p>Ut bibendum ullamcorper tortor, eget aliquet odio facilisis quis. Nulla interdum aliquet scelerisque. Curabitur ante metus, laoreet eu convallis a, tristique a arcu. Donec id erat sed lectus congue tempor</p>
+						<p>Definicion de suscrito y seguidor.</p>
+                                                <h:form>
+                                                <h:commandButton style="display: block;margin: 20px 0 0 0;" action="#{cursoController.cursoCont()}" value="Follow" class="button2" /> <br/><br/><br/><br/>
+						<h:commandButton style="display: block;margin: 20px 0 0 0;" action="#{cursoController.cursoCont()}" value="Subscribe" class="button2" />
+                                                </h:form>
 						
-						<p style="display: block;margin: 20px 0 0 0;"><a href="#" class="button2">Apply Now</a></p>
+                                              <!--  <p style="display: block;margin: 20px 0 0 0;"><a href="#" class="button2">Subscribe</a></p>-->
 					
 					</div>
 				
 				</div>
-				
+				</c:forEach>
 			<!-- END .inner-content-wrapper -->
 			</div>
 			

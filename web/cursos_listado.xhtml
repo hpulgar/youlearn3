@@ -183,9 +183,11 @@
 					<li class="event-wrapper event-full clearfix">
 					
 						<div class="event-date">
-							<div class="event-m">FECHA</div>
-							<div class="event-d">FE</div>	
-						</div>
+                                                    <div class="event-m">#{lc.fecha.toGMTString().substring(2,6)}</div>
+                                                    <div class="event-d">#{lc.fecha.toGMTString().subSequence(0,2)}</div>	
+                                                    <div class="event-m">#{lc.fecha.toGMTString().subSequence(6,11)}</div>
+						
+                                                </div>
 				
 						<div class="event-info">	
 							<div class="event-meta">
@@ -193,7 +195,9 @@
                                                             <h:form id="cursoForm">
                                                                 <h4> <h:commandLink action="#{cursoController.cargarCurso(lc.idCurso)}" value="#{lc.nomCurso}" /> &raquo; </h4>
                                                                 <p><strong>Seguidores: </strong>#{lc.seguidores}</p>
-                                                                <p><strong>SubCategoria:</strong>#{lc.idCat.nomSubcat}</p>
+                                                                <p><strong>Suscripciones: </strong>#{lc.personasInscritas}</p>
+                                                                <p><strong>Categoria: </strong>#{lc.idCat.idCategoria.nomCat}</p>
+                                                                <p><strong>SubCategoria: </strong>#{lc.idCat.nomSubcat}</p>
                                                             </h:form>
                                                         </div>
 						</div>
