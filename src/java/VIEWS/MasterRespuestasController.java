@@ -210,7 +210,7 @@ public class MasterRespuestasController implements Serializable {
         return ejbFacade.find(id);
     }
     
-    public String crearRespuesta(int id_comentario,int id_usuario){
+    public void crearRespuesta(int id_comentario,int id_usuario){
     
         //if(!current.getRespuesta().isEmpty())
         //{
@@ -252,12 +252,12 @@ public class MasterRespuestasController implements Serializable {
                     System.out.println("la respuesta "+current.getRespuesta());
                     current = null;
                 }
-                return "/blog-single.xhtml";
+                //return "/blog-single.xhtml";
 
             }catch(Exception e){
 
                 System.out.println("Si tira error es este -----------------> "+e);
-                return "/blog-single.xhtml";
+               // return "/blog-single.xhtml";
             }
            
         //}

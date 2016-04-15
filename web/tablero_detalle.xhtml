@@ -252,10 +252,10 @@
 					
 					<div>
                                            
-                                            <c:forEach items="#{foroPosteosController.cargaUno(foroPosteosController.idPosteo)}" var="bi">
+                                            <c:forEach items="#{tableroController.unTablero(tableroController.idTablero)}" var="bi">
                                                 <div>
-                                            
-                                                    <h3><img src="#{bi.idUser.imagen_foto_perfil}" class="blog-date"  style=" object-fit: cover;"/></h3>
+                                                    (por mientras)
+                                                    <h3><img src="#{bi.idUsuario.imagen_foto_perfil}" class="blog-date"  style='height: 200px; width:200px; object-fit: cover;' /></h3> <br/>
 						
                                                 </div>	
                                            
@@ -266,9 +266,11 @@
                                                                <f:convertDateTime type="date" pattern="dd-M-yyyy HH:mm"/>
                                                          </h:outputText></li>
                                                     <li><strong>Iniciado por </strong></li>
-                                                    <li> #{bi.idUser.username}</li>    
-                                                    <li><strong>En categoria</strong></li>
-                                                    <li>#{bi.idSubcategoria.descripcion}</li>
+                                                    <li> #{bi.idUsuario.username}</li>    
+                                                    <li><strong>Titulo</strong></li>
+                                                    <li>#{bi.titulo}</li>
+                                                    <li><strong>Curso</strong></li>
+                                                    <li>#{bi.idCurso.nomCurso}</li>
                                                     <li><strong>Commentarios</strong></li> 
                                                     <li>#{masterComentarioController.cuentaComentarios()}</li>
                                                     
@@ -277,10 +279,10 @@
 					</div>
 					
 					<div class="blog-content blog-content-single">	
-                                            <c:forEach items="#{foroPosteosController.cargaUno(foroPosteosController.idPosteo)}" var="fp2"> 
-                                                <img src="#{fp2.imagen_foro_posteos}" alt="" class="blog-image" />
+                                            <c:forEach items="#{tableroController.unTablero(tableroController.idTablero)}" var="fp2"> 
+                                               
 						
-                                                <p>#{fp2.contenido}</p>
+                                                <p>#{fp2.descripcion}</p>
 						
 						
 						</c:forEach> 
@@ -302,7 +304,7 @@
 						
 						<h3 class="block-title">Comentarios> en este posteo</h3>
 						
-                                                <c:forEach items="#{masterComentarioController.cargaComentarios(foroPosteosController.idPosteo,2)}" var="mc">
+                                                <c:forEach items="#{masterComentarioController.cargaComentarios(tableroController.idTablero,3)}" var="mc">
 						
                                                     <ul class="comments">
                                                     
@@ -379,7 +381,7 @@
 							</div>
 
                                                     
-                                                    <h:commandButton class="button1" onclick="history.go(0)" action="#{masterComentarioController.CrearComentario(usuarioController.id_user,foroPosteosController.idPosteo,2)}" value ="Comentar"/>
+                                                    <h:commandButton class="button1" onclick="history.go(0)" action="#{masterComentarioController.CrearComentario(usuarioController.id_user,tableroController.idTablero,3)}" value ="Comentar"/>
 						</h:form>
 						
 					<!-- END #respond -->

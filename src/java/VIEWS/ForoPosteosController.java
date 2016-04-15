@@ -240,6 +240,7 @@ public class ForoPosteosController implements Serializable {
         fsc.setIdSubcategoria(id_subcategoria);
         Usuario ou = new Usuario();
         ou.setIdUsuario(id_usuario);
+        
         DateFormat dateFormat = new SimpleDateFormat("yyyy/mm/dd HH:mm:ss");
         Date date = new Date();
         String fecha = dateFormat.format(date);

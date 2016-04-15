@@ -34,7 +34,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Tablero.findAll", query = "SELECT t FROM Tablero t"),
-    @NamedQuery(name = "Tablero.findByIdTablero", query = "SELECT t FROM Tablero t WHERE t.idTablero = :idTablero")})
+    @NamedQuery(name = "Tablero.verTablero", query = "SELECT t FROM Tablero t WHERE t.idTablero = :idTablero")})
 public class Tablero implements Serializable {
 
     private static final long serialVersionUID = 1L;

@@ -182,20 +182,20 @@
                         
                             <div class="field-row">
 				  <label for="titulo">Titulo</label>
-                                  <h:inputText value="#{cursoController.selected.nomCurso}" class="text_input" id="nombre" size="10" />
+                                  <h:inputText value="#{tableroController.selected.titulo}" class="text_input" id="Titulo" size="10" />
 				</div>
                             
                             <div class="field-row">
 				  <label for="introduccion">Mensaje</label>
 			
-                                  <h:inputTextarea value="#{cursoController.selected.introduccion_curso}" id="Introduccion_Curso" ></h:inputTextarea>
+                                  <h:inputTextarea value="#{tableroController.selected.descripcion}" id="Mensaje" ></h:inputTextarea>
 				</div>
                            
                             
                              <div class="field-row">
 
 				<p>
-                                    <h:commandButton action="#{cursoController.CrearCurso(cursoSubCatController.id_cSub_cat,usuarioController.id_user)}" class="button1" type="submit"  style="float:right" value="Crear tema en tablero" id="submit"/>
+                                    <h:commandButton action="#{tableroController.crearTablero(cursoController.idCurso,usuarioController.id_user)}" class="button1" type="submit"  style="float:right" value="Crear tema en tablero" id="submit"/>
                                 </p>
                             </div>
                                

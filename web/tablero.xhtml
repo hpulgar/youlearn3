@@ -166,7 +166,7 @@
 			<!-- BEGIN .inner-content-wrapper -->
 			<div class="inner-content-wrapper">
 			 <h:form>
-                                    <h:commandButton action="foro_crear.xhtml" value="Crear un tema" style="float: right"/>
+                                    <h:commandButton action="tablero_crear.xhtml" value="Crear un tema" style="float: right"/>
                                 </h:form>	
                             <h3 class="block-title">Nombre Curso</h3>
                             
@@ -182,7 +182,7 @@
 						</tr>
 					</thead>
 					<tbody>
-                                            <c:forEach items="#{foroPosteosController.cargaTodos()}" var="f" rendered="false">
+                                            <c:forEach items="#{tableroController.verTableros(cursoController.idCurso)}" var="f" rendered="false">
                                 
                                                 <h:form>
 						<tr>
@@ -193,13 +193,13 @@
                                                     <td data-title="fecha">#{f.fecha}</td>
                                                     
                                                     
-                                                    <td data-title="" > <h:commandLink action="#{foroPosteosController.verPost(f.idPost)}" value="#{f.titulo}"/></td>                                       
+                                                    <td data-title="" > <h:commandLink action="#{tableroController.verDetalle(f.idTablero)}" value="#{f.titulo}"/></td>                                       
                                                     
                                                     
-                                                    <td data-title="iniciado_por">#{f.idUser.username}</td>
-                                                    <td data-title="Mensajes">#{masterComentarioController.cuentaMensajes(f.idPost)}</td>
+                                                    <td data-title="iniciado_por">#{f.idUsuario.username}</td>
+                                                    <td data-title="Mensajes">#{masterComentarioController.cuentaMensajes(f.idTablero)}</td>
                                                     
-                                                        <td data-title="Visitas">#{foroPosteosController.setIdPosteo(f.idPost)} #{f.idPost}</td>
+                                                    <td data-title="Visitas">#{f.idTablero}</td>
                                                         
 						</tr>
                                                     </h:form>

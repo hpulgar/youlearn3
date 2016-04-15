@@ -211,7 +211,7 @@
                                                             
                                                             <div class="event-meta">
                                                                  <h:form>
-                                    <h:commandButton action="tablero.xhtml" value="Ir al tablero del cuso" style="float: right"/>
+                                                                     <h:commandButton action="#{cursoController.irTablero(cs.idCurso)}" value="Ir al tablero del cuso" style="float: right"/>
                                 </h:form>	
                                                                 <p><strong>Personas Inscritas: </strong>#{cs.personasInscritas}</p>
                                                                 <p><strong>Seguidores: </strong>#{cs.seguidores}</p>

@@ -126,6 +126,10 @@ table tr a {
 	background: #209b60;
 }
 
+.event-name {
+	background: white;
+        align-content: center;
+}
 /* -----------------------------------------------------------
 	Event title link colour
 ----------------------------------------------------------- */

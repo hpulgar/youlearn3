@@ -267,7 +267,11 @@ public class CursoController implements Serializable {
             return "/curso.xhtml";
         }
         
-        
+        public String irTablero(int idCurso)
+        {
+            this.setIdCurso(idCurso);
+            return "/tablero.xhtml";
+        }
         
         public String CrearCurso(int id_scat_curso,int id_usuario)
         {

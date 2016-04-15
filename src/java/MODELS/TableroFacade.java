@@ -6,9 +6,11 @@
 package MODELS;
 
 import ENTITIES.Tablero;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -27,6 +29,14 @@ public class TableroFacade extends AbstractFacade<Tablero> {
 
     public TableroFacade() {
         super(Tablero.class);
+    }
+    
+    public List<Tablero> verT(int idTab)
+    {
+        EntityManager t2= getEntityManager();
+        Query q = t2.createNamedQuery("Tablero.verTablero").setParameter("idTablero", idTab);   
+        
+       return q.getResultList(); 
     }
     
 }

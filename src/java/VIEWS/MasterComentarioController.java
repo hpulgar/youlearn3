@@ -224,7 +224,7 @@ public class MasterComentarioController implements Serializable {
     
     //CODIGO RECONCHESUMARE
     
-    public String CrearComentario(int idComentador,int idPublicacion,int pft){
+    public void CrearComentario(int idComentador,int idPublicacion,int pft){
     try
     {
         
@@ -255,13 +255,13 @@ public class MasterComentarioController implements Serializable {
         getFacade().create(current);
         current = null;
         
-        return "/blog-single.xhtml";
+       // return "/blog-single.xhtml";
         
     }catch(Exception e){
         
         System.out.println("Si tira error es este --> "+e);
-        return "/blog-single.xhtml";}
-    
+        //return "/blog-single.xhtml";}
+    }    
     }
     
     public List<MasterComentario> cargaComentarios(int idPublicacion,int idPtf)

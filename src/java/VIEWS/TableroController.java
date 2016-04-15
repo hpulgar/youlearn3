@@ -8,6 +8,8 @@ import VIEWS.util.PaginationHelper;
 import MODELS.TableroFacade;
 
 import java.io.Serializable;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ResourceBundle;
 import javax.ejb.EJB;
 import javax.inject.Named;
@@ -32,6 +34,8 @@ public class TableroController implements Serializable {
     private PaginationHelper pagination;
     private int selectedItemIndex;
     private List<Tablero> arTablero = new ArrayList();
+    private List<Tablero> arTablero2= new ArrayList();
+    private int idTablero;
     
     
     
@@ -42,8 +46,24 @@ public class TableroController implements Serializable {
         return arTablero;
     }
 
+    public List<Tablero> getArTablero2() {
+        return arTablero2;
+    }
+
+    public void setArTablero2(List<Tablero> arTablero2) {
+        this.arTablero2 = arTablero2;
+    }
+
     public void setArTablero(List<Tablero> arTablero) {
         this.arTablero = arTablero;
+    }
+
+    public int getIdTablero() {
+        return idTablero;
+    }
+
+    public void setIdTablero(int idTablero) {
+        this.idTablero = idTablero;
     }
 
     
@@ -215,26 +235,46 @@ public class TableroController implements Serializable {
     //    String titulo
     //    String escripcion        
     
-    public List<Tablero> verTableros()
+    public List<Tablero> verTableros(int idCurso)
     {
         arTablero.clear();
-        arTablero = ejbFacade.findAll();
+        arTablero2.clear();
+        arTablero = ejbFacade.findAll();        
+        
+        for(int i=0;i<arTablero.size();i++)
+        {
+            if(arTablero.get(i).getIdCurso().getIdCurso() == idCurso)
+            {
+                arTablero2.add(arTablero.get(i));
+            }
+        }        
+        return arTablero2;
+    }
+    
+    public String verDetalle(int idTablero)
+    {
+        this.setIdTablero(idTablero);
+        return "/tablero_detalle.xhtml";
+    }
+    
+//    public String verCrearTab()
+//    {
+//        String
+//    }
+    
+    
+    public List<Tablero> unTablero(int id_tablero)
+    {
+        
+        arTablero.clear();
+        arTablero = ejbFacade.verT(id_tablero);
         
         return arTablero;
-    }
-    
-    public Tablero unTablero(int id_tablero)
-    {
-        Tablero objT;
-        
-        objT = ejbFacade.find(id_tablero);
-        
-        return objT;
         
     }
     
     
-     public String crearForo(int id_curso,int id_usuario)
+     public String crearTablero(int id_curso,int id_usuario)
     {
         
         
@@ -244,6 +284,7 @@ public class TableroController implements Serializable {
         //    int id_curso  parametro 
         //    String titulo selected
         //    String escripcion selected
+        //    DATETIME fecha
         
         
         
@@ -253,20 +294,23 @@ public class TableroController implements Serializable {
         Curso oc = new Curso();
         oc.setIdCurso(id_curso);
  
-        
+        DateFormat dateFormat = new SimpleDateFormat("yyyy/mm/dd HH:mm:ss");
+        Date date = new Date();
+        String fecha = dateFormat.format(date);
     
         current.setIdUsuario(ou);
         current.setIdCurso(oc);
+        current.setFecha(dateFormat.parse(fecha));
         
         getFacade().create(current);
         current = null;
         
-        return "/Por Definir";
+        return "/tablero.xhtml";
         
         }catch(Exception e)
         {
-            System.out.println("EL ERRORR"+ e);
-            return "/Por Definir";
+            System.out.println("EL ERRORR "+ e);
+            return "/tablero_crear.xhtml";
         }
             
     }
