@@ -6,6 +6,7 @@
 package ENTITIES;
 
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -18,6 +19,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -52,6 +55,11 @@ public class Tablero implements Serializable {
     @Size(min = 1, max = 65535)
     @Column(name = "descripcion")
     private String descripcion;
+     @Basic(optional = false)
+    @NotNull
+    @Column(name = "fecha")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date fecha;
     @JoinColumn(name = "id_curso", referencedColumnName = "id_curso")
     @ManyToOne(optional = false)
     private Curso idCurso;
@@ -66,10 +74,11 @@ public class Tablero implements Serializable {
         this.idTablero = idTablero;
     }
 
-    public Tablero(Integer idTablero, String titulo, String descripcion) {
+    public Tablero(Integer idTablero, String titulo, String descripcion,Date fecha) {
         this.idTablero = idTablero;
         this.titulo = titulo;
         this.descripcion = descripcion;
+        this.fecha = fecha;
     }
 
     public Integer getIdTablero() {
@@ -110,6 +119,14 @@ public class Tablero implements Serializable {
 
     public void setIdUsuario(Usuario idUsuario) {
         this.idUsuario = idUsuario;
+    }
+    
+     public Date getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(Date fecha) {
+        this.fecha = fecha;
     }
 
     @Override
