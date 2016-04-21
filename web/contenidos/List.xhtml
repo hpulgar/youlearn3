@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListContenidosTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:form styleClass="jsfcrud_list_form">
+                <h:panelGroup id="messagePanel" layout="block">
+                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                </h:panelGroup>
+                <h:outputText escape="false" value="#{bundle.ListContenidosEmpty}" rendered="#{contenidosController.items.rowCount == 0}"/>
+                <h:panelGroup rendered="#{contenidosController.items.rowCount > 0}">
+                    <h:outputText value="#{contenidosController.pagination.pageFirstItem + 1}..#{contenidosController.pagination.pageLastItem + 1}/#{contenidosController.pagination.itemsCount}"/>&nbsp;
+                    <h:commandLink action="#{contenidosController.previous}" value="#{bundle.Previous} #{contenidosController.pagination.pageSize}" rendered="#{contenidosController.pagination.hasPreviousPage}"/>&nbsp;
+                    <h:commandLink action="#{contenidosController.next}" value="#{bundle.Next} #{contenidosController.pagination.pageSize}" rendered="#{contenidosController.pagination.hasNextPage}"/>&nbsp;
+                    <h:dataTable value="#{contenidosController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListContenidosTitle_idContenido}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idContenido}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListContenidosTitle_unidad}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.unidad}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListContenidosTitle_nombreUnidad}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.nombreUnidad}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListContenidosTitle_fecha}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.fecha}">
+                                <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                            </h:outputText>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListContenidosTitle_contenido}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.contenido}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="&nbsp;"/>
+                            </f:facet>
+                            <h:commandLink action="#{contenidosController.prepareView}" value="#{bundle.ListContenidosViewLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{contenidosController.prepareEdit}" value="#{bundle.ListContenidosEditLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{contenidosController.destroy}" value="#{bundle.ListContenidosDestroyLink}"/>
+                        </h:column>
+                    </h:dataTable>
+                </h:panelGroup>
+                <br />
+                <h:commandLink action="#{contenidosController.prepareCreate}" value="#{bundle.ListContenidosCreateLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ListContenidosIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

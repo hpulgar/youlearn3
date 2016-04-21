@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.EditContenidosTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.EditContenidosLabel_idContenido}" for="idContenido" />
+                    <h:inputText id="idContenido" value="#{contenidosController.selected.idContenido}" title="#{bundle.EditContenidosTitle_idContenido}" required="true" requiredMessage="#{bundle.EditContenidosRequiredMessage_idContenido}"/>
+                    <h:outputLabel value="#{bundle.EditContenidosLabel_unidad}" for="unidad" />
+                    <h:inputText id="unidad" value="#{contenidosController.selected.unidad}" title="#{bundle.EditContenidosTitle_unidad}" required="true" requiredMessage="#{bundle.EditContenidosRequiredMessage_unidad}"/>
+                    <h:outputLabel value="#{bundle.EditContenidosLabel_nombreUnidad}" for="nombreUnidad" />
+                    <h:inputText id="nombreUnidad" value="#{contenidosController.selected.nombreUnidad}" title="#{bundle.EditContenidosTitle_nombreUnidad}" required="true" requiredMessage="#{bundle.EditContenidosRequiredMessage_nombreUnidad}"/>
+                    <h:outputLabel value="#{bundle.EditContenidosLabel_fecha}" for="fecha" />
+                    <h:inputText id="fecha" value="#{contenidosController.selected.fecha}" title="#{bundle.EditContenidosTitle_fecha}" required="true" requiredMessage="#{bundle.EditContenidosRequiredMessage_fecha}">
+                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.EditContenidosLabel_contenido}" for="contenido" />
+                    <h:inputTextarea rows="4" cols="30" id="contenido" value="#{contenidosController.selected.contenido}" title="#{bundle.EditContenidosTitle_contenido}" required="true" requiredMessage="#{bundle.EditContenidosRequiredMessage_contenido}"/>
+                </h:panelGrid>
+                <h:commandLink action="#{contenidosController.update}" value="#{bundle.EditContenidosSaveLink}"/>
+                <br />
+                <br />
+                <h:link outcome="View" value="#{bundle.EditContenidosViewLink}"/>
+                <br />
+                <h:commandLink action="#{contenidosController.prepareList}" value="#{bundle.EditContenidosShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.EditContenidosIndexLink}" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

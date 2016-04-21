@@ -69,9 +69,9 @@ public class Archivo implements Serializable {
     private boolean autorizado;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idArchivo")
     private List<LogSubidas> logSubidasList;
-    @JoinColumn(name = "id_curso", referencedColumnName = "id_curso")
+    @JoinColumn(name = "id_contenido", referencedColumnName = "id_contenido")
     @ManyToOne(optional = false)
-    private Curso idCurso;
+    private Contenidos idContenido;
     @JoinColumn(name = "id_tipo_archivo", referencedColumnName = "id_tipo")
     @ManyToOne(optional = false)
     private TipoArchivo idTipoArchivo;
@@ -140,12 +140,12 @@ public class Archivo implements Serializable {
         this.logSubidasList = logSubidasList;
     }
 
-    public Curso getIdCurso() {
-        return idCurso;
+    public Contenidos getIdContenido() {
+        return idContenido;
     }
 
-    public void setIdCurso(Curso idCurso) {
-        this.idCurso = idCurso;
+    public void setIdContenido(Contenidos idContenido) {
+        this.idContenido = idContenido;
     }
 
     public TipoArchivo getIdTipoArchivo() {

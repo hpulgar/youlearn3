@@ -42,7 +42,10 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Curso.findByNomCurso", query = "SELECT c FROM Curso c WHERE c.nomCurso = :nomCurso"),
     @NamedQuery(name = "Curso.findByPersonasInscritas", query = "SELECT c FROM Curso c WHERE c.personasInscritas = :personasInscritas"),
     @NamedQuery(name = "Curso.findByAutorizado", query = "SELECT c FROM Curso c WHERE c.autorizado = :autorizado"),
-    @NamedQuery(name = "Curso.findBySeguidores", query = "SELECT c FROM Curso c WHERE c.seguidores = :seguidores")})
+    @NamedQuery(name = "Curso.findBySeguidores", query = "SELECT c FROM Curso c WHERE c.seguidores = :seguidores"),
+    @NamedQuery(name = "Curso.findByIntroduccionCurso", query = "SELECT c FROM Curso c WHERE c.introduccionCurso = :introduccionCurso"),
+    @NamedQuery(name = "Curso.findByImagenPortadaCurso", query = "SELECT c FROM Curso c WHERE c.imagenPortadaCurso = :imagenPortadaCurso"),
+    @NamedQuery(name = "Curso.findByFecha", query = "SELECT c FROM Curso c WHERE c.fecha = :fecha")})
 public class Curso implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -50,83 +53,55 @@ public class Curso implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id_curso")
-    
     private Integer idCurso;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 45)
     @Column(name = "nom_curso")
-    
     private String nomCurso;
     @Basic(optional = false)
     @NotNull
     @Column(name = "personas_inscritas")
-    
     private int personasInscritas;
     @Basic(optional = false)
     @NotNull
     @Lob
     @Size(min = 1, max = 65535)
     @Column(name = "descripcion_curso")
-   
     private String descripcionCurso;
     @Basic(optional = false)
     @NotNull
     @Column(name = "Autorizado")
-   
     private boolean autorizado;
     @Basic(optional = false)
     @NotNull
     @Lob
     @Size(min = 1, max = 65535)
     @Column(name = "contenidos")
-    
     private String contenidos;
     @Basic(optional = false)
     @NotNull
     @Column(name = "seguidores")
-    
     private int seguidores;
+    @Size(max = 200)
+    @Column(name = "introduccion_curso")
+    private String introduccionCurso;
+    @Size(max = 200)
+    @Column(name = "imagen_portada_curso")
+    private String imagenPortadaCurso;
     @Basic(optional = false)
     @NotNull
-    
-    
     @Column(name = "fecha")
-    @Temporal(TemporalType.TIMESTAMP)   
+    @Temporal(TemporalType.DATE)
     private Date fecha;
-    @Basic(optional = false)
-    @NotNull   
-    
-    @Lob
-    @Size(min = 1, max = 65535)
-    @Column(name = "introduccion_curso")    
-    private String introduccion_curso;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 200)
-    
-    @Column(name = "imagen_portada_curso")    
-    private String imagen_portada_curso;
-    
-    
-    
-    
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idCurso")    
-    private List<Archivo> archivoList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idCurso")
-    private List<LogStreaming> logStreamingList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idCurso")
-    private List<InscripcionCurso> inscripcionCursoList;
+    private List<Contenidos> contenidosList;
     @JoinColumn(name = "id_cat", referencedColumnName = "id_subcat")
     @ManyToOne(optional = false)
     private CursoSubCat idCat;
     @JoinColumn(name = "id_usuario", referencedColumnName = "id_usuario")
     @ManyToOne(optional = false)
     private Usuario idUsuario;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idCurso")
-    private List<Tablero> tableroList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idCurso")
-    private List<PreguntasData> preguntasDataList;
 
     public Curso() {
     }
@@ -135,7 +110,7 @@ public class Curso implements Serializable {
         this.idCurso = idCurso;
     }
 
-    public Curso(Integer idCurso, String nomCurso, int personasInscritas, String descripcionCurso, boolean autorizado, String contenidos, int seguidores, String imagen_portada_curso
+   public Curso(Integer idCurso, String nomCurso, int personasInscritas, String descripcionCurso, boolean autorizado, String contenidos, int seguidores, String imagen_portada_curso
     , String introduccion_curso, Date fecha) {
         this.idCurso = idCurso;
         this.nomCurso = nomCurso;
@@ -144,8 +119,8 @@ public class Curso implements Serializable {
         this.autorizado = autorizado;
         this.contenidos = contenidos;
         this.seguidores = seguidores;
-        this.imagen_portada_curso = imagen_portada_curso;
-        this.introduccion_curso = introduccion_curso;
+        this.imagenPortadaCurso = imagen_portada_curso;
+        this.introduccionCurso = introduccion_curso;
         this.fecha = fecha;
     }
 
@@ -204,24 +179,23 @@ public class Curso implements Serializable {
     public void setSeguidores(int seguidores) {
         this.seguidores = seguidores;
     }
-    
-     public String getImagen_portada_curso() {
-        return imagen_portada_curso;
+
+    public String getIntroduccionCurso() {
+        return introduccionCurso;
     }
 
-    public void setImagen_portada_curso(String imagen_portada_curso) {
-        this.imagen_portada_curso = imagen_portada_curso;
-    }
-    
-     public String getIntroduccion_curso() {
-        return introduccion_curso;
+    public void setIntroduccionCurso(String introduccionCurso) {
+        this.introduccionCurso = introduccionCurso;
     }
 
-    public void setIntroduccion_curso(String introduccion_curso) {
-        this.introduccion_curso = introduccion_curso;
+    public String getImagenPortadaCurso() {
+        return imagenPortadaCurso;
     }
-    
-    
+
+    public void setImagenPortadaCurso(String imagenPortadaCurso) {
+        this.imagenPortadaCurso = imagenPortadaCurso;
+    }
+
     public Date getFecha() {
         return fecha;
     }
@@ -231,32 +205,12 @@ public class Curso implements Serializable {
     }
 
     @XmlTransient
-    public List<Archivo> getArchivoList() {
-        return archivoList;
-        
-        
+    public List<Contenidos> getContenidosList() {
+        return contenidosList;
     }
 
-    public void setArchivoList(List<Archivo> archivoList) {
-        this.archivoList = archivoList;
-    }
-
-    @XmlTransient
-    public List<LogStreaming> getLogStreamingList() {
-        return logStreamingList;
-    }
-
-    public void setLogStreamingList(List<LogStreaming> logStreamingList) {
-        this.logStreamingList = logStreamingList;
-    }
-
-    @XmlTransient
-    public List<InscripcionCurso> getInscripcionCursoList() {
-        return inscripcionCursoList;
-    }
-
-    public void setInscripcionCursoList(List<InscripcionCurso> inscripcionCursoList) {
-        this.inscripcionCursoList = inscripcionCursoList;
+    public void setContenidosList(List<Contenidos> contenidosList) {
+        this.contenidosList = contenidosList;
     }
 
     public CursoSubCat getIdCat() {
@@ -273,24 +227,6 @@ public class Curso implements Serializable {
 
     public void setIdUsuario(Usuario idUsuario) {
         this.idUsuario = idUsuario;
-    }
-
-    @XmlTransient
-    public List<Tablero> getTableroList() {
-        return tableroList;
-    }
-
-    public void setTableroList(List<Tablero> tableroList) {
-        this.tableroList = tableroList;
-    }
-
-    @XmlTransient
-    public List<PreguntasData> getPreguntasDataList() {
-        return preguntasDataList;
-    }
-
-    public void setPreguntasDataList(List<PreguntasData> preguntasDataList) {
-        this.preguntasDataList = preguntasDataList;
     }
 
     @Override

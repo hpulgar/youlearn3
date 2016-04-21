@@ -303,7 +303,6 @@ public class CursoController implements Serializable {
                 String fecha = dateFormat.format(date);
 
              
-
                 current.setFecha(dateFormat.parse(fecha));
                 current.setIdUsuario(ou);
                 current.setIdCat(csc);
