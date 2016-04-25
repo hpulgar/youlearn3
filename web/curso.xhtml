@@ -242,44 +242,32 @@
                          <div id="tabs-tab-title-2">
 						
 						<div class="title1 clearfix">
-							<h4>Contenidos</h4>
+							<h4>Unidades</h4>
 							<div class="title-block"></div>
 						</div>
 						
 						<table style="width:100%;">
 							<thead>
 								<tr>
-									<th>Unit ID</th>
-									<th>Unit Name</th>
-									<th>Duration</th>
-									<th>Prerequisites</th>
+									<th>Unidad</th>
+									<th>Nombre Unidad</th>
+									<th>Fecha</th>
+									<th>i can fap to this</th>
 								</tr>
 							</thead>
 							<tbody>
-								<tr>
-									<td data-title="Column 1">001</td>
-									<td data-title="Column 1">Design Basics</td>
-									<td data-title="Column 1">3 Months</td>
-									<td data-title="Column 1">Units 005, 001 and 010</td>
-								</tr>
-								<tr>
-									<td data-title="Column 2">002</td>
-									<td data-title="Column 2">Marketing</td>
-									<td data-title="Column 2">3 Months</td>
-									<td data-title="Column 2">None</td>
-								</tr>
-								<tr>
-									<td data-title="Column 3">003</td>
-									<td data-title="Column 3">Colour Theory</td>
-									<td data-title="Column 3">1 Month</td>
-									<td data-title="Column 3">Unit 001</td>
-								</tr>
-								<tr>
-									<td data-title="Column 4">004</td>
-									<td data-title="Column 4">Business Studies</td>
-									<td data-title="Column 4">5 Months</td>
-									<td data-title="Column 4">Units 007 and 009</td>
-								</tr>
+                                                             <h:form id="lista_contenidos">
+                                                                 <c:forEach items="#{contenidosController.verTodosCont(cursoController.idCurso)}" var="cont">
+                                                                    <tr>
+                                                                   
+                                                                            <td data-title="Column 1">#{cont.unidad}</td>
+                                                                            <td data-title="Column 1">  <h:commandLink value="#{cont.nombreUnidad}" action="#{contenidosController.verContenidoI(cont.idContenido)}"/> </td>
+                                                                            
+                                                                            <td data-title="Column 1">#{cont.fecha}</td>
+                                                                            <td data-title="Column 1">#{cont.idContenido}</td>
+                                                                    </tr>
+                                                                 </c:forEach>
+								</h:form>
 							</tbody>
 						</table>
 						

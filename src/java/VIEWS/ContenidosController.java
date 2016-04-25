@@ -266,31 +266,44 @@ public class ContenidosController implements Serializable {
         }catch(Exception e)
         {
             System.out.println("EL ERROR"+ e );
-            return "/crear_contenido.xhtml";            
+            return "/contenido_crear.xhtml";            
         }
         
     }
     
     
-    public List<Contenidos> verTodosCont()
+    public List<Contenidos> verTodosCont(int idCurso)
     {
         
         this.arContenidos.clear();
+        this.arContenidos2.clear();
         this.arContenidos= ejbFacade.findAll();
         
-        return arContenidos;
+        for(int i=0;i<arContenidos.size();i++)
+        {
+            if(arContenidos.get(i).getIdCurso().getIdCurso() == idCurso)
+            {
+                arContenidos2.add(arContenidos.get(i));
+            }
+            
+        }
+              return arContenidos2;  
+        
     }
     
     public List<Contenidos> verUnCont(int idCont)
     {
         arContenidos.clear();
         arContenidos = ejbFacade.verUnContenido(idCont);
+       
+        
         return arContenidos;
     }
     
-    public String verContenidoI()// I de Individual
+    public String verContenidoI(int idContenido)// I de Individual
     {
-        return "/contenido.xhtml";
+        setIdContenido(idContenido);
+        return "/contenidos.xhtml";
     }
     
     

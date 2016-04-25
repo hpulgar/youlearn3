@@ -153,7 +153,7 @@
 		<div class="page-header-inner clearfix">
 		
 		<div class="page-title">	
-			<h2>Crea un curso en Youlearn</h2>
+			<h2>Crea tu Contenido del Curso</h2>
 			<div class="page-title-block"></div>
 		</div>
 		
@@ -177,78 +177,53 @@
 			
 			<p>&nbsp;</p>
 			
-			<h:form  id="contactform2" class="clearfix">
+			
+                        <h:form  id="contactform" class="clearfix">	
                             
-				<div class="field-row">
-					<label for="categoria">Categoria del curso</label>
+                            <div class="field-row">
+					
+                                <label for="categoria">Unidad del curso</label>
                                        
-                                        <h:selectOneMenu value="#{cursoCategoriaController.id_curso_cat}" onchange="this.form.submit()">
+                                <h:selectOneMenu value="#{contenidosController.selected.unidad}">
                                                 
-                                            <f:selectItem itemValue="0" itemLabel="Seleccione una Categoria" noSelectionOption="true" /> 
-                                            <c:forEach items="#{cursoCategoriaController.cCats()}" var="c"> 
-                                                <f:selectItem itemValue="#{c.idCat}" itemLabel="#{c.nomCat}" />   
-                                                </c:forEach>
+                                            <f:selectItem itemValue="0" itemLabel="Seleccione una Unidad" noSelectionOption="true" /> 
+                                           
+                                                <f:selectItem itemValue="1" itemLabel="1" />
+                                                <f:selectItem itemValue="2" itemLabel="2" />   
+                                                <f:selectItem itemValue="3" itemLabel="3" />   
+                                                <f:selectItem itemValue="4" itemLabel="4" />   
+                                                <f:selectItem itemValue="5" itemLabel="5" />   
+                                                <f:selectItem itemValue="6" itemLabel="6" />   
+                                                <f:selectItem itemValue="7}" itemLabel="7" />   
+                                                <f:selectItem itemValue="8" itemLabel="8" />   
+                                                <f:selectItem itemValue="9" itemLabel="9" />   
+                                                <f:selectItem itemValue="10" itemLabel="10" />   
+                                               
                                              </h:selectOneMenu>
                                       
                                             
 				</div>
-                             </h:form>
-                        <h:form  id="contactform" class="clearfix">
-				<div class="field-row">
-				  <label for="subcategoria">Subcategoria del curso</label>
-                                  
-                                 
-                                  <h:selectOneMenu value="#{cursoSubCatController.id_cSub_cat}" >
-                                        
-                                      <f:selectItem itemValue="0" itemLabel="Seleccione una Categoria"  noSelectionOption="true"/> 
-                                      <c:forEach items="#{cursoSubCatController.listaSubCategorias(cursoCategoriaController.id_curso_cat)}" var="fsc"  >
-                                          <f:selectItem itemValue="#{fsc.idSubcat}" itemLabel="#{fsc.nomSubcat}" />
-                                        </c:forEach>
-                                     </h:selectOneMenu>	
-                                  
-				</div>
+                         
                             
-                       
-                             
-                        
-                            <div class="field-row">
-				  <label for="titulo">Nomre del curso</label>
-                                  <h:inputText value="#{cursoController.selected.nomCurso}" class="text_input" id="nombre" size="10" />
-				</div>
+                            
+                           
                             
                             <div class="field-row">
-				  <label for="introduccion">Introduccion del curso</label>
-			
-                                  <h:inputTextarea value="#{cursoController.selected.introduccionCurso}" id="Introduccion_Curso" ></h:inputTextarea>
+				  <label for="introduccion">Nombre de la Unidad</label>
+                                  <h:inputText value="#{contenidosController.selected.nombreUnidad}" id="nombre_unidad" ></h:inputTextarea>
 				</div>
                             
-                            <div class="field-row">
-				  <label for="descripcion">Descripcion del curso</label>
-			
-                                  <h:inputTextarea value="#{cursoController.selected.descripcionCurso}" id="Descripcion_Curso" ></h:inputTextarea>
-				</div>
-                             
-                            <div class="field-row">
-				  <label for="imagenUrl">Adjuntar una imagen mediante url para portada del curso</label>
-			
-                                  <h:inputText value="#{cursoController.selected.imagenPortadaCurso}" class="text_input" id="imagenSubida" size="10" /><br></br>
-                                 <label for="imagenSubida">Subir una imagen</label><br></br>
-                                <!--  <h:inputFile value="">
-                                 
-                                 </h:inputFile>-->
-                                 <br></br>
-				</div>
-                            
-                             <br></br><div class="field-row">
+                          <br></br><div class="field-row">
 				  <label for="contenido">Contenidos del curso</label>
 			
-                                  <h:inputTextarea value="#{cursoController.selected.contenidos}" id="contenido" ></h:inputTextarea>
+                                  <h:inputTextarea value="#{contenidosController.selected.contenido}" id="contenido" ></h:inputTextarea>
 				</div>
+                          
                             
                              <div class="field-row">
 
 				<p>
-                                    <h:commandButton action="#{cursoController.CrearCurso(cursoSubCatController.id_cSub_cat,usuarioController.id_user)}" class="button1" type="submit"  style="float:right" value="Crear Curso" id="submit"/>
+                                    <h:commandButton action="#{contenidosController.crearContenido(cursoController.idCurso)}" class="button1" type="submit"  style="float:right" value="Crear Curso" id="submit"/>
                                 </p>
                             </div>
                                
