@@ -29,6 +29,14 @@
                     <h:inputTextarea rows="4" cols="30" id="contenidos" value="#{cursoController.selected.contenidos}" title="#{bundle.CreateCursoTitle_contenidos}" required="true" requiredMessage="#{bundle.CreateCursoRequiredMessage_contenidos}"/>
                     <h:outputLabel value="#{bundle.CreateCursoLabel_seguidores}" for="seguidores" />
                     <h:inputText id="seguidores" value="#{cursoController.selected.seguidores}" title="#{bundle.CreateCursoTitle_seguidores}" required="true" requiredMessage="#{bundle.CreateCursoRequiredMessage_seguidores}"/>
+                    <h:outputLabel value="#{bundle.CreateCursoLabel_introduccionCurso}" for="introduccionCurso" />
+                    <h:inputText id="introduccionCurso" value="#{cursoController.selected.introduccionCurso}" title="#{bundle.CreateCursoTitle_introduccionCurso}" />
+                    <h:outputLabel value="#{bundle.CreateCursoLabel_imagenPortadaCurso}" for="imagenPortadaCurso" />
+                    <h:inputText id="imagenPortadaCurso" value="#{cursoController.selected.imagenPortadaCurso}" title="#{bundle.CreateCursoTitle_imagenPortadaCurso}" />
+                    <h:outputLabel value="#{bundle.CreateCursoLabel_fecha}" for="fecha" />
+                    <h:inputText id="fecha" value="#{cursoController.selected.fecha}" title="#{bundle.CreateCursoTitle_fecha}" required="true" requiredMessage="#{bundle.CreateCursoRequiredMessage_fecha}">
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:inputText>
                     <h:outputLabel value="#{bundle.CreateCursoLabel_idCat}" for="idCat" />
                     <h:selectOneMenu id="idCat" value="#{cursoController.selected.idCat}" title="#{bundle.CreateCursoTitle_idCat}" required="true" requiredMessage="#{bundle.CreateCursoRequiredMessage_idCat}">
                         <f:selectItems value="#{cursoSubCatController.itemsAvailableSelectOne}"/>

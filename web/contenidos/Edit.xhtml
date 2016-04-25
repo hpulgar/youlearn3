@@ -27,6 +27,10 @@
                     </h:inputText>
                     <h:outputLabel value="#{bundle.EditContenidosLabel_contenido}" for="contenido" />
                     <h:inputTextarea rows="4" cols="30" id="contenido" value="#{contenidosController.selected.contenido}" title="#{bundle.EditContenidosTitle_contenido}" required="true" requiredMessage="#{bundle.EditContenidosRequiredMessage_contenido}"/>
+                    <h:outputLabel value="#{bundle.EditContenidosLabel_idCurso}" for="idCurso" />
+                    <h:selectOneMenu id="idCurso" value="#{contenidosController.selected.idCurso}" title="#{bundle.EditContenidosTitle_idCurso}" required="true" requiredMessage="#{bundle.EditContenidosRequiredMessage_idCurso}">
+                        <f:selectItems value="#{cursoController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
                 </h:panelGrid>
                 <h:commandLink action="#{contenidosController.update}" value="#{bundle.EditContenidosSaveLink}"/>
                 <br />

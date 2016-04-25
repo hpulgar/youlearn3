@@ -14,7 +14,7 @@ import javax.persistence.Query;
 
 /**
  *
- * @author Felipe
+ * @author Fenix III
  */
 @Stateless
 public class UsuarioFacade extends AbstractFacade<Usuario> {
@@ -37,9 +37,9 @@ public class UsuarioFacade extends AbstractFacade<Usuario> {
         Query q = em2.createNamedQuery("Usuario.logIn")
                 .setParameter("username", name)
                 .setParameter("password", pass);
-       
+    
         return q.getResultList();
-        
+    
     }
        
 //    public List <Usuario> cargaPerfiles(int id)

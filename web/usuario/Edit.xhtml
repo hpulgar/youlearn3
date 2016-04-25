@@ -29,6 +29,12 @@
                     <h:inputText id="correo" value="#{usuarioController.selected.correo}" title="#{bundle.EditUsuarioTitle_correo}" />
                     <h:outputLabel value="#{bundle.EditUsuarioLabel_creditos}" for="creditos" />
                     <h:inputText id="creditos" value="#{usuarioController.selected.creditos}" title="#{bundle.EditUsuarioTitle_creditos}" />
+                    <h:outputLabel value="#{bundle.EditUsuarioLabel_imagen_portada_perfil}" for="imagen_portada_perfil" />
+                    <h:inputText id="imagen_portada_perfil" value="#{usuarioController.selected.imagen_portada_perfil}" title="#{bundle.EditUsuarioTitle_imagen_portada_perfil}" required="true" requiredMessage="#{bundle.EditUsuarioRequiredMessage_imagen_portada_perfil}"/>
+                    <h:outputLabel value="#{bundle.EditUsuarioLabel_imagen_dashboard}" for="imagen_dashboard" />
+                    <h:inputText id="imagen_dashboard" value="#{usuarioController.selected.imagen_dashboard}" title="#{bundle.EditUsuarioTitle_imagen_dashboard}" required="true" requiredMessage="#{bundle.EditUsuarioRequiredMessage_imagen_dashboard}"/>
+                    <h:outputLabel value="#{bundle.EditUsuarioLabel_imagen_foto_perfil}" for="imagen_foto_perfil" />
+                    <h:inputText id="imagen_foto_perfil" value="#{usuarioController.selected.imagen_foto_perfil}" title="#{bundle.EditUsuarioTitle_imagen_foto_perfil}" required="true" requiredMessage="#{bundle.EditUsuarioRequiredMessage_imagen_foto_perfil}"/>
                     <h:outputLabel value="#{bundle.EditUsuarioLabel_idPerfil}" for="idPerfil" />
                     <h:selectOneMenu id="idPerfil" value="#{usuarioController.selected.idPerfil}" title="#{bundle.EditUsuarioTitle_idPerfil}" required="true" requiredMessage="#{bundle.EditUsuarioRequiredMessage_idPerfil}">
                         <f:selectItems value="#{perfilController.itemsAvailableSelectOne}"/>

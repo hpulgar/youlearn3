@@ -5,17 +5,19 @@
  */
 package MODELS;
 
-import ENTITIES.Perfil;
+import ENTITIES.Contenidos;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
  * @author Fenix III
  */
 @Stateless
-public class PerfilFacade extends AbstractFacade<Perfil> {
+public class ContenidosFacade extends AbstractFacade<Contenidos> {
 
     @PersistenceContext(unitName = "YoulearnPU")
     private EntityManager em;
@@ -25,8 +27,18 @@ public class PerfilFacade extends AbstractFacade<Perfil> {
         return em;
     }
 
-    public PerfilFacade() {
-        super(Perfil.class);
+    public ContenidosFacade() {
+        super(Contenidos.class);
     }
+    
+    
+    public List<Contenidos> verUnContenido(int idContenido)
+    {
+        EntityManager m2=getEntityManager();
+        Query q = m2.createNamedQuery("Contenidos.verContenido").setParameter("idContenido", idContenido);
+        return q.getResultList();
+    }
+    
+    
     
 }

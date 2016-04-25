@@ -29,6 +29,14 @@
                     <h:inputTextarea rows="4" cols="30" id="contenidos" value="#{cursoController.selected.contenidos}" title="#{bundle.EditCursoTitle_contenidos}" required="true" requiredMessage="#{bundle.EditCursoRequiredMessage_contenidos}"/>
                     <h:outputLabel value="#{bundle.EditCursoLabel_seguidores}" for="seguidores" />
                     <h:inputText id="seguidores" value="#{cursoController.selected.seguidores}" title="#{bundle.EditCursoTitle_seguidores}" required="true" requiredMessage="#{bundle.EditCursoRequiredMessage_seguidores}"/>
+                    <h:outputLabel value="#{bundle.EditCursoLabel_introduccionCurso}" for="introduccionCurso" />
+                    <h:inputText id="introduccionCurso" value="#{cursoController.selected.introduccionCurso}" title="#{bundle.EditCursoTitle_introduccionCurso}" />
+                    <h:outputLabel value="#{bundle.EditCursoLabel_imagenPortadaCurso}" for="imagenPortadaCurso" />
+                    <h:inputText id="imagenPortadaCurso" value="#{cursoController.selected.imagenPortadaCurso}" title="#{bundle.EditCursoTitle_imagenPortadaCurso}" />
+                    <h:outputLabel value="#{bundle.EditCursoLabel_fecha}" for="fecha" />
+                    <h:inputText id="fecha" value="#{cursoController.selected.fecha}" title="#{bundle.EditCursoTitle_fecha}" required="true" requiredMessage="#{bundle.EditCursoRequiredMessage_fecha}">
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:inputText>
                     <h:outputLabel value="#{bundle.EditCursoLabel_idCat}" for="idCat" />
                     <h:selectOneMenu id="idCat" value="#{cursoController.selected.idCat}" title="#{bundle.EditCursoTitle_idCat}" required="true" requiredMessage="#{bundle.EditCursoRequiredMessage_idCat}">
                         <f:selectItems value="#{cursoSubCatController.itemsAvailableSelectOne}"/>

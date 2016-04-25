@@ -1,11 +1,14 @@
 package VIEWS;
 
-import ENTITIES.CursoCategoria;
+import ENTITIES.Contenidos;
+import ENTITIES.Curso;
 import VIEWS.util.JsfUtil;
 import VIEWS.util.PaginationHelper;
-import MODELS.CursoCategoriaFacade;
+import MODELS.ContenidosFacade;
 
 import java.io.Serializable;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ResourceBundle;
 import javax.ejb.EJB;
 import javax.inject.Named;
@@ -19,50 +22,68 @@ import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
 import java.util.*;
 
-@Named("cursoCategoriaController")
+@Named("contenidosController")
 @SessionScoped
-public class CursoCategoriaController implements Serializable {
+public class ContenidosController implements Serializable {
 
-    private CursoCategoria current;
+    private Contenidos current;
     private DataModel items = null;
     @EJB
-    private MODELS.CursoCategoriaFacade ejbFacade;
+    private MODELS.ContenidosFacade ejbFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
-    private int id_curso_cat;
-    private List<CursoCategoria> arCursoCat = new ArrayList();
-
-    public CursoCategoriaController() {
-    }
-
-    public int getId_curso_cat() {
-        return id_curso_cat;
-    }
-
-    public void setId_curso_cat(int id_curso_cat) {
-        this.id_curso_cat = id_curso_cat;
-    }
-
-    public List<CursoCategoria> getArCursoCat() {
-        return arCursoCat;
-    }
-
-    public void setArCursoCat(List<CursoCategoria> arCursoCat) {
-        this.arCursoCat = arCursoCat;
-    }
+    private int idUnidad;
+    private int idContenido;
+    private List<Contenidos> arContenidos = new ArrayList<Contenidos>();
+    private List<Contenidos> arContenidos2 = new ArrayList<Contenidos>();
     
-    public CursoCategoria getSelected() {
+    public ContenidosController() {
+    }
+
+    public Contenidos getSelected() {
         if (current == null) {
-            current = new CursoCategoria();
+            current = new Contenidos();
             selectedItemIndex = -1;
         }
         return current;
     }
 
-    private CursoCategoriaFacade getFacade() {
+    private ContenidosFacade getFacade() {
         return ejbFacade;
     }
 
+    public int getIdUnidad() {
+        return idUnidad;
+    }
+
+    public void setIdUnidad(int idUnidad) {
+        this.idUnidad = idUnidad;
+    }
+
+    public int getIdContenido() {
+        return idContenido;
+    }
+
+    public void setIdContenido(int idContenido) {
+        this.idContenido = idContenido;
+    }
+
+    public List<Contenidos> getArContenidos() {
+        return arContenidos;
+    }
+
+    public void setArContenidos(List<Contenidos> arContenidos) {
+        this.arContenidos = arContenidos;
+    }
+
+    public List<Contenidos> getArContenidos2() {
+        return arContenidos2;
+    }
+
+    public void setArContenidos2(List<Contenidos> arContenidos2) {
+        this.arContenidos2 = arContenidos2;
+    }
+    
     public PaginationHelper getPagination() {
         if (pagination == null) {
             pagination = new PaginationHelper(10) {
@@ -87,13 +108,13 @@ public class CursoCategoriaController implements Serializable {
     }
 
     public String prepareView() {
-        current = (CursoCategoria) getItems().getRowData();
+        current = (Contenidos) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "View";
     }
 
     public String prepareCreate() {
-        current = new CursoCategoria();
+        current = new Contenidos();
         selectedItemIndex = -1;
         return "Create";
     }
@@ -101,7 +122,7 @@ public class CursoCategoriaController implements Serializable {
     public String create() {
         try {
             getFacade().create(current);
-            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("CursoCategoriaCreated"));
+            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("ContenidosCreated"));
             return prepareCreate();
         } catch (Exception e) {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
@@ -110,7 +131,7 @@ public class CursoCategoriaController implements Serializable {
     }
 
     public String prepareEdit() {
-        current = (CursoCategoria) getItems().getRowData();
+        current = (Contenidos) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "Edit";
     }
@@ -118,7 +139,7 @@ public class CursoCategoriaController implements Serializable {
     public String update() {
         try {
             getFacade().edit(current);
-            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("CursoCategoriaUpdated"));
+            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("ContenidosUpdated"));
             return "View";
         } catch (Exception e) {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
@@ -127,7 +148,7 @@ public class CursoCategoriaController implements Serializable {
     }
 
     public String destroy() {
-        current = (CursoCategoria) getItems().getRowData();
+        current = (Contenidos) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         performDestroy();
         recreatePagination();
@@ -151,7 +172,7 @@ public class CursoCategoriaController implements Serializable {
     private void performDestroy() {
         try {
             getFacade().remove(current);
-            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("CursoCategoriaDeleted"));
+            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("ContenidosDeleted"));
         } catch (Exception e) {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
         }
@@ -207,36 +228,95 @@ public class CursoCategoriaController implements Serializable {
         return JsfUtil.getSelectItems(ejbFacade.findAll(), true);
     }
 
-    public CursoCategoria getCursoCategoria(java.lang.Integer id) {
+    public Contenidos getContenidos(java.lang.Integer id) {
         return ejbFacade.find(id);
     }
-
-    public List<CursoCategoria> cCats()
+    /////////////////////////////////////////////////////////////////////
+//    contenidos
+//            int id_contenido X (auto increment)
+//            int unidad   POR USUARIO
+//            string nombre_unidad POR USUARIO
+//            date fecha  AUTOMATICO
+//            string contenido POR USUARIO
+//            int id_curso    POR PARAMETRO
+                
+    
+    
+    
+    
+    public String crearContenido(int idCurso)
     {
-        arCursoCat.clear();
-        arCursoCat = ejbFacade.findAll();
+        try
+        {
+            Curso obCurso = new Curso();
+            obCurso.setIdCurso(idCurso);
+            
+            DateFormat dateFormat = new SimpleDateFormat("yyyy/mm/dd HH:mm:ss");
+            Date date = new Date();
+            String fecha = dateFormat.format(date);
+            
+            current.setFecha(dateFormat.parse(fecha));
+            current.setIdCurso(obCurso);
+            
+            getFacade().create(current);
+            current = null;
+            
+            return "/curso.xhtml";
+            
+        }catch(Exception e)
+        {
+            System.out.println("EL ERROR"+ e );
+            return "/crear_contenido.xhtml";            
+        }
         
-       
-        return arCursoCat;
     }
     
     
+    public List<Contenidos> verTodosCont()
+    {
+        
+        this.arContenidos.clear();
+        this.arContenidos= ejbFacade.findAll();
+        
+        return arContenidos;
+    }
+    
+    public List<Contenidos> verUnCont(int idCont)
+    {
+        arContenidos.clear();
+        arContenidos = ejbFacade.verUnContenido(idCont);
+        return arContenidos;
+    }
+    
+    public String verContenidoI()// I de Individual
+    {
+        return "/contenido.xhtml";
+    }
+    
+    
+    
+    
+    
+    /////////////////////////////////////////////////////////////////////
+    
+    
+    
+    
+    
+    
+    
 
-    
-    
-    
-
-    @FacesConverter(forClass = CursoCategoria.class)
-    public static class CursoCategoriaControllerConverter implements Converter {
+    @FacesConverter(forClass = Contenidos.class)
+    public static class ContenidosControllerConverter implements Converter {
 
         @Override
         public Object getAsObject(FacesContext facesContext, UIComponent component, String value) {
             if (value == null || value.length() == 0) {
                 return null;
             }
-            CursoCategoriaController controller = (CursoCategoriaController) facesContext.getApplication().getELResolver().
-                    getValue(facesContext.getELContext(), null, "cursoCategoriaController");
-            return controller.getCursoCategoria(getKey(value));
+            ContenidosController controller = (ContenidosController) facesContext.getApplication().getELResolver().
+                    getValue(facesContext.getELContext(), null, "contenidosController");
+            return controller.getContenidos(getKey(value));
         }
 
         java.lang.Integer getKey(String value) {
@@ -256,11 +336,11 @@ public class CursoCategoriaController implements Serializable {
             if (object == null) {
                 return null;
             }
-            if (object instanceof CursoCategoria) {
-                CursoCategoria o = (CursoCategoria) object;
-                return getStringKey(o.getIdCat());
+            if (object instanceof Contenidos) {
+                Contenidos o = (Contenidos) object;
+                return getStringKey(o.getIdContenido());
             } else {
-                throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: " + CursoCategoria.class.getName());
+                throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: " + Contenidos.class.getName());
             }
         }
 

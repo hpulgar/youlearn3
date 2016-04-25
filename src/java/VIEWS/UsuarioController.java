@@ -33,7 +33,7 @@ public class UsuarioController implements Serializable {
     private Usuario current;
     private DataModel items = null;
     @EJB
-      private MODELS.UsuarioFacade ejbFacade;
+    private MODELS.UsuarioFacade ejbFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
    private String nombreUsuario,contraseña,message;
@@ -159,9 +159,9 @@ public class UsuarioController implements Serializable {
         //carga username
     public String verUsername(int idp){
         System.out.println("IMRPIMIENDO EL ID DEL USUARIO "+idp);
-        Usuario uo = new Usuario();
+        Usuario uo ;
         uo = ejbFacade.cargaUsername(idp).get(0);
-        System.out.println("IMRPIMIENDO EL nombre DEL USUARIO "+uo.getUsername());
+        
     
         return uo.getUsername();
     }

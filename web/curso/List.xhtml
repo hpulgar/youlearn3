@@ -64,6 +64,26 @@
                         </h:column>
                         <h:column>
                             <f:facet name="header">
+                                <h:outputText value="#{bundle.ListCursoTitle_introduccionCurso}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.introduccionCurso}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListCursoTitle_imagenPortadaCurso}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.imagenPortadaCurso}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListCursoTitle_fecha}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.fecha}">
+                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                            </h:outputText>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
                                 <h:outputText value="#{bundle.ListCursoTitle_idCat}"/>
                             </f:facet>
                             <h:outputText value="#{item.idCat}"/>

@@ -27,6 +27,8 @@
                     </h:outputText>
                     <h:outputText value="#{bundle.ViewContenidosLabel_contenido}"/>
                     <h:outputText value="#{contenidosController.selected.contenido}" title="#{bundle.ViewContenidosTitle_contenido}"/>
+                    <h:outputText value="#{bundle.ViewContenidosLabel_idCurso}"/>
+                    <h:outputText value="#{contenidosController.selected.idCurso}" title="#{bundle.ViewContenidosTitle_idCurso}"/>
                 </h:panelGrid>
                 <br />
                 <h:commandLink action="#{contenidosController.destroyAndView}" value="#{bundle.ViewContenidosDestroyLink}"/>

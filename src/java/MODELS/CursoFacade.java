@@ -14,7 +14,7 @@ import javax.persistence.Query;
 
 /**
  *
- * @author Felipe
+ * @author Fenix III
  */
 @Stateless
 public class CursoFacade extends AbstractFacade<Curso> {
@@ -30,6 +30,7 @@ public class CursoFacade extends AbstractFacade<Curso> {
     public CursoFacade() {
         super(Curso.class);
     }
+    
     public List<Curso> verC(int idCurso)
     {
         EntityManager m2 = getEntityManager();
@@ -37,7 +38,5 @@ public class CursoFacade extends AbstractFacade<Curso> {
         
         return q.getResultList();
     }
-    
-    
     
 }

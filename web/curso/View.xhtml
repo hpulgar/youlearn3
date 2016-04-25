@@ -29,6 +29,14 @@
                     <h:outputText value="#{cursoController.selected.contenidos}" title="#{bundle.ViewCursoTitle_contenidos}"/>
                     <h:outputText value="#{bundle.ViewCursoLabel_seguidores}"/>
                     <h:outputText value="#{cursoController.selected.seguidores}" title="#{bundle.ViewCursoTitle_seguidores}"/>
+                    <h:outputText value="#{bundle.ViewCursoLabel_introduccionCurso}"/>
+                    <h:outputText value="#{cursoController.selected.introduccionCurso}" title="#{bundle.ViewCursoTitle_introduccionCurso}"/>
+                    <h:outputText value="#{bundle.ViewCursoLabel_imagenPortadaCurso}"/>
+                    <h:outputText value="#{cursoController.selected.imagenPortadaCurso}" title="#{bundle.ViewCursoTitle_imagenPortadaCurso}"/>
+                    <h:outputText value="#{bundle.ViewCursoLabel_fecha}"/>
+                    <h:outputText value="#{cursoController.selected.fecha}" title="#{bundle.ViewCursoTitle_fecha}">
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:outputText>
                     <h:outputText value="#{bundle.ViewCursoLabel_idCat}"/>
                     <h:outputText value="#{cursoController.selected.idCat}" title="#{bundle.ViewCursoTitle_idCat}"/>
                     <h:outputText value="#{bundle.ViewCursoLabel_idUsuario}"/>
