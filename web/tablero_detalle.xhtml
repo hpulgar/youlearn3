@@ -281,8 +281,8 @@
 					<div class="blog-content blog-content-single">	
                                             <c:forEach items="#{tableroController.unTablero(tableroController.idTablero)}" var="fp2"> 
                                                
-						
-                                                <p>#{fp2.descripcion}</p>
+                                                <h:outputText value="#{fp2.descripcion}" escape="false" />
+                                                
 						
 						
 						</c:forEach> 

@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:p="http://primefaces.org/ui">
     <h:head>
 
 
@@ -22,7 +23,7 @@
 	<link rel="stylesheet" href="css/responsive.css" type="text/css"  media="all" />
         <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic' rel='stylesheet' type='text/css'></link>
         <link href='http://fonts.googleapis.com/css?family=Merriweather:400,300,700,900' rel='stylesheet' type='text/css'></link>
-
+<!--
 	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
 	<script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js'></script>
 	<script type="text/javascript" src="js/superfish.js"></script>
@@ -30,7 +31,7 @@
 	<script type="text/javascript" src="js/tinynav.min.js"></script>
 	<script type="text/javascript" src="js/jquery.uniform.js"></script>
 	<script type="text/javascript" src="js/scripts.js"></script>
-	
+-->	
 <!-- END head -->
    </h:head>
     
@@ -213,19 +214,24 @@
                         
                             <div class="field-row">
 				  <label for="titulo">Nomre del curso</label>
-                                  <h:inputText value="#{cursoController.selected.nomCurso}" class="text_input" id="nombre" size="10" />
+                                  <h:inputText value="#{cursoController.selected.nomCurso}" class="text_input" id="nombre"  />
 				</div>
                             
                             <div class="field-row">
 				  <label for="introduccion">Introduccion del curso</label>
 			
-                                  <h:inputTextarea value="#{cursoController.selected.introduccionCurso}" id="Introduccion_Curso" ></h:inputTextarea>
+                                  
+                                  <p:editor  widgetVar="editorWidget" value="#{cursoController.selected.introduccionCurso}" id="Introduccion_Curso"/> 
 				</div>
                             
                             <div class="field-row">
 				  <label for="descripcion">Descripcion del curso</label>
 			
-                                  <h:inputTextarea value="#{cursoController.selected.descripcionCurso}" id="Descripcion_Curso" ></h:inputTextarea>
+                                 
+                                  
+                                  <p:editor  widgetVar="editorWidget" value="#{cursoController.selected.descripcionCurso}"  id="Descripcion_Curso"/> 
+                                  
+                                  
 				</div>
                              
                             <div class="field-row">
@@ -242,7 +248,10 @@
                              <br></br><div class="field-row">
 				  <label for="contenido">Contenidos del curso</label>
 			
-                                  <h:inputTextarea value="#{cursoController.selected.contenidos}" id="contenido" ></h:inputTextarea>
+                                  
+                                  
+                                  <p:editor  widgetVar="editorWidget" value="#{cursoController.selected.contenidos}"  id="contenido"/> 
+                                  
 				</div>
                             
                              <div class="field-row">

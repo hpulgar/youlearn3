@@ -279,8 +279,10 @@
 					<div class="blog-content blog-content-single">	
                                             <c:forEach items="#{foroPosteosController.cargaUno(foroPosteosController.idPosteo)}" var="fp2"> 
                                                 <img src="#{fp2.imagen_foro_posteos}" alt="" class="blog-image" />
-						
-                                                <p>#{fp2.contenido}</p>
+                                                 
+                                                       <!-- <p></p>-->
+                                                       <h:outputText value="#{fp2.contenido}"  escape="false" />
+                                                 
 						
 						
 						</c:forEach> 

@@ -189,7 +189,7 @@
 				
 				<div class="course-desc-wrapper clearfix">
                                     <img src="#{vc.imagenPortadaCurso}" alt="" class="course-image" />
-                                        <p class="course-desc">#{vc.descripcionCurso}</p>
+                                    <p class="course-desc"><h:outputText value="#{vc.descripcionCurso}" escape="false" /></p>
 				</div>
 			
 				<div id="tabs">
@@ -207,7 +207,7 @@
 							<h4>Introduction</h4>
 							<div class="title-block"></div>
 						</div>
-                                            <p>#{vc.introduccionCurso}</p>
+                                            <p><h:outputText value="#{vc.introduccionCurso}"  escape="false"/></p>
 						
 						<div class="title1 clearfix">
 							<h4>Detalles Usuario</h4>
@@ -279,28 +279,27 @@
 							<li>Copyright</li>
 							<li>> 18 años</li>
 							<li>y que se sho</li>
+                                                        <li>Atonta3</li>
                                                         
 						</ul>
 						
 					</div>
-					
+					<h:form >
 					<div id="tabs-tab-title-4">
-						
 						<div class="title1 clearfix">
 							<h4>Getting Started</h4>
 							<div class="title-block"></div>
 						</div>
-						
-						<p>Definicion de suscrito y seguidor.</p>
-                                                <h:form>
-                                                <h:commandButton style="display: block;margin: 20px 0 0 0;" action="#{cursoController.cursoCont()}" value="Follow" class="button2" /> <br/><br/><br/><br/>
-						<h:commandButton style="display: block;margin: 20px 0 0 0;" action="#{cursoController.cursoCont()}" value="Subscribe" class="button2" />
-                                                </h:form>
-						
+                                                 <h:commandButton  action="#{cursoController.cursoCont()}" value="Follow" class="button2" />  <br/><br/>
+                                                 <h:commandButton  action="#{cursoController.cursoCont()}" value="Subscribe" class="button2" />
+                                               
+                                                 <br/><br/><br/><br/><br/>
+                                                 <p>Definicion de suscrito y seguidor.</p>
                                               <!--  <p style="display: block;margin: 20px 0 0 0;"><a href="#" class="button2">Subscribe</a></p>-->
 					
 					</div>
-				
+				 </h:form>
+						
 				</div>
 				</c:forEach>
 			<!-- END .inner-content-wrapper -->

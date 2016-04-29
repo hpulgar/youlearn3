@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.SimpleTimeZone;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
@@ -298,12 +299,21 @@ public class CursoController implements Serializable {
                 Usuario ou = new Usuario();
                 ou.setIdUsuario(id_usuario);
                 
-                DateFormat dateFormat = new SimpleDateFormat("yyyy/mm/dd HH:mm:ss");
-                Date date = new Date();
-                String fecha = dateFormat.format(date);
+//                DateFormat dateFormat = new SimpleDateFormat("yyyy/mm/dd");
+//                Date date = new Date();
+//                String fecha = dateFormat.format(date);
+//                
+                
+                
+                SimpleDateFormat sdf = new SimpleDateFormat();
+                sdf.setTimeZone(new SimpleTimeZone(-3, "GMT"));
+                sdf.applyPattern("yyyy/mm/dd");
+                Date fecha = new Date();
 
              
-                current.setFecha(dateFormat.parse(fecha));
+                current.setFecha(fecha);
+                
+               
                 current.setIdUsuario(ou);
                 current.setIdCat(csc);
                 current.setAutorizado(false);

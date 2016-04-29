@@ -183,10 +183,11 @@
 					<li class="event-wrapper event-full clearfix">
 					
 						<div class="event-date">
+                                                    <div class="event-m">#{lc.fecha.toLocaleString().subSequence(3,5)}</div>
                                                     <div class="event-m">#{lc.fecha.toGMTString().substring(2,6)}</div>
                                                     <div class="event-d">#{lc.fecha.toGMTString().subSequence(0,2)}</div>	
                                                     <div class="event-m">#{lc.fecha.toGMTString().subSequence(6,11)}</div>
-						
+                                                    
                                                 </div>
 				
 						<div class="event-info">	

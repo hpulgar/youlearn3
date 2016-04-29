@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:p="http://primefaces.org/ui">
     <h:head>
 
 
@@ -23,13 +24,14 @@
         <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic' rel='stylesheet' type='text/css'></link>
         <link href='http://fonts.googleapis.com/css?family=Merriweather:400,300,700,900' rel='stylesheet' type='text/css'></link>
 
-	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
+	
+        <!--<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
 	<script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js'></script>
 	<script type="text/javascript" src="js/superfish.js"></script>
 	<script type="text/javascript" src="js/jquery.flexslider-min.js"></script>
 	<script type="text/javascript" src="js/tinynav.min.js"></script>
 	<script type="text/javascript" src="js/jquery.uniform.js"></script>
-	<script type="text/javascript" src="js/scripts.js"></script>
+	<script type="text/javascript" src="js/scripts.js"></script>-->
 	
 <!-- END head -->
    </h:head>
@@ -210,14 +212,24 @@
                             
                             <div class="field-row">
 				  <label for="introduccion">Nombre de la Unidad</label>
-                                  <h:inputText value="#{contenidosController.selected.nombreUnidad}" id="nombre_unidad" ></h:inputTextarea>
+                                  <h:inputText value="#{contenidosController.selected.nombreUnidad}" id="nombre_unidad" ></h:inputText>
 				</div>
                             
                           <br></br><div class="field-row">
 				  <label for="contenido">Contenidos del curso</label>
+                                  
+                                 
+                                  
+                                  <p:editor id="editor" widgetVar="editorWidget" value="#{contenidosController.selected.contenido}" /> 
 			
-                                  <h:inputTextarea value="#{contenidosController.selected.contenido}" id="contenido" ></h:inputTextarea>
-				</div>
+                                  
+				
+                          
+                          
+                          
+                          
+                          
+                          </div>
                           
                             
                              <div class="field-row">

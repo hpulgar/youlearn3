@@ -56,42 +56,53 @@ public class Curso implements Serializable {
     private Integer idCurso;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 45)
+    
+    @Size(min = 1, max = 200)
     @Column(name = "nom_curso")
     private String nomCurso;
+   
     @Basic(optional = false)
     @NotNull
     @Column(name = "personas_inscritas")
     private int personasInscritas;
+    
     @Basic(optional = false)
-    @NotNull
-    @Lob
+    @NotNull    
+    @Lob   
     @Size(min = 1, max = 65535)
     @Column(name = "descripcion_curso")
     private String descripcionCurso;
+   
     @Basic(optional = false)
     @NotNull
     @Column(name = "Autorizado")
     private boolean autorizado;
+   
     @Basic(optional = false)
-    @NotNull
-    @Lob
+    @NotNull    
+    @Lob  
     @Size(min = 1, max = 65535)
     @Column(name = "contenidos")
     private String contenidos;
+    
     @Basic(optional = false)
     @NotNull
     @Column(name = "seguidores")
     private int seguidores;
-    @Size(max = 200)
+    
+    @Basic(optional = false)
+    @Size(min = 1, max = 65535)
     @Column(name = "introduccion_curso")
     private String introduccionCurso;
+    
     @Size(max = 200)
     @Column(name = "imagen_portada_curso")
     private String imagenPortadaCurso;
+   
     @Basic(optional = false)
     @NotNull
     @Column(name = "fecha")
+    
     @Temporal(TemporalType.DATE)
     private Date fecha;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idCurso")

@@ -280,10 +280,14 @@
 					<div class="blog-content blog-content-single">	
                                             <c:forEach items="#{contenidosController.verUnCont(contenidosController.idContenido)}" var="cont2"> 
                                                 <img src="http://img.pandawhale.com/post-19984-maria-sharapova-hot-bikini-swi-H5lF.jpeg" alt="" class="blog-image" />
-						<div style="word-wrap: break-word;">
-                                                <p>#{cont2.contenido}</p>
-                                                </div>
 						
+                                                <p>
+                                                  
+                                                       
+                                                        <h:outputText value="#{cont2.contenido}" escape="false" />
+                                                    
+                                                </p>
+                                                
 						
 						</c:forEach> 
 					</div>
