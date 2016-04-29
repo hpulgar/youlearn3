@@ -2,7 +2,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <h:head>
 
 
@@ -36,114 +37,12 @@
 
     <h:body id="top" class="loading">
 
+        <div id="header" >
+                        
+                  <ui:include src="header.xhtml" />
+        </div>
 
-
-        <!-- BEGIN body -->
-
-
-        <!-- BEGIN #header-wrapper -->
-        <div id="header-wrapper">
-
-            <!-- BEGIN #header-border -->
-            <div id="header-border">
-
-                <!-- BEGIN #header-top -->
-                <div id="header-top" class="clearfix">
-
-                    <ul class="top-left-nav clearfix">
-                        <h:outputText  value="Bienvenido: #{perfilController.nPerfil(usuarioController.idProfile)}"/><br/>
-                        <h:form>
-                            <h:commandLink  action="#{usuarioController.logout()}" value="Logout " rendered="#{menuController.logeado()}"/>
-                        </h:form>
-                        <h:link value="Iniciar sesion" outcome="login.xhtml" rendered="#{menuController.noLogeado()}"/><br/>
-
-                    </ul>
-
-
-
-                    <!-- END #header-top -->
-                </div>
-
-                <!-- BEGIN #header-content-wrapper -->
-                <div id="header-content-wrapper" class="clearfix">
-
-                    <div id="logo">
-                        <h1><a href="index.xhtml"><span>You</span>Learn</a></h1>
-                    </div>
-
-
-                    <!-- END #header-content-wrapper -->
-                </div>
-
-                <!-- BEGIN #main-menu-wrapper -->
-                <div id="main-menu-wrapper" class="clearfix">
-
-                    <!-- BEGIN #main-menu -->
-                    <ul id="main-menu">
-
-                        <li class="current_page_item"><a href="index.xhtml">Home</a></li>
-                            <h:form>
-
-                            <li><h:commandLink  value="Perfil"  action="perfil.xhtml" rendered="#{menuController.logeado()}"></h:commandLink>
-                                    <ul>
-                                        <li><a href="cuenta.xhtml">Mi cuenta</a></li>
-                                        <li><a href="#">Dashboard</a></li> 
-
-                                    </ul>
-                                </li>
-                        </h:form>
-
-
-                        <li><a href="courses.html">Cursos</a>
-                            <ul>
-                                <li><h:commandLink  value="Mis cursos" rendered="#{menuController.logeado()}"></h:commandLink></li>
-                                    <li><a href="#">Buscar cursos</a></li>
-                                    <li><h:commandLink  value="Crear un curso" rendered="#{menuController.logeado()}"></h:commandLink></li>
-
-                                </ul>
-                            </li>
-                            <li><h:form><h:commandLink  value="Foro"  action="foro.xhtml" rendered="#{menuController.logeado()}"></h:commandLink></h:form></li>
-                                <li><a href="typography.html">Caracteristicas</a>
-                                    <ul>
-
-                                        <li><a href="events.html">Events</a></li>
-                                        <li><a href="events-single.html">Events Single</a></li>
-                                        <li><a href="teachers1.html">Teachers #1</a></li>
-                                        <li><a href="teachers2.html">Teachers #2</a></li>
-                                        <li><a href="portfolio.html">Portfolio</a></li>
-                                        <li><a href="portfolio-single.html">Portfolio Single</a></li>
-                                        <li><a href="photo-gallery-2-col.html">Gallery - 2 Columns</a></li>
-                                        <li><a href="photo-gallery-3-col.html">Gallery - 3 Columns</a></li>
-                                        <li><a href="photo-gallery-4-col.html">Gallery - 4 Columns</a></li>
-                                        <li><a href="full-width.html">Full Width</a></li>
-                                        <li><a href="left-sidebar.html">Left Sidebar</a></li>
-                                        <li><a href="right-sidebar.html">Right Sidebar</a></li>
-                                        <li><a href="columns.html">Columns</a></li>
-                                        <li><a href="js-elements.html">JS Elements</a></li>
-                                        <li><a href="typography.html">Typography</a></li>
-                                    </ul>
-                                </li>
-                                <li><a href="typography.html">Nosotros</a></li>
-                                <li><a href="contact.html">Contacto</a></li>
-
-                                <!-- END #main-menu -->
-                            </ul>
-
-                            <div class="menu-search-button"></div>
-                            <form method="get" action="#" class="menu-search-form">
-                                <input class="menu-search-field" type="text" onBlur="if (this.value == '')
-                                            this.value = 'To search, type and hit enter';" onFocus="if (this.value == 'To search, type and hit enter')
-                                                        this.value = '';" value="Ingrese una busqueda" name="s" />
-                            </form>
-
-                            <!-- END #main-menu-wrapper -->
-                        </div>
-
-                        <!-- END #header-border -->
-                    </div>
-
-                    <!-- END #header-wrapper -->
-                </div>
+        
 
                 <!-- BEGIN .slider -->
                 <div class="slider clearfix">
