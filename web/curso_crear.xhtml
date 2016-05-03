@@ -183,9 +183,10 @@
 				<div class="field-row">
 					<label for="categoria">Categoria del curso</label>
                                        
-                                        <h:selectOneMenu value="#{cursoCategoriaController.id_curso_cat}" onchange="this.form.submit()">
+                                        <h:selectOneMenu value="#{cursoCategoriaController.id_curso_cat}">
                                                 
                                             <f:selectItem itemValue="0" itemLabel="Seleccione una Categoria" noSelectionOption="true" /> 
+                                             <p:ajax  update="subcategorias"/>
                                             <c:forEach items="#{cursoCategoriaController.cCats()}" var="c"> 
                                                 <f:selectItem itemValue="#{c.idCat}" itemLabel="#{c.nomCat}" />   
                                                 </c:forEach>
@@ -193,13 +194,13 @@
                                       
                                             
 				</div>
-                             </h:form>
-                        <h:form  id="contactform" class="clearfix">
+                           <!--  </h:form>
+                        <h:form  id="contactform" class="clearfix"> -->
 				<div class="field-row">
 				  <label for="subcategoria">Subcategoria del curso</label>
                                   
                                  
-                                  <h:selectOneMenu value="#{cursoSubCatController.id_cSub_cat}" >
+                                  <h:selectOneMenu value="#{cursoSubCatController.id_cSub_cat}" id="subcategorias" >
                                         
                                       <f:selectItem itemValue="0" itemLabel="Seleccione una Categoria"  noSelectionOption="true"/> 
                                       <c:forEach items="#{cursoSubCatController.listaSubCategorias(cursoCategoriaController.id_curso_cat)}" var="fsc"  >

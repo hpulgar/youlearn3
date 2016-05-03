@@ -225,43 +225,53 @@ public class MasterComentarioController implements Serializable {
     //CODIGO RECONCHESUMARE
     
     public void CrearComentario(int idComentador,int idPublicacion,int pft){
-    try
-    {
         
-        //id comentario no va
-        //id_pft viene por parametro --
-        //comentario se define en xhtml
-        //fecha comentario se moldea --
-        //id usuario viene por parametro --
-        //id publicacion viene por parametro --
-        
-        MasterComentario mc = new MasterComentario();
-        mc.setIdPublicacion(idPublicacion);
-        Usuario ou = new Usuario();
-        ou.setIdUsuario(idComentador);
-        MasterPft mpft =  new MasterPft();
-        mpft.setIdPft(pft);
-                
-        DateFormat dateFormat = new SimpleDateFormat("yyyy/mm/dd HH:mm:ss");
-        Date date = new Date();
-        String fecha = dateFormat.format(date);
-        
-        
-        current.setIdPft(mpft);
-        current.setFechaComentario(dateFormat.parse(fecha));
-        current.setIdUsuario(ou);
-        current.setIdPublicacion(idPublicacion);
-        
-        getFacade().create(current);
-        current = null;
-        
-       // return "/blog-single.xhtml";
-        
-    }catch(Exception e){
-        
-        System.out.println("Si tira error es este --> "+e);
-        //return "/blog-single.xhtml";}
-    }    
+        try
+        {
+
+            //id comentario no va
+            //id_pft viene por parametro --
+            //comentario se define en xhtml
+            //fecha comentario se moldea --
+            //id usuario viene por parametro --
+            //id publicacion viene por parametro --
+
+            MasterComentario mc = new MasterComentario();
+            mc.setIdPublicacion(idPublicacion);
+            Usuario ou = new Usuario();
+            ou.setIdUsuario(idComentador);
+            MasterPft mpft =  new MasterPft();
+            mpft.setIdPft(pft);
+
+            DateFormat dateFormat = new SimpleDateFormat("yyyy/mm/dd HH:mm:ss");
+            Date date = new Date();
+            String fecha = dateFormat.format(date);
+
+
+            current.setIdPft(mpft);
+            current.setFechaComentario(dateFormat.parse(fecha));
+            current.setIdUsuario(ou);
+            current.setIdPublicacion(idPublicacion);
+
+            getFacade().create(current);
+
+            this.current = null;
+
+           // return "/blog-single.xhtml";
+
+        }catch(Exception e){
+
+            System.out.println("Si tira error es este --> "+e);
+            //return "/blog-single.xhtml";}
+        }    
+    }
+    
+    
+    
+    public String insertForo(int idComentador,int idPublicacion,int pft)
+    {        
+        this.CrearComentario(idComentador, idPublicacion, pft);
+        return "/blog-single.xhtml";
     }
     
     public List<MasterComentario> cargaComentarios(int idPublicacion,int idPtf)

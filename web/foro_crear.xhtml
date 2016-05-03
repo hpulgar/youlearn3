@@ -4,7 +4,8 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <h:head>
 
 
@@ -178,39 +179,36 @@
 			
 			<p>&nbsp;</p>
 			
-			<h:form  id="contactform2" class="clearfix">
-                            
-				<div class="field-row">
+                        <h:form  id="contactform2" class="clearfix">
+            
+				<div class="field-row" id="algo">
 					<label for="categoria">Categoria</label>
-                                       
-                                        <h:selectOneMenu value="#{foroCategoriaController.id_cat}" onchange="this.form.submit()">
+                                        <h:selectOneMenu value="#{foroCategoriaController.id_cat}" >
                                                 
                                             <f:selectItem itemValue="0" itemLabel="Seleccione una Categoria" noSelectionOption="true" /> 
+                                            <p:ajax  update="subcategorias"/>
                                                 <c:forEach items="#{foroCategoriaController.listaCategorias()}" var="c"> 
-                                                    <f:selectItem itemValue="#{c.idCategoria}" itemLabel="#{c.titulo}" />   
+                                                    <f:selectItem itemValue="#{c.idCategoria}" itemLabel="#{c.titulo}" />  
+                                                    
                                                 </c:forEach>
                                              </h:selectOneMenu>
-                                      
-                                            
 				</div>
-                             </h:form>
+                
+                        <!--     </h:form>
                         <h:form  id="contactform" class="clearfix">
-				<div class="field-row">
+			-->	
+                             <div class="field-row">
 				  <label for="subcategoria">Subcategoria</label>
                                   
-                                 
-                                  <h:selectOneMenu value="#{foroSubcategoriaController.id_subCat}" >
-                                        
+                                
+                                  <h:selectOneMenu value="#{foroSubcategoriaController.id_subCat}" id="subcategorias" >
                                       <f:selectItem itemValue="0" itemLabel="Seleccione una Categoria"  noSelectionOption="true"/> 
                                         <c:forEach items="#{foroSubcategoriaController.listaCategorias(foroCategoriaController.id_cat)}" var="fsc"  >
-                                        <f:selectItem itemValue="#{fsc.idSubcategoria}" itemLabel="#{fsc.titulo}" />
+                                        <f:selectItem itemValue="#{fsc.idSubcategoria}" itemLabel="#{fsc.titulo}" />                                        
                                         </c:forEach>
                                      </h:selectOneMenu>	
                                   
 				</div>
-                            
-                       
-                             
                         
                             <div class="field-row">
 				  <label for="titulo">Titulo</label>

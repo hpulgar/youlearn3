@@ -4,7 +4,8 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
- >
+          
+      xmlns:p="http://primefaces.org/ui">
       
       <h:head>
 
@@ -56,24 +57,28 @@
                             $("#"+$(this).attr("id")).hide();
                             $("#response"+($(this).attr("id")).substr(-1)).show();
                             $(".algo").focus();
+                            $(".algo").val("");
                             
                             $("#response"+($(this).attr("id")).substr(-1)).focusout(function()
                             {
                                 $("#responder"+($(this).attr("id")).substr(-1)).show();
                                 $("#response"+($(this).attr("id")).substr(-1)).hide();
                                 $("#response"+($(this).attr("id")).substr(-1)).val("");
+                                $(".algo").val("");
                             });
                         }if($(this).attr("id").length === 11)
                         {
                             $("#"+$(this).attr("id")).hide();
                             $("#response"+($(this).attr("id")).substr(-2)).show();
                             $(".algo").focus();
+                            $(".algo").val("");
 
                             $("#response"+($(this).attr("id")).substr(-2)).focusout(function()
                             {
                                 $("#responder"+($(this).attr("id")).substr(-2)).show();
                                 $("#response"+($(this).attr("id")).substr(-2)).hide();
                                 $("#response"+($(this).attr("id")).substr(-2)).val("");
+                                $(".algo").val("");
 
                             });
                         }if($(this).attr("id").length === 12)
@@ -81,12 +86,14 @@
                             $("#"+$(this).attr("id")).hide();
                             $("#response"+($(this).attr("id")).substr(-3)).show();
                             $("#response"+($(this).attr("id")).substr(-3)).focus();
+                            $(".algo").val("");
 
                             $("#response"+($(this).attr("id")).substr(-3)).focusout(function()
                             {
                                 $("#responder"+($(this).attr("id")).substr(-3)).show();
                                 $("#response"+($(this).attr("id")).substr(-3)).hide();
                                 $("#response"+($(this).attr("id")).substr(-3)).val("");
+                                $(".algo").val("");
 
                             });
                         }
@@ -348,7 +355,7 @@
                                                                                     <h:form id="#{masterComentarioController.ShowResponse(mc.idComentario)}" onkeypress="if (event.keyCode == 13) this.submit();" >
                                                                                         
                                                                                         <h:inputText  id ="responder2" class="algo"  value="#{masterRespuestasController.selected.respuesta}"  />
-                                                                                        <h:commandButton id="hidden" style="visibility: hidden;" action="#{masterRespuestasController.crearRespuesta(mc.idComentario,usuarioController.id_user)}" />  
+                                                                                        <p:commandButton id="hidden" style="visibility: hidden;" onkeyup="this.form.submit()" action="#{masterRespuestasController.crearRespuesta(mc.idComentario,usuarioController.id_user)}" />  
                                                                                      </h:form>
                                                                                          
                                                                                     <!--<p class="reply"><a href="#">Reply</a></p>  -->
@@ -385,7 +392,7 @@
 							</div>
 
                                                     
-                                                    <h:commandButton class="button1" onclick="history.go(0)" action="#{masterComentarioController.CrearComentario(usuarioController.id_user,contenidosController.idContenido,4)}" value ="Comentar"/>
+                                                      <p:commandButton class="button4 rounded-button" style="background: #209b60; color: #fff; border: none;" onclick="this.form.submit()"   action="#{masterComentarioController.CrearComentario(usuarioController.id_user,contenidosController.idContenido,4)}" value ="Comentar"/>
 						</h:form>
 						
 					<!-- END #respond -->
