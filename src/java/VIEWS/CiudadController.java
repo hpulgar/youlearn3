@@ -6,6 +6,7 @@ import VIEWS.util.PaginationHelper;
 import MODELS.CiudadFacade;
 
 import java.io.Serializable;
+import java.util.*;
 import java.util.ResourceBundle;
 import javax.ejb.EJB;
 import javax.inject.Named;
@@ -28,6 +29,10 @@ public class CiudadController implements Serializable {
     private MODELS.CiudadFacade ejbFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
+    private int idCiudad;
+    private List<Ciudad> arCiudad = new ArrayList();
+    private List<Ciudad> arCiudad2 = new ArrayList();
+    
 
     public CiudadController() {
     }
@@ -40,6 +45,33 @@ public class CiudadController implements Serializable {
         return current;
     }
 
+    public List<Ciudad> getArCiudad2() {
+        return arCiudad2;
+    }
+
+    public void setArCiudad2(List<Ciudad> arCiudad2) {
+        this.arCiudad2 = arCiudad2;
+    }
+
+    
+    public List<Ciudad> getArCiudad() {
+        return arCiudad;
+    }
+
+    public void setArCiudad(List<Ciudad> arCiudad) {
+        this.arCiudad = arCiudad;
+    }
+    
+
+    public int getIdCiudad() {
+        return idCiudad;
+    }
+
+    public void setIdCiudad(int idCiudad) {
+        this.idCiudad = idCiudad;
+    }
+
+    
     private CiudadFacade getFacade() {
         return ejbFacade;
     }
@@ -180,6 +212,24 @@ public class CiudadController implements Serializable {
         return "List";
     }
 
+    public List<Ciudad> verCity(int idPais)
+    {
+       arCiudad.clear();
+       arCiudad2.clear();
+       arCiudad = ejbFacade.findAll();
+        
+        for(int i=0;i<arCiudad.size();i++)
+        {
+            if(arCiudad.get(i).getIdPais().getIdPais() == idPais)
+            {
+                arCiudad2.add(arCiudad.get(i));
+            }
+        }
+        return arCiudad2;
+    }
+    
+    
+    
     public SelectItem[] getItemsAvailableSelectMany() {
         return JsfUtil.getSelectItems(ejbFacade.findAll(), false);
     }

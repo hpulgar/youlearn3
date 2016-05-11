@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    
+    <h:head>
+        <title>Persona</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </h:head>
+    <h:body>
+        
+        <div class="inner-content-wrapper">
+           
+             
+            <div id="info">
+			
+                <h:form id="info">
+				<div class="teacher-entry clearfix">
+                                    
+                                  
+                                    
+				
+                                        
+                                    <c:forEach items="#{personaController.buscarPersona(usuarioController.id_user)}" var="pe">
+					<div class="teacher-image">
+                                            <img src="#{pe.idUsuario.imagen_foto_perfil}" alt="" />
+                                            
+                                            <div class="teacher-content">	
+						
+						<div class="title1 clearfix">
+                                                    <h3>#{pe.idUsuario.username}</h3>
+                                                    <h4>#{pe.nombre} #{pe.apellido}</h4>
+							<div class="title-block"></div>
+						</div>
+						
+                                            <p>#{pe.descripcion}</p>
+						
+						<ul class="teacher-contact">
+                                                     
+                                                        <li><span class="contact-widget">#{pe.idUsuario.correo}</span></li>
+                                                        <li><span class="contact-widget">#{pe.ocupacion}</span></li>
+                                                        <li><span class="contact-widget">#{pe.idUsuario.idPerfil.nomPerfil}</span></li>
+						</ul>
+						
+					</div>
+                                            
+					</div>
+					
+					
+                                    </c:forEach>
+				
+				<!-- END .teacher-entry -->
+				</div>
+                    
+                    </h:form>
+			
+            </div>
+        </div>
+    </h:body>
+</html>

@@ -7,9 +7,12 @@ import VIEWS.util.PaginationHelper;
 import MODELS.UsuarioFacade;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.SimpleTimeZone;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
@@ -36,7 +39,10 @@ public class UsuarioController implements Serializable {
     private MODELS.UsuarioFacade ejbFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
-   private String nombreUsuario,contraseña,message;
+     private String nombreUsuario,contraseña,message;
+    private int id_user;
+    private String correo;
+    private int id_muro;
 
     public String getNombreUsuario() {
         return nombreUsuario;
@@ -89,13 +95,6 @@ public class UsuarioController implements Serializable {
     private List<Usuario> cargaP = new ArrayList();
     private int idProfile;
 
-
- private int id_user;
-    private String correo;
-    private int id_muro;
-  
-
-  
 
     public UsuarioController() {
     }
@@ -155,6 +154,54 @@ public class UsuarioController implements Serializable {
         return "Create";
     }
 
+    //crear usuario
+    
+//    
+//    int id_usuario automatico
+//    String username Pag
+//    String password Pag
+//    date fecha_creacion Auto
+//    int id_perfil auto
+//    String correo pag
+//    int creditos auto en 0
+//    string imagen portada inicial null
+//    string imagen dashboard inicial null
+//    string foto perfil inicial null
+//            
+    
+    public String crearUsuario()
+    {
+        try{
+                SimpleDateFormat sdf = new SimpleDateFormat();
+                sdf.setTimeZone(new SimpleTimeZone(-3, "GMT"));
+                sdf.applyPattern("yyyy/mm/dd");
+                Date fecha = new Date();
+                
+                Perfil oPe = new Perfil();
+                oPe.setIdPerfil(2);
+                
+                
+                current.setFechaCreacion(fecha);
+                current.setIdPerfil(oPe);
+                current.setCreditos(0);
+                current.setImagen_portada_perfil("https://i.ytimg.com/vi/1WiGCe7QZGI/maxresdefault.jpg");
+                current.setImagen_dashboard("https://i.ytimg.com/vi/1WiGCe7QZGI/maxresdefault.jpg");
+                current.setImagen_foto_perfil("https://i.ytimg.com/vi/1WiGCe7QZGI/maxresdefault.jpg");
+                
+                getFacade().create(current);
+                
+                return "/index.xhtml";
+                
+        }catch(Exception e)
+        {
+            
+            System.out.println("LA WEA NO CREA "+e);
+            return "/register.xhtml";
+        }
+                
+                
+    }
+    
     
         //carga username
     public String verUsername(int idp){
@@ -166,6 +213,14 @@ public class UsuarioController implements Serializable {
         return uo.getUsername();
     }
     
+    
+    public List<Usuario> verUser(int idUser)
+    {
+        List<Usuario> aUs;
+        aUs = ejbFacade.cargaPerfiles(idUser);
+        
+        return aUs;
+    }
     
      private int getPerfil(String nomU,String PassUS)
      {

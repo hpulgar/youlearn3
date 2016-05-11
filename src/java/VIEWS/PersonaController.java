@@ -1,6 +1,8 @@
 package VIEWS;
 
+import ENTITIES.Ciudad;
 import ENTITIES.Persona;
+import ENTITIES.Usuario;
 import VIEWS.util.JsfUtil;
 import VIEWS.util.PaginationHelper;
 import MODELS.PersonaFacade;
@@ -17,6 +19,7 @@ import javax.faces.convert.FacesConverter;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
+import java.util.*;
 
 @Named("personaController")
 @SessionScoped
@@ -28,10 +31,39 @@ public class PersonaController implements Serializable {
     private MODELS.PersonaFacade ejbFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
+    private int idPersona;
+    private List<Persona> arPersona = new ArrayList();
+    private List<Persona> arPersona2 = new ArrayList();
 
     public PersonaController() {
     }
 
+    public List<Persona> getArPersona() {
+        return arPersona;
+    }
+
+    public void setArPersona(List<Persona> arPersona) {
+        this.arPersona = arPersona;
+    }
+
+    public List<Persona> getArPersona2() {
+        return arPersona2;
+    }
+
+    public void setArPersona2(List<Persona> arPersona2) {
+        this.arPersona2 = arPersona2;
+    }
+
+    
+    public int getIdPersona() {
+        return idPersona;
+    }
+
+    public void setIdPersona(int idPersona) {
+        this.idPersona = idPersona;
+    }
+
+    
     public Persona getSelected() {
         if (current == null) {
             current = new Persona();
@@ -179,6 +211,98 @@ public class PersonaController implements Serializable {
         recreateModel();
         return "List";
     }
+    
+    
+    
+    /*
+    
+    
+    int id_persona increment
+    String nombre  pag (quitar ____)
+    string apellido pag
+    date fecha_nac pag (mayus)
+    string ocupacion pag
+    int id_ciudad XPARAMEtro
+    boolean genero pag (arreglarlo)
+    int id_usuario XPARAMETRo
+    String descripcion
+    
+    
+    */
+    public String inforP(int idUsuario)
+    {
+        
+        if(!this.buscarPersona(idUsuario).isEmpty())
+        {
+            editP(idUsuario);
+            return "verInfo.xhtml";
+        }else
+        {
+            editP(idUsuario);
+           return "editarInfo.xhtml";
+        }
+        
+    }
+    
+    
+    
+    public List<Persona> buscarPersona(int idUsuario)
+    {
+        arPersona.clear();
+        arPersona2.clear();
+        arPersona = ejbFacade.findAll();
+        for(int i=0;i<arPersona.size();i++)
+        {
+            if(arPersona.get(i).getIdUsuario().getIdUsuario() == idUsuario)
+            {
+                arPersona2.add(arPersona.get(i));
+            }
+        }
+        return arPersona2;
+        
+    }
+    
+    
+    private void editP(int id_usuario)
+    {
+        if(!buscarPersona(id_usuario).isEmpty())
+            {
+                current = buscarPersona(id_usuario).get(0);
+            }
+            
+    }
+    
+    
+    public String crearPersona(int id_usuario, int id_ciudad)
+    {
+        try{
+            
+                        
+            Ciudad oCi = new Ciudad();
+            oCi.setIdCiudad(id_ciudad);
+            
+            Usuario oUs = new Usuario();
+            oUs.setIdUsuario(id_usuario);
+            
+            current.setIdCiudad(oCi);
+            current.setIdUsuario(oUs);
+            
+            getFacade().create(current);
+            
+            return "/perfil.xhtml";
+        }catch(Exception e)
+        {
+            System.out.println("Error "+e);
+            return "/perfil.xhtml";
+        }
+    }
+    
+    
+    
+    
+    
+    
+    
 
     public SelectItem[] getItemsAvailableSelectMany() {
         return JsfUtil.getSelectItems(ejbFacade.findAll(), false);

@@ -78,15 +78,16 @@ public class Usuario implements Serializable {
     @Column(name = "imagen_portada_perfil")
     private String imagen_portada_perfil;
     @Basic(optional = false)
-    @NotNull
+    
     @Size(min = 1, max = 200)
     @Column(name = "imagen_dashboard")
     private String imagen_dashboard;
     @Basic(optional = false)
-    @NotNull
+    
     @Size(min = 1, max = 200)
     @Column(name = "imagen_foto_perfil")
     private String imagen_foto_perfil;
+    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idUsuario")
     private List<Sesion> sesionList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idPublicador")

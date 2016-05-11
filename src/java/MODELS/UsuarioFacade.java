@@ -42,13 +42,13 @@ public class UsuarioFacade extends AbstractFacade<Usuario> {
     
     }
        
-//    public List <Usuario> cargaPerfiles(int id)
-//     {
-//         EntityManager em2 = getEntityManager();
-//         Query q = em2.createNamedQuery("Usuario.findByIdUsuario").setParameter("idUsuario", id);
-//         return q.getResultList();
-//         
-//     }   
+    public List <Usuario> cargaPerfiles(int id)
+     {
+         EntityManager em2 = getEntityManager();
+         Query q = em2.createNamedQuery("Usuario.findByIdUsuario").setParameter("idUsuario", id);
+         return q.getResultList();
+         
+     }   
        
     public List<Usuario> cargaUsername(int idp)
     {

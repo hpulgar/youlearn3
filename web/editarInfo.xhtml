@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    
+    <h:head>
+        <title>Persona</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </h:head>
+    <h:body>
+        
+        <div class="inner-content-wrapper">
+        <div id="info">
+			<h:form   style=" align-content: center">
+
+				<div class="field-row">
+					<label>Nombre</label>
+                                        <h:inputText class="text_input" id="nombre" value="#{personaController.selected.nombre}"/>
+				</div>
+
+				<div class="field-row">
+                                    <label>Apellido</label>
+                                    <h:inputText class="text_input" id="apellido" value="#{personaController.selected.apellido}"/>
+				</div>
+                            
+                                <div class="field-row">
+                                      <p:outputLabel for="popup" value="Fecha Nacimiento" />
+                                      <p:calendar id="popup" value="#{personaController.selected.fechaNac}"  style="  background: blue" />
+                                       
+                                </div>
+                            
+                            <div class="field-row">
+                                      <label>Genero</label>
+
+                                      <h:selectOneMenu value="#{personaController.selected.genero}" >
+                                      <f:selectItem itemValue="0" itemLabel="Seleccione una Categoria"  noSelectionOption="true"/> 
+                                          <f:selectItem itemValue="Hombre" itemLabel="Hombre" />
+                                          <f:selectItem itemValue="Mujer" itemLabel="Mujer" />
+                                          
+                                     </h:selectOneMenu>	
+				</div>
+                                
+                            
+                            
+                            <div class="field-row">
+					<label>Pais</label>
+                                       
+                                        <h:selectOneMenu value="#{paisController.idPais}">
+                                            <f:selectItem itemValue="0" itemLabel="Seleccione una Categoria" noSelectionOption="true" /> 
+                                             <p:ajax  update="ciudad"/>
+                                             <c:forEach items="#{paisController.verPaises()}" var="pp">
+                                                 <f:selectItem itemValue="#{pp.idPais}" itemLabel="#{pp.nombrePais}" />   
+                                                </c:forEach>
+                                             </h:selectOneMenu>
+				</div>
+                           
+				<div class="field-row">
+				  <label>Ciudad</label>
+                                  
+                                 
+                                  <h:selectOneMenu value="#{ciudadController.idCiudad}" id="ciudad" >
+                                      <f:selectItem itemValue="0" itemLabel="Seleccione una Categoria"  noSelectionOption="true"/> 
+                                      <c:forEach items="#{ciudadController.verCity(paisController.idPais)}" var="ci">
+                                          <f:selectItem itemValue="#{ci.idCiudad}" itemLabel="#{ci.nombreCiudad}" />
+                                      </c:forEach>
+                                     </h:selectOneMenu>	
+				</div> 
+                            
+                            
+                            <div class="field-row">
+                                      <label>Ocupacion</label>
+
+                                      <h:inputText class="text_input" id="Ocupacion" value="#{personaController.selected.ocupacion}"/>
+                                </div>
+                            
+                            <div class="field-row">
+                                      <label >Descripcion</label>
+
+                                      <h:inputText class="text_input" id="descripcion" value="#{personaController.selected.descripcion}"/>
+                                </div>
+
+                             <div class="field-row">
+
+				<p>
+                                    <h:commandButton class="button1" type="submit" value="Crear cuenta" id="submit" action="#{personaController.crearPersona(usuarioController.id_user,ciudadController.idCiudad)}"/>
+                                 
+				</p>
+                             </div>
+                               
+                        </h:form>
+			
+			<!-- END .inner-content-wrapper -->
+			</div>
+            </div>
+    </h:body>
+</html>

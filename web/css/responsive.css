@@ -720,7 +720,7 @@
 	.header-block-wrapper,
 	.slides .flex-caption-wrapper,
 	.content-wrapper {
-		width: 300px;
+		width: 400px;
 	}
 	
 	.slider {
@@ -842,7 +842,8 @@
 	}
 	
 	.blog-entry .blog-info .blog-meta {
-		display: none;
+		display: none ;
+                text-align: center;
 	}
 	
 	.news-social-links ul {

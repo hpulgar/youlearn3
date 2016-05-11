@@ -5,7 +5,8 @@
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
           
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
       
       <h:head>
 
@@ -112,114 +113,10 @@
      
 
 	<!-- BEGIN #header-wrapper -->
-	<div id="header-wrapper">
-		
-		<!-- BEGIN #header-border -->
-		<div id="header-border">
-		
-			<!-- BEGIN #header-top -->
-			<div id="header-top" class="clearfix">
-			
-				<ul class="top-left-nav clearfix">
-					<li><a href="blog.html">Blog</a><span>/</span></li>
-					<li><a href="events.html">Events</a><span>/</span></li>
-					<li><a href="typography.html">Jobs</a><span>/</span></li>
-					<li><a href="courses.html">Courses</a><span>/</span></li>
-					<li><a href="typography.html">Campus</a><span>/</span></li>
-				</ul>
-			
-				<ul class="top-right-nav clearfix">
-					<li class="phone-icon">1800-562-3764</li>
-					<li class="email-icon">enquiries@website.com</li>
-				</ul>
-			
-			<!-- END #header-top -->
-			</div>
-			
-			<!-- BEGIN #header-content-wrapper -->
-			<div id="header-content-wrapper" class="clearfix">
-			
-				<div id="logo">
-					<h1><a href="index-2.html"><span>Park</span>College</a></h1>
-				</div>
-			
-				<ul class="social-icons clearfix">	
-					<li><a target="_blank" href="#"><span class="twitter-icon"></span></a></li>
-					<li><a target="_blank" href="#"><span class="facebook-icon"></span></a></li>
-					<li><a target="_blank" href="#"><span class="gplus-icon"></span></a></li>
-					<li><a target="_blank" href="#"><span class="pinterest-icon"></span></a></li>
-					<li><a target="_blank" href="#"><span class="flickr-icon"></span></a></li>
-					<li><a target="_blank" href="#"><span class="youtube-icon"></span></a></li>
-					<li><a target="_blank" href="#"><span class="vimeo-icon"></span></a></li>
-					<li><a target="_blank" href="#"><span class="skype-icon"></span></a></li>
-					<li><a target="_blank" href="#"><span class="rss-icon"></span></a></li>
-				</ul>
-			
-			<!-- END #header-content-wrapper -->
-			</div>
-		
-			<!-- BEGIN #main-menu-wrapper -->
-			<div id="main-menu-wrapper" class="clearfix">
-		
-				<!-- BEGIN #main-menu -->
-				<ul id="main-menu">
-					
-					<li><a href="index-2.html">Home</a></li>
-					<li><a href="typography.html">About Us</a></li>
-					<li><a href="courses.html">Courses</a>
-						<ul>
-							<li><a href="courses-single.html">Course Name #1</a></li>
-							<li><a href="courses-single.html">Course Name #2</a></li>
-							<li><a href="courses-single.html">Course Name #3</a>
-								<ul>
-									<li><a href="courses-single.html">Course Name #1</a></li>
-									<li><a href="courses-single.html">Course Name #2</a></li>
-									<li><a href="courses-single.html">Course Name #3</a></li>
-								</ul>
-							</li>
-							<li><a href="courses-single.html">Course Name #4</a></li>
-							<li><a href="courses-single.html">Course Name #5</a></li>
-							<li><a href="courses-single.html">Course Name #6</a></li>
-						</ul>
-					</li>
-					<li class="current_page_item"><a href="blog.html">Blog</a></li>
-					<li><a href="typography.html">Features</a>
-						<ul>
-							<li><a href="events.html">Events</a></li>
-							<li><a href="events-single.html">Events Single</a></li>
-							<li><a href="teachers1.html">Teachers #1</a></li>
-							<li><a href="teachers2.html">Teachers #2</a></li>
-							<li><a href="portfolio.html">Portfolio</a></li>
-							<li><a href="portfolio-single.html">Portfolio Single</a></li>
-							<li><a href="photo-gallery-2-col.html">Gallery - 2 Columns</a></li>
-							<li><a href="photo-gallery-3-col.html">Gallery - 3 Columns</a></li>
-							<li><a href="photo-gallery-4-col.html">Gallery - 4 Columns</a></li>
-							<li><a href="full-width.html">Full Width</a></li>
-							<li><a href="left-sidebar.html">Left Sidebar</a></li>
-							<li><a href="right-sidebar.html">Right Sidebar</a></li>
-							<li><a href="columns.html">Columns</a></li>
-							<li><a href="js-elements.html">JS Elements</a></li>
-							<li><a href="typography.html">Typography</a></li>
-						</ul>
-					</li>
-					<li><a href="contact.html">Contact Us</a></li>
-					
-				<!-- END #main-menu -->
-				</ul>
-		
-				<div class="menu-search-button"></div>
-				<form method="get" action="#" class="menu-search-form">
-					<input class="menu-search-field" type="text" onblur="if(this.value=='')this.value='To search, type and hit enter';" onfocus="if(this.value=='To search, type and hit enter')this.value='';" value="To search, type and hit enter" name="s" />
-				</form>
-		
-			<!-- END #main-menu-wrapper -->
-			</div>
-		
-		<!-- END #header-border -->
-		</div>
-	
-	<!-- END #header-wrapper -->
-	</div>
+	<div id="header" >
+                        
+                  <ui:include src="header.xhtml" />
+        </div>
 	
 	<!-- BEGIN .page-header -->
 	<div class="page-header clearfix">

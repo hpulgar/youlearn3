@@ -28,10 +28,20 @@ public class PublicacionPerfilController implements Serializable {
     private MODELS.PublicacionPerfilFacade ejbFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
+    private int idPublicacion;
 
     public PublicacionPerfilController() {
     }
 
+    public int getIdPublicacion() {
+        return idPublicacion;
+    }
+
+    public void setIdPublicacion(int idPublicacion) {
+        this.idPublicacion = idPublicacion;
+    }
+
+    
     public PublicacionPerfil getSelected() {
         if (current == null) {
             current = new PublicacionPerfil();

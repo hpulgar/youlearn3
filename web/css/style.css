@@ -1289,7 +1289,7 @@ div.selector.disabled span, div.selector.disabled.active span {
 
 .sidebar-right {
 	background: url(../images/dot_border_v.png) repeat-y top left;
-	width: 27%;
+	width: 20%;
 	float: left;
 	position: relative;
 	top: 0;
@@ -1311,7 +1311,14 @@ div.selector.disabled span, div.selector.disabled.active span {
 }
 
 .main-content {
-	width: 73%;
+	width: 80%;
+	float: left;
+	position: relative;
+	min-height: 10px;
+}
+
+.perfil-content {
+	width: 100%;
 	float: left;
 	position: relative;
 	min-height: 10px;
@@ -2025,9 +2032,9 @@ label span {
 }
 
 .teacher-entry .teacher-image {
-	width: 15%;
+	width: 30%;
 	float: left;
-	margin: 0 5% 0 0;
+	margin: 0 20% 0 0;
 }
 
 .teacher-entry .teacher-image img {
@@ -2036,8 +2043,8 @@ label span {
 }
 
 .teacher-entry .teacher-content {
-	width: 80%;
-	float: left;
+	width: 100%;
+	float: right;
 	background: url(../images/dot_border_h.png) repeat-x bottom left;
 }
 

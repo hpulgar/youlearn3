@@ -6,6 +6,7 @@ import VIEWS.util.PaginationHelper;
 import MODELS.PaisFacade;
 
 import java.io.Serializable;
+import java.util.*;
 import java.util.ResourceBundle;
 import javax.ejb.EJB;
 import javax.inject.Named;
@@ -28,6 +29,9 @@ public class PaisController implements Serializable {
     private MODELS.PaisFacade ejbFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
+    
+    private int idPais;
+    private List<Pais> arPais = new ArrayList();
 
     public PaisController() {
     }
@@ -39,6 +43,23 @@ public class PaisController implements Serializable {
         }
         return current;
     }
+
+    public int getIdPais() {
+        return idPais;
+    }
+
+    public void setIdPais(int idPais) {
+        this.idPais = idPais;
+    }
+
+    public List<Pais> getArPais() {
+        return arPais;
+    }
+
+    public void setArPais(List<Pais> arPais) {
+        this.arPais = arPais;
+    }
+    
 
     private PaisFacade getFacade() {
         return ejbFacade;
@@ -180,6 +201,17 @@ public class PaisController implements Serializable {
         return "List";
     }
 
+    
+    public List<Pais> verPaises()
+    {
+        
+        arPais.clear();
+        return arPais = ejbFacade.findAll();
+        
+    }
+    
+    
+    
     public SelectItem[] getItemsAvailableSelectMany() {
         return JsfUtil.getSelectItems(ejbFacade.findAll(), false);
     }
