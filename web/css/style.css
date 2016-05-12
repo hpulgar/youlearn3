@@ -1537,6 +1537,10 @@ div.selector.disabled span, div.selector.disabled.active span {
 .blog-entry .blog-info {
 	float: left;
 	width: 20%;
+        text-align:center;
+        justify-content:center;
+        
+        
 }
 
 .blog-entry .blog-content {
@@ -1555,8 +1559,19 @@ div.selector.disabled span, div.selector.disabled.active span {
 	margin: 0 0 15px 0;
 }
 
+.blog-entry .blog-info .foto-perfil {
+	border-radius: 99%;
+	width: 150px;
+	height: 150px;
+	
+	margin: 0 0 15px 0;
+}
+
 .blog-entry .blog-info .blog-meta {
 	clear: both;
+        text-align: left;
+        justify-content:space-around;
+         float: left;
 }
 
 .blog-entry .blog-info .blog-date h3 {

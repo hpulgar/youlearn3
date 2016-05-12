@@ -80,49 +80,67 @@
 				<!-- BEGIN .blog-entry -->
 				<div class="blog-entry clearfix">
 					
-                                    <div class="blog-info" style=" float:left; margin-left:-5%">
+                                    <div class="blog-info">
                                            
-                                            <c:forEach items="#{usuarioController.verUser(usuarioController.id_user)}" var="bi">
+                                            <c:forEach items="#{personaController.buscarPersona(usuarioController.id_user)}" var="bi">
                                                 <div>
-                                                    <h3><img src="#{bi.imagen_foto_perfil}" class="blog-date"  style=" object-fit: cover;"/></h3>
-                                                </div>	
-                                           
-                                                <ul class="blog-meta">
+                                                    <h3><img src="#{bi.idUsuario.imagen_foto_perfil}" class="foto-perfil" /></h3>
+                                              
+                                                    <h2><h:outputText value="#{bi.idUsuario.username}"></h:outputText></h2>
+                                                    <br/><br/>
+                                                     
+                                                    <strong> <h:outputText value="Nombre "></h:outputText></strong>
+                                                    <br/>
+                                                    <h:outputText value="#{bi.nombre} #{bi.apellido}"></h:outputText>
+                                                    <br/><br/>
                                                     
-                                                    <li> <strong>Miembro Desde </strong></li>
-                                                    
-                                                    <li><h:outputText value="#{bi.fechaCreacion}" style=" text-align: center; margin-right:10%" >
+                                                    <strong> <h:outputText value="Miembro Desde"></h:outputText></strong>
+                                                    <br/>
+                                                    <h:outputText value="#{bi.idUsuario.fechaCreacion}">
                                                                <f:convertDateTime type="date" pattern="dd-M-yyyy"/>
-                                                         </h:outputText></li>
-                                                    <li><strong>Tipo usuario</strong></li>
+                                                    </h:outputText>
+                                                    <br></br><br/>
                                                     
-                                                   
-                                                    <li>#{bi.idPerfil.nomPerfil} </li>
-                                                  
+                                                    <strong><h:outputText value="Tipo de usuario"></h:outputText></strong>
+                                                    <br/>
+                                                    <h:outputText value="#{bi.idUsuario.idPerfil.nomPerfil}" ></h:outputText>
+                                                    <br/><br/>
+                                                    <strong><h:outputText value="Correo"></h:outputText></strong>
+                                                    <br/>
+                                                    <h:outputText value="#{bi.idUsuario.correo}" ></h:outputText>
+                                                    <br/><br/>
                                                     
-                                                    <h:button class="button1" style=" margin-left: 40%;" value="y q se sho"/>
-						</ul>
+                                                    <strong><h:outputText value="Descripcion"></h:outputText></strong>
+                                                    <br/>
+                                                    <h:outputText value="#{bi.descripcion}" ></h:outputText>
+                                                    <br/><br/>
+                                                    
+                                                    <h:button class="button1" style=" margin-left: 10%;" value="NO_IDEA_BUTTON"/>
+						
+                                                  </div>  
                                                 </c:forEach> 
-					</div>
+                                        	
+                                    </div>
 					
 					<div class="blog-content blog-content-single">	
                                             <h3>Informacion</h3>
                                             <div id="tabs" >
                                                 <ul class="nav clearfix" >
-                                                            <li><a href="#tabs-tab-title-1">Tab Title 1</a></li>
-                                                            <li><a href="#tabs-tab-title-2">Tab Title 2</a></li>
-                                                            <li><a href="#tabs-tab-title-3">Tab Title 3</a></li>
-                                                            <li><a href="#tabs-tab-title-4">Tab Title 4</a></li>
-                                                            <li><a href="#tabs-tab-title-5">Tab Title 5</a></li>
-                                                            <li><a href="#tabs-tab-title-6">Tab Title 5</a></li>
+                                                            <li><a href="#tabs-tab-title-1">Dashboard</a></li>
+                                                            <li><a href="#tabs-tab-title-2">Mi muro</a></li>
+                                                            <li><a href="#tabs-tab-title-3">Editar perfil</a></li>
+                                                            <li><a href="#tabs-tab-title-4">Mensajes</a></li>
+                                                            <li><a href="#tabs-tab-title-5">Cursos inscritos</a></li>
+                                                            <li><a href="#tabs-tab-title-6">Premium</a></li>
                                                          
                                                     </ul>
                                                 <c:forEach items="#{usuarioController.verUser(usuarioController.id_user)}" var="bi2">
                                                     
                                                     <style type="text/css"> </style>
-                                                    <div id="tabs-tab-title-1" style="background-image: url( #{bi2.imagen_dashboard})" > <p></p> <ui:include src="#{personaController.inforP(usuarioController.id_user)}" /> </div>
-                                                    <div id="tabs-tab-title-2" style=" background-image: url(#{bi2.imagen_dashboard})"> <p></p><ui:include src="editarInfo.xhtml" /></div>
-                                                    <div id="tabs-tab-title-3" style=" background-image: url(#{bi2.imagen_dashboard})"> <p>Ut bibendum ullamcorper tortor, eget aliquet odio facilisis quis. Nulla interdum aliquet scelerisque. Curabitur ante metus, laoreet eu convallis a, tristique a arcu. Donec id erat sed lectus congue tempor</p></div>
+                                                    <div id="tabs-tab-title-1" style="background-image: url( #{bi2.imagen_dashboard}); background-repeat: no-repeat;background-size: cover" > <p></p> <ui:include src="#{personaController.inforP(usuarioController.id_user)}" /> </div>
+                                                    <!--<div id="tabs-tab-title-1" style="background-image: url( #{bi2.imagen_dashboard}); background-repeat: no-repeat;background-size: cover" ><p>Ut bibendum ullamcorper tortor, eget aliquet odio facilisis quis. Nulla interdum aliquet scelerisque. Curabitur ante metus, laoreet eu convallis a, tristique a arcu. Donec id erat sed lectus congue tempor<br></br>Ut bibendum ullamcorper tortor, eget aliquet odio facilisis quis. Nulla interdum aliquet scelerisque. Curabitur ante metus, laoreet eu convallis a, tristique a arcu. Donec id erat sed lectus congue tempo</p></div>
+                                                 --><div id="tabs-tab-title-3" style=" background-image: url(#{bi2.imagen_dashboard}); background-repeat: no-repeat;background-size: cover"> <p></p><ui:include src="editarInfo.xhtml" /></div>
+                                                    <div id="tabs-tab-title-2" style=" background-image: url(#{bi2.imagen_dashboard}); background-repeat: no-repeat;background-size: cover"> <p>Ut bibendum ullamcorper tortor, eget aliquet odio facilisis quis. Nulla interdum aliquet scelerisque. Curabitur ante metus, laoreet eu convallis a, tristique a arcu. Donec id erat sed lectus congue tempor</p></div>
                                                     <div id="tabs-tab-title-4"><p>Ut bibendum ullamcorper tortor, eget aliquet odio facilisis quis. Nulla interdum aliquet scelerisque. Curabitur ante metus, laoreet eu convallis a, tristique a arcu. Donec id erat sed lectus congue tempor</p></div>
                                                     <div id="tabs-tab-title-5"><p>Ut bibendum ullamcorper tortor, eget aliquet odio facilisis quis. Nulla interdum aliquet scelerisque. Curabitur ante metus, laoreet eu convallis a, tristique a arcu. Donec id erat sed lectus congue tempor</p></div>
                                                     <div id="tabs-tab-title-6"><p>Ut bibendum ullamcorper tortor, eget aliquet odio facilisis quis. Nulla interdum aliquet scelerisque. Curabitur ante metus, laoreet eu convallis a, tristique a arcu. Donec id erat sed lectus congue tempor</p></div>
