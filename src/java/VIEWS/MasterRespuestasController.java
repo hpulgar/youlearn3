@@ -35,7 +35,7 @@ public class MasterRespuestasController implements Serializable {
     private MODELS.MasterRespuestasFacade ejbFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
-    private List<MasterRespuestas> listaRespuestas;
+    private List<MasterRespuestas> listaRespuestas = new ArrayList();
     
     
 
@@ -243,13 +243,13 @@ public class MasterRespuestasController implements Serializable {
                 current.setFechaRespuesta(dateFormat.parse(fecha));
 
                 
-                System.out.println("la respuesta "+current.getRespuesta());
+               
                 
                 if(!current.getRespuesta().isEmpty())
                 {
+                    System.out.println("ID DEL COMENTARIO A PARA RESPUESTA ->>>>>>>>>>>"+id_comentario);
+                    System.out.println("LA RESPUESTA A CREAR "+current.getRespuesta());
                     getFacade().create(current);
-                    System.out.println("ID DEL COMENTARIO ->>>>>>>>>>>"+id_comentario);
-                    System.out.println("la respuesta "+current.getRespuesta());
                     current = null;
                 }
                 //return "/blog-single.xhtml";
@@ -265,16 +265,18 @@ public class MasterRespuestasController implements Serializable {
     }
     
      public List<MasterRespuestas> cargaRespuesta(int id_comentario)
-    {        
-        List<MasterRespuestas> mrl = new ArrayList<MasterRespuestas>(); 
-        MasterRespuestas mr = new MasterRespuestas();
+    {    
+        //listaRespuestas.clear();
+        List<MasterRespuestas> mrl = new ArrayList(); 
         mrl.clear();   
+        
+        listaRespuestas.clear();
         listaRespuestas = ejbFacade.findAll();                
         for(int i=0;i<listaRespuestas.size();i++)
         {
             if((listaRespuestas.get(i).getIdComentario().getIdComentario())==id_comentario)
                 {
-                   //System.out.println(" comentario>>>> "+comentariosForo.get(i));
+                   
                    
                    mrl.add(listaRespuestas.get(i));
                 } 
@@ -287,6 +289,66 @@ public class MasterRespuestasController implements Serializable {
     }
     
     
+     
+     
+     public String crearRespuesta2(int id_comentario,int id_usuario){
+    
+      
+            try
+            {
+
+               
+
+                MasterRespuestas mr = new MasterRespuestas();
+
+                Usuario ou = new Usuario();
+                ou.setIdUsuario(id_usuario);
+
+                MasterComentario mc= new MasterComentario();
+                mc.setIdComentario(id_comentario);
+
+
+
+                DateFormat dateFormat = new SimpleDateFormat("yyyy/mm/dd HH:mm:ss");
+                Date date = new Date();
+                String fecha = dateFormat.format(date);
+
+
+                current.setIdComentario(mc);
+                current.setIdUsuario(ou);
+                current.setFechaRespuesta(dateFormat.parse(fecha));
+
+                
+               
+                
+                if(!current.getRespuesta().isEmpty())
+                {
+                    System.out.println("ID DEL COMENTARIO A PARA RESPUESTA ->>>>>>>>>>>"+id_comentario);
+                    System.out.println("LA RESPUESTA A CREAR "+current.getRespuesta());
+                    getFacade().create(current);
+                    current = null;
+                }
+                return "/perfil.xhtml";
+
+            }catch(Exception e){
+
+                System.out.println("Si tira error es este -----------------> "+e);
+                return "/perfil.xhtml";
+            }
+           
+        
+        
+    }
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
 
     @FacesConverter(forClass = MasterRespuestas.class)
     public static class MasterRespuestasControllerConverter implements Converter {

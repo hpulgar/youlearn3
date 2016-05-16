@@ -243,7 +243,20 @@ public class PersonaController implements Serializable {
         }
         
     }
-    
+    public void updateP(int idUsuario,int idCity)
+    {
+        
+        if(!this.buscarPersona(idUsuario).isEmpty())
+        {
+             editarPersona(idUsuario,idCity);
+            
+        }else
+        {
+            crearPersona(idUsuario,idCity);
+           
+        }
+        
+    }
     
     
     public List<Persona> buscarPersona(int idUsuario)
@@ -275,6 +288,7 @@ public class PersonaController implements Serializable {
     
     public String crearPersona(int id_usuario, int id_ciudad)
     {
+        System.out.println("ENTRA AL crear");
         try{
             
                         
@@ -299,7 +313,30 @@ public class PersonaController implements Serializable {
     
     
     
-    
+    public String editarPersona(int id_usuario, int id_ciudad)
+    {
+        System.out.println("ENTRA AL EDITAR");
+        try{
+            
+                        
+            Ciudad oCi = new Ciudad();
+            oCi.setIdCiudad(id_ciudad);
+            
+            Usuario oUs = new Usuario();
+            oUs.setIdUsuario(id_usuario);
+            
+            current.setIdCiudad(oCi);
+            current.setIdUsuario(oUs);
+            
+            getFacade().edit(current);
+            
+            return "/perfil.xhtml";
+        }catch(Exception e)
+        {
+            System.out.println("Error "+e);
+            return "/perfil.xhtml";
+        }
+    }
     
     
     

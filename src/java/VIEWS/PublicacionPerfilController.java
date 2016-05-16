@@ -1,11 +1,15 @@
 package VIEWS;
 
 import ENTITIES.PublicacionPerfil;
+import ENTITIES.Usuario;
 import VIEWS.util.JsfUtil;
 import VIEWS.util.PaginationHelper;
 import MODELS.PublicacionPerfilFacade;
 
+import java.util.*;
 import java.io.Serializable;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ResourceBundle;
 import javax.ejb.EJB;
 import javax.inject.Named;
@@ -29,9 +33,38 @@ public class PublicacionPerfilController implements Serializable {
     private PaginationHelper pagination;
     private int selectedItemIndex;
     private int idPublicacion;
+    private List<PublicacionPerfil> arPerfil = new ArrayList();
+    //private List<PublicacionPerfil> arPerfil2 = new ArrayList();
+    private int idPerfil;
 
     public PublicacionPerfilController() {
     }
+
+    public List<PublicacionPerfil> getArPerfil() {
+        return arPerfil;
+    }
+
+    public void setArPerfil(List<PublicacionPerfil> arPerfil) {
+        this.arPerfil = arPerfil;
+    }
+
+//    public List<PublicacionPerfil> getArPerfil2() {
+//        return arPerfil2;
+//    }
+//
+//    public void setArPerfil2(List<PublicacionPerfil> arPerfil2) {
+//        this.arPerfil2 = arPerfil2;
+//    }
+
+    public int getIdPerfil() {
+        return idPerfil;
+    }
+
+    public void setIdPerfil(int idPerfil) {
+        this.idPerfil = idPerfil;
+    }
+    
+    
 
     public int getIdPublicacion() {
         return idPublicacion;
@@ -189,6 +222,82 @@ public class PublicacionPerfilController implements Serializable {
         recreateModel();
         return "List";
     }
+ 
+    
+//    
+//    int idpublicacion Autoincrement
+//    String publicacion X pagian(Publicaciones)
+//    int id_publicador X parametro
+//    date publicacion genera automaticamente
+//    int idUsuario X parametro (dueño d ela pagina)
+//    
+//    
+    
+    
+    
+    
+    public void crearPublicacion(int publicador,int id_usuario)
+    {
+        try{
+            
+            Usuario ou = new Usuario();
+            ou.setIdUsuario(publicador);
+            
+            Usuario ou2 = new Usuario();
+            ou.setIdUsuario(id_usuario);
+            
+            DateFormat dateFormat = new SimpleDateFormat("yyyy/mm/dd HH:mm:ss");
+            Date date = new Date();
+            String fecha = dateFormat.format(date);
+            
+            current.setIdPublicador(ou);
+            current.setIdUsuario(ou2);
+            current.setFechaPublicacion(dateFormat.parse(fecha));
+            ejbFacade.create(current);
+            this.current=null;
+        }
+        catch(Exception e)
+        {
+         System.out.println("El error al crear la publicacion es "+ e);   
+        }
+    }
+    
+    
+    
+    public List<PublicacionPerfil> verPublicaciones(int idUsuario)
+    {
+        arPerfil.clear();
+        arPerfil =ejbFacade.findAll();
+        List<PublicacionPerfil> arPerfil2 = new ArrayList();
+        
+        for(int i=0;i<arPerfil.size();i++)
+        {
+            if(arPerfil.get(i).getIdUsuario().getIdUsuario() == idUsuario)
+            {
+                
+                arPerfil2.add(arPerfil.get(i));
+            }
+        }
+        return arPerfil2;
+        
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 
     public SelectItem[] getItemsAvailableSelectMany() {
         return JsfUtil.getSelectItems(ejbFacade.findAll(), false);

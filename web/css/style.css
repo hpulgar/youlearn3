@@ -1000,6 +1000,14 @@ div.selector.disabled span, div.selector.disabled.active span {
 	border-radius: 30px;
 }
 
+.comment-entry .comment-right .algo{
+    width: 250px; 
+    margin-right: 100px;
+    float:right;
+    
+}
+
+
 /* 5.4 - Tables */
 .page-content table {
 	margin: 0 0 30px 0;
@@ -1397,6 +1405,14 @@ div.selector.disabled span, div.selector.disabled.active span {
 	padding: 30px;
 }
 
+.editar-content-wrapper {
+	padding: 30px;
+        margin-left: 5%;
+}
+
+
+
+
 /* 7.1 - Events */
 .event-list {
 	margin: 0 !important;
@@ -1539,6 +1555,8 @@ div.selector.disabled span, div.selector.disabled.active span {
 	width: 20%;
         text-align:center;
         justify-content:center;
+        font: oblique 100% cursive;
+        text-transform: capitalize;
         
         
 }
@@ -1727,7 +1745,13 @@ div.selector.disabled span, div.selector.disabled.active span {
 	float: right;
 	margin: 60px 0 20px 0;
 }
-
+.respond-publicacion {
+	width: 85%;
+	float: right;
+	margin: 60px 0 20px 0;
+        
+        
+}
 #respond input[type="text"],
 #contactform input[type="text"] {
 	width: 50%;

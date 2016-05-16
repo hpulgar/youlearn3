@@ -30,7 +30,7 @@ import javax.faces.model.SelectItem;
 public class MasterComentarioController implements Serializable {
 
     private MasterComentario current;
-    private List<MasterComentario> comentariosForo;     
+    private List<MasterComentario> comentariosForo = new ArrayList();     
     private List<MasterComentario> comentariosForo2;  
     private DataModel items = null;
     @EJB
@@ -40,7 +40,17 @@ public class MasterComentarioController implements Serializable {
     private int idCom;
     private int cuenta;
     private int bigId;
+    private boolean mostrar = false;
 
+    public boolean isMostrar() {
+        return mostrar;
+    }
+
+    public void setMostrar(boolean mostrar) {
+        this.mostrar = mostrar;
+    }
+
+    
     public int getBigId() {
         return bigId;
     }
@@ -224,6 +234,14 @@ public class MasterComentarioController implements Serializable {
     
     //CODIGO RECONCHESUMARE
     
+    
+    
+    public boolean mostrarComentario(boolean asd)
+    {
+        this.setMostrar(asd);
+        return this.isMostrar();
+    }
+    
     public void CrearComentario(int idComentador,int idPublicacion,int pft){
         
         try
@@ -276,8 +294,10 @@ public class MasterComentarioController implements Serializable {
     
     public List<MasterComentario> cargaComentarios(int idPublicacion,int idPtf)
     {        
-        List<MasterComentario> ob = new ArrayList<MasterComentario>();        
-        ob.clear();   
+        List<MasterComentario> ob = new ArrayList() ;        
+           
+        
+        comentariosForo.clear();
         comentariosForo = ejbFacade.findAll();                
         for(int i=0;i<comentariosForo.size();i++)
         {
@@ -303,6 +323,7 @@ public class MasterComentarioController implements Serializable {
     public int cuentaMensajes(int idpost)
     {   
         int c=0;
+        comentariosForo.clear();
         comentariosForo = ejbFacade.findAll();
         
         for(int i=0;i<comentariosForo.size();i++)
@@ -317,7 +338,7 @@ public class MasterComentarioController implements Serializable {
      
     public int mayorIdComentarios()
     {   
-        System.out.println("QUIERO IMPRIMIR EL MAYOR ID: "+this.getBigId());
+       // System.out.println("QUIERO IMPRIMIR EL MAYOR ID: "+this.getBigId());
         return this.getBigId();   
     }
     
@@ -325,7 +346,7 @@ public class MasterComentarioController implements Serializable {
     public String ShowResponse(int i)
     {
         String a = "response"+i;
-        System.out.println("IMPRIMIENDO Response: "+a);
+        //System.out.println("IMPRIMIENDO Response: "+a);
         
         return a;
     }
@@ -333,7 +354,7 @@ public class MasterComentarioController implements Serializable {
     public String ShowResponder(int i)
     {
             String b = "responder"+i;
-            System.out.println("IMPRIMIENDO RESPONDER: "+b);
+           // System.out.println("IMPRIMIENDO RESPONDER: "+b);
             
         return b;
     }

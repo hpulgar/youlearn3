@@ -13,7 +13,7 @@
     </h:head>
     <h:body>
         
-        <div class="inner-content-wrapper">
+        <div class="editar-content-wrapper">
         <div id="info">
 			<h:form>
 
@@ -86,7 +86,7 @@
                              <div class="field-row">
 
 				<p>
-                                    <h:commandButton class="button1" type="submit" value="Actualizar datos" id="submit" action="#{personaController.crearPersona(usuarioController.id_user,ciudadController.idCiudad)}"/>
+                                    <h:commandButton class="button1" type="submit" value="Actualizar datos" id="submit" action="#{personaController.updateP(usuarioController.id_user,ciudadController.idCiudad)}"/>
                                  
 				</p>
                              </div>
