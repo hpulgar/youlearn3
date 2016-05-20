@@ -1001,6 +1001,7 @@ div.selector.disabled span, div.selector.disabled.active span {
 }
 
 .comment-entry .comment-right .algo{
+    
     width: 250px; 
     margin-right: 100px;
     float:right;
@@ -1267,7 +1268,7 @@ div.selector.disabled span, div.selector.disabled.active span {
 	display: block;
 	border-top: #e5e5e5 1px solid;
 	padding: 20px 20px 20px 20px;
-	background: #fff;
+	background: transparent;
 }
 
 .ui-tabs .ui-tabs-hide { 

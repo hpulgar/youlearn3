@@ -11,181 +11,112 @@
     <h:head>
         <title>TODO supply a title</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         
         <link rel="stylesheet" href="css/style.css" type="text/css"  media="all" />
-        <script type="text/javascript">
-    //<![CDATA[
-        
-       
-            $(document).ready(function() 
-            {
-                
-                for(i=0;i<=#{masterComentarioController.mayorIdComentarios()};i++)
-                {                   
-                    
-                    $("#response"+i).hide(); 
-                }   
-                    $(".comment-right .responder").click(function()
-                    {   
-                        
-                        if($(this).attr("id").length === 10)
-                        {
-                            
-                            $("#"+$(this).attr("id")).hide();
-                            $("#response"+($(this).attr("id")).substr(-1)).show();
-                            $(".algo").focus();
-                            $(".algo").val("");
-                            
-                            $("#response"+($(this).attr("id")).substr(-1)).focusout(function()
-                            {
-                                $("#responder"+($(this).attr("id")).substr(-1)).show();
-                                $("#response"+($(this).attr("id")).substr(-1)).hide();
-                                $("#response"+($(this).attr("id")).substr(-1)).val("");
-                                $(".algo").val("");
-                            });
-                        }if($(this).attr("id").length === 11)
-                        {
-                            $("#"+$(this).attr("id")).hide();
-                            $("#response"+($(this).attr("id")).substr(-2)).show();
-                            $(".algo").focus();
-                            $(".algo").val("");
-
-                            $("#response"+($(this).attr("id")).substr(-2)).focusout(function()
-                            {
-                                $("#responder"+($(this).attr("id")).substr(-2)).show();
-                                $("#response"+($(this).attr("id")).substr(-2)).hide();
-                                $("#response"+($(this).attr("id")).substr(-2)).val("");
-                                $(".algo").val("");
-
-                            });
-                        }if($(this).attr("id").length === 12)
-                        {
-                            $("#"+$(this).attr("id")).hide();
-                            $("#response"+($(this).attr("id")).substr(-3)).show();
-                            $("#response"+($(this).attr("id")).substr(-3)).focus();
-                            $(".algo").val("");
-
-                            $("#response"+($(this).attr("id")).substr(-3)).focusout(function()
-                            {
-                                $("#responder"+($(this).attr("id")).substr(-3)).show();
-                                $("#response"+($(this).attr("id")).substr(-3)).hide();
-                                $("#response"+($(this).attr("id")).substr(-3)).val("");
-                                $(".algo").val("");
-
-                            });
-                        }
-                    });   
-                
-            });
-            
-         //]]>> 
-         jQuery.noConflict()
-</script>
-        
-    	
    </h:head>
-    <h:body>
-     
+    <h:body >
         
-<c:forEach items="#{publicacionPerfilController.verPublicaciones(usuarioController.id_user)}" var="pu">
-    <div id="respond-publicacion" style="width: 85%; margin: 3% 5%;" >
-        
-
-            <ul class="comments">
-                <li class="comment-entry clearfix">
-                    <div class="comment-left">
-                        <div ><img src="#{pu.idPublicador.imagen_foto_perfil}" class="comment-image" /> </div>
-                    </div>
-                    <div class="comment-right clearfix">
-                        <p class="comment-info">#{pu.idPublicador.username} <span> #{pu.fechaPublicacion} </span></p>
-                        <div style="word-wrap: break-word; width: 400px">
-                            <p class="comment-info"  >#{pu.publicacion}</p>
-                        </div>
-                    </div>
-                </li>
-                <li>
-                
-                    <c:forEach items="#{masterComentarioController.cargaComentarios(pu.idPublicacion,1)}" var="mc">
-
-                        <ul class="comments">
-
-
-                                <li class="comment-entry clearfix">
-                                <!-- BEGIN .comment-left -->
-                                    <div class="comment-left">
-                                        <div ><img src="#{mc.idUsuario.imagen_foto_perfil}" class="comment-image" /> </div>
-
-                                    </div>
-
-                                <!-- BEGIN .comment-right -->
-
-                                    <div class="comment-right clearfix">
-                                        <p class="comment-info">#{mc.idUsuario.username} <span> #{mc.fechaComentario} </span></p>
-                                    <div style="word-wrap: break-word; width: 400px">
-                                        <p class="comment-info"  >#{mc.comentario}</p>
-                                    </div>
-                                        <p class="reply"><a class="responder" id="#{masterComentarioController.ShowResponder(mc.idComentario)}" >Responder</a></p>
-
-                                        <c:forEach items="#{masterRespuestasController.cargaRespuesta(mc.idComentario)}" var="mrl">
+            <c:forEach items="#{publicacionPerfilController.verPublicaciones(usuarioController.id_user)}" var="pu">
+                <h:form id="#{masterComentarioController.nombreForm2(pu.idPublicacion)}" >    
+                        <div id="respond-publicacion" style="width: 85%; margin: 3% 5%; " >
+                            <ul class="comments">
+                                    <li class="comment-entry clearfix">
+                                        <div class="comment-left">
+                                            <div ><img src="#{pu.idPublicador.imagen_foto_perfil}" class="comment-image" /> </div>
+                                        </div>
+                                        <div class="comment-right clearfix">
+                                            <p class="comment-info">#{pu.idPublicador.username} <span> #{pu.fechaPublicacion} </span></p>
                                             <div style="word-wrap: break-word; width: 400px">
-
-                                                <p class="comment-info clearfix"> <img src="#{mc.idUsuario.imagen_foto_perfil}" class="course-image" style='height: 30px; width: 30px; object-fit: cover;'></img> 
-                                                #{mrl.idUsuario.username} <span> #{mrl.respuesta} </span></p>
+                                                <p class="comment-info"  >#{pu.publicacion}</p>
                                             </div>
+                                        </div>
+                                    </li>
+                                    <h:panelGroup id="panelc">
+                                        <c:forEach items="#{masterComentarioController.cargaComentarios(pu.idPublicacion,1)}" var="mc">
+                                            <h:form id="#{masterComentarioController.nombreForm(mc.idComentario)}">
+                                                <li>
+                                                    <ul class="comments">
+                                                            <li class="comment-entry clearfix">
+                                                            <!-- BEGIN .comment-left -->
+                                                                <div class="comment-left">
+                                                                    <div><img src="#{mc.idUsuario.imagen_foto_perfil}" class="comment-image" /> </div>
+                                                                </div>
 
+                                                            <!-- BEGIN .comment-right -->
+
+                                                                <div class="comment-right clearfix">
+                                                                    <p class="comment-info">#{mc.idUsuario.username} <span> #{mc.fechaComentario} </span></p>
+                                                                <div style="word-wrap: break-word; width: 400px">
+                                                                    <p class="comment-info"  >#{mc.comentario}</p>
+                                                                </div>
+                                                                    <p class="reply"><a class="responder" id="#{masterComentarioController.ShowResponder(mc.idComentario)}" >Responder</a></p>
+
+                                                                    <h:panelGroup id="panelg" >
+
+                                                                        <c:forEach items="#{masterRespuestasController.cargaRespuesta(mc.idComentario)}" var="mrl">
+                                                                            <div style="word-wrap: break-word; width: 400px">
+
+                                                                                <p class="comment-info clearfix"> <img src="#{mrl.idUsuario.imagen_foto_perfil}" class="course-image" style='height: 30px; width: 30px; object-fit: cover;'></img> 
+                                                                                #{mrl.idUsuario.username} <span> #{mrl.respuesta} </span></p>
+                                                                            </div>
+
+                                                                        </c:forEach>
+                                                                    </h:panelGroup>
+
+                                                                <!-- END .comment-right -->
+                                                                </div>
+                                                            </li>
+
+                                                        <!-- ESTO ES PARA MOSTRAR LAS RESPUESTAS -->
+                                                                <ul>
+                                                                    <li class="comment-entry clearfix">	
+
+                                                                        <div id ="comment-rightResp" class="comment-right">
+                                                                            <h:panelGroup id="panelg2">
+
+                                                                                <p:inputText id="inpRes" class="algo"  value="#{masterRespuestasController.selected.respuesta}"/><br/>
+                                                                                <p:commandButton  id="#{masterComentarioController.nombreBoton(mc.idComentario)}" update="inpRes" process="@this"  style="visibility: hidden;" actionListener="#{masterRespuestasController.crearRespuesta(mc.idComentario,usuarioController.id_user)}">
+                                                                                    <f:ajax execute="#{masterComentarioController.nombreForm(mc.idComentario)}" render="panelg"/> 
+
+                                                                                </p:commandButton>
+
+                                                                                <p:defaultCommand  target="#{masterComentarioController.nombreBoton(mc.idComentario)}" />
+                                                                            </h:panelGroup>
+                                                                        </div>
+                                                                    </li>
+                                                                </ul>
+                                                    </ul> 
+                                                </li>
+                                            </h:form>
                                         </c:forEach>
-                                    <!-- END .comment-right -->
-                                    </div>
-                                </li>
+                                        </h:panelGroup>
+                                     <li>
+                                        <div id="commentform" style="float:right;">
+                                            <div class="field-row">
+                                                <p:panel id="#{masterComentarioController.nombreInput(pu.idPublicacion)}">
+                                                
+                                                    <p:inputText id="comentar2"  value="#{masterComentarioController.selected.comentario}"  style="border-color: #198752; width: 350px; margin-right: 50px"/>
+                                                    <p:commandButton id="bto" update="#{masterComentarioController.nombreInput(pu.idPublicacion)}" process="@this"  value="Comentar" actionListener="#{masterComentarioController.CrearComentario2(usuarioController.id_user,pu.idPublicacion,1,masterComentarioController.comentario2)}"> 
+                                                        <f:ajax execute="#{masterComentarioController.nombreForm2(pu.idPublicacion)}" render="panelc"  />
+                                                      
+                                                        </p:commandButton>
 
-                            <!-- ESTO ES PARA MOSTRAR LAS RESPUESTAS -->
-                                    <ul>
-                                        <li class="comment-entry clearfix">	
-
-                                            <div id ="comment-rightResp" class="comment-right">
-                                                <h:form id="#{masterComentarioController.ShowResponse(mc.idComentario)}" onkeypress="if (event.keyCode == 13) window.location.href='perfil.xhtml'; "  >
-
-                                                    <h:inputText autocomplete="false" id="responder2" class="algo"  value="#{masterRespuestasController.selected.respuesta}"/><br/>
-                                                    <p:commandButton id="hidden" style="visibility: hidden;"   action="#{masterRespuestasController.crearRespuesta(mc.idComentario,usuarioController.id_user)}"/>  
-                                                </h:form>
-
-                                            <!--<p class="reply"><a href="#">Reply</a></p>  -->
-                                            <!-- END .comment-right -->
-
+                                                </p:panel>
+                                               
                                             </div>
-                                        </li>
-                                    </ul>
-
-                        </ul> 
-                        
-                       
-                    </c:forEach>
-                </li>
-                <li>
-
-               <!-- <h3 class="block-title"><a>Comentando como : </a>#{usuarioController.verUsername(usuarioController.id_user)}</h3>-->
-
-                    <h:form id="commentform" style="float:right;">
-                        <div class="field-row">
-                            <h:inputText value="#{masterComentarioController.selected.comentario}"  style=" width: 350px; margin-right: 50px" autocomplete="false" alt="Comentario" ><span> Comentar </span> </h:inputText>
+                                        </div>
+                                    </li>
+                                </ul>
                         </div>
-                        <p:commandButton  ajax="true" class="button1 rounded-button"  style=" float: right;background: #209b60; color: #fff; border: none;" onclick="this.form.submit()" action="#{masterComentarioController.CrearComentario(usuarioController.id_user,pu.idPublicacion,1)}" value ="Comentar"/>
-                    </h:form>
-                </li>
-
-
-                                <!-- END #respond -->
-            </ul>
-            
+                </h:form>  
+ <br/> <br/>
+            </c:forEach>
         
-        
-
-        
-    </div>
-
-</c:forEach>
             
-            
+    
+                
+       
         
     </h:body>
        

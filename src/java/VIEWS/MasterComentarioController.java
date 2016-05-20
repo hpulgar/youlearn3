@@ -41,6 +41,7 @@ public class MasterComentarioController implements Serializable {
     private int cuenta;
     private int bigId;
     private boolean mostrar = false;
+    private String comentario2;
 
     public boolean isMostrar() {
         return mostrar;
@@ -75,6 +76,15 @@ public class MasterComentarioController implements Serializable {
         this.idCom = idCom;
     }
 
+    public String getComentario2() {
+        return comentario2;
+    }
+
+    public void setComentario2(String comentario2) {
+        this.comentario2 = comentario2;
+    }
+
+    
     
     public void setComentariosForo(List<MasterComentario> comentariosForo) {
         this.comentariosForo = comentariosForo;
@@ -232,7 +242,31 @@ public class MasterComentarioController implements Serializable {
         return "List";
     }
     
-    //CODIGO RECONCHESUMARE
+    //CO    
+    public String nombreForm(int numero)
+    {
+        return "form"+numero;
+        
+    }
+    
+    public String nombreForm2(int numero)
+    {
+        return "Segundo"+numero;
+        
+    }
+    
+    public String nombreInput(int numero)
+    {
+        return "inpCom"+numero;
+        
+    }
+    public String nombreBoton(int numero)
+    {
+        return "btoCom"+numero;
+        
+    }
+    
+    
     
     
     
@@ -243,7 +277,8 @@ public class MasterComentarioController implements Serializable {
     }
     
     public void CrearComentario(int idComentador,int idPublicacion,int pft){
-        
+        System.out.println("----------->Entra<-----------------");
+        System.out.println("coment"+ current.getComentario());
         try
         {
 
@@ -254,8 +289,9 @@ public class MasterComentarioController implements Serializable {
             //id usuario viene por parametro --
             //id publicacion viene por parametro --
 
-            MasterComentario mc = new MasterComentario();
-            mc.setIdPublicacion(idPublicacion);
+            //MasterComentario mc = new MasterComentario();
+            //mc.setIdPublicacion(idPublicacion);
+            //mc.setComentario(comentario);
             Usuario ou = new Usuario();
             ou.setIdUsuario(idComentador);
             MasterPft mpft =  new MasterPft();
@@ -266,7 +302,9 @@ public class MasterComentarioController implements Serializable {
             String fecha = dateFormat.format(date);
 
 
+            System.out.println("El Comentario           "+current.getComentario());
             current.setIdPft(mpft);
+            //current.setComentario(comentario);
             current.setFechaComentario(dateFormat.parse(fecha));
             current.setIdUsuario(ou);
             current.setIdPublicacion(idPublicacion);
@@ -283,7 +321,63 @@ public class MasterComentarioController implements Serializable {
             //return "/blog-single.xhtml";}
         }    
     }
-    
+    public void CrearComentario2(int idComentador,int idPublicacion,int pft,String comentario){
+        
+        try
+        {
+
+            //id comentario no va
+            //id_pft viene por parametro --
+            //comentario se define en xhtml
+            //fecha comentario se moldea --
+            //id usuario viene por parametro --
+            //id publicacion viene por parametro --
+
+            MasterComentario mc = new MasterComentario();
+            //mc.setIdPublicacion(idPublicacion);
+            //mc.setComentario(comentario);
+            Usuario ou = new Usuario();
+            ou.setIdUsuario(idComentador);
+            MasterPft mpft =  new MasterPft();
+            mpft.setIdPft(pft);
+
+            DateFormat dateFormat = new SimpleDateFormat("yyyy/mm/dd HH:mm:ss");
+            Date date = new Date();
+            String fecha = dateFormat.format(date);
+
+            
+            
+            mc.setIdPft(mpft);//1
+            mc.setFechaComentario(dateFormat.parse(fecha));//2
+            mc.setIdUsuario(ou);//3
+            mc.setIdPublicacion(idPublicacion);//4
+            mc.setComentario(current.getComentario());//5
+
+            
+            System.out.println(" comentario   "+current.getComentario());
+            System.out.println(" ptf   "+mc.getIdPft().getIdPft());
+            System.out.println(" idPublicacion   "+mc.getIdPublicacion());
+            System.out.println(" idComentador   "+mc.getIdUsuario().getIdUsuario());
+            System.out.println(" fecha   "+mc.getFechaComentario());
+            
+            
+            if(mc.getComentario() != null)
+            {   
+                System.out.println(" LO CREA");
+                getFacade().create(mc);
+                mc = null;
+            }else
+            {
+                System.out.println("NO lo CREA");
+            }
+            
+           //return "/peril.xhtml";
+        }catch(Exception e){
+
+            System.out.println("error en el comentario --> "+e);
+            //return "/perfil.xhtml";
+        }    
+    }
     
     
     public String insertForo(int idComentador,int idPublicacion,int pft)
@@ -294,10 +388,10 @@ public class MasterComentarioController implements Serializable {
     
     public List<MasterComentario> cargaComentarios(int idPublicacion,int idPtf)
     {        
-        List<MasterComentario> ob = new ArrayList() ;        
-           
-        
+        List<MasterComentario> ob = new ArrayList() ;   
         comentariosForo.clear();
+        ob.clear();
+        
         comentariosForo = ejbFacade.findAll();                
         for(int i=0;i<comentariosForo.size();i++)
         {

@@ -38,7 +38,14 @@
 	<script type="text/javascript" src="js/tinynav.min.js"></script>
 	<script type="text/javascript" src="js/jquery.uniform.js"></script>
 	<script type="text/javascript" src="js/scripts.js"></script>
-	
+	 <script type="text/javascript">
+    
+        
+                            
+        </script>     
+
+       
+          
 
 <!-- END head -->
    </h:head>
@@ -123,32 +130,32 @@
 					<div class="blog-content blog-content-single">	
                                             <h3>Informacion</h3>
                                             <div id="tabs" >
-                                                <ul class="nav clearfix">
-                                                            <li><a href="#tabs-tab-title-1">Dashboard</a></li>
+                                                <ul class="nav clearfix" >
+                                                    
+                                                            <li><a href="comentar.xhtml" >Dashboard</a></li>
                                                             <li><a href="#tabs-tab-title-2">Mi muro</a></li>
                                                             <li><a href="#tabs-tab-title-3">Editar perfil</a></li>
-                                                            <li><a href="comentar.xhtml">Mensajes</a></li>
+                                                            <li><a href="#tabs-tab-title-4">Mensajes</a></li>
                                                             <li><a href="#tabs-tab-title-5" >Cursos inscritos</a></li>
                                                             <li><a href="#tabs-tab-title-6">Premium</a></li>
-                                                         
+                                                      
                                                     </ul>
-                                                <c:forEach items="#{usuarioController.verUser(usuarioController.id_user)}" var="bi2">
-                                                    
+                                                
+                                                    <c:forEach items="#{usuarioController.verUser(usuarioController.id_user)}" var="bi2">
                                                     <style type="text/css"> </style>
-                                                    <div id="tabs-tab-title-1" style="background-image: url( #{bi2.imagen_dashboard}); background-repeat: no-repeat; background-size: 676.5px " > <p></p> <ui:include src="#{personaController.inforP(usuarioController.id_user)}" /> </div>
-                                                    <!--<div id="tabs-tab-title-1" style="background-image: url( #{bi2.imagen_dashboard}); background-repeat: no-repeat;background-size: cover" ><p>Ut bibendum ullamcorper tortor, eget aliquet odio facilisis quis. Nulla interdum aliquet scelerisque. Curabitur ante metus, laoreet eu convallis a, tristique a arcu. Donec id erat sed lectus congue tempor<br></br>Ut bibendum ullamcorper tortor, eget aliquet odio facilisis quis. Nulla interdum aliquet scelerisque. Curabitur ante metus, laoreet eu convallis a, tristique a arcu. Donec id erat sed lectus congue tempo</p></div>
-                                                 --><div id="tabs-tab-title-3" style=" background-image: url(#{bi2.imagen_dashboard}); background-repeat: no-repeat; background-size: 676.5px" > <p></p><ui:include src="editarInfo.xhtml" /></div>
+                                                    <div id="tabs-tab-title-1" style="background-image: url( #{bi2.imagen_dashboard}); background-repeat: no-repeat; background-size: 676.5px " > 
+                                                       <p></p> </div>
+                                                    <div id="tabs-tab-title-3" style=" background-image: url(#{bi2.imagen_dashboard}); background-repeat: no-repeat; background-size: 676.5px" > <p></p><ui:include src="editarInfo.xhtml" /></div>
                                                     <div id="tabs-tab-title-2" style=" background-image: url(#{bi2.imagen_dashboard}); background-repeat: no-repeat;background-size: 676.5px"> <p>Ut bibendum ullamcorper tortor, eget aliquet odio facilisis quis. Nulla interdum aliquet scelerisque. Curabitur ante metus, laoreet eu convallis a, tristique a arcu. Donec id erat sed lectus congue tempor</p></div>
-                                                    <div id="tabs-tab-title-4" style=" background-image: url(#{bi2.imagen_dashboard}); background-repeat: no-repeat;background-size: 676.5px"> <div   > </div><p></p></div>
-                                                    <div id="tabs-tab-title-5"><p> </p></div>
+                                                    <div id="tabs-tab-title-4" style=" background-image: url(#{bi2.imagen_dashboard}); background-repeat: no-repeat;background-size: 676.5px"> <ui:include src="#{personaController.inforP(usuarioController.id_user)}" /><p></p></div>
+                                                    <div id="tabs-tab-title-5"><p></p></div>
                                                     <div id="tabs-tab-title-6"><p>Ut bibendum ullamcorper tortor, eget aliquet odio facilisis quis. Nulla interdum aliquet scelerisque. Curabitur ante metus, laoreet eu convallis a, tristique a arcu. Donec id erat sed lectus congue tempor</p></div>
                                                     
                                                 </c:forEach>
                                             </div>
 					</div>
 				
-					
-					
+                                
                                     
                                             
 					

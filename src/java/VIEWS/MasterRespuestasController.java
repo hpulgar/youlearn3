@@ -36,12 +36,22 @@ public class MasterRespuestasController implements Serializable {
     private PaginationHelper pagination;
     private int selectedItemIndex;
     private List<MasterRespuestas> listaRespuestas = new ArrayList();
+    private boolean ver = false;
     
     
 
     public MasterRespuestasController() {
     }
 
+    public boolean getVer() {
+        return ver;
+    }
+
+    public void setVer(boolean ver) {
+        this.ver = ver;
+    }
+
+    
     public List<MasterRespuestas> getListaRespuestas() {
         return listaRespuestas;
     }
@@ -210,8 +220,21 @@ public class MasterRespuestasController implements Serializable {
         return ejbFacade.find(id);
     }
     
-    public void crearRespuesta(int id_comentario,int id_usuario){
+    public void verInput()
+    {
+        this.ver=true;
+        
+    }
     
+    private void hideInput()
+    {
+        this.setVer(false);
+    }
+    
+    public void crearRespuesta(int id_comentario,int id_usuario){
+        
+        
+        System.out.println("ENTRA AL CREAR       --------------------");
         //if(!current.getRespuesta().isEmpty())
         //{
             try

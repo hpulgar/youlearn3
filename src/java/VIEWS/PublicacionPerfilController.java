@@ -254,7 +254,7 @@ public class PublicacionPerfilController implements Serializable {
             current.setIdUsuario(ou2);
             current.setFechaPublicacion(dateFormat.parse(fecha));
             ejbFacade.create(current);
-            this.current=null;
+            current=null;
         }
         catch(Exception e)
         {
@@ -270,8 +270,11 @@ public class PublicacionPerfilController implements Serializable {
         arPerfil =ejbFacade.findAll();
         List<PublicacionPerfil> arPerfil2 = new ArrayList();
         
+        
         for(int i=0;i<arPerfil.size();i++)
         {
+            
+            
             if(arPerfil.get(i).getIdUsuario().getIdUsuario() == idUsuario)
             {
                 
