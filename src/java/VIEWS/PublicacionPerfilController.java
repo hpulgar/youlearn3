@@ -244,17 +244,22 @@ public class PublicacionPerfilController implements Serializable {
             ou.setIdUsuario(publicador);
             
             Usuario ou2 = new Usuario();
-            ou.setIdUsuario(id_usuario);
+            ou2.setIdUsuario(id_usuario);
             
             DateFormat dateFormat = new SimpleDateFormat("yyyy/mm/dd HH:mm:ss");
             Date date = new Date();
             String fecha = dateFormat.format(date);
             
+             System.out.println("Usuario publicador--> "+ou);
+             System.out.println("Usuario perfil --> "+ou2);
+             System.out.println("Usuario2 Parametro --> "+current.getPublicacion());
+             
+             
             current.setIdPublicador(ou);
-            current.setIdUsuario(ou2);
+            current.setIdUsuario(ou2);     
             current.setFechaPublicacion(dateFormat.parse(fecha));
             ejbFacade.create(current);
-            current=null;
+            current= null;
         }
         catch(Exception e)
         {
@@ -271,7 +276,7 @@ public class PublicacionPerfilController implements Serializable {
         List<PublicacionPerfil> arPerfil2 = new ArrayList();
         
         
-        for(int i=0;i<arPerfil.size();i++)
+        for(int i= arPerfil.size()-1 ; i > 0 ;i--)
         {
             
             
@@ -284,21 +289,6 @@ public class PublicacionPerfilController implements Serializable {
         return arPerfil2;
         
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     
     
 

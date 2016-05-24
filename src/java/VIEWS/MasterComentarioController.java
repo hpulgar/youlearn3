@@ -380,6 +380,8 @@ public class MasterComentarioController implements Serializable {
     }
     
     
+    
+    
     public String insertForo(int idComentador,int idPublicacion,int pft)
     {        
         this.CrearComentario(idComentador, idPublicacion, pft);
