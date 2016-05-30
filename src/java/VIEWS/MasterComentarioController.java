@@ -278,7 +278,7 @@ public class MasterComentarioController implements Serializable {
     
     public void CrearComentario(int idComentador,int idPublicacion,int pft){
         System.out.println("----------->Entra<-----------------");
-        System.out.println("coment"+ current.getComentario());
+        
         try
         {
 
@@ -309,9 +309,16 @@ public class MasterComentarioController implements Serializable {
             current.setIdUsuario(ou);
             current.setIdPublicacion(idPublicacion);
 
-            getFacade().create(current);
-
-            this.current = null;
+            if(current.getComentario() != null)
+            {
+                getFacade().create(current);
+                this.current = null;
+                System.out.println(" Crea el Comentario");
+            }
+            else 
+            {
+                System.out.println(" no Crea el comentario");
+            }
 
            // return "/blog-single.xhtml";
 
@@ -321,7 +328,7 @@ public class MasterComentarioController implements Serializable {
             //return "/blog-single.xhtml";}
         }    
     }
-    public void CrearComentario2(int idComentador,int idPublicacion,int pft,String comentario){
+    public void CrearComentario2(int idComentador,int idPublicacion,int pft){
         
         try
         {

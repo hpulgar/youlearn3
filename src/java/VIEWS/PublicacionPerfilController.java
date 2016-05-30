@@ -238,6 +238,7 @@ public class PublicacionPerfilController implements Serializable {
     
     public void crearPublicacion(int publicador,int id_usuario)
     {
+        System.out.println("ENTRA AL METODO CREAR PUBLICACION");
         try{
             
             Usuario ou = new Usuario();
@@ -249,17 +250,21 @@ public class PublicacionPerfilController implements Serializable {
             DateFormat dateFormat = new SimpleDateFormat("yyyy/mm/dd HH:mm:ss");
             Date date = new Date();
             String fecha = dateFormat.format(date);
-            
-             System.out.println("Usuario publicador--> "+ou);
-             System.out.println("Usuario perfil --> "+ou2);
+       
              System.out.println("Usuario2 Parametro --> "+current.getPublicacion());
              
              
             current.setIdPublicador(ou);
             current.setIdUsuario(ou2);     
             current.setFechaPublicacion(dateFormat.parse(fecha));
-            ejbFacade.create(current);
-            current= null;
+            if(current.getPublicacion() != null)
+            {
+                ejbFacade.create(current);
+                current= null;
+            }else
+            {
+                System.out.println(" es null y no lo crea");
+            }
         }
         catch(Exception e)
         {
@@ -276,7 +281,7 @@ public class PublicacionPerfilController implements Serializable {
         List<PublicacionPerfil> arPerfil2 = new ArrayList();
         
         
-        for(int i= arPerfil.size()-1 ; i > 0 ;i--)
+        for(int i= arPerfil.size()-1 ; i >= 0 ;i--)
         {
             
             

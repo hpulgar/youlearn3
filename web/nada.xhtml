@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+   
+    <h:head>
+        <title>Comentar</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        
+        <link rel="stylesheet" href="css/style.css" type="text/css"  media="all" />
+   </h:head>
+    <h:body >
+       
+        
+         <c:forEach items="#{publicacionPerfilController.verPublicaciones(usuarioController.id_user)}" var="pu">
+                <h:form id="#{masterComentarioController.nombreForm2(pu.idPublicacion)}" >    
+                        <div id="respond-publicacion" style="width: 85%; margin: 3% 5%; " >
+                            <ul class="comments">
+                                    <li class="comment-entry clearfix">
+                                        <div class="comment-left">
+                                            <div ><img src="#{pu.idPublicador.imagen_foto_perfil}" class="comment-image" /> </div>
+                                        </div>
+                                        <div class="comment-right clearfix">
+                                            <p class="comment-info">#{pu.idPublicador.username} <span> #{pu.fechaPublicacion} </span></p>
+                                            <div style="word-wrap: break-word; width: 400px">
+                                                <p class="comment-info"  >#{pu.publicacion}</p>
+                                            </div>
+                                        </div>
+                                    </li>
+                                
+                                
+                                
+                                <!-- INICIO COMENTARIOS -->
+                                
+                                
+                                    <h:panelGroup id="panelc">
+                                        <c:forEach items="#{masterComentarioController.cargaComentarios(pu.idPublicacion,1)}" var="mc">
+                                            <h:form id="#{masterComentarioController.nombreForm(mc.idComentario)}">
+                                                <li>
+                                                    <ul class="comments">
+                                                            <li class="comment-entry clearfix">
+                                                            <!-- BEGIN .comment-left -->
+                                                                <div class="comment-left">
+                                                                    <div><img src="#{mc.idUsuario.imagen_foto_perfil}" class="comment-image" /> </div>
+                                                                </div>
+
+                                                            <!-- BEGIN .comment-right -->
+
+                                                                <div class="comment-right clearfix">
+                                                                    <p class="comment-info">#{mc.idUsuario.username} <span> #{mc.fechaComentario} </span></p>
+                                                                <div style="word-wrap: break-word; width: 400px">
+                                                                    <p class="comment-info"  >#{mc.comentario}</p>
+                                                                </div>
+                                                                    <p class="reply"><a class="responder" id="#{masterComentarioController.ShowResponder(mc.idComentario)}" >Responder</a></p>
+                                                                     <!-- MOSTRAR RESPUESTAS -->
+                                                                    <h:panelGroup id="panelg" >
+                                                                        <c:forEach items="#{masterRespuestasController.cargaRespuesta(mc.idComentario)}" var="mrl">
+                                                                            <div style="word-wrap: break-word; width: 400px">
+
+                                                                                <p class="comment-info clearfix"> <img src="#{mrl.idUsuario.imagen_foto_perfil}" class="course-image" style='height: 30px; width: 30px; object-fit: cover;'></img> 
+                                                                                #{mrl.idUsuario.username} <span> #{mrl.respuesta} </span></p>
+                                                                            </div>
+                                                                        </c:forEach>
+                                                                    </h:panelGroup>
+                                                                     
+                                                                     <!-- FIN MOSTRAR RESPUESTAS-->
+
+                                                                <!-- END .comment-right -->
+                                                                </div>
+                                                            </li>
+
+                                                        <!-- ESTO ES PARA INSERTAR LAS RESPUESTAS -->
+                                                                <ul>
+                                                                    <li class="comment-entry clearfix">	
+
+                                                                        <div id ="comment-rightResp" class="comment-right">
+                                                                            <h:panelGroup id="panelg2">
+
+                                                                                <p:inputText id="inpRes" class="algo"  value="#{masterRespuestasController.selected.respuesta}"/><br/>
+                                                                                <p:commandButton  id="#{masterComentarioController.nombreBoton(mc.idComentario)}" update="inpRes" process="@this"  style="visibility: hidden;" actionListener="#{masterRespuestasController.crearRespuesta(mc.idComentario,usuarioController.id_user)}">
+                                                                                    <f:ajax execute="#{masterComentarioController.nombreForm(mc.idComentario)}" render="panelg"/> 
+
+                                                                                </p:commandButton>
+
+                                                                                <p:defaultCommand  target="#{masterComentarioController.nombreBoton(mc.idComentario)}" />
+                                                                            </h:panelGroup>
+                                                                        </div>
+                                                                    </li>
+                                                                </ul>
+                                                        <!-- FIN DE INSERTAR RESPUESTAS-->
+                                                    </ul> 
+                                                </li>
+                                            </h:form>
+                                        </c:forEach>
+                                        </h:panelGroup> <!-- FIN COMENTARIOS -->
+                                        
+                                     <li><!-- LI DE BOTON PARA COMENTAR -->
+                                        <div id="commentform" style="float:right;">
+                                            <div class="field-row">
+                                                <p:panel id="#{masterComentarioController.nombreInput(pu.idPublicacion)}">
+                                                
+                                                    <p:inputText id="comentar2"  value="#{masterComentarioController.selected.comentario}"  style="border-color: #198752; width: 350px; margin-right: 50px"/>
+                                                    <p:commandButton id="bto" update="#{masterComentarioController.nombreInput(pu.idPublicacion)}" process="@this"  value="Comentar" actionListener="#{masterComentarioController.CrearComentario2(usuarioController.id_user,pu.idPublicacion,1,masterComentarioController.comentario2)}"> 
+                                                        <f:ajax execute="#{masterComentarioController.nombreForm2(pu.idPublicacion)}" render="panelc"  />
+                                                      
+                                                        </p:commandButton>
+
+                                                </p:panel>
+                                               
+                                            </div>
+                                        </div>
+                                    </li><!-- FIN BOTON COMENTAR -->
+                                </ul>
+                        </div>
+                </h:form>  
+ <br/> <br/>
+            </c:forEach>
+        
+        
+        
+    </h:body>
+</html>
