@@ -37,11 +37,7 @@
 	<script type="text/javascript" src="js/tinynav.min.js"></script>
 	<script type="text/javascript" src="js/jquery.uniform.js"></script>
 	<script type="text/javascript" src="js/scripts.js"></script>
-	 <script type="text/javascript">
-    
-        
-                            
-        </script>     
+	   
 
        
           
@@ -87,7 +83,8 @@
                                     <div class="blog-info">
                                            
                                             <c:forEach items="#{personaController.buscarPersona(usuarioController.id_user)}" var="bi">
-                                                <div>
+                                                <div style=" background-image: url('http://subtlepatterns.com/patterns/wood_pattern.png')">
+                                                    
                                                     <h3><img src="#{bi.idUsuario.imagen_foto_perfil}" class="foto-perfil" /></h3>
                                               
                                                     <h2><h:outputText value="#{bi.idUsuario.username}"></h:outputText></h2>
@@ -119,7 +116,7 @@
                                                     <h:outputText value="#{bi.descripcion}" ></h:outputText>
                                                     <br/><br/>
                                                     
-                                                    <h:button class="button1" style=" margin-left: 10%;" value="NO_IDEA_BUTTON"/>
+                                                    <h:button  style=" margin-left: 10%;background-image: url(#{bi.idUsuario.imagen_portada_perfil}); border-bottom-color: black;border-style: groove;margin-bottom: 10px;" value="NO_IDEA_BUTTON"/>
 						
                                                   </div>  
                                                 </c:forEach> 
@@ -143,6 +140,8 @@
                                                     <c:forEach items="#{usuarioController.verUser(usuarioController.id_user)}" var="bi2">
                                                     <style type="text/css"> </style>
                                                     <div id="tabs-tab-title-1" style="background-image: url( #{bi2.imagen_dashboard}); background-repeat: no-repeat; background-size: 676.5px " > 
+                                                        
+                                                        
                                                        <p></p> </div>
                                                     <div id="tabs-tab-title-3" style=" background-image: url(#{bi2.imagen_dashboard}); background-repeat: no-repeat; background-size: 676.5px" > <p></p><ui:include src="editarInfo.xhtml" /></div>
                                                     <div id="tabs-tab-title-2" style=" background-image: url(#{bi2.imagen_dashboard}); background-repeat: no-repeat;background-size: 676.5px"> <p> </p></div>

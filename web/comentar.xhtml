@@ -16,68 +16,89 @@
         <link rel="stylesheet" href="css/style.css" type="text/css"  media="all" />
    </h:head>
     <h:body >
-        <h:form id="parametroBody">
-            <p:panelGrid id="panelP" >
-                <div class="field-row">   
-                        
-                    <p:inputText  id="crearPublicacionPerfil" value="#{publicacionPerfilController.selected.publicacion}" required="true"  style="border-color: #198752; width: 350px;float:left; margin-right: 45px">
-                    <p:commandButton id="btoCrearPublicacion" value="Publicar" update="parametroBody" process="@all"  actionListener="#{publicacionPerfilController.crearPublicacion(usuarioController.id_user, usuarioController.id_user)}"/>
-                    </p:inputText>
-                </div>
-            
-            
-                <c:forEach  items="#{publicacionPerfilController.verPublicaciones(usuarioController.id_user)}" var="pu" id="RecorreObjetosPublicacion">
-                    <h:form id="pub">
-                                <div id="respond-publicacion" style="width: 85%; margin: 3% 5%;">
-                                    <ul class="comments">
-                                            <li class="comment-entry clearfix">
-                                                <div class="comment-left">
-                                                    <div>
-                                                        <img src="#{pu.idPublicador.imagen_foto_perfil}" class="comment-image" />
-                                                    </div>
-                                                </div>
-                                                <div class="comment-right clearfix">
-                                                    <p class="comment-info">#{pu.idPublicador.username} <span> #{pu.fechaPublicacion} </span></p>
-                                                    <div style="word-wrap: break-word; width: 400px">
-                                                        <p class="comment-info"  >#{pu.publicacion}</p>
-                                                    </div>
-                                                </div> 
-                                            </li>  
-                                        
-                                        
-                                                        <ui:repeat value="#{masterComentarioController.cargaComentarios(pu.idPublicacion,1)}" var="mc">
-                                            <li>
-                                                <ul class="comments">
-                                                    <li class="comment-entry clearfix">
-                                                        <div class="comment-left">
-                                                            <div><img src="#{mc.idUsuario.imagen_foto_perfil}" class="comment-image" /> </div>
-                                                        </div>
-                                                        <div class="comment-right clearfix">
-                                                            <p class="comment-info">#{mc.idUsuario.username} <span> #{mc.fechaComentario} </span></p>
-                                                            <div style="word-wrap: break-word; width: 400px">
-                                                                <p class="comment-info"  >#{mc.comentario}</p>
-                                                            </div>
-                                                        </div>
-                                                    </li>
-                                                </ul> 
-                                            </li>
-                                                        </ui:repeat>
-                                    </ul>
-                                    
-                                </div>  
-                    
-                                        <div id="commentform" style="float:right;">
-                                            <div class="field-row">
-                                                <p:inputText id="#{masterComentarioController.nombreInput(pu.idPublicacion)}"  value="#{masterComentarioController.selected.comentario}"  style="border-color: #198752; width: 350px; margin-right: 50px"/>
-                                                        <p:commandButton id="#{masterComentarioController.nombreBoton(pu.idPublicacion)}" actionListener="#{masterComentarioController.CrearComentario(usuarioController.id_user,pu.idPublicacion,1)}" value="Comentar" /> 
-                                            </div>
+
+<h:panelGrid id="parametroBody" >
+
+    <h:form  >
+        <div class="field-row" >
+            <p:inputText  id="crearPublicacionPerfil" value="#{publicacionPerfilController.selected.publicacion}" required="true"  style="border-color: #198752; width: 350px;float:left; margin-right: 45px">
+                <p:commandButton id="btoCrearPublicacion" value="Publicar" update="parametroBody" process="@all"  action="#{publicacionPerfilController.crearPublicacion(usuarioController.id_user, usuarioController.id_user)}" > 
+                </p:commandButton>
+            </p:inputText>
+        </div>
+    </h:form>
+    <c:forEach  items="#{publicacionPerfilController.verPublicaciones(usuarioController.id_user)}" var="pu" >
+        <h:form id="#{masterComentarioController.nombreForm(pu.idPublicacion)}">
+
+            <div id="respond-publicacion" style="width: 85%; margin: 3% 5%;">
+                <ul class="comments">
+                    <li class="comment-entry clearfix">
+                        <div class="comment-left">
+                            <div>
+                            <img src="#{pu.idPublicador.imagen_foto_perfil}" class="comment-image" />
+                            </div>
+                        </div>
+                        <div class="comment-right clearfix">
+                            <p class="comment-info">#{pu.idPublicador.username} <span> #{pu.fechaPublicacion} </span></p>
+                            <div style="word-wrap: break-word; width: 400px">
+                            <p class="comment-info"  >#{pu.publicacion}</p>
+                            </div>
+                        </div> 
+                    </li>
+
+                        <c:forEach items="#{masterComentarioController.cargaComentarios(pu.idPublicacion,1)}" var="mc">
+                        <li>
+                            <ul class="comments">
+                                <li class="comment-entry clearfix">
+                                    <div class="comment-left">
+                                        <div><img src="#{mc.idUsuario.imagen_foto_perfil}" class="comment-image" /> </div>
+                                    </div>
+                                    <div class="comment-right clearfix">
+                                        <p class="comment-info">#{mc.idUsuario.username} <span> #{mc.fechaComentario} </span></p>
+                                        <div style="word-wrap: break-word; width: 400px">
+                                            <p class="comment-info"  >#{mc.comentario}</p>
                                         </div>
-                    </h:form>
-                </c:forEach>
-            </p:panelGrid>
+                                    </div>
+                                    <ul>
+                                        <li>
+                                            <div class="comment-right clearfix">
+                                            <ui:repeat value="#{masterRespuestasController.cargaRespuesta(mc.idComentario)}" var="mrl">
+                                                <div style="word-wrap: break-word; width: 400px">
+                                                    <p class="comment-info clearfix"> <img src="#{mrl.idUsuario.imagen_foto_perfil}" class="course-image" style='height: 30px; width: 30px; object-fit: cover;'></img> 
+                                                    #{mrl.idUsuario.username} <span> #{mrl.respuesta} </span></p>
+                                                </div>
+                                            </ui:repeat>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <div id ="comment-rightResp" class="comment-right">
+                                        <p:inputText  id="#{masterComentarioController.nombreInput2(mc.idComentario)}" value="#{masterRespuestasController.selected.respuesta}"/><br/>
+                                        <p:commandButton id="#{masterComentarioController.nombreBoton2(mc.idComentario)}" actionListener="#{masterRespuestasController.crearRespuesta(mc.idComentario,usuarioController.id_user)}" update="#{masterComentarioController.nombreForm(mc.idComentario)}" process="@all" value="Responder" />
+                                    </div>
+                                </li>
+                            </ul> 
+                        </li>
+
+                        </c:forEach>
+                            <li>
+                                <div class="field-row" style="float:center;">
+                                    <h:inputText id="#{masterComentarioController.nombreInput(mc.idComentario)}" value="#{masterComentarioController.selected.comentario}" style="border-color: #198752; width: 200px; margin-left: 30px"/>
+                                    <p:commandButton id="#{masterComentarioController.nombreBoton(mc.idComentario)}" actionListener="#{masterComentarioController.CrearComentario(usuarioController.id_user,pu.idPublicacion,1)}"  update="#{masterComentarioController.nombreForm(pu.idPublicacion)}" process="@all" value="Comentar"  style="float:right ;margin-right:30px" ></p:commandButton>
+                                </div>
+                            </li>
+                </ul>
+            </div> 
+        </h:form>
+    </c:forEach>
+
+
+</h:panelGrid>
+
             
       
-            </h:form>
+           
  
     </h:body>
        

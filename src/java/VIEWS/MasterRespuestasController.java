@@ -246,8 +246,7 @@ public class MasterRespuestasController implements Serializable {
                 //id_usuario
                 //fecha respuesta
 
-                MasterRespuestas mr = new MasterRespuestas();
-
+               
                 Usuario ou = new Usuario();
                 ou.setIdUsuario(id_usuario);
 
@@ -265,10 +264,10 @@ public class MasterRespuestasController implements Serializable {
                 current.setIdUsuario(ou);
                 current.setFechaRespuesta(dateFormat.parse(fecha));
 
-                
+                System.out.println("LA RESPUESTA A CREAR "+current.getRespuesta());
                
                 
-                if(!current.getRespuesta().isEmpty())
+                if(current.getRespuesta() != null)
                 {
                     System.out.println("ID DEL COMENTARIO A PARA RESPUESTA ->>>>>>>>>>>"+id_comentario);
                     System.out.println("LA RESPUESTA A CREAR "+current.getRespuesta());
