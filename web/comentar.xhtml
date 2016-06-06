@@ -77,7 +77,7 @@
                                     <div id ="comment-rightResp" class="comment-right">
                                         <h:form id="#{masterComentarioController.nombreForm2(mc.idComentario)}">
                                             <p:inputText  id="#{masterComentarioController.nombreInput2(mc.idComentario)}" value="#{masterRespuestasController.selected.respuesta}"/><br/>
-                                            <p:commandButton id="#{masterComentarioController.nombreBoton2(mc.idComentario)}" actionListener="#{masterRespuestasController.crearRespuesta(mc.idComentario,usuarioController.id_user)}" update="comms" process="@all" value="Responder" />
+                                            <p:commandButton id="#{masterComentarioController.nombreBoton2(mc.idComentario)}" actionListener="#{masterRespuestasController.crearRespuesta(mc.idComentario,usuarioController.id_user)}" update="parametroBody" process="@all" value="Responder" />
                                         </h:form>
                                     </div>
                                 </li>
@@ -89,7 +89,7 @@
                                 <div class="field-row" style="float:left;">
                                     <h:form id="#{masterComentarioController.nombreForm(pu.idPublicacion)}">
                                         <h:inputText id="#{masterComentarioController.nombreInput(mc.idComentario)}" value="#{masterComentarioController.selected.comentario}" style="border-color: #198752; width: 200px; margin-left: 30px"/>
-                                        <p:commandButton id="#{masterComentarioController.nombreBoton(mc.idComentario)}" actionListener="#{masterComentarioController.CrearComentario(usuarioController.id_user,pu.idPublicacion,1)}"  update="comms" process="@all" value="Comentar"  style="float:right ;margin-right:30px" ></p:commandButton>
+                                        <p:commandButton id="#{masterComentarioController.nombreBoton(mc.idComentario)}" actionListener="#{masterComentarioController.CrearComentario(usuarioController.id_user,pu.idPublicacion,1)}"  update="parametroBody" process="@all" value="Comentar"  style="float:right ;margin-right:30px" ></p:commandButton>
                                    </h:form>
                                 </div>
                             </li>
