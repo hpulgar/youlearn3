@@ -83,7 +83,7 @@
                                     <div class="blog-info">
                                            
                                             <c:forEach items="#{personaController.buscarPersona(usuarioController.id_user)}" var="bi">
-                                                <div style=" background-image: url('http://subtlepatterns.com/patterns/wood_pattern.png')">
+                                                <div style=" background-image: url('#{bi.idUsuario.imagen_portada_perfil}')">
                                                     
                                                     <h3><img src="#{bi.idUsuario.imagen_foto_perfil}" class="foto-perfil" /></h3>
                                               
@@ -116,7 +116,7 @@
                                                     <h:outputText value="#{bi.descripcion}" ></h:outputText>
                                                     <br/><br/>
                                                     
-                                                    <h:button  style=" margin-left: 10%;background-image: url(#{bi.idUsuario.imagen_portada_perfil}); border-bottom-color: black;border-style: groove;margin-bottom: 10px;" value="NO_IDEA_BUTTON"/>
+                                                    <h:button  style=" margin-left: 10%;background-color: #209b60; border-bottom-color: black;border-style: groove;margin-bottom: 10px;" value="NO_IDEA_BUTTON"/>
 						
                                                   </div>  
                                                 </c:forEach> 

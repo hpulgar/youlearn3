@@ -27,8 +27,9 @@
             </p:inputText>
         </div>
     </h:form>
+    
     <c:forEach  items="#{publicacionPerfilController.verPublicaciones(usuarioController.id_user)}" var="pu" >
-        <h:form id="#{masterComentarioController.nombreForm(pu.idPublicacion)}">
+        <h:panelGroup id="comms">
 
             <div id="respond-publicacion" style="width: 85%; margin: 3% 5%;">
                 <ul class="comments">
@@ -74,8 +75,10 @@
                                 </li>
                                 <li>
                                     <div id ="comment-rightResp" class="comment-right">
-                                        <p:inputText  id="#{masterComentarioController.nombreInput2(mc.idComentario)}" value="#{masterRespuestasController.selected.respuesta}"/><br/>
-                                        <p:commandButton id="#{masterComentarioController.nombreBoton2(mc.idComentario)}" actionListener="#{masterRespuestasController.crearRespuesta(mc.idComentario,usuarioController.id_user)}" update="#{masterComentarioController.nombreForm(mc.idComentario)}" process="@all" value="Responder" />
+                                        <h:form id="#{masterComentarioController.nombreForm2(mc.idComentario)}">
+                                            <p:inputText  id="#{masterComentarioController.nombreInput2(mc.idComentario)}" value="#{masterRespuestasController.selected.respuesta}"/><br/>
+                                            <p:commandButton id="#{masterComentarioController.nombreBoton2(mc.idComentario)}" actionListener="#{masterRespuestasController.crearRespuesta(mc.idComentario,usuarioController.id_user)}" update="comms" process="@all" value="Responder" />
+                                        </h:form>
                                     </div>
                                 </li>
                             </ul> 
@@ -83,16 +86,18 @@
 
                         </c:forEach>
                             <li>
-                                <div class="field-row" style="float:center;">
-                                    <h:inputText id="#{masterComentarioController.nombreInput(mc.idComentario)}" value="#{masterComentarioController.selected.comentario}" style="border-color: #198752; width: 200px; margin-left: 30px"/>
-                                    <p:commandButton id="#{masterComentarioController.nombreBoton(mc.idComentario)}" actionListener="#{masterComentarioController.CrearComentario(usuarioController.id_user,pu.idPublicacion,1)}"  update="#{masterComentarioController.nombreForm(pu.idPublicacion)}" process="@all" value="Comentar"  style="float:right ;margin-right:30px" ></p:commandButton>
+                                <div class="field-row" style="float:left;">
+                                    <h:form id="#{masterComentarioController.nombreForm(pu.idPublicacion)}">
+                                        <h:inputText id="#{masterComentarioController.nombreInput(mc.idComentario)}" value="#{masterComentarioController.selected.comentario}" style="border-color: #198752; width: 200px; margin-left: 30px"/>
+                                        <p:commandButton id="#{masterComentarioController.nombreBoton(mc.idComentario)}" actionListener="#{masterComentarioController.CrearComentario(usuarioController.id_user,pu.idPublicacion,1)}"  update="comms" process="@all" value="Comentar"  style="float:right ;margin-right:30px" ></p:commandButton>
+                                   </h:form>
                                 </div>
                             </li>
                 </ul>
             </div> 
-        </h:form>
+         </h:panelGroup>
     </c:forEach>
-
+    
 
 </h:panelGrid>
 
