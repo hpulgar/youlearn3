@@ -24,7 +24,7 @@
 <!-- BEGIN body -->
 <h:body >
     
-    <div class="blog-info">
+    
                                            
                                         <c:forEach items="#{personaController.buscarPersona(usuarioController.id_usuario_amigo)}" var="bi">
                                                 <div style=" background-image: url('#{bi.idUsuario.imagen_portada_perfil}')">
@@ -32,6 +32,7 @@
                                                     <h3><img src="#{bi.idUsuario.imagen_foto_perfil}" class="foto-perfil" /></h3>
                                               
                                                     <h2><h:outputText value="#{bi.idUsuario.username}" style="color:#fefeff"></h:outputText></h2>
+                                                    
                                                     <br/><br/>
                                                      
                                                     <strong> <h:outputText value="Nombre " style=" color:#fefeff"></h:outputText></strong>
@@ -65,7 +66,7 @@
                                                   </div>  
                                                 </c:forEach> 
                                         	
-                                    </div>
+                                   
     
     
     

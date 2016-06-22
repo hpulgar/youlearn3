@@ -47,7 +47,7 @@
    </h:head>
 
 <!-- BEGIN body -->
- <h:body id="top" class="loading">
+ <h:body id="top" >
      
 
 	<!-- BEGIN #header-wrapper -->
@@ -80,9 +80,12 @@
 				
 				<!-- BEGIN .blog-entry -->
 				<div class="blog-entry clearfix">
-                                    
-                                    <ui:include src="#{personaController.inforP(usuarioController.id_user)}"/>
-					
+                                    <div class="blog-info">
+                                    <ui:include src="#{personaController.inforP(usuarioController.id_user,personaController.modificar)}"/>
+					<h:form>
+                                        <h:commandLink value="Editar" action="#"/>
+                                        </h:form>
+                                    </div>
 					<div class="blog-content blog-content-single">	
                                             <h3>Informacion</h3>
                                             <div id="tabs" >
@@ -93,7 +96,7 @@
                                                             <li><a href="#tabs-tab-title-3">Editar perfil</a></li>
                                                             <li><a href="#tabs-tab-title-4">Mensajes</a></li>
                                                             <li><a href="#tabs-tab-title-5" >Cursos inscritos</a></li>
-                                                            <li><a href="nada.xhtml">Premium</a></li>
+                                                            <li><a href="#tabs-tab-title-6">Premium</a></li>
                                                       
                                                     </ul>
                                                 

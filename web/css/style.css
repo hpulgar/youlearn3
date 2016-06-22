@@ -156,6 +156,8 @@ table {
 /* 1.0 - Global */
 body {
 	color: #424242;
+        
+        
 	-webkit-font-smoothing: subpixel-antialiased;
 }
 
@@ -1586,6 +1588,7 @@ div.selector.disabled span, div.selector.disabled.active span {
 	height: 150px;
         object-fit: cover;
 	margin: 0 0 15px 0;
+        margin-top: 10px;
 }
 
 .blog-entry .blog-info .blog-meta {

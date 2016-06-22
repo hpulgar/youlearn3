@@ -86,7 +86,8 @@
                              <div class="field-row">
 
 				<p>
-                                    <h:commandButton class="button1" type="submit" value="Actualizar datos" id="submit" action="#{personaController.updateP(usuarioController.id_user,ciudadController.idCiudad)}"/>
+                                    <h:commandButton class="button1" type="submit" value="Actualizar" id="submit" action="#{personaController.updateP(usuarioController.id_user,ciudadController.idCiudad)}"/>
+                                    <h:commandButton class="button1" type="submit" value="Cancelar" id="cancelar" action="#{personaController.setModificar(null)}"/>
                                  
 				</p>
                              </div>

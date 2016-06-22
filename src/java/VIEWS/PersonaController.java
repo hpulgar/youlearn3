@@ -34,8 +34,17 @@ public class PersonaController implements Serializable {
     private int idPersona;
     private List<Persona> arPersona = new ArrayList();
     private List<Persona> arPersona2 = new ArrayList();
+    private String modificar;
 
     public PersonaController() {
+    }
+
+    public String getModificar() {
+        return modificar;
+    }
+
+    public void setModificar(String modificar) {
+        this.modificar = modificar;
     }
 
     public List<Persona> getArPersona() {
@@ -229,29 +238,37 @@ public class PersonaController implements Serializable {
     
     
     */
-    public String inforP(int idUsuario)
+    public String inforP(int idUsuario,String modificar)
     {
         
-        if(!this.buscarPersona(idUsuario).isEmpty())
-        {
-            editP(idUsuario);
-            return "Bio.xhtml";
-        }else
-        {
-            editP(idUsuario);
-           return "editarInfo.xhtml";
-        }
+            if(!this.buscarPersona(idUsuario).isEmpty())
+            {
+                editP(idUsuario);
+                this.setModificar("Bio.xhtml");
+            }else
+            {
+                editP(idUsuario);
+               this.setModificar("editarInfo.xhtml");
+            }
+       
+        return this.getModificar();
         
     }
+    
+    
+    
     public void updateP(int idUsuario,int idCity)
     {
         
         if(!this.buscarPersona(idUsuario).isEmpty())
         {
+            this.setModificar("");
              editarPersona(idUsuario,idCity);
+             
             
         }else
         {
+            this.setModificar("");
             crearPersona(idUsuario,idCity);
            
         }
