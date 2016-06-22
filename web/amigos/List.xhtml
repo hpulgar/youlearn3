@@ -15,6 +15,7 @@
                     <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
                 </h:panelGroup>
                 <h:outputText escape="false" value="#{bundle.ListAmigosEmpty}" rendered="#{amigosController.items.rowCount == 0}"/>
+                
                 <h:panelGroup rendered="#{amigosController.items.rowCount > 0}">
                     <h:outputText value="#{amigosController.pagination.pageFirstItem + 1}..#{amigosController.pagination.pageLastItem + 1}/#{amigosController.pagination.itemsCount}"/>&nbsp;
                     <h:commandLink action="#{amigosController.previous}" value="#{bundle.Previous} #{amigosController.pagination.pageSize}" rendered="#{amigosController.pagination.hasPreviousPage}"/>&nbsp;

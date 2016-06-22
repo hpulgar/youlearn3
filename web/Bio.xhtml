@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+ <h:head>
+
+
+	<!--Meta Tags-->
+        <meta name="viewport" content="width=device-width; initial-scale=1.0"></meta>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		
+	<!--Title-->
+	<title>Youlearn - Biografia</title>
+
+
+	
+	
+<!-- END head -->
+   </h:head>
+
+<!-- BEGIN body -->
+<h:body >
+    
+    <div class="blog-info">
+                                           
+                                        <c:forEach items="#{personaController.buscarPersona(usuarioController.id_usuario_amigo)}" var="bi">
+                                                <div style=" background-image: url('#{bi.idUsuario.imagen_portada_perfil}')">
+                                                    
+                                                    <h3><img src="#{bi.idUsuario.imagen_foto_perfil}" class="foto-perfil" /></h3>
+                                              
+                                                    <h2><h:outputText value="#{bi.idUsuario.username}" style="color:#fefeff"></h:outputText></h2>
+                                                    <br/><br/>
+                                                     
+                                                    <strong> <h:outputText value="Nombre " style=" color:#fefeff"></h:outputText></strong>
+                                                    <br/>
+                                                    <h:outputText value="#{bi.nombre} #{bi.apellido}" style=" color:#fefeff"></h:outputText>
+                                                    <br/><br/>
+                                                    
+                                                    <strong> <h:outputText value="Miembro Desde" style=" color:#fefeff"></h:outputText></strong>
+                                                    <br/>
+                                                    <h:outputText value="#{bi.idUsuario.fechaCreacion}" style=" color:#fefeff">
+                                                               <f:convertDateTime type="date" pattern="dd-M-yyyy"/>
+                                                    </h:outputText>
+                                                    <br></br><br/>
+                                                    
+                                                    <strong><h:outputText value="Tipo de usuario" style=" color:#fefeff"></h:outputText></strong>
+                                                    <br/>
+                                                    <h:outputText value="#{bi.idUsuario.idPerfil.nomPerfil}" style=" color:#fefeff" ></h:outputText>
+                                                    <br/><br/>
+                                                    <strong><h:outputText value="Correo" style=" color:#fefeff"></h:outputText></strong>
+                                                    <br/>
+                                                    <h:outputText value="#{bi.idUsuario.correo}"  style=" color:#fefeff"></h:outputText>
+                                                    <br/><br/>
+                                                    
+                                                    <strong><h:outputText value="Descripcion" style=" color:#fefeff"></h:outputText></strong>
+                                                    <br/>
+                                                    <h:outputText value="#{bi.descripcion}" style="color:#fefeff "></h:outputText>
+                                                    <br/><br/>
+                                                    <h:form>
+                                                        <h:commandButton  disabled="#{amigosController.btoAmigosHabilitado(amigosController.respuesta)}" rendered="#{amigosController.botonAmistad(usuarioController.id_user,usuarioController.id_usuario_amigo)}" actionListener="#{amigosController.enviarSolicitud(usuarioController.id_user,usuarioController.id_usuario_amigo,amigosController.respuesta)}" style=";margin-left: 10%; background-color:#198752; border-bottom-color: black; border-style: groove;margin-bottom: 10px;"  value="#{amigosController.buscarRelacion(usuarioController.id_user,usuarioController.id_usuario_amigo)}"/>
+                                                    </h:form>
+                                                  </div>  
+                                                </c:forEach> 
+                                        	
+                                    </div>
+    
+    
+    
+    
+    
+</h:body>
+</html>

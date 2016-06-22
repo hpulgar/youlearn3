@@ -43,6 +43,22 @@ public class UsuarioController implements Serializable {
     private int id_user;
     private String correo;
     private int id_muro;
+    private int id_usuario_amigo;
+
+    
+    
+    
+    public UsuarioController() {
+    }
+    
+    public int getId_usuario_amigo() {
+        return id_usuario_amigo;
+    }
+
+    public void setId_usuario_amigo(int id_usuario_amigo) {
+        System.out.println("id ami "+ id_usuario_amigo);
+        this.id_usuario_amigo = id_usuario_amigo;
+    }
 
     public String getNombreUsuario() {
         return nombreUsuario;
@@ -96,8 +112,7 @@ public class UsuarioController implements Serializable {
     private int idProfile;
 
 
-    public UsuarioController() {
-    }
+   
 
     public Usuario getSelected() {
         if (current == null) {
@@ -222,6 +237,9 @@ public class UsuarioController implements Serializable {
         return aUs;
     }
     
+   
+    
+    
      private int getPerfil(String nomU,String PassUS)
      {
          //Usuario uss;
@@ -230,6 +248,7 @@ public class UsuarioController implements Serializable {
          {
              setIdProfile((int) idp.get(i).getIdPerfil().getIdPerfil());
              setId_user((int) idp.get(i).getIdUsuario());
+             setId_usuario_amigo((int)idp.get(i).getIdUsuario());
          }
          return getIdProfile();
          

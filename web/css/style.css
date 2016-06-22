@@ -1378,6 +1378,8 @@ div.selector.disabled span, div.selector.disabled.active span {
 	margin: 0 auto;
 }
 
+
+
 .page-title {
 	float: left;
 }
@@ -1582,7 +1584,7 @@ div.selector.disabled span, div.selector.disabled.active span {
 	border-radius: 99%;
 	width: 150px;
 	height: 150px;
-	
+        object-fit: cover;
 	margin: 0 0 15px 0;
 }
 

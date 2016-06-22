@@ -1,6 +1,7 @@
 package VIEWS;
 
 import ENTITIES.Amigos;
+import ENTITIES.Usuario;
 import VIEWS.util.JsfUtil;
 import VIEWS.util.PaginationHelper;
 import MODELS.AmigosFacade;
@@ -17,6 +18,7 @@ import javax.faces.convert.FacesConverter;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
+import java.util.*;
 
 @Named("amigosController")
 @SessionScoped
@@ -28,10 +30,38 @@ public class AmigosController implements Serializable {
     private MODELS.AmigosFacade ejbFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
+    private String mensajeBoton;
+    private int idAmistad;
+    private String respuesta;
 
     public AmigosController() {
     }
 
+    public String getRespuesta() {
+        return respuesta;
+    }
+
+    public void setRespuesta(String respuesta) {
+        this.respuesta = respuesta;
+    }
+
+    public int getIdAmistad() {
+        return idAmistad;
+    }
+
+    public void setIdAmistad(int idAmistad) {
+        this.idAmistad = idAmistad;
+    }
+
+    public String getMensajeBoton() {
+        return mensajeBoton;
+    }
+
+    public void setMensajeBoton(String mensajeBoton) {
+        this.mensajeBoton = mensajeBoton;
+    }
+
+    
     public Amigos getSelected() {
         if (current == null) {
             current = new Amigos();
@@ -191,7 +221,178 @@ public class AmigosController implements Serializable {
     public Amigos getAmigos(java.lang.Integer id) {
         return ejbFacade.find(id);
     }
+    ////////////////////////////////////////////////////////
+    private void crearSolicitud(int idUser1,int idUser2,boolean apr){
+        try
+        {
+            //id_amistad
+            //id_usuario1
+            //id_usuario2
+            //aprobado(usuario 2 aprueba)
+            Amigos objA = new Amigos();
+            Usuario ou = new Usuario();
+            ou.setIdUsuario(idUser1);
+            Usuario ou2 = new Usuario();
+            ou2.setIdUsuario(idUser2);
+            
+            objA.setAprobado(apr);
+            objA.setIdUsuario1(ou);
+            System.out.println("asd --- "+objA.getIdUsuario1().getIdUsuario());
+            objA.setIdUsuario2(ou2);
+            System.out.println("asd --- "+objA.getIdUsuario2().getIdUsuario());
+            
+            getFacade().create(objA);
+            
+            System.out.println("Lo CREA");
+            
 
+        }catch(Exception e){
+            System.out.println("Si tira error es este -----------------> "+e);
+        }
+    }
+    
+    private void aceptarSolicitud(int idUser1,int idUser2,Amigos objAm ){
+        try
+        {
+            System.out.println("ID DE LA AMISTAD A EDITAR "+objAm.getIdAmistad());
+            objAm.setAprobado(true);
+            ejbFacade.edit(objAm);
+            System.out.println("Aprobado = "+ objAm.getAprobado());
+            
+            crearSolicitud(idUser1,idUser2,true);
+            
+        }catch(Exception e){
+            System.out.println("Si tira error es este -----------------> "+e);
+        }
+    }
+    
+    
+    public String buscarRelacion(int idUser1,int idUser2)
+    {
+            
+            List<Amigos> oa = ejbFacade.findAll();
+            if(oa.isEmpty())
+            {
+                this.setRespuesta("Enviar Solicitud");
+            }   
+            else
+            {
+                for(int i=0;i<oa.size();i++)
+                {
+                    if(oa.get(i).getIdUsuario1().getIdUsuario() == idUser1 && oa.get(i).getIdUsuario2().getIdUsuario() == idUser2 &&
+                       oa.get(i).getAprobado() == true)
+                    {
+                        System.out.println(oa.get(i).getIdUsuario1().getIdUsuario()+"-"+idUser1+"-"+oa.get(i).getIdUsuario2().getIdUsuario()+"-"+idUser2);
+                        this.setRespuesta("Amigos");
+                        break;
+                    }else if(oa.get(i).getIdUsuario1().getIdUsuario() == idUser1 && oa.get(i).getIdUsuario2().getIdUsuario() == idUser2 && oa.get(i).getAprobado() == false)
+                    {
+                        this.setRespuesta("Solicitud Pendiente");
+                    }else if(oa.get(i).getIdUsuario1().getIdUsuario() == idUser2 && oa.get(i).getIdUsuario2().getIdUsuario() == idUser1 && oa.get(i).getAprobado() == false)
+                    {
+                        this.setRespuesta("Aceptar Solicitud");
+                        current= null;
+                        current = oa.get(i);
+                    }else if(oa.get(i).getIdUsuario1().getIdUsuario() != idUser2 && oa.get(i).getIdUsuario2().getIdUsuario() != idUser1)
+                    {
+                        System.out.println("ENTRA AL ENVIAR SOLICITUD "+oa.get(i).getIdAmistad());
+                        this.setRespuesta("Enviar Solicitud");
+                    }
+                }
+
+            }
+        return this.getRespuesta();
+    }
+     
+    
+    public void enviarSolicitud(int idUser1,int idUser2,String meth)
+    {
+                if(null != meth)
+                switch (meth) {
+            case "Aceptar Solicitud":
+                System.out.println("ACEPTAR SOLICITU3");
+                System.out.println("editar");
+                aceptarSolicitud(idUser1,idUser2,current);
+                break;
+            case "Enviar Solicitud":
+                System.out.println("ENVIAR SOLICITU3");
+                crearSolicitud(idUser1,idUser2,false);
+                break;
+            default:
+                System.out.println("ESTO NO HACE NADA");
+                break;
+        }
+    }
+    
+    
+       
+    
+//    public void enviarSolicitudOLD(int idUser1,int idUser2)
+//    {
+//            List<Amigos> oa = ejbFacade.findAll();
+//            if(!oa.isEmpty())
+//            {
+//                for(int i=0;i<oa.size();i++)
+//                {
+//                    if(oa.get(i).getIdUsuario1().getIdUsuario() == idUser1 && oa.get(i).getIdUsuario2().getIdUsuario() == idUser2)
+//                    {
+//                        if(oa.get(i).getAprobado() == true)
+//                        {
+//                            System.out.println(" no lo crea");
+//                        }else
+//                        {
+//                            System.out.println("Solicitud Pendiente");
+//                        }
+//                    }else 
+//                    {
+//                         System.out.println("Si "+oa.get(i).getIdUsuario1().getIdUsuario()+" es igual a "+ idUser2+" y "+oa.get(i).getIdUsuario2().getIdUsuario()+" es igual a "+idUser1);
+//                         System.out.println("Entonces...");
+//                        if(oa.get(i).getIdUsuario1().getIdUsuario() == idUser2 && oa.get(i).getIdUsuario2().getIdUsuario() == idUser1)
+//                        {
+//                            if(oa.get(i).getAprobado()==false)
+//                            {
+//                                System.out.println("A PUNTO DE EDITAR");
+//                                current= null;
+//                                current = oa.get(i);
+//                                System.out.println("editar");
+//                                aceptarSolicitud(idUser1,idUser2,current);
+//                            }else
+//                            {
+//                                System.out.println("SEGUN ESTO EL APROBADO ES TRUE");
+//                            }
+//                        }else
+//                        {
+//                            System.out.println("CREAR 1");
+//                            crearSolicitud(idUser1,idUser2,false);
+//                            break;
+//                        }
+//                    }
+//                }
+//            }else
+//            {
+//                System.out.println("CREAR 2");
+//                crearSolicitud(idUser1,idUser2,false);
+//            }
+//      
+//    }
+//    
+    
+    
+    
+    public boolean botonAmistad(int idUser1, int idUser2)
+    {
+        return idUser1 != idUser2;
+        
+    }
+    
+    public boolean btoAmigosHabilitado(String meth)
+    {
+        return ("Solicitud Pendiente".equals(meth) ||"Amigos".equals(meth));
+    }
+    
+    
+    
+    ////////////////////////////////////////////////////////////
     @FacesConverter(forClass = Amigos.class)
     public static class AmigosControllerConverter implements Converter {
 

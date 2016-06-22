@@ -65,7 +65,10 @@
                         <li class="current_page_item"><a href="index.xhtml">Home</a></li>
                             <h:form>
 
-                            <li><h:commandLink  value="Dashboard"  action="perfil.xhtml" rendered="#{menuController.logeado()}"></h:commandLink>
+                            <li><h:commandLink  value="Dashboard"  action="perfil.xhtml" actionListener="#{usuarioController.setId_usuario_amigo(usuarioController.id_user)}" rendered="#{menuController.logeado()}">
+                                
+                                    
+                                </h:commandLink>
                                  
                                 </li>
                         </h:form>

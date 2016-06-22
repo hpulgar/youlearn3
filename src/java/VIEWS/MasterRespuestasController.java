@@ -232,29 +232,21 @@ public class MasterRespuestasController implements Serializable {
     }
     
     public void crearRespuesta(int id_comentario,int id_usuario){
-        
-        
         System.out.println("ENTRA AL CREAR       --------------------");
         //if(!current.getRespuesta().isEmpty())
         //{
             try
             {
-
                 //id_respuesta
                 //id_comentario
                 //reespuesta
                 //id_usuario
                 //fecha respuesta
-
-               
+                
                 Usuario ou = new Usuario();
                 ou.setIdUsuario(id_usuario);
-
                 MasterComentario mc= new MasterComentario();
                 mc.setIdComentario(id_comentario);
-
-
-
                 DateFormat dateFormat = new SimpleDateFormat("yyyy/mm/dd HH:mm:ss");
                 Date date = new Date();
                 String fecha = dateFormat.format(date);
@@ -274,16 +266,10 @@ public class MasterRespuestasController implements Serializable {
                     getFacade().create(current);
                     current = null;
                 }
-                //return "/blog-single.xhtml";
-
+                
             }catch(Exception e){
-
                 System.out.println("Si tira error es este -----------------> "+e);
-               // return "/blog-single.xhtml";
             }
-           
-        //}
-        
     }
     
      public List<MasterRespuestas> cargaRespuesta(int id_comentario)

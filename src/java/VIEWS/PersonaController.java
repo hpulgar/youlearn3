@@ -235,7 +235,7 @@ public class PersonaController implements Serializable {
         if(!this.buscarPersona(idUsuario).isEmpty())
         {
             editP(idUsuario);
-            return "verInfo.xhtml";
+            return "Bio.xhtml";
         }else
         {
             editP(idUsuario);
@@ -255,6 +255,14 @@ public class PersonaController implements Serializable {
             crearPersona(idUsuario,idCity);
            
         }
+        
+    }
+    
+     public List<Persona> verPersona()
+    {
+        List<Persona> arPersonas =ejbFacade.findAll();
+       
+        return arPersonas;
         
     }
     

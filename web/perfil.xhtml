@@ -5,7 +5,8 @@
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
           
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
       
       <h:head>
 
@@ -79,49 +80,8 @@
 				
 				<!-- BEGIN .blog-entry -->
 				<div class="blog-entry clearfix">
-					
-                                    <div class="blog-info">
-                                           
-                                            <c:forEach items="#{personaController.buscarPersona(usuarioController.id_user)}" var="bi">
-                                                <div style=" background-image: url('#{bi.idUsuario.imagen_portada_perfil}')">
-                                                    
-                                                    <h3><img src="#{bi.idUsuario.imagen_foto_perfil}" class="foto-perfil" /></h3>
-                                              
-                                                    <h2><h:outputText value="#{bi.idUsuario.username}"></h:outputText></h2>
-                                                    <br/><br/>
-                                                     
-                                                    <strong> <h:outputText value="Nombre "></h:outputText></strong>
-                                                    <br/>
-                                                    <h:outputText value="#{bi.nombre} #{bi.apellido}"></h:outputText>
-                                                    <br/><br/>
-                                                    
-                                                    <strong> <h:outputText value="Miembro Desde"></h:outputText></strong>
-                                                    <br/>
-                                                    <h:outputText value="#{bi.idUsuario.fechaCreacion}">
-                                                               <f:convertDateTime type="date" pattern="dd-M-yyyy"/>
-                                                    </h:outputText>
-                                                    <br></br><br/>
-                                                    
-                                                    <strong><h:outputText value="Tipo de usuario"></h:outputText></strong>
-                                                    <br/>
-                                                    <h:outputText value="#{bi.idUsuario.idPerfil.nomPerfil}" ></h:outputText>
-                                                    <br/><br/>
-                                                    <strong><h:outputText value="Correo"></h:outputText></strong>
-                                                    <br/>
-                                                    <h:outputText value="#{bi.idUsuario.correo}" ></h:outputText>
-                                                    <br/><br/>
-                                                    
-                                                    <strong><h:outputText value="Descripcion"></h:outputText></strong>
-                                                    <br/>
-                                                    <h:outputText value="#{bi.descripcion}" ></h:outputText>
-                                                    <br/><br/>
-                                                    
-                                                    <h:button  style=" margin-left: 10%; background-image: url('#{bi.idUsuario.imagen_portada_perfil}'); border-bottom-color: black;border-style: groove;margin-bottom: 10px;" value="NO_IDEA_BUTTON"/>
-						
-                                                  </div>  
-                                                </c:forEach> 
-                                        	
-                                    </div>
+                                    
+                                    <ui:include src="#{personaController.inforP(usuarioController.id_user)}"/>
 					
 					<div class="blog-content blog-content-single">	
                                             <h3>Informacion</h3>
@@ -129,7 +89,7 @@
                                                 <ul class="nav clearfix" >
                                                     
                                                             <li><a href="comentar.xhtml" >Dashboard</a></li>
-                                                            <li><a href="#tabs-tab-title-2">Mi muro</a></li>
+                                                            <li><a href="users.xhtml">Mi muro</a></li>
                                                             <li><a href="#tabs-tab-title-3">Editar perfil</a></li>
                                                             <li><a href="#tabs-tab-title-4">Mensajes</a></li>
                                                             <li><a href="#tabs-tab-title-5" >Cursos inscritos</a></li>
@@ -139,13 +99,10 @@
                                                 
                                                     <c:forEach items="#{usuarioController.verUser(usuarioController.id_user)}" var="bi2">
                                                     <style type="text/css"> </style>
-                                                    <div id="tabs-tab-title-1" style="background-image: url( #{bi2.imagen_dashboard}); background-repeat: no-repeat; background-size: 676.5px " > 
-                                                        
-                                                        
-                                                       <p></p> </div>
-                                                    <div id="tabs-tab-title-3" style=" background-image: url(#{bi2.imagen_dashboard}); background-repeat: no-repeat; background-size: 676.5px" > <p></p><ui:include src="editarInfo.xhtml" /></div>
+                                                    <div id="tabs-tab-title-1" style="background-image: url( #{bi2.imagen_dashboard}); background-repeat: no-repeat; background-size: 676.5px " > <p></p> </div>
+                                                    <div id="tabs-tab-title-3" style=" background-image: url(#{bi2.imagen_dashboard}); background-repeat: no-repeat; background-size: 676.5px" > <p></p></div>
                                                     <div id="tabs-tab-title-2" style=" background-image: url(#{bi2.imagen_dashboard}); background-repeat: no-repeat;background-size: 676.5px"> <p> </p></div>
-                                                    <div id="tabs-tab-title-4" style=" background-image: url(#{bi2.imagen_dashboard}); background-repeat: no-repeat;background-size: 676.5px"> <ui:include src="#{personaController.inforP(usuarioController.id_user)}" /><p></p></div>
+                                                    <div id="tabs-tab-title-4" style=" background-image: url(#{bi2.imagen_dashboard}); background-repeat: no-repeat;background-size: 676.5px"> Quisque bibendum erat feugiat rhoncus tincidunt ipsum mi facilisis nisl, nec eleifend enim massa ac purus. Integer malesuada faucibus auctor vivamus accumsan justo.Quisque bibendum erat feugiat rhoncus tincidunt ipsum mi facilisis nisl, nec eleifend enim massa ac purus. Integer malesuada faucibus auctor vivamus accumsan justo.Quisque bibendum erat feugiat rhoncus tincidunt ipsum mi facilisis nisl, nec eleifend enim massa ac purus. Integer malesuada faucibus auctor vivamus accumsan justo. <p></p></div>
                                                     <div id="tabs-tab-title-5"><p></p></div>
                                                     <div id="tabs-tab-title-6"><p></p></div>
                                                     
