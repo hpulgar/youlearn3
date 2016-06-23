@@ -1,11 +1,17 @@
 package VIEWS;
 
+import ENTITIES.Curso;
 import ENTITIES.InscripcionCurso;
+import ENTITIES.TipoAlumno;
+import ENTITIES.Usuario;
 import VIEWS.util.JsfUtil;
 import VIEWS.util.PaginationHelper;
 import MODELS.InscripcionCursoFacade;
 
 import java.io.Serializable;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.ResourceBundle;
 import javax.ejb.EJB;
 import javax.inject.Named;
@@ -191,7 +197,97 @@ public class InscripcionCursoController implements Serializable {
     public InscripcionCurso getInscripcionCurso(java.lang.Integer id) {
         return ejbFacade.find(id);
     }
-
+    /*//////////////////////////////////////////////////////////////
+    cuando un usuario sigue un curso lo esta siguiendo, y cuando un usuario que ya sigue un curso le pone subscribir al curso, vamos a editar el campo tipo usuario de seguidor a suscriptor 
+    y asi no tenemos conflicto al momento de contar los seguidores
+    bykk
+    //////////////////////////////////////////////////////////////////*/
+    
+    public String inscribirAlCurso(int idUser,int idCurso,int idTipoAlumno)
+    {
+        //int id_insc; AutoIncrement
+        //int id_usuario; Parametro
+        //int id_curso; Parametro 
+        //Date fecha_insc; se Define ACA
+        //String descrp; Se DefineACA(que se sho)
+        //int tipo_alumno; Parametro(Dependiendo del boton q Aprete)
+        
+        try
+        {
+            DateFormat dateFormat = new SimpleDateFormat("yyyy/mm/dd HH:mm:ss");
+            Date date = new Date();
+            String fecha = dateFormat.format(date);
+            
+            Usuario ou = new Usuario();
+            ou.setIdUsuario(idUser);
+            
+            Curso oc = new Curso();
+            oc.setIdCurso(idCurso);
+            
+            TipoAlumno ota = new TipoAlumno();
+            ota.setIdTipo(idTipoAlumno);
+            
+            InscripcionCurso oic = new InscripcionCurso();
+            
+            oic.setIdUsuario(ou);
+            oic.setIdCurso(oc);
+            oic.setFechaInsc(dateFormat.parse(fecha));
+            oic.setDescripcion("y q se sho");
+            oic.setTipoAlumno(ota);
+            
+            System.out.println("id u "+oic.getIdUsuario().getIdUsuario());
+            System.out.println("id c "+oic.getIdCurso().getIdCurso());
+            System.out.println("fecfha " +oic.getFechaInsc());
+            System.out.println("desc "+oic.getDescripcion());
+            System.out.println("tipo a "+oic.getTipoAlumno().getIdTipo());
+            ejbFacade.create(oic);
+            System.out.println("ESTA COSI3 CONFIMA LA CREACION");
+            return "/curso.xhtml";
+            
+        }catch(Exception e)
+        {
+            System.out.println("EL ERROR AL CREAR LA INSCRIPCION ES EL SIGUIENTE: "+e+" Si, no se entiende ninguna wea =P");
+            return "/detalles_curso.xthml";
+        }
+        
+     //return "byyk";   
+    }
+    
+    
+   /* public String crearForo(int id_subcategoria,int id_usuario)
+    {
+        
+        
+        try{
+        ForoSubcategoria fsc = new ForoSubcategoria();
+        fsc.setIdSubcategoria(id_subcategoria);
+        
+        
+        
+        
+        System.out.println("el id subcat "+id_subcategoria);
+        
+        current.setFecha(dateFormat.parse(fecha));
+        current.setIdUser(ou);
+        current.setIdSubcategoria(fsc);
+        current.setAutorizado(false);
+        
+        getFacade().create(current);
+        current = null;
+        
+        return "/foro.xhtml";
+        
+        }catch(Exception e)
+        {
+            System.out.println("EL ERRORR"+ e);
+            return "/foro_crear.xhtml";
+        }
+            
+    }
+    */
+    
+    
+    //////////////////////////////////////////////
     @FacesConverter(forClass = InscripcionCurso.class)
     public static class InscripcionCursoControllerConverter implements Converter {
 

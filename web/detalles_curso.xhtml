@@ -187,8 +187,8 @@
 							<h4>Getting Started</h4>
 							<div class="title-block"></div>
 						</div>
-                                                 <h:commandButton  action="#{cursoController.cursoCont()}" value="Follow" class="button2" />  <br/><br/>
-                                                 <h:commandButton  action="#{cursoController.cursoCont()}" value="Subscribe" class="button2" />
+                                                <h:commandButton  action="#{inscripcionCursoController.inscribirAlCurso(usuarioController.id_user,cursoController.idCurso,1)}" value="Follow" class="button2" /> 
+                                                <h:commandButton  action="#{inscripcionCursoController.inscribirAlCurso(usuarioController.id_user,cursoController.idCurso,2)}" value="Subscribe" class="button2" />
                                                
                                                  <br/><br/><br/><br/><br/>
                                                  <p>Definicion de suscrito y seguidor.</p>
