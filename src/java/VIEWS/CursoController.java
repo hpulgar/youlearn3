@@ -322,7 +322,7 @@ public class CursoController implements Serializable {
                 getFacade().create(current);
                 current = null;
 
-                return "/cursos_listado.xhtml";////////momentaneo
+                return "/cursos_listado.xhtml";//momentaneo
 
                 }catch(Exception e)
                 {
