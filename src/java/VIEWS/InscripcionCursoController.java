@@ -4,14 +4,17 @@ import ENTITIES.Curso;
 import ENTITIES.InscripcionCurso;
 import ENTITIES.TipoAlumno;
 import ENTITIES.Usuario;
+import ENTITIES.PublicacionPerfil;
 import VIEWS.util.JsfUtil;
 import VIEWS.util.PaginationHelper;
 import MODELS.InscripcionCursoFacade;
-
+import VIEWS.PublicacionPerfilController;
 import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.ResourceBundle;
 import javax.ejb.EJB;
 import javax.inject.Named;
@@ -34,8 +37,17 @@ public class InscripcionCursoController implements Serializable {
     private MODELS.InscripcionCursoFacade ejbFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
+    private String estadoS;
 
     public InscripcionCursoController() {
+    }
+
+    public String getEstadoS() {
+        return estadoS;
+    }
+
+    public void setEstadoS(String estadoS) {
+        this.estadoS = estadoS;
     }
 
     public InscripcionCurso getSelected() {
@@ -234,14 +246,14 @@ public class InscripcionCursoController implements Serializable {
             oic.setFechaInsc(dateFormat.parse(fecha));
             oic.setDescripcion("y q se sho");
             oic.setTipoAlumno(ota);
-            
-            System.out.println("id u "+oic.getIdUsuario().getIdUsuario());
-            System.out.println("id c "+oic.getIdCurso().getIdCurso());
-            System.out.println("fecfha " +oic.getFechaInsc());
-            System.out.println("desc "+oic.getDescripcion());
-            System.out.println("tipo a "+oic.getTipoAlumno().getIdTipo());
+//            System.out.println("id u "+oic.getIdUsuario().getIdUsuario());
+//            System.out.println("id c "+oic.getIdCurso().getIdCurso());
+//            System.out.println("fecfha " +oic.getFechaInsc());
+//            System.out.println("desc "+oic.getDescripcion());
+//            System.out.println("tipo a "+oic.getTipoAlumno().getIdTipo());
             ejbFacade.create(oic);
             System.out.println("ESTA COSI3 CONFIMA LA CREACION");
+            
             return "/curso.xhtml";
             
         }catch(Exception e)
@@ -253,40 +265,115 @@ public class InscripcionCursoController implements Serializable {
      //return "byyk";   
     }
     
+     public String cargarCurso(int idc,int idus)
+        {
+                        
+            String pagina ="";
+            
+            //Obtengo arraylist con datos del curso
+            
+            List<InscripcionCurso> ars = new ArrayList();
+            ars.clear();
+            ars= ejbFacade.findAll();
+            
+  
+            if(!ars.isEmpty())
+            {
+                for(int i=0;i<ars.size();i++)
+                {
+                      System.out.println("Entro al FOR con valores de idc = "+idc+" y id usuario "+idus);
+                    //Si cumple las condiciones,entonces...
+                    if((ars.get(i).getIdCurso().getIdCurso()==idc && ars.get(i).getIdUsuario().getIdUsuario()== idus))
+                    {
+                        System.out.println("Entro al IF");
+                        //Al cumplir las condiciones(usuario inscrito),nos llevara directamente al curso.
+                        //setIdCurso(idc);
+                        pagina= "/curso.xhtml";
+
+                    } 
+                    else
+                   {
+                         System.out.println("Entro al ELSE");
+                                   // Si no, mostrara el detalle del curso
+                        //setIdCurso(idc);
+                        pagina= "/detalles_curso.xhtml";
+                    }
+                }
+            }else
+            {
+                pagina="/detalles_curso.xhtml";
+              
+            }
+            System.out.println("Salgo del for con el valor de pagina = "+pagina);
+            return pagina;
+        }
+     
+     public String nboton(int idCurso,int idUs)
+     { 
     
-   /* public String crearForo(int id_subcategoria,int id_usuario)
+         String estado="";
+         
+         if(suscripcionCurso(idCurso,idUs)==true)
+         {
+             estado="Suscribir";
+             
+         }
+         else
+         {
+             estado="Suscrito";
+         }
+             
+        return estado;
+        
+     }
+     
+    public boolean suscripcionCurso(int idCurso,int idUs)
     {
+        boolean suscrito=false;
+        List<InscripcionCurso> ars = new ArrayList();
+        ars.clear();
+        ars= ejbFacade.findAll();
+          for(int i=0;i<ars.size();i++)
+            {
+                //Si cumple las condiciones,entonces...
+                if((ars.get(i).getIdUsuario().getIdUsuario() == idUs && ars.get(i).getIdCurso().getIdCurso()== idCurso && ars.get(i).getTipoAlumno().getIdTipo()==1))
+                {
+                    this.setEstadoS("Suscribir");
+                    current = ars.get(i);
+                    suscrito=true;  
+                } 
+                else
+               {       
+                   this.setEstadoS("Suscrito");
+                   suscrito=false;
+                }
+            }
         
-        
+        return suscrito;
+    }    
+    
+    
+    public void crearSuscripcion()
+    {
         try{
-        ForoSubcategoria fsc = new ForoSubcategoria();
-        fsc.setIdSubcategoria(id_subcategoria);
-        
-        
-        
-        
-        System.out.println("el id subcat "+id_subcategoria);
-        
-        current.setFecha(dateFormat.parse(fecha));
-        current.setIdUser(ou);
-        current.setIdSubcategoria(fsc);
-        current.setAutorizado(false);
-        
-        getFacade().create(current);
-        current = null;
-        
-        return "/foro.xhtml";
-        
+            if(current != null)
+            {
+                System.out.println("Entra al try para comenzar la suscripcion del curso");
+                TipoAlumno ta = new TipoAlumno();
+                ta.setIdTipo(2);
+                current.setTipoAlumno(ta);
+                ejbFacade.edit(current);
+                
+                
+//                PublicacionPerfilController a = new PublicacionPerfilController();
+//                a.crearPublicacionSuscribirCurso(1,"asd");
+                
+            }
         }catch(Exception e)
         {
-            System.out.println("EL ERRORR"+ e);
-            return "/foro_crear.xhtml";
+            System.out.println("Error al crear suscripcion = "+e);
         }
-            
     }
-    */
-    
-    
     //////////////////////////////////////////////
     @FacesConverter(forClass = InscripcionCurso.class)
     public static class InscripcionCursoControllerConverter implements Converter {

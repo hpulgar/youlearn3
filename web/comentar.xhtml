@@ -46,9 +46,16 @@
                             <h:form  >
                                 <p class="comment-info"><h:commandLink  value="#{pu.idPublicador.username}"  action="perfil.xhtml" actionListener="#{usuarioController.setId_usuario_amigo(pu.idPublicador.idUsuario)}"/>  <span> #{pu.fechaPublicacion} </span></p>
                                 <div style="word-wrap: break-word; width: 400px">
-                                    <p class="comment-info"><h:outputText value="#{pu.publicacion}" escape="false"/></p>
+                                    <p class="comment-info"><h:outputText value="#{pu.publicacion}" escape="false" /></p>
+                                    
+                                 
+               
+                                    
                                 </div>
                             </h:form>
+                            
+                         
+                            
                            
                         </div> 
                     </li>

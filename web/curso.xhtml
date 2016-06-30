@@ -108,6 +108,9 @@
                                                             
                                                             <div class="event-meta">
                                                                  <h:form>
+                                                                     
+                                                                     
+                                                                     <h:commandButton actionListener="#{inscripcionCursoController.crearSuscripcion()}" disabled="#{!inscripcionCursoController.suscripcionCurso(cs.idCurso,usuarioController.id_user)}" value="#{inscripcionCursoController.nboton(cs.idCurso,usuarioController.id_user)}" style="float: left"/>
                                                                      <h:commandButton action="#{cursoController.irTablero(cs.idCurso)}" value="Ir al tablero del cuso" style="float: right"/>
                                 </h:form>	
                                                                 <p><strong>Personas Inscritas: </strong>#{cs.personasInscritas}</p>

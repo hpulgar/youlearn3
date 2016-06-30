@@ -1,5 +1,6 @@
 package VIEWS;
 
+import ENTITIES.Curso;
 import ENTITIES.PublicacionPerfil;
 import ENTITIES.Usuario;
 import VIEWS.util.JsfUtil;
@@ -226,21 +227,17 @@ public class PublicacionPerfilController implements Serializable {
     
 //    
 //    int idpublicacion Autoincrement
-//    String publicacion X pagian(Publicaciones)
+//    String publicacion X pagian(Publicaciones)(<CommandLink Usuario/> +"Se ha Suscrito a "+"<:p CommandLink value="nombreCurso" action="metodoDentrodeLinkRedirige al Curso/>"
 //    int id_publicador X parametro
 //    date publicacion genera automaticamente
 //    int idUsuario X parametro (dueño d ela pagina)
 //    
 //    
     
-    
-    
-    
     public void crearPublicacion(int publicador,int id_usuario)
     {
         System.out.println("ENTRA AL METODO CREAR PUBLICACION");
         try{
-            
             Usuario ou = new Usuario();
             ou.setIdUsuario(publicador);
             
@@ -269,6 +266,50 @@ public class PublicacionPerfilController implements Serializable {
         catch(Exception e)
         {
          System.out.println("El error al crear la publicacion es "+ e);   
+        }
+    }
+    
+    
+   
+    
+      public void crearPublicacionSuscribirCurso(int id_usuario, String bton,String nomCurso, int idCurso)
+    {
+        System.out.println("ENTRA AL METODO CREAR PUBLICACION");
+        try{
+            PublicacionPerfil pp = new PublicacionPerfil();
+            
+            
+            Usuario ou2 = new Usuario();
+            ou2.setIdUsuario(id_usuario);
+            
+            DateFormat dateFormat = new SimpleDateFormat("yyyy/mm/dd HH:mm:ss");
+            Date date = new Date();
+            String fecha = dateFormat.format(date);
+            
+            pp.setIdPublicador(ou2);
+            pp.setIdUsuario(ou2);
+            pp.setFechaPublicacion(dateFormat.parse(fecha));
+            //pp.setPublicacion("Se ha "+bton+" al curso <a href="+"#{inscripcionCursoController.cargarCurso("+idCurso+","+id_usuario+")}"+"onclick="+"#{cursoController.setIdCurso("+idCurso+")}>"+nomCurso+"</a>");
+            pp.setPublicacion("Se ha bton al curso <a href=detalles_curso.xhtml onclick='#{cursoController.setIdCurso("+idCurso+")}'>"+nomCurso+"</a>");
+            
+            System.out.println("Id usuario "+pp.getIdUsuario().getIdUsuario());
+            System.out.println("Id publicador "+pp.getIdPublicador().getIdUsuario());
+            System.out.println("Fecha "+pp.getFechaPublicacion());
+            System.out.println("Publicacion "+pp.getPublicacion());
+             
+            
+            
+            System.out.println("Antes de Crear");
+            getFacade().create(pp);
+            System.out.print("Despues de crear");
+            
+        }
+        catch(NullPointerException e)
+        {
+         System.out.println("El error al crear la publicacion es "+ e);   
+        }catch(Exception e)
+        {
+            System.out.println("Excepcion "+e);
         }
     }
     

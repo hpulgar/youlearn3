@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
  <h:head>
 
 
@@ -91,7 +92,8 @@
 							<div class="event-meta">
 								
                                                             <h:form id="cursoForm">
-                                                                <h4> <h:commandLink action="#{cursoController.cargarCurso(lc.idCurso)}" value="#{lc.nomCurso}" /> &raquo; </h4>
+                                                                <h4> <h:commandLink actionListener="#{cursoController.setIdCurso(lc.idCurso)}" action="#{inscripcionCursoController.cargarCurso(lc.idCurso,usuarioController.id_user)}"  value="#{lc.nomCurso}" />
+&raquo; </h4>
                                                                 <p><strong>Seguidores: </strong>#{lc.seguidores}</p>
                                                                 <p><strong>Suscripciones: </strong>#{lc.personasInscritas}</p>
                                                                 <p><strong>Categoria: </strong>#{lc.idCat.idCategoria.nomCat}</p>

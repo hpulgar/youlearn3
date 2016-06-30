@@ -2,6 +2,7 @@ package VIEWS;
 
 import ENTITIES.Curso;
 import ENTITIES.CursoSubCat;
+import ENTITIES.Perfil;
 import ENTITIES.Usuario;
 import VIEWS.util.JsfUtil;
 import VIEWS.util.PaginationHelper;
@@ -256,12 +257,7 @@ public class CursoController implements Serializable {
             return arCurso;
         }
         
-        public String cargarCurso(int idc)
-        {
-            
-            setIdCurso(idc);
-            return "/detalles_curso.xhtml";
-        }
+       
         
         public String cursoCont()
         {
