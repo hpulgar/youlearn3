@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+ <h:head>
+
+
+	<!--Meta Tags-->
+        <meta name="viewport" content="width=device-width; initial-scale=1.0"></meta>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		
+	<!--Title-->
+	<title>Youlearn - Curso</title>
+
+
+	
+	
+<!-- END head -->
+   </h:head>
+
+<!-- BEGIN body -->
+<h:body >
+
+	
+		
+		<!-- BEGIN .main-content-full -->
+		<div class="main-content-full page-content">
+			
+			<!-- BEGIN .inner-content-wrapper -->
+			<div class="inner-content-wrapper">
+				
+                            
+                            
+				<ul class="teacher-4">
+                                    <ui:repeat value="#{amigosController.listAmigos(usuarioController.id_user)}" var="u">
+                                   
+					<li>
+                                            
+                                            <h:form>
+                                            <img src="#{u.imagen_foto_perfil}"  style=" width: 100%;height: 150px; object-fit: cover "  />
+                                                <div style=" width: 100%;height: 150px; ">
+                                                    <h3 class="teacher-title"><span><h2><h:commandLink style="color:white" value="#{u.username}" action="perfil.xhtml" actionListener="#{usuarioController.setId_usuario_amigo(u.idUsuario)}"/></h2> #{u.idPerfil.nomPerfil}</span></h3>
+                                                </div>
+                                                <div style=" width: 100%; height: 220px">
+                                                    
+                                                </div>
+                                            </h:form>
+                                        </li>
+                                       
+                                    </ui:repeat>
+				</ul>
+                            
+				<div class="pagination-wrapper dotted-pagination" style="margin: 10px 0 10px 0 !important;">
+					<a class="selected" href="#">1</a>
+                                        <a href="#">2</a>
+					<a href="#">3</a>
+					<a href="#">></a>
+				</div>
+			
+			<!-- END .inner-content-wrapper -->
+			</div>
+			
+		<!-- END .main-content-full -->
+		</div>
+	
+	<!-- END .content-wrapper -->
+	
+	<!-- BEGIN #footer-wrapper -->
+	
+        
+        
+</h:body>
+
+</html>

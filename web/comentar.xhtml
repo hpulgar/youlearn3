@@ -46,10 +46,11 @@
                             <h:form  >
                                 <p class="comment-info"><h:commandLink  value="#{pu.idPublicador.username}"  action="perfil.xhtml" actionListener="#{usuarioController.setId_usuario_amigo(pu.idPublicador.idUsuario)}"/>  <span> #{pu.fechaPublicacion} </span></p>
                                 <div style="word-wrap: break-word; width: 400px">
-                                    <p class="comment-info"><h:outputText value="#{pu.publicacion}" escape="false" /></p>
-                                    
-                                 
-               
+                                    <p class="comment-info"/><h:outputText value="#{pu.publicacion}" escape="false" />
+                                   
+                                    <h:commandLink value="#{pu.idForo.titulo}" action="#{foroPosteosController.verPost(pu.idForo.idPost)}" />
+                                    <h:commandLink value="#{pu.idCurso.nomCurso}"  action="#{cursoController.verCurs(pu.idCurso.idCurso)}"  />
+                               
                                     
                                 </div>
                             </h:form>
@@ -73,6 +74,7 @@
                                             <div style="word-wrap: break-word; width: 350px">
                                                 <p class="comment-info"  >#{mc.comentario}</p>
                                             </div>
+                                            
                                         </h:form>
                                     </div>
                                     <ul>

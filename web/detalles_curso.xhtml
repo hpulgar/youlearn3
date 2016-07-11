@@ -188,8 +188,8 @@
 							<h4>Getting Started</h4>
 							<div class="title-block"></div>
 						</div>
-                                            <p:commandButton  action="#{inscripcionCursoController.inscribirAlCurso(usuarioController.id_user,cursoController.idCurso,1)}" actionListener="#{publicacionPerfilController.crearPublicacionSuscribirCurso(usuarioController.id_user,'Seguido',vc.nomCurso,vc.idCurso)}" value="Follow" class="button2"></p:commandButton>
-                                            <p:commandButton  action="#{inscripcionCursoController.inscribirAlCurso(usuarioController.id_user,cursoController.idCurso,2)}" actionListener="#{publicacionPerfilController.crearPublicacionSuscribirCurso(usuarioController.id_user,'Suscrito',vc.nomCurso,vc.idCurso)}" value="Subscribe" class="button2"></p:commandButton>
+                                            <p:commandButton  action="#{inscripcionCursoController.inscribirAlCurso(usuarioController.id_user,cursoController.idCurso,1)}" actionListener="#{publicacionPerfilController.crearPublicacionPerfil(usuarioController.id_user,'Siguiendo',0,vc.idCurso)}" value="Seguir" class="button2"></p:commandButton>
+                                            <p:commandButton  action="#{inscripcionCursoController.inscribirAlCurso(usuarioController.id_user,cursoController.idCurso,2)}" actionListener="#{publicacionPerfilController.crearPublicacionPerfil(usuarioController.id_user, 'Suscrito',0,vc.idCurso)}" value="Suscribir" class="button2"></p:commandButton>
                                                
                                                  <br/><br/><br/><br/><br/>
                                                  <p>Definicion de suscrito y seguidor.</p>

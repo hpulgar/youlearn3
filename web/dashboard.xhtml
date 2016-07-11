@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+
+   
+    <h:head>
+        <title>Dashboard</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        
+        
+   </h:head>
+    <h:body >
+
+<h:panelGrid id="parametroBody" >
+
+ 
+    
+    <c:forEach  items="#{publicacionPerfilController.verPublicacionesDashboard(usuarioController.id_user)}" var="pu" >
+        <h:panelGroup id="comms">
+
+            <div id="respond-publicacion" style="width: 85%; margin: 3% 5%;">
+                <ul class="comments">
+                    
+                    <li class="comment-entry clearfix">
+                        <div class="comment-left">
+                            <div>
+                            <img src="#{pu.idPublicador.imagen_foto_perfil}" class="comment-image" />
+                            </div>
+                        </div>
+                        <div class="comment-right clearfix">
+                            
+                            <h:form  >
+                                <p class="comment-info"><h:commandLink  value="#{pu.idPublicador.username}"  action="perfil.xhtml" actionListener="#{usuarioController.setId_usuario_amigo(pu.idPublicador.idUsuario)}"/>  <span> #{pu.fechaPublicacion} </span></p>
+                                <div style="word-wrap: break-word; width: 400px">
+                                    <p class="comment-info"/><h:outputText value="#{pu.publicacion}" escape="false" />
+                                   
+                                    <h:commandLink value="#{pu.idForo.titulo}" action="#{foroPosteosController.verPost(pu.idForo.idPost)}" />
+                                    <h:commandLink value="#{pu.idCurso.nomCurso}"  action="#{cursoController.verCurs(pu.idCurso.idCurso)}"  />
+                               
+                                    
+                                </div>
+                            </h:form>
+                            
+                         
+                            
+                           
+                        </div> 
+                    </li>
+                    
+                    
+                          
+                </ul>
+            </div> 
+         </h:panelGroup>
+    </c:forEach>
+    
+
+</h:panelGrid>
+
+            
+      
+           
+ 
+    </h:body>
+       
+</html>

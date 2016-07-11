@@ -38,53 +38,53 @@
     <h:body id="top" class="loading">
 
         <div id="header" >
-                        
-                  <ui:include src="header.xhtml" />
+
+            <ui:include src="header.xhtml" />
         </div>
 
-        
 
-                <!-- BEGIN .slider -->
-                <div class="slider clearfix">
 
-                    <ul class="slides slide-loader">
+        <!-- BEGIN .slider -->
+        <div class="slider clearfix">
 
-                        <li style="background:url(images/slide_01.jpg) no-repeat bottom center">
+            <ul class="slides slide-loader">
 
-                            <div class="flex-caption-wrapper">
-                                <div class="flex-caption">
-                                    <p>Se parte de la comunidad</p>
-                                    <div class="clearboth"></div>
-                                    <p>Participa!</p>
-                                </div>
-                            </div>
+                <li style="background:url(images/slide_01.jpg) no-repeat bottom center">
 
-                        </li>
+                    <div class="flex-caption-wrapper">
+                        <div class="flex-caption">
+                            <p>Se parte de la comunidad</p>
+                            <div class="clearboth"></div>
+                            <p>Participa!</p>
+                        </div>
+                    </div>
 
-                        <li style="background:url(images/slide_02.jpg) no-repeat bottom center">
+                </li>
 
-                            <div class="flex-caption-wrapper">
-                                <div class="flex-caption">
-                                    <p>Novedosos cursos</p>
-                                    <div class="clearboth"></div>
-                                    <p>Aprende hoy!</p>
-                                </div>
-                            </div>
+                <li style="background:url(images/slide_02.jpg) no-repeat bottom center">
 
-                        </li>
+                    <div class="flex-caption-wrapper">
+                        <div class="flex-caption">
+                            <p>Novedosos cursos</p>
+                            <div class="clearboth"></div>
+                            <p>Aprende hoy!</p>
+                        </div>
+                    </div>
 
-                        <li style="background:url(images/slide_03.jpg) no-repeat bottom center">
+                </li>
 
-                        </li>
+                <li style="background:url(images/slide_03.jpg) no-repeat bottom center">
 
-                    </ul>
+                </li>
 
-                    <!-- END .slider -->
-                </div>
+            </ul>
 
-                <div class="header-block-wrapper clearfix">
+            <!-- END .slider -->
+        </div>
 
-                    <div class="header-block-inner">
+        <div class="header-block-wrapper clearfix">
+
+            <div class="header-block-inner">
 
 
                 <h:link outcome="register.xhtml" class="header-block-5 header-block-style-2 clearfix" rendered="#{menuController.noLogeado()}">
@@ -96,7 +96,7 @@
                     <img src="images/header_icon_01.png" alt="" />
                     <h2>Foro</h2>
                 </h:link>
-                        
+
                 <a href="cursos_listado.xhtml" class="header-block-5 header-block-style-2 clearfix">
                     <img src="images/header_icon_02.png" alt="" />
                     <h2>Cursos</h2>
@@ -366,7 +366,10 @@
 
         <!-- END body -->
 
+        <br />
+        <h:link outcome="/tipoPublicacion/List" value="Show All TipoPublicacion Items"/>
     </h:body>
+
 
 
 
