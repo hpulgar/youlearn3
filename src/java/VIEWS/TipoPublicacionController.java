@@ -1,21 +1,12 @@
 package VIEWS;
 
-import ENTITIES.Curso;
-import ENTITIES.CursoSubCat;
-import ENTITIES.Perfil;
-import ENTITIES.Usuario;
+import ENTITIES.TipoPublicacion;
 import VIEWS.util.JsfUtil;
 import VIEWS.util.PaginationHelper;
-import MODELS.CursoFacade;
+import MODELS.TipoPublicacionFacade;
 
 import java.io.Serializable;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 import java.util.ResourceBundle;
-import java.util.SimpleTimeZone;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
@@ -27,56 +18,29 @@ import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
 
-@Named("cursoController")
+@Named("tipoPublicacionController")
 @SessionScoped
-public class CursoController implements Serializable {
+public class TipoPublicacionController implements Serializable {
 
-    private Curso current;
+    private TipoPublicacion current;
     private DataModel items = null;
     @EJB
-    private MODELS.CursoFacade ejbFacade;
+    private MODELS.TipoPublicacionFacade ejbFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
-    private int idCurso;
-    private List<Curso> arCurso = new ArrayList();
 
-    public List<Curso> getArCurso() {
-        return arCurso;
+    public TipoPublicacionController() {
     }
 
-    public void setArCurso(List<Curso> arCurso) {
-        this.arCurso = arCurso;
-    }
-    
-
-    
-
-    public CursoController() {
-    }
-
-    public int getIdCurso() {
-        return idCurso;
-    }
-
-    public void setIdCurso(int idCurso) {
-        this.idCurso = idCurso;
-    }
-    
-    
-
-   
-
-    
-    
-    public Curso getSelected() {
+    public TipoPublicacion getSelected() {
         if (current == null) {
-            current = new Curso();
+            current = new TipoPublicacion();
             selectedItemIndex = -1;
         }
         return current;
     }
 
-    private CursoFacade getFacade() {
+    private TipoPublicacionFacade getFacade() {
         return ejbFacade;
     }
 
@@ -104,13 +68,13 @@ public class CursoController implements Serializable {
     }
 
     public String prepareView() {
-        current = (Curso) getItems().getRowData();
+        current = (TipoPublicacion) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "View";
     }
 
     public String prepareCreate() {
-        current = new Curso();
+        current = new TipoPublicacion();
         selectedItemIndex = -1;
         return "Create";
     }
@@ -118,7 +82,7 @@ public class CursoController implements Serializable {
     public String create() {
         try {
             getFacade().create(current);
-            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("CursoCreated"));
+            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("TipoPublicacionCreated"));
             return prepareCreate();
         } catch (Exception e) {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
@@ -127,7 +91,7 @@ public class CursoController implements Serializable {
     }
 
     public String prepareEdit() {
-        current = (Curso) getItems().getRowData();
+        current = (TipoPublicacion) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "Edit";
     }
@@ -135,7 +99,7 @@ public class CursoController implements Serializable {
     public String update() {
         try {
             getFacade().edit(current);
-            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("CursoUpdated"));
+            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("TipoPublicacionUpdated"));
             return "View";
         } catch (Exception e) {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
@@ -144,7 +108,7 @@ public class CursoController implements Serializable {
     }
 
     public String destroy() {
-        current = (Curso) getItems().getRowData();
+        current = (TipoPublicacion) getItems().getRowData();
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         performDestroy();
         recreatePagination();
@@ -168,7 +132,7 @@ public class CursoController implements Serializable {
     private void performDestroy() {
         try {
             getFacade().remove(current);
-            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("CursoDeleted"));
+            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("TipoPublicacionDeleted"));
         } catch (Exception e) {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
         }
@@ -224,129 +188,21 @@ public class CursoController implements Serializable {
         return JsfUtil.getSelectItems(ejbFacade.findAll(), true);
     }
 
-    public Curso getCurso(java.lang.Integer id) {
+    public TipoPublicacion getTipoPublicacion(java.lang.Integer id) {
         return ejbFacade.find(id);
     }
 
-    ////////////////////////////////CURSO///////////////////////////////////////////////////
-        
-        // INT IDCURSO
-        //INT ID SUBCAT
-        //ID_USUARIO
-        //NOMBRE_CURSO
-        //PERSONAS_INSCRITAS
-        //DESCRIPCION_CURSO
-        //AUTORIZADO 
-        //CONTENIDOS
-        //SEGUIDORES
-        //INTRODUCCION
-        //IMAGEN
-        
-        
-        
-        public List<Curso> listaCursos()
-        {
-            this.arCurso.clear();
-            arCurso = ejbFacade.findAll();
-            
-            return arCurso;
-        }
-        
-        public List<Curso> verCurso(int idCurso)
-        {
-            arCurso.clear();
-            arCurso = ejbFacade.verC(idCurso);
-            return arCurso;
-        }
-        
-       
-        
-        public String cursoCont()
-        {
-            return "/curso.xhtml";
-        }
-        
-        public String irTablero(int idCurso)
-        {
-            this.setIdCurso(idCurso);
-            return "/tablero.xhtml";
-        }
-        
-          public String verCurs(int idCurso)
-        {
-            this.setIdCurso(idCurso);
-            return "/detalles_curso.xhtml";
-        }
-        
-        public String CrearCurso(int id_scat_curso,int id_usuario)
-        {
-            try{
-                
-        // 1 INT IDCURSO automatico x
-        // 2 INT ID SUBCAT por parametro X
-        // 3 ID_USUARIO por parametro  X
-        // 4 NOMBRE_CURSO selecterd X
-        // 5 PERSONAS_INSCRITAS defecto 0 X
-        // 6 DESCRIPCION_CURSO selected X
-        // 7 AUTORIZADO  por defecto 0 X
-        // 8 CONTENIDOS selected X
-        // 9 SEGUIDORES por defecto 0 X
-        // 10 INTRODUCCION selected X
-        // 11 IMAGEN selected
-                
-        
-        ///////AGREGAR FECHA
-                
-                CursoSubCat csc = new CursoSubCat();
-                csc.setIdSubcat(id_scat_curso);
-        
-                Usuario ou = new Usuario();
-                ou.setIdUsuario(id_usuario);
-                
-//                DateFormat dateFormat = new SimpleDateFormat("yyyy/mm/dd");
-//                Date date = new Date();
-//                String fecha = dateFormat.format(date);
-//                
-                
-                
-                SimpleDateFormat sdf = new SimpleDateFormat();
-                sdf.setTimeZone(new SimpleTimeZone(-3, "GMT"));
-                sdf.applyPattern("yyyy/mm/dd");
-                Date fecha = new Date();
-
-             
-                current.setFecha(fecha);
-                
-               
-                current.setIdUsuario(ou);
-                current.setIdCat(csc);
-                current.setAutorizado(false);
-                current.setSeguidores(0);
-                current.setPersonasInscritas(0);
-                getFacade().create(current);
-                current = null;
-
-                return "/cursos_listado.xhtml";//momentaneo
-
-                }catch(Exception e)
-                {
-                    System.out.println("EL ERRORR"+ e);
-                    return "/curso_crear.xhtml";
-                }
-        }
-        
-        
-    @FacesConverter(forClass = Curso.class)
-    public static class CursoControllerConverter implements Converter {
+    @FacesConverter(forClass = TipoPublicacion.class)
+    public static class TipoPublicacionControllerConverter implements Converter {
 
         @Override
         public Object getAsObject(FacesContext facesContext, UIComponent component, String value) {
             if (value == null || value.length() == 0) {
                 return null;
             }
-            CursoController controller = (CursoController) facesContext.getApplication().getELResolver().
-                    getValue(facesContext.getELContext(), null, "cursoController");
-            return controller.getCurso(getKey(value));
+            TipoPublicacionController controller = (TipoPublicacionController) facesContext.getApplication().getELResolver().
+                    getValue(facesContext.getELContext(), null, "tipoPublicacionController");
+            return controller.getTipoPublicacion(getKey(value));
         }
 
         java.lang.Integer getKey(String value) {
@@ -361,20 +217,16 @@ public class CursoController implements Serializable {
             return sb.toString();
         }
 
-        
-       
-        
-        
         @Override
         public String getAsString(FacesContext facesContext, UIComponent component, Object object) {
             if (object == null) {
                 return null;
             }
-            if (object instanceof Curso) {
-                Curso o = (Curso) object;
-                return getStringKey(o.getIdCurso());
+            if (object instanceof TipoPublicacion) {
+                TipoPublicacion o = (TipoPublicacion) object;
+                return getStringKey(o.getIdTipoPublicacion());
             } else {
-                throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: " + Curso.class.getName());
+                throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: " + TipoPublicacion.class.getName());
             }
         }
 

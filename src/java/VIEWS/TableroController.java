@@ -235,6 +235,12 @@ public class TableroController implements Serializable {
     //    String titulo
     //    String escripcion        
     
+      public void verUno(int id)
+     {
+          Tablero tp = ejbFacade.verT(id).get(0);
+          current = tp;
+     }
+    
     public List<Tablero> verTableros(int idCurso)
     {
         arTablero.clear();

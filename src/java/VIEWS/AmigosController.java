@@ -7,6 +7,8 @@ import VIEWS.util.PaginationHelper;
 import MODELS.AmigosFacade;
 
 import java.io.Serializable;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ResourceBundle;
 import javax.ejb.EJB;
 import javax.inject.Named;
@@ -62,13 +64,13 @@ public class AmigosController implements Serializable {
     }
 
     
-    public Amigos getSelected() {
-        if (current == null) {
-            current = new Amigos();
-            selectedItemIndex = -1;
-        }
-        return current;
-    }
+//    public Amigos getSelected() {
+//        if (current == null) {
+//            current = new Amigos();
+//            selectedItemIndex = -1;
+//        }
+//        return current;
+//    }
 
     private AmigosFacade getFacade() {
         return ejbFacade;
@@ -235,11 +237,16 @@ public class AmigosController implements Serializable {
             Usuario ou2 = new Usuario();
             ou2.setIdUsuario(idUser2);
             
+            DateFormat dateFormat = new SimpleDateFormat("yyyy/mm/dd HH:mm:ss");
+            Date date = new Date();
+            String fecha = dateFormat.format(date);
+            
             objA.setAprobado(apr);
             objA.setIdUsuario1(ou);
             System.out.println("asd --- "+objA.getIdUsuario1().getIdUsuario());
             objA.setIdUsuario2(ou2);
             System.out.println("asd --- "+objA.getIdUsuario2().getIdUsuario());
+            objA.setFechaAmistad(dateFormat.parse(fecha));
             
             getFacade().create(objA);
             
@@ -325,58 +332,6 @@ public class AmigosController implements Serializable {
     }
     
     
-       
-    
-//    public void enviarSolicitudOLD(int idUser1,int idUser2)
-//    {
-//            List<Amigos> oa = ejbFacade.findAll();
-//            if(!oa.isEmpty())
-//            {
-//                for(int i=0;i<oa.size();i++)
-//                {
-//                    if(oa.get(i).getIdUsuario1().getIdUsuario() == idUser1 && oa.get(i).getIdUsuario2().getIdUsuario() == idUser2)
-//                    {
-//                        if(oa.get(i).getAprobado() == true)
-//                        {
-//                            System.out.println(" no lo crea");
-//                        }else
-//                        {
-//                            System.out.println("Solicitud Pendiente");
-//                        }
-//                    }else 
-//                    {
-//                         System.out.println("Si "+oa.get(i).getIdUsuario1().getIdUsuario()+" es igual a "+ idUser2+" y "+oa.get(i).getIdUsuario2().getIdUsuario()+" es igual a "+idUser1);
-//                         System.out.println("Entonces...");
-//                        if(oa.get(i).getIdUsuario1().getIdUsuario() == idUser2 && oa.get(i).getIdUsuario2().getIdUsuario() == idUser1)
-//                        {
-//                            if(oa.get(i).getAprobado()==false)
-//                            {
-//                                System.out.println("A PUNTO DE EDITAR");
-//                                current= null;
-//                                current = oa.get(i);
-//                                System.out.println("editar");
-//                                aceptarSolicitud(idUser1,idUser2,current);
-//                            }else
-//                            {
-//                                System.out.println("SEGUN ESTO EL APROBADO ES TRUE");
-//                            }
-//                        }else
-//                        {
-//                            System.out.println("CREAR 1");
-//                            crearSolicitud(idUser1,idUser2,false);
-//                            break;
-//                        }
-//                    }
-//                }
-//            }else
-//            {
-//                System.out.println("CREAR 2");
-//                crearSolicitud(idUser1,idUser2,false);
-//            }
-//      
-//    }
-//    
-    
     
     
     public boolean botonAmistad(int idUser1, int idUser2)
@@ -389,6 +344,27 @@ public class AmigosController implements Serializable {
     {
         return ("Solicitud Pendiente".equals(meth) ||"Amigos".equals(meth));
     }
+    
+    public List<Usuario> listAmigos(int idUsuario)
+    {
+        List<Usuario> arU = new ArrayList();
+        List<Amigos> arA = new ArrayList();
+        //List<Amigos> arA2 = new ArrayList();
+        
+        arA.clear();
+        arU.clear();
+        arA = getFacade().findAll();
+        for(int i=0;i<arA.size();i++)
+        {
+            if(arA.get(i).getIdUsuario1().getIdUsuario() == idUsuario)
+            {
+                arU.add(arA.get(i).getIdUsuario2());
+            }
+        }
+        return arU;
+    }
+    
+    
     
     
     

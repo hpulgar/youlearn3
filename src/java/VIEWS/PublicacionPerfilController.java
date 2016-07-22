@@ -1,7 +1,10 @@
 package VIEWS;
 
+import ENTITIES.Amigos;
 import ENTITIES.Curso;
+import ENTITIES.ForoPosteos;
 import ENTITIES.PublicacionPerfil;
+import ENTITIES.TipoPublicacion;
 import ENTITIES.Usuario;
 import VIEWS.util.JsfUtil;
 import VIEWS.util.PaginationHelper;
@@ -25,7 +28,7 @@ import javax.faces.model.SelectItem;
 
 @Named("publicacionPerfilController")
 @SessionScoped
-public class PublicacionPerfilController implements Serializable {
+public class PublicacionPerfilController extends AmigosController implements Serializable  {
 
     private PublicacionPerfil current;
     private DataModel items = null;
@@ -37,10 +40,40 @@ public class PublicacionPerfilController implements Serializable {
     private List<PublicacionPerfil> arPerfil = new ArrayList();
     //private List<PublicacionPerfil> arPerfil2 = new ArrayList();
     private int idPerfil;
+    private String paginaRedirect;
+    private String metodoRedirect;
+    private String link;
 
     public PublicacionPerfilController() {
     }
 
+    public String getPaginaRedirect() {
+        return paginaRedirect;
+    }
+
+    public void setPaginaRedirect(String paginaRedirect) {
+        this.paginaRedirect = paginaRedirect;
+    }
+
+    public String getMetodoRedirect() {
+        return metodoRedirect;
+    }
+
+    public void setMetodoRedirect(String metodoRedirect) {
+        this.metodoRedirect = metodoRedirect;
+    }
+
+    public String getLink() {
+        return link;
+    }
+
+    public void setLink(String link) {
+        this.link = link;
+    }
+    
+    
+
+    
     public List<PublicacionPerfil> getArPerfil() {
         return arPerfil;
     }
@@ -244,16 +277,20 @@ public class PublicacionPerfilController implements Serializable {
             Usuario ou2 = new Usuario();
             ou2.setIdUsuario(id_usuario);
             
+            TipoPublicacion tp = new TipoPublicacion();
+            tp.setIdTipoPublicacion(1);
+            
             DateFormat dateFormat = new SimpleDateFormat("yyyy/mm/dd HH:mm:ss");
             Date date = new Date();
             String fecha = dateFormat.format(date);
        
              System.out.println("Usuario2 Parametro --> "+current.getPublicacion());
              
-             
+            current.setIdTipoPublicacion(tp);
             current.setIdPublicador(ou);
             current.setIdUsuario(ou2);     
             current.setFechaPublicacion(dateFormat.parse(fecha));
+            
             if(current.getPublicacion() != null)
             {
                 ejbFacade.create(current);
@@ -272,7 +309,7 @@ public class PublicacionPerfilController implements Serializable {
     
    
     
-      public void crearPublicacionSuscribirCurso(int id_usuario, String bton,String nomCurso, int idCurso)
+      public void crearPublicacionPerfil(int id_usuario, String bton,int idPosteo, int idCurso)
     {
         System.out.println("ENTRA AL METODO CREAR PUBLICACION");
         try{
@@ -286,21 +323,56 @@ public class PublicacionPerfilController implements Serializable {
             Date date = new Date();
             String fecha = dateFormat.format(date);
             
-            pp.setIdPublicador(ou2);
-            pp.setIdUsuario(ou2);
-            pp.setFechaPublicacion(dateFormat.parse(fecha));
-            //pp.setPublicacion("Se ha "+bton+" al curso <a href="+"#{inscripcionCursoController.cargarCurso("+idCurso+","+id_usuario+")}"+"onclick="+"#{cursoController.setIdCurso("+idCurso+")}>"+nomCurso+"</a>");
-            pp.setPublicacion("Se ha bton al curso <a href=detalles_curso.xhtml onclick='#{cursoController.setIdCurso("+idCurso+")}'>"+nomCurso+"</a>");
+            TipoPublicacion tp = new TipoPublicacion();
+            tp.setIdTipoPublicacion(2);
             
-            System.out.println("Id usuario "+pp.getIdUsuario().getIdUsuario());
-            System.out.println("Id publicador "+pp.getIdPublicador().getIdUsuario());
-            System.out.println("Fecha "+pp.getFechaPublicacion());
-            System.out.println("Publicacion "+pp.getPublicacion());
-             
+            Curso cur = new Curso();
+            cur.setIdCurso(idCurso);
             
+            ForoPosteos fp = new ForoPosteos();
+            fp.setIdPost(idPosteo);
             
+           // pp.setPublicacion("Ha "+bton+" al curso "+);
+           // pp.setLinkPublicacion("#{inscripcionCursoController.cargarCurso("+idCurso+","+id_usuario+")}");               
+          
             System.out.println("Antes de Crear");
-            getFacade().create(pp);
+            if(idPosteo != 0)
+            {
+                    pp.setIdTipoPublicacion(tp);
+                    pp.setIdPublicador(ou2);
+                    pp.setIdUsuario(ou2);
+                    pp.setFechaPublicacion(dateFormat.parse(fecha));
+                    pp.setPublicacion("Ha creado el blog ");// cuando vamos a generar una publicacion q muestre el foro?
+                   // pp.setIdCurso(cur);//creo q esta de mas(es mejor dejarlo null)
+                    pp.setIdForo(fp);
+                    System.out.println("Id usuario "+pp.getIdUsuario().getIdUsuario());
+                    System.out.println("Id publicador "+pp.getIdPublicador().getIdUsuario());
+                    System.out.println("Fecha "+pp.getFechaPublicacion());
+                    System.out.println("Publicacion "+pp.getPublicacion());
+                        
+                
+            }
+            
+               
+            if(idCurso != 0)
+            {     
+                  pp.setIdTipoPublicacion(tp);
+                  pp.setIdPublicador(ou2);
+                  pp.setIdUsuario(ou2);
+                  pp.setFechaPublicacion(dateFormat.parse(fecha));
+                  pp.setIdCurso(cur);
+                  //pp.setIdForo(fp);// lo mismo q arriba
+                  pp.setPublicacion("Se esta "+bton+" al curso ");
+                  System.out.println("Id usuario "+pp.getIdUsuario().getIdUsuario());
+                  System.out.println("Id publicador "+pp.getIdPublicador().getIdUsuario());
+                  System.out.println("Fecha "+pp.getFechaPublicacion());
+                  System.out.println("Publicacion "+pp.getPublicacion());
+                       
+            }
+            
+             getFacade().create(pp);
+            
+      
             System.out.print("Despues de crear");
             
         }
@@ -317,6 +389,9 @@ public class PublicacionPerfilController implements Serializable {
     
     public List<PublicacionPerfil> verPublicaciones(int idUsuario)
     {
+        String bykk= "";
+        String bykk2="";
+        
         arPerfil.clear();
         arPerfil =ejbFacade.findAll();
         List<PublicacionPerfil> arPerfil2 = new ArrayList();
@@ -324,17 +399,54 @@ public class PublicacionPerfilController implements Serializable {
         
         for(int i= arPerfil.size()-1 ; i >= 0 ;i--)
         {
-            
-            
             if(arPerfil.get(i).getIdUsuario().getIdUsuario() == idUsuario)
             {
-                
-                arPerfil2.add(arPerfil.get(i));
+//                if(arPerfil.get(i).getIdTipoPublicacion().getIdTipoPublicacion() == 2)
+//                {
+//                   this.paginaRedirect = "detalles_curso.xhtml";
+//                   this.metodoRedirect = "cursoController.setIdCurso("+arPerfil.get(i).getLinkPublicacion()+")";
+//                   
+//                }else if(arPerfil.get(i).getIdTipoPublicacion().getIdTipoPublicacion() == 3)
+//                {
+//                    this.paginaRedirect = "blog-single.xhtml";
+//                    CursoController cc = new CursoController();
+//                    cc.setIdCurso(Integer.parseInt(arPerfil.get(i).getLinkPublicacion()));
+              arPerfil2.add(arPerfil.get(i));
             }
         }
         return arPerfil2;
         
     }
+    
+    public List<PublicacionPerfil> verPublicacionesDashboard(int idUsuario)
+    {
+        arPerfil.clear();
+        arPerfil =ejbFacade.findAll();
+        List<PublicacionPerfil> arPerfil2 = new ArrayList();
+        List<Usuario> arAmigos = listAmigos(idUsuario);
+        
+        for(int i= arPerfil.size()-1 ; i >= 0 ;i--)
+        {
+            for(int o=0;o<arAmigos.size();o++)
+            {
+                //System.out.println("ID "+arAmigos.get(o).getIdUsuario());
+                if(arPerfil.get(i).getIdUsuario().getIdUsuario() == arAmigos.get(o).getIdUsuario())
+                {
+                   arPerfil2.add(arPerfil.get(i));
+                }
+
+            }
+        }
+        return arPerfil2;
+    }
+    
+//    public List<PublicacionPerfil> ordenar(List<PublicacionPerfil> pp)
+//    {
+//        arPerfil =pp;
+//        pp.
+//        return null;
+//    }
+      
     
     
 

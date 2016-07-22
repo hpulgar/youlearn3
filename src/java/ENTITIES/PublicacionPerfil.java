@@ -26,16 +26,17 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author Felipe
+ * @author Zotindows
  */
 @Entity
 @Table(name = "publicacion_perfil")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "PublicacionPerfil.findAll", query = "SELECT p FROM PublicacionPerfil p order BY p.fechaPublicacion DESC"),
+    @NamedQuery(name = "PublicacionPerfil.findAll", query = "SELECT p FROM PublicacionPerfil p"),
     @NamedQuery(name = "PublicacionPerfil.findByIdPublicacion", query = "SELECT p FROM PublicacionPerfil p WHERE p.idPublicacion = :idPublicacion"),
     @NamedQuery(name = "PublicacionPerfil.findByPublicacion", query = "SELECT p FROM PublicacionPerfil p WHERE p.publicacion = :publicacion"),
-    @NamedQuery(name = "PublicacionPerfil.findByFechaPublicacion", query = "SELECT p FROM PublicacionPerfil p WHERE p.fechaPublicacion = :fechaPublicacion")})
+    @NamedQuery(name = "PublicacionPerfil.findByFechaPublicacion", query = "SELECT p FROM PublicacionPerfil p WHERE p.fechaPublicacion = :fechaPublicacion"),
+    @NamedQuery(name = "PublicacionPerfil.findByLinkPublicacion", query = "SELECT p FROM PublicacionPerfil p WHERE p.linkPublicacion = :linkPublicacion")})
 public class PublicacionPerfil implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -54,6 +55,18 @@ public class PublicacionPerfil implements Serializable {
     @Column(name = "fecha_publicacion")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaPublicacion;
+    @Size(max = 200)
+    @Column(name = "link_publicacion")
+    private String linkPublicacion;
+    @JoinColumn(name = "id_curso", referencedColumnName = "id_curso")
+    @ManyToOne
+    private Curso idCurso;
+    @JoinColumn(name = "id_foro", referencedColumnName = "id_post")
+    @ManyToOne
+    private ForoPosteos idForo;
+    @JoinColumn(name = "id_tipo_publicacion", referencedColumnName = "id_tipo_publicacion")
+    @ManyToOne(optional = false)
+    private TipoPublicacion idTipoPublicacion;
     @JoinColumn(name = "id_publicador", referencedColumnName = "id_usuario")
     @ManyToOne(optional = false)
     private Usuario idPublicador;
@@ -96,6 +109,38 @@ public class PublicacionPerfil implements Serializable {
 
     public void setFechaPublicacion(Date fechaPublicacion) {
         this.fechaPublicacion = fechaPublicacion;
+    }
+
+    public String getLinkPublicacion() {
+        return linkPublicacion;
+    }
+
+    public void setLinkPublicacion(String linkPublicacion) {
+        this.linkPublicacion = linkPublicacion;
+    }
+
+    public Curso getIdCurso() {
+        return idCurso;
+    }
+
+    public void setIdCurso(Curso idCurso) {
+        this.idCurso = idCurso;
+    }
+
+    public ForoPosteos getIdForo() {
+        return idForo;
+    }
+
+    public void setIdForo(ForoPosteos idForo) {
+        this.idForo = idForo;
+    }
+
+    public TipoPublicacion getIdTipoPublicacion() {
+        return idTipoPublicacion;
+    }
+
+    public void setIdTipoPublicacion(TipoPublicacion idTipoPublicacion) {
+        this.idTipoPublicacion = idTipoPublicacion;
     }
 
     public Usuario getIdPublicador() {

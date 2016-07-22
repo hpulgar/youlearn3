@@ -38,6 +38,15 @@ public class ForoPosteosController implements Serializable {
     private List<ForoPosteos> carga = new ArrayList();
     private List<ForoPosteos> cargaNoticias = new ArrayList();
     private int idPosteo;
+    private List<ForoPosteos> arForo = new ArrayList();
+
+    public List<ForoPosteos> getArForo() {
+        return arForo;
+    }
+
+    public void setArForo(List<ForoPosteos> arForo) {
+        this.arForo = arForo;
+    }
 
     public int getIdPosteo() {
         return idPosteo;
@@ -206,11 +215,35 @@ public class ForoPosteosController implements Serializable {
         carga = ejbFacade.verP(id);
         return carga;
     }
+     
+     
+     public String nombrePost(int id)
+     {
+         return ejbFacade.verP(idPosteo).get(0).getTitulo();
+     }
+     
+     
+     
+     public void verUno(int id)
+     {
+          ForoPosteos fp = ejbFacade.verP(id).get(0);
+          current = fp;
+     }
         
      public List<ForoPosteos> cargaTodos()
          {
+             carga.clear();
+             carga=ejbFacade.findAll();
              carga2.clear();
-             carga2=ejbFacade.findAll();
+             for(int i=0;i<carga.size();i++)
+             {
+                 if(carga.get(i).getAutorizado() == true)
+                 {
+                     carga2.add(carga.get(i));
+                 }
+                 
+             }
+             
              
              return carga2;
         
@@ -251,8 +284,10 @@ public class ForoPosteosController implements Serializable {
         current.setIdUser(ou);
         current.setIdSubcategoria(fsc);
         current.setAutorizado(false);
+        //current.getIdPost();
         
         getFacade().create(current);
+        getFacade().find(ou).getIdPost();
         current = null;
         
         return "/foro.xhtml";
@@ -263,6 +298,36 @@ public class ForoPosteosController implements Serializable {
             return "/foro_crear.xhtml";
         }
             
+    }
+    
+       public List<ForoPosteos> verPublicaciones(int idPost)
+    {
+      
+        
+        arForo.clear();
+        arForo =ejbFacade.findAll();
+        List<ForoPosteos> arForo2 = new ArrayList();
+        
+        
+        for(int i= arForo.size()-1 ; i >= 0 ;i--)
+        {
+            if(arForo.get(i).getIdPost() == idPost)
+            {
+//                if(arPerfil.get(i).getIdTipoPublicacion().getIdTipoPublicacion() == 2)
+//                {
+//                   this.paginaRedirect = "detalles_curso.xhtml";
+//                   this.metodoRedirect = "cursoController.setIdCurso("+arPerfil.get(i).getLinkPublicacion()+")";
+//                   
+//                }else if(arPerfil.get(i).getIdTipoPublicacion().getIdTipoPublicacion() == 3)
+//                {
+//                    this.paginaRedirect = "blog-single.xhtml";
+//                    CursoController cc = new CursoController();
+//                    cc.setIdCurso(Integer.parseInt(arPerfil.get(i).getLinkPublicacion()));
+              arForo2.add(arForo.get(i));
+            }
+        }
+        return arForo2;
+        
     }
     public SelectItem[] getItemsAvailableSelectMany() {
         return JsfUtil.getSelectItems(ejbFacade.findAll(), false);

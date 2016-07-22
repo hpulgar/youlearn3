@@ -6,6 +6,7 @@
 package ENTITIES;
 
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -17,12 +18,15 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
+import java.util.*;
 
 /**
  *
- * @author Felipe
+ * @author Zotindows
  */
 @Entity
 @Table(name = "amigos")
@@ -30,7 +34,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "Amigos.findAll", query = "SELECT a FROM Amigos a"),
     @NamedQuery(name = "Amigos.findByIdAmistad", query = "SELECT a FROM Amigos a WHERE a.idAmistad = :idAmistad"),
-    @NamedQuery(name = "Amigos.findByAprobado", query = "SELECT a FROM Amigos a WHERE a.aprobado = :aprobado")})
+    @NamedQuery(name = "Amigos.findByAprobado", query = "SELECT a FROM Amigos a WHERE a.aprobado = :aprobado"),
+    @NamedQuery(name = "Amigos.findByFechaAmistad", query = "SELECT a FROM Amigos a WHERE a.fechaAmistad = :fechaAmistad")})
 public class Amigos implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -43,6 +48,9 @@ public class Amigos implements Serializable {
     @NotNull
     @Column(name = "aprobado")
     private boolean aprobado;
+    @Column(name = "fecha_amistad")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date fechaAmistad;
     @JoinColumn(name = "id_usuario1", referencedColumnName = "id_usuario")
     @ManyToOne(optional = false)
     private Usuario idUsuario1;
@@ -78,6 +86,14 @@ public class Amigos implements Serializable {
         this.aprobado = aprobado;
     }
 
+    public Date getFechaAmistad() {
+        return fechaAmistad;
+    }
+
+    public void setFechaAmistad(Date fechaAmistad) {
+        this.fechaAmistad = fechaAmistad;
+    }
+
     public Usuario getIdUsuario1() {
         return idUsuario1;
     }
@@ -94,6 +110,8 @@ public class Amigos implements Serializable {
         this.idUsuario2 = idUsuario2;
     }
 
+    
+    
     @Override
     public int hashCode() {
         int hash = 0;

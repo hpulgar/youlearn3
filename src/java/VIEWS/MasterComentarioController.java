@@ -277,7 +277,7 @@ public class MasterComentarioController implements Serializable {
     }
     public String nombreBoton2(int numero)
     {
-        
+       
         return "btoDos"+numero;
         
     }
