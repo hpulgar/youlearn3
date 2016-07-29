@@ -4,7 +4,7 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-          
+          xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
       xmlns:p="http://primefaces.org/ui"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
       
@@ -35,75 +35,8 @@
 	<script type="text/javascript" src="js/jquery.uniform.js"></script>
 	<script type="text/javascript" src="js/scripts.js"></script>
         <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
-
       
-	<script type="text/javascript">
-    //<![CDATA[
-           
-       
-            $(document).ready(function() 
-            {
-                
-                for(i=0;i<=#{masterComentarioController.mayorIdComentarios()};i++)
-                {                   
-                    
-                    $("#response"+i).hide(); 
-                }   
-                    $(".comment-right .responder").click(function()
-                    {   
-                        
-                        if($(this).attr("id").length === 10)
-                        {
-                            
-                            $("#"+$(this).attr("id")).hide();
-                            $("#response"+($(this).attr("id")).substr(-1)).show();
-                            $(".algo").focus();
-                            $(".algo").val("");
-                            
-                            $("#response"+($(this).attr("id")).substr(-1)).focusout(function()
-                            {
-                                $("#responder"+($(this).attr("id")).substr(-1)).show();
-                                $("#response"+($(this).attr("id")).substr(-1)).hide();
-                                $("#response"+($(this).attr("id")).substr(-1)).val("");
-                                $(".algo").val("");
-                            });
-                        }if($(this).attr("id").length === 11)
-                        {
-                            $("#"+$(this).attr("id")).hide();
-                            $("#response"+($(this).attr("id")).substr(-2)).show();
-                            $(".algo").focus();
-                            $(".algo").val("");
 
-                            $("#response"+($(this).attr("id")).substr(-2)).focusout(function()
-                            {
-                                $("#responder"+($(this).attr("id")).substr(-2)).show();
-                                $("#response"+($(this).attr("id")).substr(-2)).hide();
-                                $("#response"+($(this).attr("id")).substr(-2)).val("");
-                                $(".algo").val("");
-
-                            });
-                        }if($(this).attr("id").length === 12)
-                        {
-                            $("#"+$(this).attr("id")).hide();
-                            $("#response"+($(this).attr("id")).substr(-3)).show();
-                            $("#response"+($(this).attr("id")).substr(-3)).focus();
-                            $(".algo").val("");
-
-                            $("#response"+($(this).attr("id")).substr(-3)).focusout(function()
-                            {
-                                $("#responder"+($(this).attr("id")).substr(-3)).show();
-                                $("#response"+($(this).attr("id")).substr(-3)).hide();
-                                $("#response"+($(this).attr("id")).substr(-3)).val("");
-                                $(".algo").val("");
-
-                            });
-                        }
-                    });   
-                
-            });
-            
-         //]]>>   
-</script>
 <!-- END head -->
    </h:head>
 
@@ -120,11 +53,9 @@
 		
 		<div class="page-title">	
 			<h2>Título
-                            <c:forEach items="#{contenidosController.verUnCont(contenidosController.idContenido)}" var="con"> 
-                            
-                                #{con.nombreUnidad}
-                            
-                            </c:forEach>              
+                            #{contenidosController.cargarCont(contenidosController.idContenido)}
+                                #{contenidosController.selected.nombreUnidad}
+                          
                         </h2>
 			<div class="page-title-block"></div>
 		</div>
@@ -152,44 +83,44 @@
 					
 					<div class="blog-info">
                                            
-                                            <c:forEach items="#{contenidosController.verUnCont(contenidosController.idContenido)}" var="cont">
+                                            
                                                 <div>
                                             
-                                                    <h3><img src="#{cont.idCurso.idUsuario.imagen_foto_perfil}" class="blog-date"  style=" object-fit: cover;"/></h3>
-						
+                                                    <h3><img src="#{contenidosController.selected.idCurso.idUsuario.imagen_foto_perfil}" class="blog-date"  style=" object-fit: cover;"/></h3>
+                                                      
                                                 </div>	
                                            
 						<ul class="blog-meta">
                                                     
                                                     <li><strong>Unidad</strong></li> 
-                                                    <li>#{cont.unidad}</li>
+                                                    <li>#{contenidosController.selected.unidad}</li>
                                                     <li> <strong>Fecha </strong></li>
-                                                    <li><h:outputText value="#{cont.fecha}">
+                                                    <li><h:outputText value="#{contenidosController.selected.fecha}">
                                                                <f:convertDateTime type="date" pattern="dd-M-yyyy HH:mm"/>
                                                          </h:outputText></li>
                                                     <li><strong>Iniciado por </strong></li>
-                                                    <li> #{cont.idCurso.idUsuario.username}</li>    
+                                                    <li> #{contenidosController.selected.idCurso.idUsuario.username}</li>    
                                                     <li><strong>Curso</strong></li>
-                                                    <li>#{cont.idCurso.nomCurso}</li>
+                                                    <li>#{contenidosController.selected.idCurso.nomCurso}</li>
                                                     
                                                     
 						</ul>
-                                                </c:forEach> 
+                                                
 					</div>
 					
 					<div class="blog-content blog-content-single">	
-                                            <c:forEach items="#{contenidosController.verUnCont(contenidosController.idContenido)}" var="cont2"> 
+                                        
                                                 <img src="http://img.pandawhale.com/post-19984-maria-sharapova-hot-bikini-swi-H5lF.jpeg" alt="" class="blog-image" />
 						
                                                 <p>
                                                   
                                                        
-                                                        <h:outputText value="#{cont2.contenido}" escape="false" />
+                                                    <h:outputText value="#{contenidosController.selected.contenido}" escape="false" />
                                                     
                                                 </p>
                                                 
 						
-						</c:forEach> 
+						
 					</div>
 				
 					<div class="clearboth"></div>
@@ -207,86 +138,81 @@
 					<div id="respond">
 						
 						<h3 class="block-title">Comentarios> en este posteo</h3>
+                                                 <h:panelGrid id="parametroBody" >
+                <h:panelGroup>
+    <div id="respond-publicacion" style="width: 100%; margin: 3% 5%;">
+        <ul class="comments">
+
+           
+                <c:forEach items="#{masterComentarioController.cargaComentarios(contenidosController.idContenido,4)}" var="mc">
+                    <li>
+                        <ul class="comments">
+                            <li class="comment-entry clearfix">
+                                <div class="comment-left">
+                                    <div><img src="#{mc.idUsuario.imagen_foto_perfil}" class="comment-image" /> </div>
+                                </div>
+                                <div class="comment-right clearfix">
+                                    <h:form>
+                                        <p class="comment-info"> <h:commandLink value="#{mc.idUsuario.username}" action="perfil.xhtml" actionListener="#{usuarioController.setId_usuario_amigo(mc.idUsuario.idUsuario)}"/> <span> #{mc.fechaComentario} </span></p>
+                                        <div style="word-wrap: break-word; width: 350px">
+                                            <p class="comment-info"  >#{mc.comentario}</p>
+                                        </div>
+
+                                    </h:form>
+                                </div>
+                                <ul>
+                                    <li>
+                                        <div class="comment-right clearfix">
+                                            <ui:repeat value="#{masterRespuestasController.cargaRespuesta(mc.idComentario)}" var="mrl">
+                                                <div style="word-wrap: break-word; width: 302px">
+                                                    <h:form>
+                                                        <p class="comment-info clearfix"> <img src="#{mrl.idUsuario.imagen_foto_perfil}" class="course-image" style='height: 30px; width: 30px; object-fit: cover;'></img> 
+                                                        <h:commandLink value="#{mrl.idUsuario.username}" action="perfil.xhtml" actionListener="#{usuarioController.setId_usuario_amigo(mrl.idUsuario.idUsuario)}" /> <span> #{mrl.respuesta} </span></p>
+                                                    </h:form>
+                                                </div>
+                                            </ui:repeat>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li id="txtResponder">
+                        <div id ="comment-rightResp" class="comment-right">
+
+                            <h:form id="#{masterComentarioController.nombreForm2(mc.idComentario)}">
+                                <p:inputText  id="#{masterComentarioController.nombreInput2(mc.idComentario)}" a:placeholder="Responder..." value="#{masterRespuestasController.selected.respuesta}"  style="float:left; margin-left: 30px" /><br/>
+                                <p:commandButton  style=" visibility: hidden"  id="#{masterComentarioController.nombreBoton2(mc.idComentario)}" actionListener="#{masterRespuestasController.crearRespuesta(mc.idComentario,usuarioController.id_user)}" update="parametroBody" process="@all" value="Responder" />
+                            </h:form>
+                        </div>
+                        </li>
+                        </ul> 
+                    </li>
+
+                </c:forEach>
+                   
+           
+
+
+
+        </ul>
+    </div>     
+       
+            <div class="field-row" style="float:left;">
+                <h:form >
+                    <h:inputText a:placeholder="Comentar..." value="#{masterComentarioController.selected.comentario}" style="border-color: #198752; width: 200px; margin-left: 80px"/>
+                    <p:commandButton actionListener="#{masterComentarioController.CrearComentario(usuarioController.id_user,contenidosController.idContenido,4)}"  update="parametroBody" process="@all" value="Comentar"  style="float:right ;margin-right:30px; visibility: hidden" ></p:commandButton>
+                </h:form>
+            </div>
+       
+    
+		 </h:panelGroup>
+                    </h:panelGrid>				
+                                                           
+
 						
-                                                <c:forEach items="#{masterComentarioController.cargaComentarios(contenidosController.idContenido,4)}" var="mc">
-						
-                                                    <ul class="comments">
-                                                    
-                                                    
-							<li class="comment-entry clearfix">
-								<!-- BEGIN .comment-left -->
-								<div class="comment-left">
-                                                                    <div ><img src="#{mc.idUsuario.imagen_foto_perfil}" class="comment-image" /> </div>
-								
-								</div>
-
-								<!-- BEGIN .comment-right -->
-                                                               
-                                                                <div class="comment-right clearfix">
-                                                                            <p class="comment-info">#{mc.idUsuario.username} <span> #{mc.fechaComentario} </span></p>
-                                                                            <div style="word-wrap: break-word; width: 400px">
-                                                                                <p class="comment-info"  >#{mc.comentario}</p>
-                                                                            </div>
-                                                                            <p class="reply"><a class="responder" id="#{masterComentarioController.ShowResponder(mc.idComentario)}" >Responder</a></p>
-
-                                                                            <c:forEach items="#{masterRespuestasController.cargaRespuesta(mc.idComentario)}" var="mrl">
-                                                                                <div style="word-wrap: break-word; width: 400px">
-                                                                                    
-                                                                                    <p class="comment-info clearfix"> <img src="#{mc.idUsuario.imagen_foto_perfil}" class="course-image" style='height: 30px; width: 30px; object-fit: cover;'></img> 
-                                                                                        #{mrl.idUsuario.username} <span> #{mrl.respuesta} </span></p>
-                                                                                </div>
-                                                                                
-                                                                            </c:forEach>
-                                                                    <!-- END .comment-right -->
-                                                                    </div>
-                                                               
-                                                                <!-- ESTO ES PARA MOSTRAR LAS RESPUESTAS -->
-                                                                    <ul>
-									<li class="comment-entry clearfix">	
-                                                                             
-										<div id ="comment-rightResp" class="comment-right">
-                                                                                    <h:form id="#{masterComentarioController.ShowResponse(mc.idComentario)}" onkeypress="if (event.keyCode == 13) this.submit();" >
-                                                                                        
-                                                                                        <h:inputText  id ="responder2" class="algo"  value="#{masterRespuestasController.selected.respuesta}"  />
-                                                                                        <p:commandButton id="hidden" style="visibility: hidden;" onkeyup="this.form.submit()" action="#{masterRespuestasController.crearRespuesta(mc.idComentario,usuarioController.id_user)}" />  
-                                                                                     </h:form>
-                                                                                         
-                                                                                    <!--<p class="reply"><a href="#">Reply</a></p>  -->
-										<!-- END .comment-right -->
-                                                                                    
-                                                                                </div>
-									</li>
-                                                                    </ul>
-                                                               
-
-							</li>
-                                                   
-							
-
-						</ul> 
-                                                </c:forEach>
-
-						
-                                                <h3 class="block-title"><a>Comentando como : </a>#{usuarioController.verUsername(usuarioController.id_user)}</h3>
-						
-						<h:form id="commentform">
-
-							<div class="field-row">
-								<label for="contact_name"></label>
-							</div>
-
-							
-
-							
-
-							<div class="field-row">
-								<label for="message_text">Comentario <span>(requerido)</span></label>
-                                                                <h:inputTextarea value="#{masterComentarioController.selected.comentario}"/>
-							</div>
-
-                                                    
-                                                      <p:commandButton class="button4 rounded-button" style="background: #209b60; color: #fff; border: none;" onclick="this.form.submit()"   action="#{masterComentarioController.CrearComentario(usuarioController.id_user,contenidosController.idContenido,4)}" value ="Comentar"/>
-						</h:form>
+                                               
+                         
+                        
+					
 						
 					<!-- END #respond -->
 					</div>

@@ -300,6 +300,14 @@ public class ContenidosController implements Serializable {
         return arContenidos;
     }
     
+    public void cargarCont(int idContenido)
+    {
+        //Contenidos obC = new Contenidos();
+        current = ejbFacade.contenido(idContenido);
+        
+    }
+    
+    
     public String verContenidoI(int idContenido)// I de Individual
     {
         setIdContenido(idContenido);

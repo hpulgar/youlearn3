@@ -5,10 +5,13 @@
  */
 package MODELS;
 
+
 import ENTITIES.MasterRespuestas;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -29,4 +32,11 @@ public class MasterRespuestasFacade extends AbstractFacade<MasterRespuestas> {
         super(MasterRespuestas.class);
     }
     
+    public List<MasterRespuestas> verRespuestas(int idComentario)
+    {
+         EntityManager m2 =  getEntityManager();
+        Query q = m2.createNamedQuery("MasterRespuestas.buscarIdComentario").setParameter("idComentario", idComentario);
+        
+        return q.getResultList();
+    }
 }

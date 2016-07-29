@@ -130,11 +130,14 @@
 					
 					<div class="clearboth"></div>
     
-        
-                    <div id="respond-publicacion" style="width: 85%; margin: 3% 5%;">
+        <h:panelGrid id="parametroBody" >
+             <h:panelGroup>
+                    <div id="respond-publicacion" style="width: 100%; margin: 3% 5%;">
                     <ul class="comments">
                         
-                       <h:panelGrid id="parametroBody" >
+                       
+                           
+                          
                         <c:forEach items="#{masterComentarioController.cargaComentarios(foroPosteosController.idPosteo,2)}" var="mc">
                         <li>
                             <ul class="comments">
@@ -170,9 +173,7 @@
                                     <div id ="comment-rightResp" class="comment-right">
                                         
                                         <h:form id="#{masterComentarioController.nombreForm2(mc.idComentario)}">
-                                            #{masterComentarioController.nombreForm2(mc.idComentario)}
-                                            #{masterComentarioController.nombreInput2(mc.idComentario)}
-                                            #{masterComentarioController.nombreBoton2(mc.idComentario)}
+                                            
                                             <p:inputText  id="#{masterComentarioController.nombreInput2(mc.idComentario)}" a:placeholder="Responder..." value="#{masterRespuestasController.selected.respuesta}"  style="float:left; margin-left: 30px" /><br/>
                                             <p:commandButton  style=" visibility: hidden"  id="#{masterComentarioController.nombreBoton2(mc.idComentario)}" actionListener="#{masterRespuestasController.crearRespuesta(mc.idComentario,usuarioController.id_user)}" update="parametroBody" process="@all" value="Responder" />
                                         </h:form>
@@ -182,20 +183,22 @@
                         </li>
   
                             </c:forEach>
-                            </h:panelGrid>
+                            
                             
                             
                        
                 </ul>
             </div>     
-                                         <li>
+                                         
                                 <div class="field-row" style="float:left;">
                                     <h:form >
                                         <h:inputText a:placeholder="Comentar..." value="#{masterComentarioController.selected.comentario}" style="border-color: #198752; width: 200px; margin-left: 80px"/>
                                         <p:commandButton actionListener="#{masterComentarioController.CrearComentario(usuarioController.id_user,foroPosteosController.idPosteo,2)}"  update="parametroBody" process="@all" value="Comentar"  style="float:right ;margin-right:30px; visibility: hidden" ></p:commandButton>
                                    </h:form>
                                 </div>
-                            </li>
+                            
+                 </h:panelGroup>
+                                        </h:panelGrid>
 </div>
                                         
 				<!-- END .blog-entry -->

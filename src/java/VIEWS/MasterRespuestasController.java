@@ -272,31 +272,33 @@ public class MasterRespuestasController implements Serializable {
             }
     }
     
+//     public List<MasterRespuestas> cargaRespuesta(int id_comentario)
+//    {    
+//        //listaRespuestas.clear();
+//        List<MasterRespuestas> mrl = new ArrayList(); 
+//        mrl.clear();   
+//        
+//        listaRespuestas.clear();
+//        listaRespuestas = ejbFacade.findAll();                
+//        for(int i=0;i<listaRespuestas.size();i++)
+//        {
+//            if((listaRespuestas.get(i).getIdComentario().getIdComentario())==id_comentario)
+//                {
+//                   
+//                   
+//                   mrl.add(listaRespuestas.get(i));
+//                } 
+//        }
+//        return mrl;
+//    }
+    
      public List<MasterRespuestas> cargaRespuesta(int id_comentario)
     {    
-        //listaRespuestas.clear();
-        List<MasterRespuestas> mrl = new ArrayList(); 
-        mrl.clear();   
-        
-        listaRespuestas.clear();
-        listaRespuestas = ejbFacade.findAll();                
-        for(int i=0;i<listaRespuestas.size();i++)
-        {
-            if((listaRespuestas.get(i).getIdComentario().getIdComentario())==id_comentario)
-                {
-                   
-                   
-                   mrl.add(listaRespuestas.get(i));
-                } 
-        }
-        
-        
        
+        listaRespuestas = ejbFacade.verRespuestas(id_comentario);                
         
-        return mrl;
+        return listaRespuestas;
     }
-    
-    
      
      
      public String crearRespuesta2(int id_comentario,int id_usuario){

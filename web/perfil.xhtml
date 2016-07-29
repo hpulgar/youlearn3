@@ -92,8 +92,9 @@
                                             <div id="tabs" >
                                                 <ul class="nav clearfix" >
                                                     
-                                                            <li><a href="comentar.xhtml">Dashboard</a></li>                                                          
-                                                            <li><a href="dashboard.xhtml">Mi muro</a></li>                     
+                                                            <li><a href="comentar.xhtml">Muro</a></li>                                                          
+                                                            <h:outputText value="#{usuarioController.verDashboard(usuarioController.id_user, usuarioController.id_usuario_amigo)}" escape="false"/>
+                                                                                 
                                                              <li><a href="users.xhtml">Users</a></li>     
                                                              <li><a href="amigos.xhtml">Amigos</a></li>
                                                             <li><a href="#tabs-tab-title-4">Mensajes</a></li>
@@ -102,16 +103,10 @@
                                                       
                                                     </ul>
                                                 
-                                                    <c:forEach items="#{usuarioController.verUser(usuarioController.id_user)}" var="bi2">
-                                                    <style type="text/css"> </style>
-                                                    <div id="tabs-tab-title-1" style="background-image: url( #{bi2.imagen_dashboard}); background-repeat: no-repeat; background-size: 676.5px " > <p></p> </div>
-                                                    <div id="tabs-tab-title-3" style=" background-image: url(#{bi2.imagen_dashboard}); background-repeat: no-repeat; background-size: 676.5px" > <p></p></div>
-                                                    <div id="tabs-tab-title-2" style=" background-image: url(#{bi2.imagen_dashboard}); background-repeat: no-repeat;background-size: 676.5px"> <p> </p></div>
-                                                    <div id="tabs-tab-title-4" style=" background-image: url(#{bi2.imagen_dashboard}); background-repeat: no-repeat;background-size: 676.5px"> Quisque bibendum erat feugiat rhoncus tincidunt ipsum mi facilisis nisl, nec eleifend enim massa ac purus. Integer malesuada faucibus auctor vivamus accumsan justo.Quisque bibendum erat feugiat rhoncus tincidunt ipsum mi facilisis nisl, nec eleifend enim massa ac purus. Integer malesuada faucibus auctor vivamus accumsan justo.Quisque bibendum erat feugiat rhoncus tincidunt ipsum mi facilisis nisl, nec eleifend enim massa ac purus. Integer malesuada faucibus auctor vivamus accumsan justo. <p></p></div>
-                                                    <div id="tabs-tab-title-5"><p></p></div>
-                                                    <div id="tabs-tab-title-6"><p></p></div>
-                                                    
-                                                </c:forEach>
+                                                  
+                        <div id="tabs-tab-title-4" style=" background-image: url(#{bi2.imagen_dashboard}); background-repeat: no-repeat;background-size: 676.5px"> Quisque bibendum erat feugiat rhoncus tincidunt ipsum mi facilisis nisl, nec eleifend enim massa ac purus. Integer malesuada faucibus auctor vivamus accumsan justo.Quisque bibendum erat feugiat rhoncus tincidunt ipsum mi facilisis nisl, nec eleifend enim massa ac purus. Integer malesuada faucibus auctor vivamus accumsan justo.Quisque bibendum erat feugiat rhoncus tincidunt ipsum mi facilisis nisl, nec eleifend enim massa ac purus. Integer malesuada faucibus auctor vivamus accumsan justo. <p></p></div>
+                        
+
                                             </div>
 					</div>
 				

@@ -169,6 +169,8 @@ public class UsuarioController implements Serializable {
         return "Create";
     }
 
+    
+    
     //crear usuario
     
 //    
@@ -348,6 +350,20 @@ public class UsuarioController implements Serializable {
         }
     }
     return null;
+  }
+  
+  
+  
+  public String verDashboard(int iduser1, int iduser2)
+  {
+      if(iduser1 == iduser2)
+      {
+          return "<li><a href='dashboard.xhtml'>Dashboard</a></li>";
+      }
+      else
+      {
+          return "";
+      }
   }
 ///////////////////////////////////////////////// fin
 

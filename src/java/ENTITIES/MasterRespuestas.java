@@ -35,6 +35,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "MasterRespuestas.findAll", query = "SELECT m FROM MasterRespuestas m"),
     @NamedQuery(name = "MasterRespuestas.findByIdRespuestas", query = "SELECT m FROM MasterRespuestas m WHERE m.idRespuestas = :idRespuestas"),
+    @NamedQuery(name = "MasterRespuestas.buscarIdComentario", query = "SELECT m FROM MasterRespuestas m WHERE m.idComentario.idComentario = :idComentario"),
     @NamedQuery(name = "MasterRespuestas.findByFechaRespuesta", query = "SELECT m FROM MasterRespuestas m WHERE m.fechaRespuesta = :fechaRespuesta")})
 public class MasterRespuestas implements Serializable {
 

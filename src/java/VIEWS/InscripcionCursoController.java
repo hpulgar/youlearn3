@@ -265,6 +265,49 @@ public class InscripcionCursoController implements Serializable {
      //return "byyk";   
     }
     
+    
+    
+    public int seguidores(int idCurso)
+    {
+        int seguidores = 0;
+        List<InscripcionCurso> ars = ejbFacade.findAll();
+        
+        for(int i=0;i<ars.size();i++)
+        {
+            if(ars.get(i).getIdCurso().getIdCurso()== idCurso)
+            {
+                if(ars.get(i).getTipoAlumno().getIdTipo() == 1)
+                {
+                    seguidores++;
+                }
+            }
+        }
+        
+        return seguidores;
+        
+    }
+    
+    public int suscriptores(int idCurso)
+    {
+        int suscriptores = 0;
+        List<InscripcionCurso> ars = ejbFacade.findAll();
+        
+        for(int i=0;i<ars.size();i++)
+        {
+            if(ars.get(i).getIdCurso().getIdCurso()== idCurso)
+            {
+                if(ars.get(i).getTipoAlumno().getIdTipo() == 2)
+                {
+                    suscriptores++;
+                }
+            }
+        }
+        
+        return suscriptores;
+        
+    }
+    
+    
      public String cargarCurso(int idc,int idus)
         {
                         
@@ -289,6 +332,7 @@ public class InscripcionCursoController implements Serializable {
                         //Al cumplir las condiciones(usuario inscrito),nos llevara directamente al curso.
                         //setIdCurso(idc);
                         pagina= "/curso.xhtml";
+                        break;
 
                     } 
                     else

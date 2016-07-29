@@ -82,7 +82,7 @@
                                        
                                                 <div>
                                                     (por mientras)
-                                                    <h3><img src="#{tableroController.selected.idUsuario.imagen_foto_perfil}" class="blog-date"  style='height: 200px; width:200px; object-fit: cover;' /></h3> <br/>
+                                                    <h3><img src="#{tableroController.selected.idUsuario.imagen_foto_perfil}" class="blog-date"  style='height: 100px; width:100px; object-fit: cover;' /></h3> <br/>
 						
                                                 </div>	
                                            
@@ -115,77 +115,85 @@
 				
 					<div class="clearboth"></div>
 					
-					<div class="news-social-links">
-						
-                                            <div id="respond-publicacion" style="width: 85%; margin: 3% 5%;">
+    
+
+
+
+                                        <h:panelGrid id="parametroBody" style="float: right" >
+                
+                <h:panelGroup>
+        <div id="respond-publicacion" style="width: 100%; margin: 3% 5%;">
+            <ul class="comments">
+                <c:forEach items="#{masterComentarioController.cargaComentarios(tableroController.idTablero,3)}" var="mc">
                     
-                                                <ul class="comments">
-                        
-                       <h:panelGrid id="parametroBody" >
-                           <c:forEach items="#{masterComentarioController.cargaComentarios(tableroController.idTablero,3)}" var="mc">
-                        <li>
-                            <ul class="comments">
-                                <li class="comment-entry clearfix">
-                                    <div class="comment-left">
-                                        <div><img src="#{mc.idUsuario.imagen_foto_perfil}" class="comment-image" /> </div>
-                                    </div>
-                                    <div class="comment-right clearfix">
-                                        <h:form>
-                                            <p class="comment-info"> <h:commandLink value="#{mc.idUsuario.username}" action="perfil.xhtml" actionListener="#{usuarioController.setId_usuario_amigo(mc.idUsuario.idUsuario)}"/> <span> #{mc.fechaComentario} </span></p>
-                                            <div style="word-wrap: break-word; width: 350px">
-                                                <p class="comment-info"  >#{mc.comentario}</p>
-                                            </div>
-                                            
-                                        </h:form>
-                                    </div>
-                                    <ul>
-                                        <li>
-                                            <div class="comment-right clearfix">
+                    
+                    <li>
+                        <ul class="comments">
+                            <li class="comment-entry clearfix">
+                                <div class="comment-left">
+                                    <div><img src="#{mc.idUsuario.imagen_foto_perfil}" class="comment-image" /> </div>
+                                </div>
+                                <div class="comment-right clearfix">
+                                    <h:form>
+                                        <p class="comment-info"> <h:commandLink value="#{mc.idUsuario.username}" action="perfil.xhtml" actionListener="#{usuarioController.setId_usuario_amigo(mc.idUsuario.idUsuario)}"/> <span> #{mc.fechaComentario} </span></p>
+                                        <div style="word-wrap: break-word; width: 350px">
+                                        <p class="comment-info"  >#{mc.comentario}</p>
+                                        </div>
+
+                                    </h:form>
+                                </div>
+                                <ul>
+                                    <li>
+                                        <div class="comment-right clearfix">
                                             <ui:repeat value="#{masterRespuestasController.cargaRespuesta(mc.idComentario)}" var="mrl">
                                                 <div style="word-wrap: break-word; width: 302px">
                                                     <h:form>
                                                         <p class="comment-info clearfix"> <img src="#{mrl.idUsuario.imagen_foto_perfil}" class="course-image" style='height: 30px; width: 30px; object-fit: cover;'></img> 
-                                                            <h:commandLink value="#{mrl.idUsuario.username}" action="perfil.xhtml" actionListener="#{usuarioController.setId_usuario_amigo(mrl.idUsuario.idUsuario)}" /> <span> #{mrl.respuesta} </span></p>
+                                                        <h:commandLink value="#{mrl.idUsuario.username}" action="perfil.xhtml" actionListener="#{usuarioController.setId_usuario_amigo(mrl.idUsuario.idUsuario)}" /> <span> #{mrl.respuesta} </span></p>
                                                     </h:form>
                                                 </div>
                                             </ui:repeat>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li>
-                                    <div id ="comment-rightResp" class="comment-right">
-                                        
-                                        <h:form id="#{masterComentarioController.nombreForm2(mc.idComentario)}">
-                                            #{masterComentarioController.nombreForm2(mc.idComentario)}
-                                            #{masterComentarioController.nombreInput2(mc.idComentario)}
-                                            #{masterComentarioController.nombreBoton2(mc.idComentario)}
-                                            <p:inputText  id="#{masterComentarioController.nombreInput2(mc.idComentario)}" a:placeholder="Responder..." value="#{masterRespuestasController.selected.respuesta}"  style="float:left; margin-left: 30px" /><br/>
-                                            <p:commandButton  style=" visibility: hidden"  id="#{masterComentarioController.nombreBoton2(mc.idComentario)}" actionListener="#{masterRespuestasController.crearRespuesta(mc.idComentario,usuarioController.id_user)}" update="parametroBody" process="@all" value="Responder" />
-                                        </h:form>
-                                    </div>
-                                </li>
-                            </ul> 
-                        </li>
-  
-                            </c:forEach>
-                            </h:panelGrid>
-                            
-                            
-                       
-                </ul>
-            </div>  
-                                                <li>
-                                <div class="field-row" style="float:left;">
-                                    <h:form >
-                                        <h:inputText a:placeholder="Comentar..." value="#{masterComentarioController.selected.comentario}" style="border-color: #198752; width: 200px; margin-left: 80px"/>
-                                        <p:commandButton actionListener="#{masterComentarioController.CrearComentario(usuarioController.id_user,foroPosteosController.idPosteo,3)}"  update="parametroBody" process="@all" value="Comentar"  style="float:right ;margin-right:30px; visibility: hidden" ></p:commandButton>
-                                   </h:form>
-                                </div>
+                                        </div>
+                                    </li>
+                                </ul>
                             </li>
-                                            
-                                            
-					</div>
+                        <li>
+                            <div id ="comment-rightResp" class="comment-right">
+
+                                <h:form id="#{masterComentarioController.nombreForm2(mc.idComentario)}">
+                                    <p:inputText  id="#{masterComentarioController.nombreInput2(mc.idComentario)}" a:placeholder="Responder..." value="#{masterRespuestasController.selected.respuesta}"  style="float:left; margin-left: 30px" /><br/>
+                                    <p:commandButton  style=" visibility: hidden"  id="#{masterComentarioController.nombreBoton2(mc.idComentario)}" actionListener="#{masterRespuestasController.crearRespuesta(mc.idComentario,usuarioController.id_user)}" update="parametroBody" process="@all" value="Responder" />
+                                </h:form>
+                            </div>
+                        </li>
+                        </ul> 
+                    </li>
+                        
+                        
+
+                </c:forEach>
+            
+
+</ul>
+
+            
+        
+       
+            <div class="field-row" style="float:left;">
+                <h:form >
+                    <h:inputText a:placeholder="Comentar..." value="#{masterComentarioController.selected.comentario}" style="border-color: #198752; width: 200px; margin-left: 80px"/>
+                    <p:commandButton actionListener="#{masterComentarioController.CrearComentario(usuarioController.id_user,tableroController.idTablero,3)}"  update="parametroBody" process="@all" value="Comentar"  style="float:right ;margin-right:30px; visibility: hidden" ></p:commandButton>
+                </h:form>
+            </div>
+      
+
+
+                
+        </div>  
+                    
+                    </h:panelGroup>
+            </h:panelGrid>
+    
 					 
 				<!-- END .blog-entry -->
 				</div>

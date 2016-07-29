@@ -39,6 +39,15 @@ public class ContenidosFacade extends AbstractFacade<Contenidos> {
         return q.getResultList();
     }
     
+    public Contenidos contenido(int idContenido)
+    {
+        Contenidos obC = new Contenidos();
+        
+        EntityManager m2=getEntityManager();
+        Query q = m2.createNamedQuery("Contenidos.verContenido").setParameter("idContenido", idContenido);
+        
+        return obC = (Contenidos) q.getSingleResult();
+    }
     
     
 }

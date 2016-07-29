@@ -389,31 +389,10 @@ public class PublicacionPerfilController extends AmigosController implements Ser
     
     public List<PublicacionPerfil> verPublicaciones(int idUsuario)
     {
-        String bykk= "";
-        String bykk2="";
+      
         
-        arPerfil.clear();
-        arPerfil =ejbFacade.findAll();
-        List<PublicacionPerfil> arPerfil2 = new ArrayList();
-        
-        
-        for(int i= arPerfil.size()-1 ; i >= 0 ;i--)
-        {
-            if(arPerfil.get(i).getIdUsuario().getIdUsuario() == idUsuario)
-            {
-//                if(arPerfil.get(i).getIdTipoPublicacion().getIdTipoPublicacion() == 2)
-//                {
-//                   this.paginaRedirect = "detalles_curso.xhtml";
-//                   this.metodoRedirect = "cursoController.setIdCurso("+arPerfil.get(i).getLinkPublicacion()+")";
-//                   
-//                }else if(arPerfil.get(i).getIdTipoPublicacion().getIdTipoPublicacion() == 3)
-//                {
-//                    this.paginaRedirect = "blog-single.xhtml";
-//                    CursoController cc = new CursoController();
-//                    cc.setIdCurso(Integer.parseInt(arPerfil.get(i).getLinkPublicacion()));
-              arPerfil2.add(arPerfil.get(i));
-            }
-        }
+        List<PublicacionPerfil> arPerfil2 = ejbFacade.PublicacionesPerfil(idUsuario);
+     
         return arPerfil2;
         
     }

@@ -31,7 +31,7 @@ public class MasterComentarioController implements Serializable {
 
     private MasterComentario current;
     private List<MasterComentario> comentariosForo = new ArrayList();     
-    private List<MasterComentario> comentariosForo2;  
+    private List<MasterComentario> comentarios;
     private DataModel items = null;
     @EJB
     private MODELS.MasterComentarioFacade ejbFacade;
@@ -43,6 +43,16 @@ public class MasterComentarioController implements Serializable {
     private boolean mostrar = false;
     private String comentario2;
 
+    public List<MasterComentario> getComentarios() {
+        return comentarios;
+    }
+
+    public void setComentarios(List<MasterComentario> comentarios) {
+        this.comentarios = comentarios;
+    }
+
+    
+    
     public boolean isMostrar() {
         return mostrar;
     }
@@ -257,6 +267,18 @@ public class MasterComentarioController implements Serializable {
         
     }
     
+    public String nombreForm3(int numero)
+    {
+       
+        return "grid"+numero;
+    }
+        
+    public String nombreForm4(int numero)
+    {
+       
+        return "acc"+numero;
+    }
+    
     public String nombreInput(int numero)
     {
         //System.out.println("inpCom"+numero);
@@ -420,27 +442,60 @@ public class MasterComentarioController implements Serializable {
         return "/blog-single.xhtml";
     }
     
+//    public List<MasterComentario> cargaComentarios(int idPublicacion,int idPtf)
+//    {        
+//        List<MasterComentario> ob = new ArrayList() ;   
+//        comentariosForo.clear();
+//        ob.clear();
+//        
+//        comentariosForo = ejbFacade.findAll();                
+//        for(int i=0;i<comentariosForo.size();i++)
+//        {
+//            if((comentariosForo.get(i).getIdPft().getIdPft()==idPtf) &&(comentariosForo.get(i).getIdPublicacion()==idPublicacion))
+//                {
+//                   //System.out.println(" comentario>>>> "+comentariosForo.get(i));
+//                   this.setBigId(comentariosForo.get(i).getIdComentario());
+//                   ob.add(comentariosForo.get(i));
+//                } 
+//        }
+//        
+//        
+//        this.setCuenta(ob.size());
+//        
+//        return ob;
+//    }
+    
+    
     public List<MasterComentario> cargaComentarios(int idPublicacion,int idPtf)
     {        
-        List<MasterComentario> ob = new ArrayList() ;   
-        comentariosForo.clear();
-        ob.clear();
+
+        comentarios = ejbFacade.verComentario(idPublicacion, idPtf);
+
         
-        comentariosForo = ejbFacade.findAll();                
-        for(int i=0;i<comentariosForo.size();i++)
+        this.setCuenta(comentarios.size());
+        
+        return comentarios;
+    }
+    
+    public String mensajeComentarios(int idPublicacion,int idPtf)
+    {
+        comentarios = ejbFacade.verComentario(idPublicacion, idPtf);
+       
+        
+        return "Mostrar "+comentarios.size()+" Comentarios Ocultos";
+    }
+    
+    public boolean mostrarAcc(int idPublicacion,int idPtf)
+    {
+        comentarios = ejbFacade.verComentario(idPublicacion, idPtf);
+        if(comentarios.isEmpty())
         {
-            if((comentariosForo.get(i).getIdPft().getIdPft()==idPtf) &&(comentariosForo.get(i).getIdPublicacion()==idPublicacion))
-                {
-                   //System.out.println(" comentario>>>> "+comentariosForo.get(i));
-                   this.setBigId(comentariosForo.get(i).getIdComentario());
-                   ob.add(comentariosForo.get(i));
-                } 
+            return false;
         }
-        
-        
-        this.setCuenta(ob.size());
-        
-        return ob;
+        else
+        {
+            return true;
+        }
     }
     
     public int cuentaComentarios()
@@ -456,7 +511,7 @@ public class MasterComentarioController implements Serializable {
         
         for(int i=0;i<comentariosForo.size();i++)
         {
-            if(comentariosForo.get(i).getIdPublicacion() == idpost)
+            if(comentariosForo.get(i).getIdPublicacion() == idpost && comentariosForo.get(i).getIdPft().getIdPft() == 2)
             {
                 c = c+1;
             }

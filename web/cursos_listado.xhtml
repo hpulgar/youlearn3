@@ -94,8 +94,8 @@
                                                             <h:form id="cursoForm">
                                                                 <h4> <h:commandLink actionListener="#{cursoController.setIdCurso(lc.idCurso)}" action="#{inscripcionCursoController.cargarCurso(lc.idCurso,usuarioController.id_user)}"  value="#{lc.nomCurso}" />
 &raquo; </h4>
-                                                                <p><strong>Seguidores: </strong>#{lc.seguidores}</p>
-                                                                <p><strong>Suscripciones: </strong>#{lc.personasInscritas}</p>
+                                                                <p><strong>Seguidores: </strong>#{inscripcionCursoController.seguidores(lc.idCurso)}</p>
+                                                                <p><strong>Suscripciones: </strong>#{inscripcionCursoController.suscriptores(lc.idCurso)}</p>
                                                                 <p><strong>Categoria: </strong>#{lc.idCat.idCategoria.nomCat}</p>
                                                                 <p><strong>SubCategoria: </strong>#{lc.idCat.nomSubcat}</p>
                                                             </h:form>

@@ -9,6 +9,7 @@ import ENTITIES.Persona;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -28,5 +29,17 @@ public class PersonaFacade extends AbstractFacade<Persona> {
     public PersonaFacade() {
         super(Persona.class);
     }
+    
+    public Persona unaPersona(int idUsuario)
+    {
+        Persona obP = new Persona();
+        
+        EntityManager m2=getEntityManager();
+        Query q = m2.createNamedQuery("Persona.buscarUsuario").setParameter("idUsuario", idUsuario);
+        
+        return obP = (Persona) q.getSingleResult();
+    }
+    
+    
     
 }

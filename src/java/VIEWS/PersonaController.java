@@ -282,6 +282,12 @@ public class PersonaController implements Serializable {
         return arPersonas;
         
     }
+     
+     public void infop(int idUsuario)
+     {
+         current = ejbFacade.unaPersona(idUsuario);
+     }
+     
     
     
     public List<Persona> buscarPersona(int idUsuario)
