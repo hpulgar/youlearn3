@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+
+    <h:head>
+        <title>Mensajes</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        
+        
+        
+    </h:head>
+    <h:body>
+        <h:form>
+            <div id="left" style="float: left;
+                                  width: 37.6%;
+                                  height: 100%;
+                                  border: 1px solid $light" > 
+            
+                                <ui:repeat value="#{amigosController.listAmigos(usuarioController.id_usuario_amigo)}" var="u">
+                                	 <img src="#{u.imagen_foto_perfil}"  style=" width: 50%;height: 50px; object-fit: cover "  />
+                                                <div >
+                                                    <h4> <p:commandLink style="color:green" value="#{u.username}"   actionListener="#{usuarioController.setId_usuario_amigo(u.idUsuario)}"/></h4>
+                                                </div>
+                                </ui:repeat>
+            
+            </div>
+            <div id="right" style="position: relative;
+        float: left;
+        width: 62.4%;
+        height: 100%">
+                <h:panelGroup id="panelMensaje">
+                    <ui:repeat value="#{mensajeController.cargaChat(1,2)}" var="ch" >
+                        <h:outputText rendered="#{!mensajeController.ordenM(usuarioController.id_user, ch.idReceptor.idUsuario)}" value="#{ch.contenido}" style="float:left"></h:outputText>
+                        <br/>
+                        <h:outputText rendered="#{mensajeController.ordenM(usuarioController.id_user, ch.idReceptor.idUsuario)}" value="#{ch.contenido}" style="float:right" ></h:outputText>
+                    </ui:repeat>
+                    
+                    
+                </h:panelGroup>
+            </div>
+      
+        </h:form>
+    </h:body>
+</html>

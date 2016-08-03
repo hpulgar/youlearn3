@@ -6,6 +6,8 @@ import VIEWS.util.PaginationHelper;
 import MODELS.MensajeFacade;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 import javax.ejb.EJB;
 import javax.inject.Named;
@@ -28,6 +30,9 @@ public class MensajeController implements Serializable {
     private MODELS.MensajeFacade ejbFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
+    private int idChat;
+    private List<Mensaje> arrMen = new ArrayList();
+    
 
     public MensajeController() {
     }
@@ -43,6 +48,24 @@ public class MensajeController implements Serializable {
     private MensajeFacade getFacade() {
         return ejbFacade;
     }
+
+    public int getIdChat() {
+        return idChat;
+    }
+
+    public void setIdChat(int idChat) {
+        this.idChat = idChat;
+    }
+
+    public List<Mensaje> getArrMen() {
+        return arrMen;
+    }
+
+    public void setArrMen(List<Mensaje> arrMen) {
+        this.arrMen = arrMen;
+    }
+    
+    
 
     public PaginationHelper getPagination() {
         if (pagination == null) {
@@ -191,6 +214,29 @@ public class MensajeController implements Serializable {
     public Mensaje getMensaje(java.lang.Integer id) {
         return ejbFacade.find(id);
     }
+    
+    ///////////////////////////////////////////////////////////////////////
+    
+    public List<Mensaje> cargaChat(int idUser,int idAmigo)
+    {
+        return arrMen= ejbFacade.consultaChat(idUser, idAmigo);
+        
+    }
+    
+    public boolean ordenM(int idUser1, int idUser2)
+    {
+        if(idUser1 == idUser2)
+        {
+            return false;
+        }else
+        {
+                return true;
+        }
+        
+    }
+    
+    
+    //////////////////////////////////////////////////////////////////////
 
     @FacesConverter(forClass = Mensaje.class)
     public static class MensajeControllerConverter implements Converter {

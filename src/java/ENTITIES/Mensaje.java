@@ -36,6 +36,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Mensaje.findByIdMensaje", query = "SELECT m FROM Mensaje m WHERE m.idMensaje = :idMensaje"),
     @NamedQuery(name = "Mensaje.findByAsunto", query = "SELECT m FROM Mensaje m WHERE m.asunto = :asunto"),
     @NamedQuery(name = "Mensaje.findByContenido", query = "SELECT m FROM Mensaje m WHERE m.contenido = :contenido"),
+    @NamedQuery(name = "Mensaje.chat", query = "SELECT m FROM Mensaje m WHERE m.idReceptor.idUsuario = :idUsuario and m.idEmisor.idUsuario = :idAmigo or m.idReceptor.idUsuario = :idAmigo and m.idEmisor.idUsuario = :idUsuario order by m.fechaEnvio desc"),
     @NamedQuery(name = "Mensaje.findByFechaEnvio", query = "SELECT m FROM Mensaje m WHERE m.fechaEnvio = :fechaEnvio")})
 public class Mensaje implements Serializable {
 

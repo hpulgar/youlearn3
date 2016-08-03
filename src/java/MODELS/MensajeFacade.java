@@ -6,9 +6,11 @@
 package MODELS;
 
 import ENTITIES.Mensaje;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -27,6 +29,15 @@ public class MensajeFacade extends AbstractFacade<Mensaje> {
 
     public MensajeFacade() {
         super(Mensaje.class);
+    }
+    
+    
+    public List<Mensaje> consultaChat(int idUsuario, int idAmigo)
+    {
+        EntityManager em3 = getEntityManager();
+        Query q= em3.createNamedQuery("Mensaje.chat").setParameter("idUsuario",idUsuario).setParameter("idAmigo", idAmigo);
+        
+        return q.getResultList();
     }
     
 }
