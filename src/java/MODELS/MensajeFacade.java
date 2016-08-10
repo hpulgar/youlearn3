@@ -14,7 +14,7 @@ import javax.persistence.Query;
 
 /**
  *
- * @author Felipe
+ * @author Zotindows
  */
 @Stateless
 public class MensajeFacade extends AbstractFacade<Mensaje> {
@@ -38,6 +38,6 @@ public class MensajeFacade extends AbstractFacade<Mensaje> {
         Query q= em3.createNamedQuery("Mensaje.chat").setParameter("idUsuario",idUsuario).setParameter("idAmigo", idAmigo);
         
         return q.getResultList();
-    }
+}
     
 }

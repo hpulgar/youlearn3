@@ -28,12 +28,6 @@
                         </h:column>
                         <h:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListMensajeTitle_asunto}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.asunto}"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
                                 <h:outputText value="#{bundle.ListMensajeTitle_contenido}"/>
                             </f:facet>
                             <h:outputText value="#{item.contenido}"/>
@@ -43,20 +37,8 @@
                                 <h:outputText value="#{bundle.ListMensajeTitle_fechaEnvio}"/>
                             </f:facet>
                             <h:outputText value="#{item.fechaEnvio}">
-                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                                <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
                             </h:outputText>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListMensajeTitle_idEmisor}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.idEmisor}"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListMensajeTitle_idReceptor}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.idReceptor}"/>
                         </h:column>
                         <h:column>
                             <f:facet name="header">

@@ -30,41 +30,46 @@
                                             
                                             
                                             
-                                           <div style=" background-image: url('#{personaController.selected.idUsuario.imagen_portada_perfil}')">
+                                          
                                                     
                                                     <h3><img src="#{personaController.selected.idUsuario.imagen_foto_perfil}" class="foto-perfil" /></h3>
+                                                     <div class="bio-info">
                                               
-                                                    <h2><h:outputText value="#{personaController.selected.idUsuario.username}" style="color:#fefeff"></h:outputText></h2>
+                                                    <h2><h:outputText value="#{personaController.selected.idUsuario.username}" ></h:outputText></h2>
                                                     
+                                                    <br/><br/>
+                                                    
+                                                    <strong> <h:outputText value="Nombre "></h:outputText></strong>
+                                                    <br/>
+                                                    <h:outputText value="#{personaController.selected.nombre} #{personaController.selected.apellido}"></h:outputText>
+                                                    <br/><br/>
+                                                    
+                                                    <strong><h:outputText value="Descripcion"></h:outputText></strong>
+                                                    <br/>
+                                                    <h:outputText value="#{personaController.selected.descripcion}" ></h:outputText>
                                                     <br/><br/>
                                                      
-                                                    <strong> <h:outputText value="Nombre " style=" color:#fefeff"></h:outputText></strong>
-                                                    <br/>
-                                                    <h:outputText value="#{personaController.selected.nombre} #{personaController.selected.apellido}" style=" color:#fefeff"></h:outputText>
-                                                    <br/><br/>
+                                                  
                                                     
-                                                    <strong> <h:outputText value="Miembro Desde" style=" color:#fefeff"></h:outputText></strong>
+                                                    <strong> <h:outputText value="Miembro Desde" ></h:outputText></strong>
                                                     <br/>
-                                                    <h:outputText value="#{personaController.selected.idUsuario.fechaCreacion}" style=" color:#fefeff">
+                                                    <h:outputText value="#{personaController.selected.idUsuario.fechaCreacion}">
                                                                <f:convertDateTime type="date" pattern="dd-M-yyyy"/>
                                                     </h:outputText>
                                                     <br></br><br/>
                                                     
-                                                    <strong><h:outputText value="Tipo de usuario" style=" color:#fefeff"></h:outputText></strong>
+                                                    <!--<strong><h:outputText value="Tipo de usuario"></h:outputText></strong>
                                                     <br/>
-                                                    <h:outputText value="#{personaController.selected.idUsuario.idPerfil.nomPerfil}" style=" color:#fefeff" ></h:outputText>
+                                                    <h:outputText value="#/{personaController.selected.idUsuario.idPerfil.nomPerfil}" ></h:outputText>
                                                     <br/><br/>
-                                                    <strong><h:outputText value="Correo" style=" color:#fefeff"></h:outputText></strong>
+                                                    <strong><h:outputText value="Correo"></h:outputText></strong>
                                                     <br/>
-                                                    <h:outputText value="#{personaController.selected.idUsuario.correo}"  style=" color:#fefeff"></h:outputText>
-                                                    <br/><br/>
+                                                    <h:outputText value="#/{personaController.selected.idUsuario.correo}" ></h:outputText>
+                                                    <br/><br/> -->
                                                     
-                                                    <strong><h:outputText value="Descripcion" style=" color:#fefeff"></h:outputText></strong>
-                                                    <br/>
-                                                    <h:outputText value="#{personaController.selected.descripcion}" style="color:#fefeff "></h:outputText>
-                                                    <br/><br/>
+                                                  
                                                     <h:form>
-                                                        <h:commandButton  disabled="#{amigosController.btoAmigosHabilitado(amigosController.respuesta)}" rendered="#{amigosController.botonAmistad(usuarioController.id_user,usuarioController.id_usuario_amigo)}" actionListener="#{amigosController.enviarSolicitud(usuarioController.id_user,usuarioController.id_usuario_amigo,amigosController.respuesta)}" style=";margin-left: 10%; background-color:#198752; border-bottom-color: black; border-style: groove;margin-bottom: 10px;"  value="#{amigosController.buscarRelacion(usuarioController.id_user,usuarioController.id_usuario_amigo)}"/>
+                                                        <h:commandButton disabled="#{amigosController.btoAmigosHabilitado(amigosController.respuesta)}" rendered="#{amigosController.botonAmistad(usuarioController.id_user,usuarioController.id_usuario_amigo)}" actionListener="#{amigosController.enviarSolicitud(usuarioController.id_user,usuarioController.id_usuario_amigo,amigosController.respuesta)}" style=";margin-left: 10%; background-color:#198752; border-bottom-color: black; border-style: groove;margin-bottom: 10px;"  value="#{amigosController.buscarRelacion(usuarioController.id_user,usuarioController.id_usuario_amigo)}"/>
                                                     </h:form>
                                                   </div>  
                                             

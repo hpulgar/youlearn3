@@ -1,12 +1,17 @@
 package VIEWS;
 
 import ENTITIES.Mensaje;
+import ENTITIES.TipoPublicacion;
+import ENTITIES.Usuario;
 import VIEWS.util.JsfUtil;
 import VIEWS.util.PaginationHelper;
 import MODELS.MensajeFacade;
 
 import java.io.Serializable;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 import javax.ejb.EJB;
@@ -32,7 +37,7 @@ public class MensajeController implements Serializable {
     private int selectedItemIndex;
     private int idChat;
     private List<Mensaje> arrMen = new ArrayList();
-    
+
 
     public MensajeController() {
     }
@@ -214,12 +219,13 @@ public class MensajeController implements Serializable {
     public Mensaje getMensaje(java.lang.Integer id) {
         return ejbFacade.find(id);
     }
-    
+
     ///////////////////////////////////////////////////////////////////////
     
-    public List<Mensaje> cargaChat(int idUser,int idAmigo)
+    //public List<Mensaje> cargaChat(int idUser,int idAmigo)
+    public List<Mensaje> cargaChat()
     {
-        return arrMen= ejbFacade.consultaChat(idUser, idAmigo);
+        return arrMen= ejbFacade.findAll();
         
     }
     
@@ -237,7 +243,41 @@ public class MensajeController implements Serializable {
     
     
     //////////////////////////////////////////////////////////////////////
+    public void enviarMensaje(int idUsuario,int idUsuarioAmigo)
+    {
+        System.out.println("ENTRA AL METODO CREAR PUBLICACION");
+        try{
+            Usuario ou = new Usuario();
+            ou.setIdUsuario(idUsuario);
+            
+            Usuario ou2 = new Usuario();
+            ou2.setIdUsuario(idUsuarioAmigo);
 
+            
+            DateFormat dateFormat = new SimpleDateFormat("yyyy/mm/dd HH:mm:ss");
+            Date date = new Date();
+            String fecha = dateFormat.format(date);
+     
+            current.setFechaEnvio(dateFormat.parse(fecha));
+            current.setIdEmisor(ou);
+            current.setIdReceptor(ou2);
+
+            
+            if(current.getContenido()!= null)
+            {
+                ejbFacade.create(current);
+                current= null;
+            }else
+            {
+                System.out.println(" es null y no lo crea");
+            }
+        }
+        catch(Exception e)
+        {
+         System.out.println("El error al crear la publicacion es "+ e);   
+        }
+    }
+//
     @FacesConverter(forClass = Mensaje.class)
     public static class MensajeControllerConverter implements Converter {
 

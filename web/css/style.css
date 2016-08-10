@@ -750,7 +750,7 @@ p {
 
 /* 5.1 - Lists */
 .page-content ul li {
-	list-style-image: url(../images/list_05.png);
+	
 	font-size: 14px;
 	margin: 0 0 12px 15px;
 }
@@ -1016,6 +1016,8 @@ div.selector.disabled span, div.selector.disabled.active span {
 	margin: 0 0 30px 0;
 	font-size: 14px;
 	color: #1c1c1c;
+     
+        
 }
 
 .page-content table th {
@@ -1279,9 +1281,7 @@ div.selector.disabled span, div.selector.disabled.active span {
 
 /* 7.0 - Content */
 .content-wrapper {
-	background: url(../images/dot_border_v.png),url(../images/dot_border_v.png);
-	background-position: top left, top right;
-	background-repeat: repeat-y;
+
 	width: 1000px;
 	margin: 85px auto 0 auto;
 	position: relative;
@@ -1408,6 +1408,11 @@ div.selector.disabled span, div.selector.disabled.active span {
 
 .inner-content-wrapper {
 	padding: 30px;
+           border-radius: 25px;
+    border: 3px solid rgba(11, 189, 44, 0.12);
+    padding: 3%;
+    width: 93.5%;
+    height: 100%;
 }
 
 .editar-content-wrapper {
@@ -1568,7 +1573,7 @@ div.selector.disabled span, div.selector.disabled.active span {
 
 .accordion-text{
     
-    background-color: rgba(11, 189, 44, 0.12); 
+    background-color: rgba(11, 189, 44, 0.12); /* ACA ESTA EL COLOR*/
     font: oblique 50% cursive;
     text-align: center;
 }
@@ -1596,6 +1601,15 @@ div.selector.disabled span, div.selector.disabled.active span {
         object-fit: cover;
 	margin: 0 0 15px 0;
         margin-top: 10px;
+}
+
+.blog-entry .blog-info .bio-info {
+    border-radius: 25px;
+    border: 3px solid rgba(11, 189, 44, 0.12);
+    background: rgba(11, 189, 44, 0.12);
+    padding: 6%;
+    width: 105%;
+    height: 100%;
 }
 
 .blog-entry .blog-info .blog-meta {

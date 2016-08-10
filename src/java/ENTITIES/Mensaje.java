@@ -14,6 +14,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -26,17 +27,15 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author Felipe
+ * @author Zotindows
  */
 @Entity
 @Table(name = "mensaje")
 @XmlRootElement
 @NamedQueries({
+    @NamedQuery(name = "Mensaje.chat", query = "SELECT m FROM Mensaje m WHERE m.idReceptor.idUsuario = :idUsuario and m.idEmisor.idUsuario = :idAmigo or m.idReceptor.idUsuario = :idAmigo and m.idEmisor.idUsuario = :idUsuario order by m.fechaEnvio desc"),
     @NamedQuery(name = "Mensaje.findAll", query = "SELECT m FROM Mensaje m"),
     @NamedQuery(name = "Mensaje.findByIdMensaje", query = "SELECT m FROM Mensaje m WHERE m.idMensaje = :idMensaje"),
-    @NamedQuery(name = "Mensaje.findByAsunto", query = "SELECT m FROM Mensaje m WHERE m.asunto = :asunto"),
-    @NamedQuery(name = "Mensaje.findByContenido", query = "SELECT m FROM Mensaje m WHERE m.contenido = :contenido"),
-    @NamedQuery(name = "Mensaje.chat", query = "SELECT m FROM Mensaje m WHERE m.idReceptor.idUsuario = :idUsuario and m.idEmisor.idUsuario = :idAmigo or m.idReceptor.idUsuario = :idAmigo and m.idEmisor.idUsuario = :idUsuario order by m.fechaEnvio desc"),
     @NamedQuery(name = "Mensaje.findByFechaEnvio", query = "SELECT m FROM Mensaje m WHERE m.fechaEnvio = :fechaEnvio")})
 public class Mensaje implements Serializable {
 
@@ -48,18 +47,14 @@ public class Mensaje implements Serializable {
     private Integer idMensaje;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 45)
-    @Column(name = "asunto")
-    private String asunto;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 200)
+    @Lob
+    @Size(min = 1, max = 65535)
     @Column(name = "contenido")
     private String contenido;
     @Basic(optional = false)
     @NotNull
     @Column(name = "fecha_envio")
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
     private Date fechaEnvio;
     @JoinColumn(name = "id_emisor", referencedColumnName = "id_usuario")
     @ManyToOne(optional = false)
@@ -75,9 +70,8 @@ public class Mensaje implements Serializable {
         this.idMensaje = idMensaje;
     }
 
-    public Mensaje(Integer idMensaje, String asunto, String contenido, Date fechaEnvio) {
+    public Mensaje(Integer idMensaje, String contenido, Date fechaEnvio) {
         this.idMensaje = idMensaje;
-        this.asunto = asunto;
         this.contenido = contenido;
         this.fechaEnvio = fechaEnvio;
     }
@@ -88,14 +82,6 @@ public class Mensaje implements Serializable {
 
     public void setIdMensaje(Integer idMensaje) {
         this.idMensaje = idMensaje;
-    }
-
-    public String getAsunto() {
-        return asunto;
-    }
-
-    public void setAsunto(String asunto) {
-        this.asunto = asunto;
     }
 
     public String getContenido() {

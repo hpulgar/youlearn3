@@ -30,17 +30,17 @@
                     <li class="person" data-chat="person1">
                         <img src="#{u.imagen_foto_perfil}" alt="" style=" object-fit: cover" />
                         <span class="name">#{u.username}</span>
-                        <span class="time">2:09 PM</span>
-                        <span class="preview">I was wondering...</span>
+                        <!--<span class="time">2:09 PM</span>
+                        <span class="preview">I was wondering...</span> -->
                     </li>
                 </ui:repeat>
             </ul>
         </div>
         
         <div class="right">
-            <ui:repeat value="#{mensajeController.cargaChat(usuarioController.id_user,2)}" var="ch" >
+            <ui:repeat value="#{mensajeController.cargaChat()}" var="ch" >
 
-                <div class="top"><span>to: <span class="name">#{ch.idEmisor.username}</span></span></div>
+                <div class="top"><span>to: <span class="name">#{ch.idEmisor}</span></span></div>
                 <div class="chat" data-chat="person1">
                     <div class="conversation-start">
                         <span>Today, 6:48 AM</span>
@@ -61,10 +61,11 @@
             
             
             <div class="write">
-                <a href="javascript:;" class="write-link attach"></a>
-                <input type="text" />
-                <a href="javascript:;" class="write-link smiley"></a>
-                <a href="javascript:;" class="write-link send"></a>
+                <h:form>
+                    <p:inputText id="mensajeEnviar" value="#{mensajeController.selected.contenido}" a:placeholder="Escribe un mensaje..."/>
+            
+                    <p:commandButton  value ="Enviar mensaje" action="#{mensajeController.enviarMensaje(usuarioController.id_user, usuarioController.id_usuario_amigo)}"/>
+                </h:form>
             </div>
         </div>
     </div>

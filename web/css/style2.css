@@ -1,17 +1,7 @@
-@import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600);
-* {
-  -moz-box-sizing: border-box;
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box;
-}
 
 body {
   /*background-color: #f8f8f8;*/
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-rendering: optimizeLegibility;
-  font-family: 'Source Sans Pro', sans-serif;
-  font-weight: 400;
+
   
   background-size: cover;
   background-repeat: none;
@@ -34,7 +24,7 @@ body {
   left: 50%;
   width: 76%;
   height: 100%;
-  background-color: #fff;
+  padding-left: 6%;
   -moz-transform: translate(-50%, -50%);
   -ms-transform: translate(-50%, -50%);
   -webkit-transform: translate(-50%, -50%);
@@ -49,7 +39,7 @@ body {
 }
 .container .left .top {
   position: relative;
-  width: 100%;
+  width: 91%;
   height: 96px;
   padding: 29px;
 }
@@ -77,8 +67,7 @@ body {
   -moz-border-radius: 21px;
   -webkit-border-radius: 21px;
   border-radius: 21px;
-  font-family: 'Source Sans Pro', sans-serif;
-  font-weight: 400;
+
 }
 .container .left input:focus {
   outline: none;
@@ -89,8 +78,8 @@ body {
   width: 42px;
   height: 42px;
   margin-left: 10px;
-  border: 1px solid #e6e6e6;
-  background-color: #00b0ff;
+  border: 1px solid #198752;
+  background-color: #198752;
   background-image: url("http://s11.postimg.org/dpuahewmn/name_type.png");
   background-repeat: no-repeat;
   background-position: top 12px left 14px;
@@ -100,8 +89,6 @@ body {
 }
 .container .left .people {
   margin-left: -1px;
-  border-right: 1px solid #e6e6e6;
-  border-left: 1px solid #e6e6e6;
   width: -moz-calc(100% + 2px);
   width: -webkit-calc(100% + 2px);
   width: -o-calc(100% + 2px);
@@ -109,8 +96,8 @@ body {
 }
 .container .left .people .person {
   position: relative;
-  width: 100%;
-  padding: 12px 10% 16px;
+  width: 88%;
+  padding: 11px 3% 16px;
   cursor: pointer;
   background-color: #fff;
 }
@@ -167,11 +154,8 @@ body {
   margin-left: -1px;
   padding-top: 13px;
   border: 0;
-  background-color: #00b0ff;
-  width: -moz-calc(100% + 2px);
-  width: -webkit-calc(100% + 2px);
-  width: -o-calc(100% + 2px);
-  width: calc(100% + 2px);
+  background-color: #198752;
+  width: 88%;
   padding-left: -moz-calc(10% + 1px);
   padding-left: -webkit-calc(10% + 1px);
   padding-left: -o-calc(10% + 1px);
@@ -187,7 +171,7 @@ body {
 .container .right {
   position: relative;
   float: left;
-  width: 62.4%;
+  width: 61.4%;
   height: 100%;
 }
 .container .right .top {

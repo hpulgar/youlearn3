@@ -17,18 +17,12 @@
                 <h:panelGrid columns="2">
                     <h:outputText value="#{bundle.ViewMensajeLabel_idMensaje}"/>
                     <h:outputText value="#{mensajeController.selected.idMensaje}" title="#{bundle.ViewMensajeTitle_idMensaje}"/>
-                    <h:outputText value="#{bundle.ViewMensajeLabel_asunto}"/>
-                    <h:outputText value="#{mensajeController.selected.asunto}" title="#{bundle.ViewMensajeTitle_asunto}"/>
                     <h:outputText value="#{bundle.ViewMensajeLabel_contenido}"/>
                     <h:outputText value="#{mensajeController.selected.contenido}" title="#{bundle.ViewMensajeTitle_contenido}"/>
                     <h:outputText value="#{bundle.ViewMensajeLabel_fechaEnvio}"/>
                     <h:outputText value="#{mensajeController.selected.fechaEnvio}" title="#{bundle.ViewMensajeTitle_fechaEnvio}">
-                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
                     </h:outputText>
-                    <h:outputText value="#{bundle.ViewMensajeLabel_idEmisor}"/>
-                    <h:outputText value="#{mensajeController.selected.idEmisor}" title="#{bundle.ViewMensajeTitle_idEmisor}"/>
-                    <h:outputText value="#{bundle.ViewMensajeLabel_idReceptor}"/>
-                    <h:outputText value="#{mensajeController.selected.idReceptor}" title="#{bundle.ViewMensajeTitle_idReceptor}"/>
                 </h:panelGrid>
                 <br />
                 <h:commandLink action="#{mensajeController.destroyAndView}" value="#{bundle.ViewMensajeDestroyLink}"/>
