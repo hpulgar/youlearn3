@@ -11,6 +11,7 @@ import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -37,9 +38,45 @@ public class MensajeController implements Serializable {
     private int selectedItemIndex;
     private int idChat;
     private List<Mensaje> arrMen = new ArrayList();
+    private List<Mensaje> arrMen2 = new ArrayList();
+
+    public List<Mensaje> getArrMen2() {
+        return arrMen2;
+    }
+
+    public void setArrMen2(List<Mensaje> arrMen2) {
+        this.arrMen2 = arrMen2;
+    }
+    private String usernameAmigo;
+    private int idAmigo;
+    private String ahora;
 
 
     public MensajeController() {
+    }
+
+    public String getAhora() {
+        return ahora;
+    }
+
+    public void setAhora(String ahora) {
+        this.ahora = ahora;
+    }
+
+    public String getUsernameAmigo() {
+        return usernameAmigo;
+    }
+
+    public void setUsernameAmigo(String usernameAmigo) {
+        this.usernameAmigo = usernameAmigo;
+    }
+
+    public int getIdAmigo() {
+        return idAmigo;
+    }
+
+    public void setIdAmigo(int idAmigo) {
+        this.idAmigo = idAmigo;
     }
 
     public Mensaje getSelected() {
@@ -222,11 +259,30 @@ public class MensajeController implements Serializable {
 
     ///////////////////////////////////////////////////////////////////////
     
-    //public List<Mensaje> cargaChat(int idUser,int idAmigo)
-    public List<Mensaje> cargaChat()
+    public List<Mensaje> cargaChat(int idUser,int idAmigo)
     {
-        return arrMen= ejbFacade.findAll();
+        arrMen.clear();
+        arrMen2.clear();
+        arrMen= ejbFacade.consultaChat(idUser, idAmigo);
         
+        for(int i=arrMen.size()-1; i >= 0 ;i--)
+        {
+            if(i != 20)
+            {
+                
+                arrMen2.add(arrMen.get(i));
+            }else
+            {
+                break;
+            }
+        }
+        arrMen.clear();
+        for(int e=arrMen2.size()-1;e>=0;e--)
+        {
+            arrMen.add(arrMen2.get(e));
+        }
+        
+        return arrMen;
     }
     
     public boolean ordenM(int idUser1, int idUser2)
@@ -236,7 +292,7 @@ public class MensajeController implements Serializable {
             return false;
         }else
         {
-                return true;
+            return true;
         }
         
     }
@@ -254,13 +310,15 @@ public class MensajeController implements Serializable {
             ou2.setIdUsuario(idUsuarioAmigo);
 
             
-            DateFormat dateFormat = new SimpleDateFormat("yyyy/mm/dd HH:mm:ss");
+            DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
             Date date = new Date();
             String fecha = dateFormat.format(date);
      
             current.setFechaEnvio(dateFormat.parse(fecha));
             current.setIdEmisor(ou);
             current.setIdReceptor(ou2);
+            
+            System.out.println("Insertando mensaje con fecha "+fecha);
 
             
             if(current.getContenido()!= null)
@@ -276,6 +334,15 @@ public class MensajeController implements Serializable {
         {
          System.out.println("El error al crear la publicacion es "+ e);   
         }
+    }
+    
+    
+    public void setAmigo(String nombre,int id)
+    {
+        this.setUsernameAmigo(nombre);
+        this.setIdAmigo(id);
+        String timeStamp = new SimpleDateFormat("HH:mm").format(Calendar.getInstance().getTime());
+        this.setAhora("Hoy, "+timeStamp);
     }
 //
     @FacesConverter(forClass = Mensaje.class)

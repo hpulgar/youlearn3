@@ -175,7 +175,7 @@ body {
   height: 100%;
 }
 .container .right .top {
-  width: 96.5%;
+  width: 82.5%;
   height: 47px;
   padding: 15px 29px;
   background-color: #eceff1;
@@ -392,7 +392,7 @@ body {
 }
 .container .right .conversation-start span:before, .container .right .conversation-start span:after {
   position: absolute;
-  top: 10px;
+  top: 35px;
   display: inline-block;
   width: 30%;
   height: 1px;

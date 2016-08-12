@@ -27,24 +27,30 @@
             </div>
             <ul class="people">
                 <ui:repeat value="#{amigosController.listAmigos(usuarioController.id_usuario_amigo)}" var="u">
+                    <h:form>
+                        <p:commandLink actionListener="#{mensajeController.setAmigo(u.username,u.idUsuario)}"  update="chatcontainer"  process="@all" > 
                     <li class="person" data-chat="person1">
                         <img src="#{u.imagen_foto_perfil}" alt="" style=" object-fit: cover" />
-                        <span class="name">#{u.username}</span>
+                         <span class="name">#{u.username}</span> 
                         <!--<span class="time">2:09 PM</span>
                         <span class="preview">I was wondering...</span> -->
                     </li>
+                                </p:commandLink>
+                        </h:form>
                 </ui:repeat>
             </ul>
         </div>
         
+        <h:panelGroup id="chatcontainer" >
         <div class="right">
-            <ui:repeat value="#{mensajeController.cargaChat()}" var="ch" >
-
-                <div class="top"><span>to: <span class="name">#{ch.idEmisor}</span></span></div>
-                <div class="chat" data-chat="person1">
-                    <div class="conversation-start">
-                        <span>Today, 6:48 AM</span>
-                    </div>
+            
+                 <p:scrollPanel id="chatMensaje" mode="native" style="width:80%;height:80%">
+            <div class="top"><span>to: <span class="name">#{mensajeController.usernameAmigo}</span></span></div>
+                    
+            <ui:repeat value="#{mensajeController.cargaChat(usuarioController.id_user,mensajeController.idAmigo)}" var="ch" >
+                
+                <div  data-chat="person1">
+                    
                     <h:form rendered="#{!mensajeController.ordenM(usuarioController.id_user, ch.idReceptor.idUsuario)}">
                         <div class="bubble you" >
                             #{ch.contenido}
@@ -60,14 +66,27 @@
             </ui:repeat>
             
             
-            <div class="write">
-                <h:form>
-                    <p:inputText id="mensajeEnviar" value="#{mensajeController.selected.contenido}" a:placeholder="Escribe un mensaje..."/>
             
-                    <p:commandButton  value ="Enviar mensaje" action="#{mensajeController.enviarMensaje(usuarioController.id_user, usuarioController.id_usuario_amigo)}"/>
-                </h:form>
+            
+            <div class="conversation-start">
+                        <span>#{mensajeController.ahora}</span>
+                    </div>
+            
+            
+                 </p:scrollPanel>
+            
+           
+            <h:form>
+
+            <div class="write">
+                    <p:inputText id="mensajeEnviar" value="#{mensajeController.selected.contenido}" a:placeholder="Escribe un mensaje..."/>
+                    <p:commandButton  value ="Enviar mensaje" action="#{mensajeController.enviarMensaje(usuarioController.id_user,mensajeController.idAmigo)}" update="chatcontainer"  process="@all"/>
             </div>
+            <p:poll interval="60"  update="chatMensaje" />
+        </h:form>
+            
         </div>
+        </h:panelGroup>
     </div>
 </div>
         

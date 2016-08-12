@@ -37,6 +37,7 @@ public class MensajeFacade extends AbstractFacade<Mensaje> {
         EntityManager em3 = getEntityManager();
         Query q= em3.createNamedQuery("Mensaje.chat").setParameter("idUsuario",idUsuario).setParameter("idAmigo", idAmigo);
         
+        
         return q.getResultList();
 }
     

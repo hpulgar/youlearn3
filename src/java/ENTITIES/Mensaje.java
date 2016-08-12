@@ -33,7 +33,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "mensaje")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Mensaje.chat", query = "SELECT m FROM Mensaje m WHERE m.idReceptor.idUsuario = :idUsuario and m.idEmisor.idUsuario = :idAmigo or m.idReceptor.idUsuario = :idAmigo and m.idEmisor.idUsuario = :idUsuario order by m.fechaEnvio desc"),
+    @NamedQuery(name = "Mensaje.chat", query = "SELECT m FROM Mensaje m WHERE m.idReceptor.idUsuario = :idUsuario and m.idEmisor.idUsuario = :idAmigo or m.idReceptor.idUsuario = :idAmigo and m.idEmisor.idUsuario = :idUsuario order by m.fechaEnvio asc"),
     @NamedQuery(name = "Mensaje.findAll", query = "SELECT m FROM Mensaje m"),
     @NamedQuery(name = "Mensaje.findByIdMensaje", query = "SELECT m FROM Mensaje m WHERE m.idMensaje = :idMensaje"),
     @NamedQuery(name = "Mensaje.findByFechaEnvio", query = "SELECT m FROM Mensaje m WHERE m.fechaEnvio = :fechaEnvio")})
