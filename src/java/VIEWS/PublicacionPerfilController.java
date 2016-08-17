@@ -271,34 +271,78 @@ public class PublicacionPerfilController extends AmigosController implements Ser
     {
         System.out.println("ENTRA AL METODO CREAR PUBLICACION");
         try{
-            Usuario ou = new Usuario();
-            ou.setIdUsuario(publicador);
             
-            Usuario ou2 = new Usuario();
-            ou2.setIdUsuario(id_usuario);
-            
-            TipoPublicacion tp = new TipoPublicacion();
-            tp.setIdTipoPublicacion(1);
-            
-            DateFormat dateFormat = new SimpleDateFormat("yyyy/mm/dd HH:mm:ss");
-            Date date = new Date();
-            String fecha = dateFormat.format(date);
-       
-             System.out.println("Usuario2 Parametro --> "+current.getPublicacion());
-             
-            current.setIdTipoPublicacion(tp);
-            current.setIdPublicador(ou);
-            current.setIdUsuario(ou2);     
-            current.setFechaPublicacion(dateFormat.parse(fecha));
-            
-            if(current.getPublicacion() != null)
+            if(publicador == id_usuario)
             {
-                ejbFacade.create(current);
-                current= null;
+                Usuario ou = new Usuario();
+                ou.setIdUsuario(publicador);
+
+                Usuario ou2 = new Usuario();
+                ou2.setIdUsuario(id_usuario);
+
+                TipoPublicacion tp = new TipoPublicacion();
+                tp.setIdTipoPublicacion(1);
+
+                DateFormat dateFormat = new SimpleDateFormat("yyyy/mm/dd HH:mm:ss");
+                Date date = new Date();
+                String fecha = dateFormat.format(date);
+
+                 System.out.println("Usuario2 Parametro --> "+current.getPublicacion());
+
+                current.setIdTipoPublicacion(tp);
+                current.setIdPublicador(ou);
+                current.setIdUsuario(ou2);     
+                current.setFechaPublicacion(dateFormat.parse(fecha));
+
+                    if(current.getPublicacion() != null)
+                    {
+                        ejbFacade.create(current);
+                        current= null;
+                    }else
+                    {
+                        System.out.println(" es null y no lo crea");
+                    }   
             }else
             {
-                System.out.println(" es null y no lo crea");
+                //UsuarioController uc = new UsuarioController();
+                
+                Usuario ou = new Usuario();
+                ou.setIdUsuario(publicador);
+                //ou.setUsername(uc.cargaUsername(id_usuario));
+                
+                
+                
+                
+                Usuario ou2 = new Usuario();
+                ou2.setIdUsuario(id_usuario);
+                //ou2.setUsername(uc.cargaUsername(id_usuario));
+
+                TipoPublicacion tp = new TipoPublicacion();
+                tp.setIdTipoPublicacion(4);
+
+                DateFormat dateFormat = new SimpleDateFormat("yyyy/mm/dd HH:mm:ss");
+                Date date = new Date();
+                String fecha = dateFormat.format(date);
+
+                 System.out.println("Usuario2 Parametro --> "+current.getPublicacion());
+
+                current.setIdTipoPublicacion(tp);
+                current.setIdPublicador(ou);
+                current.setIdUsuario(ou2);     
+                current.setFechaPublicacion(dateFormat.parse(fecha));
+                current.setLinkPublicacion(ou.getUsername()+" <a>Ha publicado en el Muro de </a>"+ou2.getUsername());
+          //puta la wea current.setLinkPublicacion(ou.getUsername()+" <a 'style="color:blue"'>Ha publicado en el Muro de </a>"+ou2.getUsername());
+                    if(current.getPublicacion() != null)
+                    {
+                        ejbFacade.create(current);
+                        current= null;
+                    }else
+                    {
+                        System.out.println(" es null y no lo crea");
+                    }
             }
+            
+            
         }
         catch(Exception e)
         {
@@ -413,6 +457,7 @@ public class PublicacionPerfilController extends AmigosController implements Ser
                 {
                    arPerfil2.add(arPerfil.get(i));
                 }
+                
 
             }
         }

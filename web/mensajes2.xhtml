@@ -18,6 +18,17 @@
     </h:head>
     <h:body>
         
+          <!-- <script>
+
+        $( document ).ready(function() {
+
+            var objDiv = document.getElementById(".chatMensajes");
+             objDiv.scrollTop = objDiv.scrollHeight;
+
+        });
+
+        </script>-->
+        
         <div class="wrapper">
     <div class="container">
         <div class="left">
@@ -49,7 +60,7 @@
                     
             <ui:repeat value="#{mensajeController.cargaChat(usuarioController.id_user,mensajeController.idAmigo)}" var="ch" >
                 
-                <div  data-chat="person1">
+                <div  data-chat="person1" id="chatMensajes" >
                     
                     <h:form rendered="#{!mensajeController.ordenM(usuarioController.id_user, ch.idReceptor.idUsuario)}">
                         <div class="bubble you" >

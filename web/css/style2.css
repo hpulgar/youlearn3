@@ -30,6 +30,7 @@ body {
   -webkit-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
 }
+
 .container .left {
   float: left;
   width: 37.6%;

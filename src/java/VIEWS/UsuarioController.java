@@ -230,6 +230,11 @@ public class UsuarioController implements Serializable {
         return uo.getUsername();
     }
     
+    public String cargaUsername(int idUsuario)
+    {
+        return ejbFacade.username(idUsuario);
+    }
+    
     
     public List<Usuario> verUser(int idUser)
     {
