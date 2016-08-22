@@ -55,36 +55,38 @@
         <h:panelGroup id="chatcontainer" >
         <div class="right">
             
-                 <p:scrollPanel id="chatMensaje" mode="native" style="width:80%;height:80%">
+            
+                 
             <div class="top"><span>to: <span class="name">#{mensajeController.usernameAmigo}</span></span></div>
                     
-            <ui:repeat value="#{mensajeController.cargaChat(usuarioController.id_user,mensajeController.idAmigo)}" var="ch" >
-                
+            <h:form id="chatMensaje">
                 <div  data-chat="person1" id="chatMensajes" >
+                <p:dataScroller value="#{mensajeController.cargaChat(usuarioController.id_user,mensajeController.idAmigo)}" var="ch2" chunkSize="5"  mode="inline" scrollHeight="650" style="width:80%">
+                      <f:facet name="loader">
+            <p:commandButton type="button" value="More" icon="ui-icon-circle-triangle-s"/>
+        </f:facet>
+                    
+                    <h:panelGrid style="width:70%">
+                
                     
                     <h:form rendered="#{!mensajeController.ordenM(usuarioController.id_user, ch.idReceptor.idUsuario)}">
                         <div class="bubble you" >
-                            #{ch.contenido}
+                            #{ch2.contenido}
                         </div>
                     </h:form>
                     <h:form rendered="#{mensajeController.ordenM(usuarioController.id_user, ch.idReceptor.idUsuario)}">
                         <div class="bubble me" >
-                            #{ch.contenido}
+                            #{ch2.contenido}
                         </div>
                     </h:form>
-                </div>
-            
-            </ui:repeat>
-            
-            
-            
-            
-            <div class="conversation-start">
-                        <span>#{mensajeController.ahora}</span>
-                    </div>
-            
-            
-                 </p:scrollPanel>
+             
+                        </h:panelGrid>
+                          
+            </p:dataScroller>
+                     </div>
+                </h:form>
+          
+                
             
            
             <h:form>

@@ -66,9 +66,11 @@
                                                     <br/>
                                                     <h:outputText value="#/{personaController.selected.idUsuario.correo}" ></h:outputText>
                                                     <br/><br/> -->
-                                                    
-                                                  
                                                     <h:form>
+                                                        <h:commandLink value="Editaar" action="#"  disabled="true" style=" margin-right: 20px"/>
+
+                                                        <!--  -->
+                                                   
                                                         <h:commandButton disabled="#{amigosController.btoAmigosHabilitado(amigosController.respuesta)}" rendered="#{amigosController.botonAmistad(usuarioController.id_user,usuarioController.id_usuario_amigo)}" actionListener="#{amigosController.enviarSolicitud(usuarioController.id_user,usuarioController.id_usuario_amigo,amigosController.respuesta)}" style=";margin-left: 10%; background-color:#198752; border-bottom-color: black; border-style: groove;margin-bottom: 10px;"  value="#{amigosController.buscarRelacion(usuarioController.id_user,usuarioController.id_usuario_amigo)}"/>
                                                     </h:form>
                                                   </div>  

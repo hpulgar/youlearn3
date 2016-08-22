@@ -279,6 +279,17 @@ public class MasterComentarioController implements Serializable {
         return "acc"+numero;
     }
     
+    public String nombreForm5(int numero)
+    {
+       
+        return "Fifth"+numero;
+    }
+    public String nombreForm6(int numero)
+    {
+       
+        return "SextoF"+numero;
+    }
+    
     public String nombreInput(int numero)
     {
         //System.out.println("inpCom"+numero);
