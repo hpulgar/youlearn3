@@ -13,6 +13,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.ResourceBundle;
 import javax.ejb.EJB;
@@ -264,24 +265,40 @@ public class MensajeController implements Serializable {
         arrMen.clear();
         arrMen2.clear();
         arrMen= ejbFacade.consultaChat(idUser, idAmigo);
+        //HashMap<Mensaje,Integer> hsm = new HashMap<Mensaje,Integer>();
         
-        for(int i=arrMen.size()-1; i >= 0 ;i--)
-        {
-            if(i != 20)
-            {
-                
-                arrMen2.add(arrMen.get(i));
-            }else
-            {
-                break;
-            }
-        }
-        arrMen.clear();
-        for(int e=arrMen2.size()-1;e>=0;e--)
-        {
-            arrMen.add(arrMen2.get(e));
-        }
         
+//        if(arrMen.size() > 0)
+//        {
+////            
+////            System.out.println("asdasdasdasd "+(arrMen.size() - 10));
+////            int algo = (arrMen.size() - 10);
+////        
+////            arrMen2 = arrMen.subList(algo,arrMen.size());
+//            for(int i=arrMen.size()-1; i >= 0 ;i--)
+//            {
+//               System.out.println("el 'ultimo' "+arrMen.get(i).getContenido()+" "+i);
+//               arrMen2.add(arrMen.get(i));
+//            }    
+//           arrMen.clear();
+//           for(int i=arrMen2.size()-1; i >= 0 ;i--)
+//           {
+//               
+//               System.out.println("el 'ultimo2' "+arrMen2.get(i).getIdMensaje()+" "+i);
+//               arrMen.add(arrMen2.get(i));
+//              // hsm.put(arrMen2.get(i),i);
+//               
+//           }
+           
+
+//        
+       // }
+           // select * from (select * from mensaje order by id_mensaje desc "*limit 5*") AS asd order by id_mensaje asc;        
+           
+           
+
+
+
         return arrMen;
     }
     

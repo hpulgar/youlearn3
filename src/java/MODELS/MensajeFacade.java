@@ -37,6 +37,12 @@ public class MensajeFacade extends AbstractFacade<Mensaje> {
         EntityManager em3 = getEntityManager();
         Query q= em3.createNamedQuery("Mensaje.chat").setParameter("idUsuario",idUsuario).setParameter("idAmigo", idAmigo);
         
+        //int algo = q.getResultList().size();
+        //System.out.println("LARGO DE ESTA MIERDA"+algo);
+        //int algo2 = algo -10;
+        
+       //return q.getParameter(algo2);
+        
         
         return q.getResultList();
 }

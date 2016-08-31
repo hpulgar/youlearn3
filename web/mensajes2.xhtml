@@ -61,26 +61,28 @@
                     
             <h:form id="chatMensaje">
                 <div  data-chat="person1" id="chatMensajes" >
-                <p:dataScroller value="#{mensajeController.cargaChat(usuarioController.id_user,mensajeController.idAmigo)}" var="ch2" chunkSize="5"  mode="inline" scrollHeight="650" style="width:80%">
-                      <f:facet name="loader">
-            <p:commandButton type="button" value="More" icon="ui-icon-circle-triangle-s"/>
-        </f:facet>
+                    <p:dataScroller value="#{mensajeController.cargaChat(usuarioController.id_user,mensajeController.idAmigo)}" var="ch2"  mode="inline" chunkSize="10" scrollHeight="650" style="width:80%"    >
+                      
                     
-                    <h:panelGrid style="width:70%">
+                    <h:panelGrid style="width:100%">
                 
                     
-                    <h:form rendered="#{!mensajeController.ordenM(usuarioController.id_user, ch.idReceptor.idUsuario)}">
+                    <h:form rendered="#{!mensajeController.ordenM(usuarioController.id_user, ch2.idReceptor.idUsuario)}">
                         <div class="bubble you" >
                             #{ch2.contenido}
+                            #{ch2.idMensaje} IdMENSAJE
                         </div>
                     </h:form>
-                    <h:form rendered="#{mensajeController.ordenM(usuarioController.id_user, ch.idReceptor.idUsuario)}">
+                    <h:form rendered="#{mensajeController.ordenM(usuarioController.id_user, ch2.idReceptor.idUsuario)}">
                         <div class="bubble me" >
                             #{ch2.contenido}
+                            #{ch2.idMensaje} IdMENSAJE
                         </div>
                     </h:form>
              
                         </h:panelGrid>
+                        
+                       
                           
             </p:dataScroller>
                      </div>
