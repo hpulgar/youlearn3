@@ -260,12 +260,36 @@ public class MensajeController implements Serializable {
 
     ///////////////////////////////////////////////////////////////////////
     
+    public int nombreM(int numero)
+    {
+        return numero;
+    }
+    
+    public int ultimoForm(int idUser,int idAmigo)
+    {   
+        arrMen.clear();
+        arrMen =ejbFacade.consultaChat(idUser, idAmigo);
+        int numero = arrMen.size()-1;
+        
+        
+        return numero;
+    }
+    
     public List<Mensaje> cargaChat(int idUser,int idAmigo)
     {
         arrMen.clear();
         arrMen2.clear();
         arrMen= ejbFacade.consultaChat(idUser, idAmigo);
-        //HashMap<Mensaje,Integer> hsm = new HashMap<Mensaje,Integer>();
+        
+
+        for(int i=arrMen.size()-1; i >= 0 ;i--)
+        {
+            Mensaje obm = arrMen.get(i);
+            arrMen2.add(obm);
+        }
+
+
+//HashMap<Mensaje,Integer> hsm = new HashMap<Mensaje,Integer>();
         
         
 //        if(arrMen.size() > 0)
@@ -276,6 +300,7 @@ public class MensajeController implements Serializable {
 ////        
 ////            arrMen2 = arrMen.subList(algo,arrMen.size());
 //            for(int i=arrMen.size()-1; i >= 0 ;i--)
+//                int i = orig.size() - 1 ; i >= 0 ; i-- 
 //            {
 //               System.out.println("el 'ultimo' "+arrMen.get(i).getContenido()+" "+i);
 //               arrMen2.add(arrMen.get(i));
@@ -299,7 +324,7 @@ public class MensajeController implements Serializable {
 
 
 
-        return arrMen;
+        return arrMen2;
     }
     
     public boolean ordenM(int idUser1, int idUser2)

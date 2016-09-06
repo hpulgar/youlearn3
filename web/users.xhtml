@@ -11,7 +11,11 @@
 	<!--Meta Tags-->
         <meta name="viewport" content="width=device-width; initial-scale=1.0"></meta>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-		
+		<link rel="stylesheet" href="css/style.css" type="text/css"  media="all" />
+	<link rel="stylesheet" href="css/colour.css" type="text/css"  media="all" />
+	<link rel="stylesheet" href="css/flexslider.css" type="text/css"  media="all" />
+	<link rel="stylesheet" href="css/superfish.css" type="text/css"  media="all" />
+	<link rel="stylesheet" href="css/responsive.css" type="text/css"  media="all" />
 	<!--Title-->
 	<title>Youlearn - Curso</title>
 
@@ -23,17 +27,12 @@
 
 <!-- BEGIN body -->
 <h:body >
-
+    <h:panelGrid><h:form>
+    
 	
-		
-		<!-- BEGIN .main-content-full -->
-		<div class="main-content-full page-content">
-			
-			<!-- BEGIN .inner-content-wrapper -->
-			<div class="inner-content-wrapper">
 				
                             
-                            
+                           
 				<ul class="teacher-4">
                                     <ui:repeat value="#{personaController.verPersona()}" var="u">
                                    
@@ -53,24 +52,16 @@
                                     </ui:repeat>
 				</ul>
                             
-				<div class="pagination-wrapper dotted-pagination" style="margin: 10px 0 10px 0 !important;">
-					<a class="selected" href="#">1</a>
-                                        <a href="#">2</a>
-					<a href="#">3</a>
-					<a href="#">></a>
-				</div>
-			
+				
 			<!-- END .inner-content-wrapper -->
-			</div>
 			
 		<!-- END .main-content-full -->
-		</div>
-	
-	<!-- END .content-wrapper -->
+		
+                	<!-- END .content-wrapper -->
 	
 	<!-- BEGIN #footer-wrapper -->
 	
-        
+        </h:form></h:panelGrid>
         
 </h:body>
 

@@ -2,7 +2,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
     <h:head>
 
 
@@ -35,106 +37,10 @@
     
     <h:body id="top" class="loading">
   <!-- BEGIN #header-wrapper -->
-	<div id="header-wrapper">
-		
-		<!-- BEGIN #header-border -->
-		<div id="header-border">
-		
-			<!-- BEGIN #header-top -->
-			<div id="header-top" class="clearfix">
-			
-			  <ul class="top-left-nav clearfix">
-                              <h:outputText  value="Bienvenido: #{perfilController.nPerfil(usuarioController.idProfile)}"/><br/>
-                              <h:form>
-                              <h:commandLink  action="#{usuarioController.logout()}" value="Logout " rendered="#{menuController.logeado()}"/>
-                              </h:form>
-                       <h:link value="Iniciar sesion" outcome="login.xhtml" rendered="#{menuController.noLogeado()}"/><br/>
-				
-				</ul>
-			
-			
-			<!-- END #header-top -->
-			</div>
-			
-			<!-- BEGIN #header-content-wrapper -->
-			<div id="header-content-wrapper" class="clearfix">
-			
-				<div id="logo">
-					<h1><a href="index-2.html"><span>You</span>Learn</a></h1>
-				</div>
-			
-			
-			<!-- END #header-content-wrapper -->
-			</div>
-		
-			<!-- BEGIN #main-menu-wrapper -->
-			<div id="main-menu-wrapper" class="clearfix">
-		
-				<!-- BEGIN #main-menu -->
-				<ul id="main-menu">
-					
-					<li class="current_page_item"><a href="index.xhtml">Home</a></li>
-                                        <h:form>
-                                          
-                                            <li><h:commandLink  value="Perfil" action="perfil.xhtml" rendered="#{menuController.logeado()}"></h:commandLink>
-                                                <ul>
-                                                    <li><a href="cuenta.xhtml">Foro</a></li>
-                                                        <li><a href="#">Dashboard</a></li>
-                                                </ul>
-                                            </li>
-                                        </h:form>
-                                       
-                                        
-					<li><a href="courses.html">Cursos</a>
-						<ul>
-							<li><a href="#">Mis cursos</a></li>
-							<li><a href="#">Buscar cursos</a></li>
-							<li><a href="#">Crear un tema</a></li>
-
-						</ul>
-					</li>
-			
-					<li><a href="typography.html">Caracteristicas</a>
-						<ul>
-							<li><a href="events.html">Events</a></li>
-							<li><a href="events-single.html">Events Single</a></li>
-							<li><a href="teachers1.html">Teachers #1</a></li>
-							<li><a href="teachers2.html">Teachers #2</a></li>
-							<li><a href="portfolio.html">Portfolio</a></li>
-							<li><a href="portfolio-single.html">Portfolio Single</a></li>
-							<li><a href="photo-gallery-2-col.html">Gallery - 2 Columns</a></li>
-							<li><a href="photo-gallery-3-col.html">Gallery - 3 Columns</a></li>
-							<li><a href="photo-gallery-4-col.html">Gallery - 4 Columns</a></li>
-							<li><a href="full-width.html">Full Width</a></li>
-							<li><a href="left-sidebar.html">Left Sidebar</a></li>
-							<li><a href="right-sidebar.html">Right Sidebar</a></li>
-							<li><a href="columns.html">Columns</a></li>
-							<li><a href="js-elements.html">JS Elements</a></li>
-							<li><a href="typography.html">Typography</a></li>
-						</ul>
-					</li>
-                                         <li><a href="typography.html">Nosotros</a></li>
-					<li><a href="contact.html">Contacto</a></li>
-				
-				
-				<!-- END #main-menu -->
-				</ul>
-		
-				<div class="menu-search-button"></div>
-				<form method="get" action="#" class="menu-search-form">
-					<input class="menu-search-field" type="text" onblur="if(this.value=='')this.value='To search, type and hit enter';" onfocus="if(this.value=='To search, type and hit enter')this.value='';" value="To search, type and hit enter" name="s" />
-				</form>
-		
-			<!-- END #main-menu-wrapper -->
-			</div>
-		
-		<!-- END #header-border -->
-		</div>
-                
-                
-	
-	<!-- END #header-wrapper -->
-	</div>
+	<div id="header" >
+                        
+                  <ui:include src="header.xhtml" />
+        </div>
 	
 	<!-- BEGIN .page-header -->
 	<div class="page-header clearfix">
@@ -168,55 +74,48 @@
 			 <h:form>
                                     <h:commandButton action="tablero_crear.xhtml" value="Crear un tema" style="float: right"/>
                                 </h:form>	
-                            <h3 class="block-title">Nombre Curso</h3>
-                            
-				
-                                <table style="width:100%;">
-					<thead>
-						<tr>
-							<th>Fecha</th>
-							<th>Nombre tema</th>
-							<th>Iniciado por</th>
-							<th>Mensajes</th>
-                                                        <th>Visitas</th>
-						</tr>
-					</thead>
-					<tbody>
-                                            <c:forEach items="#{tableroController.verTableros(cursoController.idCurso)}" var="f" rendered="false">
+                            <h3 class="block-title">#{cursoController.nomcurso(cursoController.idCurso)}</h3>
                                 
-                                                <h:form>
-						<tr>
-                                                    
-                                                    
-                                                      
-                                                   
-                                                    <td data-title="fecha">#{f.fecha}</td>
-                                                    
-                                                    
-                                                    <td data-title="" > <h:commandLink action="#{tableroController.verDetalle(f.idTablero)}" value="#{f.titulo}"/></td>                                       
-                                                    
-                                                    
-                                                    <td data-title="iniciado_por">#{f.idUsuario.username}</td>
-                                                    <td data-title="Mensajes">#{masterComentarioController.cuentaMensajes(f.idTablero)}</td>
-                                                    
-                                                    <td data-title="Visitas">#{f.idTablero}</td>
-                                                        
-						</tr>
-                                                    </h:form>
-                                             </c:forEach>
-						
-					</tbody>
-				</table>
+                            <h:form>
+                                    <p:dataTable var="f" value="#{tableroController.verTableros(cursoController.idCurso)}" rows="2"
+                                    paginator="true"
+                                    >
+                                   
+                                    <p:column headerText="Fecha">
+                                        <h:outputText value="#{f.fecha}"/>
+                                    </p:column>
+                                        
+                                    <p:column headerText="Nombre Tema">
+                                        <h:commandLink action="#{tableroController.verDetalle(f.idTablero)}" value="#{f.titulo}"/>
+                                    </p:column>
+                                        
+                                    <p:column headerText="Iniciado Por">
+                                        <h:outputText value="#{f.idUsuario.username}"/>
+                                    </p:column>
+                                        
+                                    <p:column headerText="Mensajes">
+                                        <h:outputText value="#{masterComentarioController.cuentaMensajes(f.idTablero)}"/>
+                                    </p:column>
+                                   
+                                   <p:column headerText="Visitas">
+                                        <h:outputText value="#{f.idTablero}"/>
+                                    </p:column>
+                                        
+                                        
+                                       
+                                        
+                                    </p:dataTable>
+				</h:form>
+				
+				 
+				
 				
 				<div class="pagination-wrapper" style="margin: 20px 0 50px 0;">
 					<a class="selected" href="#">1</a>
 					<a href="#">2</a>
 					<a href="#">3</a>
 					<a href="#">></a>
-				</div>
-				
-				
-				
+				</div> 
 				
 				<div class="clearboth"></div>
 			

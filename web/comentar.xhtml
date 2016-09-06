@@ -19,9 +19,7 @@
    </h:head>
     <h:body >
 
-        <p:outputPanel deferred="true">
         
-    </p:outputPanel>
         
         
         <h:panelGrid id="parametroBody" style="width: 100%" >
@@ -36,6 +34,13 @@
     </h:form>
     
     <c:forEach  items="#{publicacionPerfilController.verPublicaciones(usuarioController.id_usuario_amigo)}" var="pu" >
+   
+   <!--<p:dataScroller value="#/{publicacionPerfilController.verPublicaciones(usuarioController.id_usuario_amigo)}" var="pu" >-->
+        <f:facet name="loader">
+            <p:commandButton type="button" value="More" icon="ui-icon-circle-triangle-s"/>
+        </f:facet>
+        
+        
         <h:panelGroup id="comms">
 
             <div id="respond-publicacion" style="width: 85%; margin: 3% 5%;">
@@ -141,7 +146,7 @@
                         <li>
                                 <div class="field-row" style="float:left;">
                                     
-                                        <h:inputText id="#{masterComentarioController.nombreInput(pu.idPublicacion)}"  a:placeholder="Comentar..." value="#{masterComentarioController.selected.comentario}" style="border-color: #198752; width: 200px; margin-left: 80px"/>
+                                    <h:inputText id="#{masterComentarioController.nombreInput(pu.idPublicacion)}"  a:placeholder="Comentar..." value="#{masterComentarioController.selected.comentario}" style="border-color: #198752; width: 200px; margin-left: 80px"/>
                                         <p:commandButton  id="#{masterComentarioController.nombreBoton(pu.idPublicacion)}"   actionListener="#{masterComentarioController.CrearComentario(usuarioController.id_user,pu.idPublicacion,1)}"  update="#{masterComentarioController.nombreForm5(pu.idPublicacion)}" process="@all" value="Comentar"  style="float:right ;margin-right:30px; visibility: hidden" >
                                            
                                         </p:commandButton>
@@ -156,6 +161,7 @@
             </div> 
          </h:panelGroup>
     </c:forEach>
+            <!--</p:dataScroller>-->
     
 
 </h:panelGrid>

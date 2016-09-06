@@ -38,5 +38,12 @@ public class CursoFacade extends AbstractFacade<Curso> {
         
         return q.getResultList();
     }
+    public String nombreC(int idCurso)
+    {
+        EntityManager m2 = getEntityManager();
+        Query q=m2.createNamedQuery("Curso.name").setParameter("idCurso", idCurso);
+        
+        return q.getSingleResult().toString();
+    }    
     
 }

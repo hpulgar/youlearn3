@@ -23,16 +23,13 @@
 
 <!-- BEGIN body -->
 <h:body >
-
+<h:panelGrid><h:form>
 	
 		
 		<!-- BEGIN .main-content-full -->
 		<div class="main-content-full page-content">
 			
-			<!-- BEGIN .inner-content-wrapper -->
-			<div class="inner-content-wrapper">
-				
-                            
+			
                             
 				<ul class="teacher-4">
                                     <ui:repeat value="#{amigosController.listAmigos(usuarioController.id_usuario_amigo)}" var="u">
@@ -60,8 +57,7 @@
 					<a href="#">></a>
 				</div>
 			
-			<!-- END .inner-content-wrapper -->
-			</div>
+			
 			
 		<!-- END .main-content-full -->
 		</div>
@@ -70,7 +66,7 @@
 	
 	<!-- BEGIN #footer-wrapper -->
 	
-        
+        </h:form></h:panelGrid>
         
 </h:body>
 

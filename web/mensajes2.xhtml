@@ -30,7 +30,7 @@
         </script>-->
         
         <div class="wrapper">
-    <div class="container">
+            <div class="container" style="height: 80%">
         <div class="left">
             <div class="top">
                 <input type="text" />
@@ -53,54 +53,72 @@
         </div>
         
         <h:panelGroup id="chatcontainer" >
-        <div class="right">
+        
             
             
                  
             <div class="top"><span>to: <span class="name">#{mensajeController.usernameAmigo}</span></span></div>
                     
-            <h:form id="chatMensaje">
+            
                 <div  data-chat="person1" id="chatMensajes" >
-                    <p:dataScroller value="#{mensajeController.cargaChat(usuarioController.id_user,mensajeController.idAmigo)}" var="ch2"  mode="inline" chunkSize="10" scrollHeight="650" style="width:80%"    >
-                      
-                    
-                    <h:panelGrid style="width:100%">
-                
-                    
-                    <h:form rendered="#{!mensajeController.ordenM(usuarioController.id_user, ch2.idReceptor.idUsuario)}">
-                        <div class="bubble you" >
-                            #{ch2.contenido}
-                            #{ch2.idMensaje} IdMENSAJE
-                        </div>
-                    </h:form>
-                    <h:form rendered="#{mensajeController.ordenM(usuarioController.id_user, ch2.idReceptor.idUsuario)}">
-                        <div class="bubble me" >
-                            #{ch2.contenido}
-                            #{ch2.idMensaje} IdMENSAJE
-                        </div>
-                    </h:form>
-             
-                        </h:panelGrid>
+                    <!--<p:dataScroller value="#/{mensajeController.cargaChat(usuarioController.id_user,mensajeController.idAmigo)}" var="ch2" mode="inline" chunkSize="15" scrollHeight="500"   style="width:80%">-->
+                    <p:dataTable id="chat" value="#{mensajeController.cargaChat(usuarioController.id_user,mensajeController.idAmigo)}"  var="ch2" 
+                                 scrollable="true" scrollHeight="500" style="width: 96%; margin-bottom: 0px"  liveScrollBuffer="90" liveScroll="true"  scrollRows="20"  >
                         
-                       
-                          
-            </p:dataScroller>
-                     </div>
-                </h:form>
-          
+                        <p:column style="border-color: white; float: left;
+                                    color: #fff;
+                                    background-color: #00b0ff;
+                                    -webkit-align-self: flex-start;
+                                    align-self: flex-start;
+                                    -moz-animation-name: slideFromLeft;
+                                    -webkit-animation-name: slideFromLeft;
+                                    animation-name: slideFromLeft;
+                                    width: 50%; word-break:  break-all" 
+                                    rendered="#{!mensajeController.ordenM(usuarioController.id_user, ch2.idReceptor.idUsuario)}" >
+                                
+                                    <div >
+                                    #{ch2.contenido}
+                                    </div>
+                                
+                            </p:column>
+                        
+                        <p:column  style="border-color: white; float: right;
+                                    -webkit-align-self: flex-end;
+                                    align-self: flex-end;
+                                    -moz-animation-name: slideFromRight;
+                                    -webkit-animation-name: slideFromRight;
+                                    animation-name: slideFromRight; width: 50%; word-break:  break-all; text-align:  right;" 
+                                    rendered="#{mensajeController.ordenM(usuarioController.id_user, ch2.idReceptor.idUsuario)}">
+                                
+                            <div  style="color: #1a1a1a;
+                                    background-color: #eceff1;" >
+                                    #{ch2.contenido}
+                                    #{mensajeController.nombreM(ch2.idMensaje)}
+                                    #{mensajeController.ultimoForm(usuarioController.id_user,mensajeController.idAmigo)}
+                                    </div>
+                                
+                        </p:column>
+                            
+
+                    </p:dataTable>    
+                    <!--</p:dataScroller>-->
+                </div>
+                
                 
             
            
-            <h:form>
+            <h:form id="mensajeEnviar">
 
             <div class="write">
-                    <p:inputText id="mensajeEnviar" value="#{mensajeController.selected.contenido}" a:placeholder="Escribe un mensaje..."/>
+                    <p:inputText  value="#{mensajeController.selected.contenido}" a:placeholder="Escribe un mensaje..."/>
                     <p:commandButton  value ="Enviar mensaje" action="#{mensajeController.enviarMensaje(usuarioController.id_user,mensajeController.idAmigo)}" update="chatcontainer"  process="@all"/>
             </div>
-            <p:poll interval="60"  update="chatMensaje" />
+            
+            <p:poll interval="500"  update="chat"  />
+            <p:focus context="mensajeEnviar" />
         </h:form>
             
-        </div>
+        
         </h:panelGroup>
     </div>
 </div>

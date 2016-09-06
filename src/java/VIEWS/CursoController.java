@@ -259,7 +259,11 @@ public class CursoController implements Serializable {
             return arCurso;
         }
         
-       
+        public String nomcurso(int idCurso)
+        {
+            
+            return ejbFacade.nombreC(idCurso);
+        }
         
         public String cursoCont()
         {
