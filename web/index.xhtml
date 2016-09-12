@@ -3,7 +3,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:p="http://primefaces.org/ui">
     <h:head>
 
 
@@ -13,16 +15,16 @@
 
         <!--Title-->
         <title>Youlearn - Pagina principal</title>
-        <h:outputStylesheet name="css/jsfcrud.css"/>
+     
 
 
-        <link rel="stylesheet" href="css/style.css" type="text/css"  media="all" />
-        <link rel="stylesheet" href="css/colour.css" type="text/css"  media="all" />
-        <link rel="stylesheet" href="css/flexslider.css" type="text/css"  media="all" />
-        <link rel="stylesheet" href="css/superfish.css" type="text/css"  media="all" />
-        <link rel="stylesheet" href="css/responsive.css" type="text/css"  media="all" />
-        <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic' rel='stylesheet' type='text/css'></link>
-        <link href='http://fonts.googleapis.com/css?family=Merriweather:400,300,700,900' rel='stylesheet' type='text/css'></link>
+      <link rel="stylesheet" href="css/style.css" type="text/css"  media="all" />
+	<link rel="stylesheet" href="css/colour.css" type="text/css"  media="all" />
+	<link rel="stylesheet" href="css/flexslider.css" type="text/css"  media="all" />
+	<link rel="stylesheet" href="css/superfish.css" type="text/css"  media="all" />
+	<link rel="stylesheet" href="css/responsive.css" type="text/css"  media="all" />
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic' rel='stylesheet' type='text/css'/>
+	<link href='http://fonts.googleapis.com/css?family=Merriweather:400,300,700,900' rel='stylesheet' type='text/css'/>
 
         <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
         <script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js'></script>
@@ -134,19 +136,29 @@
                     <div class="content-block">
 
                         <h3 class="block-title">Buscador</h3>
-                        <p>Selecciona un criterio de busqueda</p>
+                        <p>Seleccione un criterio de busqueda</p>
 
-                        <form method="get" action="#" class="course-finder-form clearfix">
+                    <h:form>
+                                     <select name="keyword-type" class="course-finder-form">
+                                        <ui:repeat value="#{cursoSubCatController.listaSubCategoriasSinID()}" var="u">
 
-                            <select name="keyword-type">
-                                <option value="Course ID">ID Curso</option>
+                                            <option value="">#{u.nomSubcat}</option>
 
-                            </select>
 
-                            <input type="text" value="Ingrese una busqueda" name="keywords" />
-                            <input type="submit" value="Buscar" />
-
-                        </form>
+                                        </ui:repeat>
+                                    </select>
+                       <h:panelGrid columns="2" cellpadding="5">
+                           <p:autoComplete  id="acMinLength" minQueryLength="3" completeMethod="#{cursoController.autoCompletado}" effect="fade" />
+                       </h:panelGrid>
+                            
+                       <p:dialog header="Values" resizable="false" showEffect="fade" widgetVar="dlg">
+                       <p:panelGrid id="output" columns="2" columnClasses="label, value">
+          
+                           <h:outputText value="#{cursoController.textoBusqueda}" />
+                       </p:panelGrid>
+                        </p:dialog>
+                            
+                 </h:form>
 
                         <!-- END .content-block -->	
                     </div>
@@ -366,10 +378,8 @@
 
         <!-- END body -->
 
-        <br />
-        <h:link outcome="/tipoPublicacion/List" value="Show All TipoPublicacion Items"/>
-        <br />
-        <h:link outcome="/mensaje/List" value="Show All Mensaje Items"/>
+       
+       
     </h:body>
 
 

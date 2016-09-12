@@ -38,6 +38,7 @@ public class CursoController implements Serializable {
     private PaginationHelper pagination;
     private int selectedItemIndex;
     private int idCurso;
+   private String textoBusqueda;
     private List<Curso> arCurso = new ArrayList();
 
     public List<Curso> getArCurso() {
@@ -60,6 +61,14 @@ public class CursoController implements Serializable {
 
     public void setIdCurso(int idCurso) {
         this.idCurso = idCurso;
+    }
+
+    public String getTextoBusqueda() {
+        return textoBusqueda;
+    }
+
+    public void setTextoBusqueda(String textoBusqueda) {
+        this.textoBusqueda = textoBusqueda;
     }
     
     
@@ -338,6 +347,18 @@ public class CursoController implements Serializable {
                     return "/curso_crear.xhtml";
                 }
         }
+        
+         public List<String> autoCompletado(String query) {
+            arCurso = ejbFacade.findAll();
+             List<String> results = new ArrayList<String>();
+        for(int i = 0; i < arCurso.size(); i++) {
+            
+            if(arCurso.get(i).getNomCurso().regionMatches(0, query, 0, 3))
+            results.add(arCurso.get(i).getNomCurso());
+        }
+         
+        return results;
+    }
         
         
     @FacesConverter(forClass = Curso.class)

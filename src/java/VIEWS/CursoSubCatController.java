@@ -30,9 +30,18 @@ public class CursoSubCatController implements Serializable {
     private PaginationHelper pagination;
     private int selectedItemIndex;
     private int id_cSub_cat;
+    private String textoBusqueda;
     private List<CursoSubCat> arCursoSubCat = new ArrayList();
     private List<CursoSubCat> arCursoSubCat2 = new ArrayList();
     public CursoSubCatController() {
+    }
+
+    public String getTextoBusqueda() {
+        return textoBusqueda;
+    }
+
+    public void setTextoBusqueda(String textoBusqueda) {
+        this.textoBusqueda = textoBusqueda;
     }
 
     public int getId_cSub_cat() {
@@ -234,6 +243,26 @@ public class CursoSubCatController implements Serializable {
             }
         }
          return arCursoSubCat2;
+    }
+    
+        public List<CursoSubCat> listaSubCategoriasSinID()
+    {
+        arCursoSubCat.clear();
+        arCursoSubCat = ejbFacade.findAll();
+        
+         return arCursoSubCat;
+    }
+        
+        public List<String> autoCompletado(String query) {
+            arCursoSubCat = ejbFacade.findAll();
+             List<String> results = new ArrayList<String>();
+        for(int i = 0; i < arCursoSubCat.size(); i++) {
+            
+            if(arCursoSubCat.get(i).getNomSubcat().regionMatches(0, query, 0, 3))
+            results.add(arCursoSubCat.get(i).getNomSubcat());
+        }
+         
+        return results;
     }
     
        
