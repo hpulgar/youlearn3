@@ -7,6 +7,7 @@ import ENTITIES.Usuario;
 import VIEWS.util.JsfUtil;
 import VIEWS.util.PaginationHelper;
 import MODELS.CursoFacade;
+import java.io.IOException;
 
 import java.io.Serializable;
 import java.text.DateFormat;
@@ -26,6 +27,7 @@ import javax.faces.convert.FacesConverter;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
+import org.primefaces.event.SelectEvent;
 
 @Named("cursoController")
 @SessionScoped
@@ -38,6 +40,7 @@ public class CursoController implements Serializable {
     private PaginationHelper pagination;
     private int selectedItemIndex;
     private int idCurso;
+    private int idCursoSeleccionado;
    private String textoBusqueda;
     private List<Curso> arCurso = new ArrayList();
 
@@ -70,6 +73,15 @@ public class CursoController implements Serializable {
     public void setTextoBusqueda(String textoBusqueda) {
         this.textoBusqueda = textoBusqueda;
     }
+
+    public int getIdCursoSeleccionado() {
+        return idCursoSeleccionado;
+    }
+
+    public void setIdCursoSeleccionado(int idCursoSeleccionado) {
+        this.idCursoSeleccionado = idCursoSeleccionado;
+    }
+    
     
     
 
@@ -349,16 +361,41 @@ public class CursoController implements Serializable {
         }
         
          public List<String> autoCompletado(String query) {
+             Curso cur = new Curso();
+      
+             
             arCurso = ejbFacade.findAll();
              List<String> results = new ArrayList<String>();
         for(int i = 0; i < arCurso.size(); i++) {
             
-            if(arCurso.get(i).getNomCurso().regionMatches(0, query, 0, 3))
+            if(arCurso.get(i).getNomCurso().regionMatches(0, query, 0, 3)){
             results.add(arCurso.get(i).getNomCurso());
+            idCursoSeleccionado =arCurso.get(i).getIdCurso();
+            }
+          
+            
+          //  cur.setIdCurso(arCurso.get(i).getIdCurso());
+            
         }
-         
+         System.out.println("Nombre Curso"+results.toString());
+          System.out.println("ID Curso "+idCursoSeleccionado);
         return results;
     }
+         
+         public void handleSelect(SelectEvent event) {  
+ String value = (String) event.getObject();
+ System.out.println("selected "+value);
+
+}
+         
+         public void clickCurso() throws IOException {
+    // ...
+     this.setIdCurso(idCursoSeleccionado);
+     System.out.println(this.getIdCursoSeleccionado());
+    FacesContext.getCurrentInstance().getExternalContext().redirect("detalles_curso.xhtml");
+    FacesContext.getCurrentInstance().responseComplete();
+ 
+}
         
         
     @FacesConverter(forClass = Curso.class)

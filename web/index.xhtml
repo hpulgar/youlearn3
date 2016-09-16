@@ -148,15 +148,12 @@
                                         </ui:repeat>
                                     </select>
                        <h:panelGrid columns="2" cellpadding="5">
-                           <p:autoComplete  id="acMinLength" minQueryLength="3" completeMethod="#{cursoController.autoCompletado}" effect="fade" />
+                           <p:autoComplete  itemValue="#{cursoController.textoBusqueda}" id="acMinLength" minQueryLength="3" value="#{cursoController.textoBusqueda}" completeMethod="#{cursoController.autoCompletado}" effect="fade">
+                               <p:ajax event="change" listener="#{cursoController.clickCurso()}"/>
+            <!-- <p:ajax event="itemSelect" listener="#/{cursoController.handleSelect}"/>-->
+</p:autoComplete>
                        </h:panelGrid>
-                            
-                       <p:dialog header="Values" resizable="false" showEffect="fade" widgetVar="dlg">
-                       <p:panelGrid id="output" columns="2" columnClasses="label, value">
-          
-                           <h:outputText value="#{cursoController.textoBusqueda}" />
-                       </p:panelGrid>
-                        </p:dialog>
+                 
                             
                  </h:form>
 
