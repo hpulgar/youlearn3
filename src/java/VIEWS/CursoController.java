@@ -42,6 +42,7 @@ public class CursoController implements Serializable {
     private int idCurso;
     private int idCursoSeleccionado;
    private String textoBusqueda;
+   
     private List<Curso> arCurso = new ArrayList();
 
     public List<Curso> getArCurso() {
@@ -361,18 +362,14 @@ public class CursoController implements Serializable {
         }
         
          public List<String> autoCompletado(String query) {
-             Curso cur = new Curso();
-      
-             
             arCurso = ejbFacade.findAll();
-             List<String> results = new ArrayList<String>();
-        for(int i = 0; i < arCurso.size(); i++) {
+             List<String> results = new ArrayList();
+            for(int i = 0; i < arCurso.size(); i++) {
             
-            if(arCurso.get(i).getNomCurso().regionMatches(0, query, 0, 3)){
+            if((arCurso.get(i).getNomCurso().regionMatches(0, query, 0, 1)) || (arCurso.get(i).getNomCurso().regionMatches(0, query.toUpperCase(), 0, 1)) ){
             results.add(arCurso.get(i).getNomCurso());
             idCursoSeleccionado =arCurso.get(i).getIdCurso();
             }
-          
             
           //  cur.setIdCurso(arCurso.get(i).getIdCurso());
             

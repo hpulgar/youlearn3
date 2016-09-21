@@ -139,19 +139,18 @@
                         <p>Seleccione un criterio de busqueda</p>
 
                     <h:form>
+                        
+                        
                                      <select name="keyword-type" class="course-finder-form">
                                         <ui:repeat value="#{cursoSubCatController.listaSubCategoriasSinID()}" var="u">
-
                                             <option value="">#{u.nomSubcat}</option>
-
-
                                         </ui:repeat>
                                     </select>
                        <h:panelGrid columns="2" cellpadding="5">
-                           <p:autoComplete  itemValue="#{cursoController.textoBusqueda}" id="acMinLength" minQueryLength="3" value="#{cursoController.textoBusqueda}" completeMethod="#{cursoController.autoCompletado}" effect="fade">
+                            <p:autoComplete  itemValue="#{cursoController.textoBusqueda}" id="acMinLength" minQueryLength="1" value="#{cursoController.textoBusqueda}" completeMethod="#{cursoController.autoCompletado}" effect="fade">
                                <p:ajax event="change" listener="#{cursoController.clickCurso()}"/>
             <!-- <p:ajax event="itemSelect" listener="#/{cursoController.handleSelect}"/>-->
-</p:autoComplete>
+                            </p:autoComplete>
                        </h:panelGrid>
                  
                             

@@ -253,9 +253,9 @@ public class MasterComentarioController implements Serializable {
     }
     
     //CO    
-    public String nombreForm(int numero)
+    public String nombreForm(int numero,String pub)
     {
-       
+       System.out.println("form"+numero+" "+pub);
         return "form"+numero;
         
     }
@@ -354,7 +354,6 @@ public class MasterComentarioController implements Serializable {
 
  
             System.out.println("en el id pft"+ pft);
-        
             System.out.println("en id us"+ idComentador);
             System.out.println("en id pub"+ idPublicacion);
             
