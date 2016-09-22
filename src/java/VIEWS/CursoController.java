@@ -73,6 +73,7 @@ public class CursoController implements Serializable {
 
     public void setTextoBusqueda(String textoBusqueda) {
         this.textoBusqueda = textoBusqueda;
+        
     }
 
     public int getIdCursoSeleccionado() {
@@ -84,7 +85,15 @@ public class CursoController implements Serializable {
     }
     
     
-    
+    public String submit()
+{
+   
+    // blank out the value of the name property
+    textoBusqueda = null;
+    idCursoSeleccionado = 0;
+    // send the user back to the same page.
+    return null;
+}
 
    
 
@@ -385,14 +394,19 @@ public class CursoController implements Serializable {
 
 }
          
-         public void clickCurso() throws IOException {
+         public void clickCursoCompletado() throws IOException {
     // ...
      this.setIdCurso(idCursoSeleccionado);
+     if(this.getIdCursoSeleccionado()!=0){
      System.out.println(this.getIdCursoSeleccionado());
     FacesContext.getCurrentInstance().getExternalContext().redirect("detalles_curso.xhtml");
     FacesContext.getCurrentInstance().responseComplete();
+
+    }
+     
  
 }
+         
         
         
     @FacesConverter(forClass = Curso.class)

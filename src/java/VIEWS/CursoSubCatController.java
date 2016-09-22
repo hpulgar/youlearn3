@@ -4,6 +4,7 @@ import ENTITIES.CursoSubCat;
 import VIEWS.util.JsfUtil;
 import VIEWS.util.PaginationHelper;
 import MODELS.CursoSubCatFacade;
+import java.io.IOException;
 
 import java.io.Serializable;
 import java.util.ResourceBundle;
@@ -266,6 +267,15 @@ public class CursoSubCatController implements Serializable {
     }
     
        
+               public void clickCursoSelect() throws IOException {
+    
+    FacesContext.getCurrentInstance().getExternalContext().redirect("detalles_curso.xhtml");
+    FacesContext.getCurrentInstance().responseComplete();
+
+    
+     
+ 
+}
     
     
     @FacesConverter(forClass = CursoSubCat.class)
