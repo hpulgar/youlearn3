@@ -42,6 +42,7 @@ public class CursoController implements Serializable {
     private int idCurso;
     private int idCursoSeleccionado;
    private String textoBusqueda;
+   private String nombreCurso;
    
     private List<Curso> arCurso = new ArrayList();
 
@@ -51,6 +52,14 @@ public class CursoController implements Serializable {
 
     public void setArCurso(List<Curso> arCurso) {
         this.arCurso = arCurso;
+    }
+
+    public String getNombreCurso() {
+        return nombreCurso;
+    }
+
+    public void setNombreCurso(String nombreCurso) {
+        this.nombreCurso = nombreCurso;
     }
     
 
@@ -275,10 +284,29 @@ public class CursoController implements Serializable {
         
         
         
-        public List<Curso> listaCursos()
+        public List<Curso> listaCursos(int idSubcat,String nombreCurso)
         {
-            this.arCurso.clear();
-            arCurso = ejbFacade.findAll();
+            System.out.println("ENTRA AL METODO");
+            
+                if(idSubcat != 0 && nombreCurso.isEmpty())
+                {
+                     System.out.println("ENTRO AL IF Q DEVUELVE SEGUN EL ID"+idSubcat);
+                    
+                    arCurso.clear();
+                    arCurso = ejbFacade.cursosSubcategorias(idSubcat);
+                }else if(!nombreCurso.isEmpty()  && idSubcat == 0)
+                {
+                    System.out.println("ENTRO AL IF Q DEVUELVE SEGUN EL NOMBRE"+nombreCurso);
+                    arCurso.clear();
+                    arCurso= ejbFacade.cursosNombres(nombreCurso);
+                }else
+                {
+                   System.out.println("ENTRO AL IF Q DEVUELVE TODO COTITO");
+                    this.arCurso.clear();
+                    arCurso = ejbFacade.findAll();
+            
+                    
+                }
             
             return arCurso;
         }

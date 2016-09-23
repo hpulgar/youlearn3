@@ -27,7 +27,7 @@
             </p:inputText>
         </div>
             
-            <p:dataScroller id="infoscroll" value="#{publicacionPerfilController.verPublicaciones(usuarioController.id_usuario_amigo)}" var="pu" scrollHeight="500" chunkSize="5" mode="inline" >
+            <p:dataScroller id="infoscroll" value="#{publicacionPerfilController.verPublicaciones(usuarioController.id_usuario_amigo)}" rowIndexVar="actual"   var="pu" scrollHeight="500" chunkSize="5" mode="inline" >
                 <div id="respond-publicacion" style="width: 85%; margin: 3% 14%;">
                     <ul class="comments">
                         <li class="comment-entry clearfix">
@@ -39,6 +39,8 @@
                             <div class="comment-right clearfix">
                                     <p class="comment-info"><h:commandLink  value="#{pu.idPublicador.username}"  action="perfil.xhtml" actionListener="#{usuarioController.setId_usuario_amigo(pu.idPublicador.idUsuario)}"/>  <span> #{pu.fechaPublicacion} </span></p>
                                     <div style="word-wrap: break-word; width: 400px">
+                                        
+                                        
                                         <p class="comment-info"/><h:outputText value="#{pu.publicacion}" escape="false" />
                                         <h:commandLink value="#{pu.idForo.titulo}" action="#{foroPosteosController.verPost(pu.idForo.idPost)}" />
                                         <h:commandLink value="#{pu.idCurso.nomCurso}"  action="#{cursoController.verCurs(pu.idCurso.idCurso)}"  />
@@ -46,56 +48,15 @@
                             </div> 
                         </li>
                         <li>
-                            <p:dataScroller value="#{masterComentarioController.cargaComentarios(pu.idPublicacion,1)}" var="mc" scrollHeight="100"> 
-                            
-                                <li>
-                                    <ul class="comments">
-                                        <li class="comment-entry clearfix">
-                                            <div class="comment-left">
-                                                <div><img src="#{mc.idUsuario.imagen_foto_perfil}" class="comment-image" /> </div>
-                                            </div>
-                                                <div class="comment-right clearfix">
-                                                    <p class="comment-info"> <h:commandLink value="#{mc.idUsuario.username}" action="perfil.xhtml" actionListener="#{usuarioController.setId_usuario_amigo(mc.idUsuario.idUsuario)}"/> <span> #{mc.fechaComentario} </span></p>
-                                                    <div style="word-wrap: break-word; width: 350px">
-                                                        <p class="comment-info"  >#{mc.comentario}</p>
-                                                    </div>
-                                                </div>
-                                            <ul>
-                                                <li>
-                                                    <div class="comment-right clearfix">
-                                                        
-                                                            <ui:repeat value="#{masterRespuestasController.cargaRespuesta(mc.idComentario)}" var="mrl">
-                                                                <div style="word-wrap: break-word; width: 302px">
-                                                                    <p class="comment-info clearfix"> <img src="#{mrl.idUsuario.imagen_foto_perfil}" class="course-image" style='height: 30px; width: 30px; object-fit: cover;'></img> 
-                                                                    <h:commandLink value="#{mrl.idUsuario.username}" action="perfil.xhtml" actionListener="#{usuarioController.setId_usuario_amigo(mrl.idUsuario.idUsuario)}" /> <span> #{mrl.respuesta} </span></p>
-                                                                </div>
-                                                            </ui:repeat>
-                                                     
-                                                    </div>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                        <li>
-                                            <h:form>
-                                            <div id ="comment-rightResp" class="comment-right">
-                                                <p:inputText   a:placeholder="Responder..." value="#{masterRespuestasController.selected.respuesta}"  style="float:left; margin-left: 30px" /><br/>
-                                                <p:commandButton     actionListener="#{masterRespuestasController.crearRespuesta(mc.idComentario,usuarioController.id_user)}" value="Responder" />
-                                            </div>
-                                            </h:form>
-                                        </li>
-                                    </ul> 
-                                </li>
-                            </p:dataScroller>
-                            
-                                <li>
-                                    <h:form>
+                          
+                            <h:form>
+                      
                                     <div class="field-row" style="float:left;">
-                                        <h:inputText id="#{masterComentarioController.nombreForm(pu.idPublicacion,pu.publicacion)}"   a:placeholder="Comentar..." value="#{masterComentarioController.selected.comentario}" style="border-color: #198752; width: 200px; margin-left: 80px"/>
-                                        <p:commandButton     action="#{masterComentarioController.CrearComentario(usuarioController.id_user,pu.idPublicacion,1)}"   value="Comentar"  style="float:right ;margin-right:30px; " />
+                                        <h:inputText     a:placeholder="Comentar..." value="#{masterComentarioController.selected.comentario}" style="border-color: #198752; width: 200px; margin-left: 80px"/>
+                                        <p:commandButton id="actual"  actionListener="#{masterComentarioController.CrearComentario(pu.idPublicador,pu.idPublicacion,1)}"  value="Comentar"  style="float:right ;margin-right:30px; " />
                                         
                                     </div>
-                                    </h:form>
-                                </li>
+                         </h:form>
                             
                             
                             

@@ -46,4 +46,25 @@ public class CursoFacade extends AbstractFacade<Curso> {
         return q.getSingleResult().toString();
     }    
     
+    public List<Curso> cursosSubcategorias(int idSubcategoria)
+    {
+        EntityManager m2 = getEntityManager();
+        Query q=m2.createNamedQuery("Curso.subcategoria").setParameter("idSubCat", idSubcategoria);
+        
+        return q.getResultList();
+    }
+    
+    public List<Curso> cursosNombres(String nomCurso)
+    {
+        EntityManager m2 = getEntityManager();
+        Query q=m2.createNamedQuery("Curso.findByNomCurso").setParameter("nomCurso",nomCurso);
+        
+        
+        return q.getResultList();
+    }
+    
+    
+    
+    
+    
 }

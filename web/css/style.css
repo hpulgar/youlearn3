@@ -2036,6 +2036,7 @@ label span {
 /* 7.6 - Course Finder */
 .course-finder-full {
 	margin: 0 0 30px 0;
+        height: 250px;
 }
 
 .course-finder-full .course-finder-icon {
@@ -2051,7 +2052,7 @@ label span {
 	float: left;
 	width: 514px;
 	padding: 32px 28px;
-	max-height: 36px;
+	max-height: 100%;
 }
 
 .course-finder-full .course-finder-full-form .selector {
