@@ -41,6 +41,7 @@ public class CursoController implements Serializable {
     private int selectedItemIndex;
     private int idCurso;
     private int idCursoSeleccionado;
+    private int idSubcatSeleccionado;
    private String textoBusqueda;
    private String nombreCurso;
    
@@ -92,6 +93,15 @@ public class CursoController implements Serializable {
     public void setIdCursoSeleccionado(int idCursoSeleccionado) {
         this.idCursoSeleccionado = idCursoSeleccionado;
     }
+
+    public int getIdSubcatSeleccionado() {
+        return idSubcatSeleccionado;
+    }
+
+    public void setIdSubcatSeleccionado(int idSubcatSeleccionado) {
+        this.idSubcatSeleccionado = idSubcatSeleccionado;
+    }
+    
     
     
     public String submit()
@@ -416,11 +426,7 @@ public class CursoController implements Serializable {
         return results;
     }
          
-         public void handleSelect(SelectEvent event) {  
- String value = (String) event.getObject();
- System.out.println("selected "+value);
-
-}
+         
          
          public void clickCursoCompletado() throws IOException {
     // ...

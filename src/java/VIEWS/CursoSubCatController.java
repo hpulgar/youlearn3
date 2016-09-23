@@ -19,6 +19,7 @@ import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
 import java.util.*;
+import org.primefaces.event.SelectEvent;
 
 @Named("cursoSubCatController")
 @SessionScoped
@@ -233,23 +234,18 @@ public class CursoSubCatController implements Serializable {
     public List<CursoSubCat> listaSubCategorias(int id_categoria)
     {
         arCursoSubCat.clear();
-        arCursoSubCat2.clear();
         arCursoSubCat = ejbFacade.findAll();
         
-        for(int i=0;i<arCursoSubCat.size();i++)
-        {
-           if(arCursoSubCat.get(i).getIdCategoria().getIdCat() == id_categoria)
-            {
-                arCursoSubCat2.add(arCursoSubCat.get(i));
-            }
-        }
-         return arCursoSubCat2;
+        
+         return arCursoSubCat;
     }
     
         public List<CursoSubCat> listaSubCategoriasSinID()
     {
         arCursoSubCat.clear();
         arCursoSubCat = ejbFacade.findAll();
+        
+      
         
          return arCursoSubCat;
     }
@@ -267,14 +263,23 @@ public class CursoSubCatController implements Serializable {
     }
     
        
-               public void clickCursoSelect() throws IOException {
+               public void clickCursoSelect(String idcategoria) throws IOException {
+                System.out.println("******************************************");
+                   System.out.println("valor categoria->"+idcategoria);
+                    System.out.println("******************************************");
     
-    FacesContext.getCurrentInstance().getExternalContext().redirect("detalles_curso.xhtml");
+    FacesContext.getCurrentInstance().getExternalContext().redirect("cursos_listado.xhtml");
     FacesContext.getCurrentInstance().responseComplete();
 
     
      
  
+}
+               
+               public void handleSelect(SelectEvent event) {  
+ String value = (String) event.getObject();
+ System.out.println("selected "+value);
+
 }
     
     

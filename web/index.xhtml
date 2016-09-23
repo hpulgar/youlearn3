@@ -143,8 +143,10 @@
                   
                         <h:form>
                             <p:selectOneMenu>
-                                <f:selectItems  value="#{cursoSubCatController.listaSubCategoriasSinID()}" var="test" itemValue="#{test.idSubcat}" itemLabel="#{test.nomSubcat}"/>
-                                       <p:ajax event="change" listener="#{cursoSubCatController.clickCursoSelect()}"/>
+                                 <f:selectItem itemLabel="Seleccione una opcion" itemValue="" />
+                                 <f:selectItems  value="#{cursoSubCatController.listaSubCategoriasSinID()}" var="test" itemValue="#{test.idSubcat}" itemLabel="#{test.nomSubcat}" />
+                                <p:ajax event="change" listener="#{cursoSubCatController.clickCursoSelect(test.nomSubcat)}"/>
+                                <p:ajax event="itemSelect" listener="#{cursoSubCatController.handleSelect}"/>
                         </p:selectOneMenu>
                             
                            
@@ -160,7 +162,7 @@
                         
   <h:form id="formularioBusqueda" onreset="#{cursoController.submit()}">
                        <h:panelGrid columns="2" cellpadding="5">
-                            <p:autoComplete  itemValue="#{cursoController.textoBusqueda}" id="acMinLength" minQueryLength="1" value="#{cursoController.textoBusqueda}" completeMethod="#{cursoController.autoCompletado}" effect="fade">
+                            <p:autoComplete  a:placeholder="Escriba una busqueda" itemValue="#{cursoController.textoBusqueda}" id="acMinLength" minQueryLength="1" value="#{cursoController.textoBusqueda}" completeMethod="#{cursoController.autoCompletado}" effect="fade">
                                 <p:ajax event="blur" listener="#{cursoController.clickCursoCompletado()}"/>
                               
             <!-- <p:ajax event="itemSelect" listener="#/{cursoController.handleSelect}"/>-->
