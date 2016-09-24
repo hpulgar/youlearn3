@@ -71,50 +71,58 @@
 		<div class="main-content page-content">
 			
 			<!-- BEGIN .inner-content-wrapper -->
-			<div class="inner-content-wrapper">
-				<h:form
-                                    >
-                            
-                             <div class="course-finder-full clearfix">	
-                                <div class="course-finder-icon"></div>  
-                                <div class="course-finder-full-form">
-						
-						
-							
-                                                        <label for="categoria">Categoria del curso</label>
-                                                        <h:selectOneMenu value="#{cursoCategoriaController.id_curso_cat}">
-                                                            <f:selectItem itemValue="0" itemLabel="Seleccione una Categoria" noSelectionOption="true" /> 
-                                                                <p:ajax  update="subcategorias"/>
-                                                                <c:forEach items="#{cursoCategoriaController.cCats()}" var="c"> 
-                                                                    <f:selectItem itemValue="#{c.idCat}" itemLabel="#{c.nomCat}" />   
-                                                                </c:forEach>
-                                                        </h:selectOneMenu>
-                                      
-                                            
-                                                        <h:inputText  value="#{cursoController.nombreCurso}" required="false" />
-                                                        <p:commandButton  value="Search" update="ListaCursos"  process="@all" />
+			
 				
-				  
-                                                        <label for="subcategoria">Subcategoria del curso</label>
-                                                        <h:selectOneMenu value="#{cursoSubCatController.id_cSub_cat}" id="subcategorias" >
-                                                            <f:selectItem itemValue="0" itemLabel="Seleccione una Categoria"  noSelectionOption="true"/> 
-                                                                <c:forEach items="#{cursoSubCatController.listaSubCategorias(cursoCategoriaController.id_curso_cat)}" var="fsc"  >
-                                                                    <f:selectItem itemValue="#{fsc.idSubcat}" itemLabel="#{fsc.nomSubcat}" />
-                                                                </c:forEach>
-                                                        </h:selectOneMenu>	
+                            
+                           
+                              
+                                        
+                                    
                                   
-				
-							
+                                
+                                        
+                                                    <h:panelGroup id="formulario_busqueda" >
+                                                        <h:form style="margin-left: 200px; margin-top: 20px">
+                                                                <label for="Buscar Por nombre">Subcategoria del curso</label>
+                                                                <h:inputText  value="#{cursoController.nombreCurso}" required="false" />
+                                                                <p:commandButton  value="Buscar" update="ListaCursos"  process="@all" />
+                                                                
+                                                                
+                                                                <label for="categoria">Categoria del curso</label>
+                                                                <h:selectOneMenu value="#{cursoCategoriaController.id_curso_cat}">
+                                                                    <f:selectItem itemValue="0" itemLabel="Seleccione una Categoria" noSelectionOption="true" /> 
+                                                                        <p:ajax  update="subcategorias"/>
+                                                                        <c:forEach items="#{cursoCategoriaController.cCats()}" var="c"> 
+                                                                            <f:selectItem itemValue="#{c.idCat}" itemLabel="#{c.nomCat}" />   
+                                                                        </c:forEach>
+                                                                </h:selectOneMenu>
 
-                                             
-						
-					
-                             
-                                        </div>
-                                </div>
+
+                                                               
+
+                                                                <label for="subcategoria">Subcategoria del curso</label>
+                                                                <h:selectOneMenu value="#{cursoSubCatController.id_cSub_cat}" id="subcategorias" >
+                                                                    <f:selectItem itemValue="0" itemLabel="Seleccione una Categoria"  noSelectionOption="true"/> 
+                                                                        <c:forEach items="#{cursoSubCatController.listaSubCategorias(cursoCategoriaController.id_curso_cat)}" var="fsc"  >
+                                                                            <f:selectItem itemValue="#{fsc.idSubcat}" itemLabel="#{fsc.nomSubcat}" />
+                                                                            
+                                                                        </c:forEach>
+                                                                    <p:ajax update="ListaCursos" />
+                                                                </h:selectOneMenu>	
+
+                                                               
+                                                                <p:commandButton  value="Limpiar" update="ListaCursos"  process="@all" action="#{cursoController.setNombreCurso(null)}" actionListener="#{cursoSubCatController.setId_cSub_cat(0)}">
+                                                                    <p:ajax update="formulario_busqueda"/>
+                                                                </p:commandButton>
+                                                        </h:form>
+                                                    </h:panelGroup> 
+                                        
+                                     
+                                
                             
                             
-                                </h:form>
+                                
+                            <br/>
 				<ul class="event-list-full">
                                     <h:panelGroup id="ListaCursos">
                                         <c:forEach items="#{cursoController.listaCursos(cursoSubCatController.id_cSub_cat, cursoController.nombreCurso)}" var="lc"  >
@@ -133,7 +141,7 @@
 								
                                                             <h:form id="cursoForm">
                                                                 <h4> <h:commandLink actionListener="#{cursoController.setIdCurso(lc.idCurso)}" action="#{inscripcionCursoController.cargarCurso(lc.idCurso,usuarioController.id_user)}"  value="#{lc.nomCurso}" />
-&raquo; </h4>
+                                                                &raquo; </h4>
                                                                 <p><strong>Seguidores: </strong>#{inscripcionCursoController.seguidores(lc.idCurso)}</p>
                                                                 <p><strong>Suscripciones: </strong>#{inscripcionCursoController.suscriptores(lc.idCurso)}</p>
                                                                 <p><strong>Categoria: </strong>#{lc.idCat.idCategoria.nomCat}</p>
@@ -156,7 +164,7 @@
 				</div>
 			
 			<!-- END .inner-content-wrapper -->
-			</div>
+			
 			
 		<!-- END .main-content -->
 		</div>

@@ -142,7 +142,7 @@
 
                   
                         <h:form>
-                            <p:selectOneMenu>
+                            <p:selectOneMenu  value="#{cursoSubCatController.id_cSub_cat}"  >
                                  <f:selectItem itemLabel="Seleccione una opcion" itemValue="" />
                                  <f:selectItems  value="#{cursoSubCatController.listaSubCategoriasSinID()}" var="test" itemValue="#{test.idSubcat}" itemLabel="#{test.nomSubcat}" />
                                 <p:ajax event="change" listener="#{cursoSubCatController.clickCursoSelect(test.nomSubcat)}"/>

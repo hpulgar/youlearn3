@@ -6,9 +6,11 @@
 package MODELS;
 
 import ENTITIES.CursoSubCat;
+import java.util.*;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -28,5 +30,17 @@ public class CursoSubCatFacade extends AbstractFacade<CursoSubCat> {
     public CursoSubCatFacade() {
         super(CursoSubCat.class);
     }
+    
+    
+    
+    public List<CursoSubCat> Subcategorias(int idCategoria)
+    {
+        EntityManager m2 = getEntityManager();
+        Query q=m2.createNamedQuery("CursoSubCat.findByidCat").setParameter("idCat",idCategoria);
+        
+        
+        return q.getResultList();
+    }
+    
     
 }

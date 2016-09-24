@@ -231,10 +231,11 @@ public class CursoSubCatController implements Serializable {
     }
 
     
+    
     public List<CursoSubCat> listaSubCategorias(int id_categoria)
     {
         arCursoSubCat.clear();
-        arCursoSubCat = ejbFacade.findAll();
+        arCursoSubCat = ejbFacade.Subcategorias(id_categoria);
         
         
          return arCursoSubCat;

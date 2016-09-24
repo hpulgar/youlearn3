@@ -2048,6 +2048,16 @@ label span {
 	float: left;
 }
 
+.course-finder-icon {
+	background: url(../images/course_search.png);
+	background-repeat: no-repeat;
+	background-position: center;
+	width: 100%;
+	height: 100px;
+	float: left;
+        background-color: #209b60;
+}
+
 .course-finder-full .course-finder-full-form {
 	float: left;
 	width: 514px;
