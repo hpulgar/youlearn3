@@ -282,6 +282,9 @@ public class CursoSubCatController implements Serializable {
  System.out.println("selected "+value);
 
 }
+
+               
+           
     
     
     @FacesConverter(forClass = CursoSubCat.class)

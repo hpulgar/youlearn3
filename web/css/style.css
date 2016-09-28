@@ -797,6 +797,7 @@ ol ol {
 }
 
 /* 5.2 - Forms */
+
 select, input[type="text"], textarea {
 	border: #e3e3e3 1px solid;
 	background: #fff;
@@ -1307,7 +1308,15 @@ div.selector.disabled span, div.selector.disabled.active span {
 	bottom: 0;
 	right: 0;		
 }
-
+.sidebar-right2 {
+	background: url(../images/dot_border_v.png) repeat-y top left;
+	width: 25%;
+	float: left;
+	position: relative;
+	top: 0;
+	bottom: 0;
+	right: 0;		
+}
 .center-content {
 	width: 46%;
 	float: left;
@@ -1330,6 +1339,12 @@ div.selector.disabled span, div.selector.disabled.active span {
 
 .perfil-content {
 	width: 100%;
+	float: left;
+	position: relative;
+	min-height: 10px;
+}
+.perfil-content2 {
+	width: 75%;
 	float: left;
 	position: relative;
 	min-height: 10px;

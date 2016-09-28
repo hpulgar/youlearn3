@@ -63,7 +63,13 @@ public class CursoController implements Serializable {
         this.nombreCurso = nombreCurso;
     }
     
+public void resetValues()
+{
 
+    setNombreCurso(null);
+  
+
+}
     
 
     public CursoController() {
@@ -102,7 +108,15 @@ public class CursoController implements Serializable {
         this.idSubcatSeleccionado = idSubcatSeleccionado;
     }
     
-    
+        public String submitBusqueda()
+{
+   
+    // blank out the value of the name property
+    textoBusqueda = null;
+    idCursoSeleccionado = 0;
+    // send the user back to the same page.
+    return null;
+}
     
     public String submit()
 {
