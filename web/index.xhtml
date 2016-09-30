@@ -141,18 +141,33 @@
                         <p>Seleccione un criterio de busqueda</p>
 
                   
+                      
                         <h:form>
-                            <p:selectOneMenu  value="#{cursoSubCatController.id_cSub_cat}"  >
-                                 <f:selectItem itemLabel="Seleccione una opcion" itemValue="" />
-                                 <f:selectItems  value="#{cursoSubCatController.listaSubCategoriasSinID()}" var="test" itemValue="#{test.idSubcat}" itemLabel="#{test.nomSubcat}" />
-                                <p:ajax event="change" listener="#{cursoSubCatController.clickCursoSelect(test.nomSubcat)}"/>
-                                <p:ajax event="itemSelect" listener="#{cursoSubCatController.handleSelect}"/>
-                        </p:selectOneMenu>
-                            
+                                 <label for="categoria">Categoria del curso</label>
+                                                                <h:selectOneMenu value="#{cursoCategoriaController.id_curso_cat}">
+                                                                    <f:selectItem itemValue="0" itemLabel="Seleccione una Categoria" noSelectionOption="true" /> 
+                                                                        <p:ajax  update="subcategorias"/>
+                                                                        <c:forEach items="#{cursoCategoriaController.cCats()}" var="c"> 
+                                                                            <f:selectItem itemValue="#{c.idCat}" itemLabel="#{c.nomCat}" />   
+                                                                        </c:forEach>
+                                                                </h:selectOneMenu>
+
+                                                                  
+                                                                <label for="subcategoria">Subcategoria del curso</label>
+                                                                <h:selectOneMenu value="#{cursoSubCatController.id_cSub_cat}" id="subcategorias">
+                                                                    <f:selectItem itemValue="0" itemLabel="Seleccione una Categoria"  noSelectionOption="true"/> 
+                                                                    <p:ajax event="change" listener="#{cursoSubCatController.clickCursoSelect(cursoSubCatController.id_cSub_cat)}"/>        
+                                                                        <c:forEach items="#{cursoSubCatController.listaSubCategorias(cursoCategoriaController.id_curso_cat)}" var="fsc"  >
+                                                                            <f:selectItem itemValue="#{fsc.idSubcat}" itemLabel="#{fsc.nomSubcat}" />
+                                                                           
+                                                                        </c:forEach>
+                                                                  
+                                                                </h:selectOneMenu>	
                            
                             
                         </h:form>
-                           
+                               
+                     
                           <!--<select name="keyword-type" class="course-finder-form">
                                         <ui:repeat value="#/{cursoSubCatController.listaSubCategoriasSinID()}" var="u">
                                             <option value="">#/{u.nomSubcat}</option>

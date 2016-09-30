@@ -14,8 +14,15 @@
         
                                                     
        
+        
+       
+         
+        
+        
         <h:panelGroup id="ListaCursos" style="color: white">
-                                        <c:forEach items="#{cursoController.listaCursos(cursoSubCatController.id_cSub_cat, cursoController.nombreCurso)}" var="lc"  >
+            <h:outputText style="color: black" value="No se encontraron resultados" rendered="#{cursoController.mensajeVacio(cursoSubCatController.id_cSub_cat)}" />
+                                        
+                                    <c:forEach items="#{cursoController.listaCursos(cursoSubCatController.id_cSub_cat, cursoController.nombreCurso)}" var="lc"  >
 					<li class="event-wrapper event-full clearfix">
 					
 						<div class="event-date">
