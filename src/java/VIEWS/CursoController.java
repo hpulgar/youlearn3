@@ -306,7 +306,19 @@ public void resetValues()
         //INTRODUCCION
         //IMAGEN
         
-        
+        public boolean mensajeVacio(int idsubcat)
+        {
+            if(idsubcat !=0)
+            {
+                arCurso.clear();
+                arCurso= ejbFacade.cursosSubcategorias(idsubcat);
+                return arCurso.isEmpty();
+            }else
+            {
+                return false;
+                
+            }
+        }
         
         public List<Curso> listaCursos(int idSubcat,String nombreCurso)
         {
@@ -318,19 +330,24 @@ public void resetValues()
                     
                     arCurso.clear();
                     arCurso = ejbFacade.cursosSubcategorias(idSubcat);
-                }else if(!nombreCurso.isEmpty()  && idSubcat == 0)
-                {
-                    System.out.println("ENTRO AL IF Q DEVUELVE SEGUN EL NOMBRE"+nombreCurso);
-                    arCurso.clear();
-                    arCurso= ejbFacade.cursosNombres(nombreCurso);
-                }else
-                {
-                   System.out.println("ENTRO AL IF Q DEVUELVE TODO COTITO");
-                    this.arCurso.clear();
-                    arCurso = ejbFacade.findAll();
-            
                     
                 }
+                else if(!nombreCurso.isEmpty()  && idSubcat == 0)
+                                {
+                                    System.out.println("ENTRO AL IF Q DEVUELVE SEGUN EL NOMBRE"+nombreCurso);
+                                    arCurso.clear();
+                                    arCurso= ejbFacade.cursosNombres(nombreCurso);
+                                }
+                    
+              
+                else
+                                    {
+                                       System.out.println("ENTRO AL IF Q DEVUELVE TODO COTITO");
+                                        this.arCurso.clear();
+                                        arCurso = ejbFacade.findAll();
+
+
+                                    }
             
             return arCurso;
         }

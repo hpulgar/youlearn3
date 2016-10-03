@@ -3,26 +3,55 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
+     xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:p="http://primefaces.org/ui">
- <h:head>
+      
+      <h:head>
 
-	
+
+	<!--Meta Tags-->
+        <meta name="viewport" content="width=device-width; initial-scale=1.0"></meta>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		
 	<!--Title-->
-	<title>Youlearn - Foro</title>
+	<title>Youlearn - Perfil</title>
 
-    <ui:include src="utilidades.xhtml" />
-	
-	
+
+	<link rel="stylesheet" href="css/style.css" type="text/css"  media="all" />
+	<link rel="stylesheet" href="css/colour.css" type="text/css"  media="all" />
+	<link rel="stylesheet" href="css/flexslider.css" type="text/css"  media="all" />
+	<link rel="stylesheet" href="css/superfish.css" type="text/css"  media="all" />
+	<link rel="stylesheet" href="css/responsive.css" type="text/css"  media="all" />
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic' rel='stylesheet' type='text/css'/>
+	<link href='http://fonts.googleapis.com/css?family=Merriweather:400,300,700,900' rel='stylesheet' type='text/css'/>
+
+	<!--Favicon-->
+	<link rel="shortcut icon" href="favicon.html" type="image/x-icon" />
+
+	<!--JavaScript-->
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
+	<script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js'></script>
+	<script type="text/javascript" src="js/superfish.js"></script>
+	<script type="text/javascript" src="js/jquery.flexslider-min.js"></script>
+	<script type="text/javascript" src="js/tinynav.min.js"></script>
+	<script type="text/javascript" src="js/jquery.uniform.js"></script>
+	<script type="text/javascript" src="js/scripts.js"></script>
+	   
+
+       
+          
+
 <!-- END head -->
    </h:head>
 
 <!-- BEGIN body -->
-<h:body id="top" class="loading">
+ <h:body id="top" >
+     
 
 	<!-- BEGIN #header-wrapper -->
-	 <div id="header" >
+	<div id="header" >
                         
                   <ui:include src="header.xhtml" />
         </div>
@@ -31,16 +60,10 @@
 	<div class="page-header clearfix">
 		
 		<div class="page-header-inner clearfix">
-		
-		<div class="page-title">	
-			<h2>Cursos</h2>
-			<div class="page-title-block"></div>
-		</div>
-		
-		<div class="breadcrumbs">
-			<p><a href="index.html">Home</a> &#187; Cursos</p>
-		</div>
-		
+                    <div class="page-title">	
+                            <h2>Cursos</h2>
+                            <div class="page-title-block"></div>
+                    </div>
 		</div>
 		
 	<!-- END .page-header -->
@@ -50,26 +73,66 @@
 	<div class="content-wrapper page-content-wrapper clearfix">
 		
 		<!-- BEGIN .main-content -->
-		<div class="main-content page-content">
+		<div class="perfil-content2 page-content">
 			
 			<!-- BEGIN .inner-content-wrapper -->
-			
+			<div class="inner-content-wrapper">
 				
-                            
-                           
-                              
-                                        
+				<!-- BEGIN .blog-entry -->
+				<div class="blog-entry clearfix">
                                     
-                                  
-                                
-                        <div class="">
-                                                    <h:panelGroup id="formulario_busqueda" >
-                                                        <h:form style="margin-top: 20px">
-                                                            <div style="text-align: left">
+                                        
+				
+                                    <ui:include src="cursos_listado2.xhtml"/>
+                                    
+                                            
+					
+					
+					
+				<!-- END .blog-entry -->
+				</div>
+			
+			<!-- END .inner-content-wrapper -->
+			</div>
+			
+		<!-- END .main-content -->
+		</div>
+		
+                <div class="sidebar-right2 page-content">
+			
+		
+			
+			<!-- BEGIN .content-block -->
+			<div class="content-block">
+				
+				<h3 class="block-title"><a href="events.html">Filtro &raquo;</a></h3>
+				
+				<ul class="event-list">
+					<!-- BEGIN .event-wrapper -->
+					<li class="event-wrapper clearfix">
+					
+						<h:panelGroup id="formulario_busqueda" >
+                                                        
+                                                    
+                                                      <h:form id="formularioBusqueda" onreset="#{cursoController.submit()}">
+                       <h:panelGrid style="left: 4%; width: 100%; height: 100%;position: absolute; display: table" columns="2" cellpadding="5">
+                            <p:autoComplete  a:placeholder="Escriba una busqueda" itemValue="#{cursoController.textoBusqueda}" id="acMinLength" minQueryLength="1" value="#{cursoController.textoBusqueda}" completeMethod="#{cursoController.autoCompletado}" effect="fade">
+                                <p:ajax event="blur" listener="#{cursoController.clickCursoCompletado()}"/>
+                              
+            <!-- <p:ajax event="itemSelect" listener="#/{cursoController.handleSelect}"/>-->
+                            </p:autoComplete>
+                       </h:panelGrid>
+                 
+                            
+                 </h:form>
+                                                    
+                                                    
+                                                    
+                                                    <h:form style="margin-top: 20px">
+                                                          
                                                                 <label for="Buscar Por nombre">Subcategoria del curso</label>
-                                                                <h:inputText  value="#{cursoController.nombreCurso}" required="false" />
-                                                                <p:commandButton  value="Buscar" update="ListaCursos"  process="@all" />
-                                                            </div>
+                                                                <h:inputText  id="campo" value="#{cursoController.nombreCurso}" required="false" />
+                                                               
                                                                 
                                                                 
                                                                 <label for="categoria">Categoria del curso</label>
@@ -81,7 +144,7 @@
                                                                         </c:forEach>
                                                                 </h:selectOneMenu>
 
-                                                                    <div style="text-align:right">
+                                                                  
                                                                 <label for="subcategoria">Subcategoria del curso</label>
                                                                 <h:selectOneMenu value="#{cursoSubCatController.id_cSub_cat}" id="subcategorias" >
                                                                     <f:selectItem itemValue="0" itemLabel="Seleccione una Categoria"  noSelectionOption="true"/> 
@@ -93,203 +156,41 @@
                                                                 </h:selectOneMenu>	
 
                                                                
+                                                                 <p:commandButton  value="Buscar" update="ListaCursos"  process="@all" />
+                                                                 <br/><br/>
+                                                           
                                                                 <p:commandButton  value="Limpiar" update="ListaCursos"  process="@all" action="#{cursoController.setNombreCurso(null)}" actionListener="#{cursoSubCatController.setId_cSub_cat(0)}">
-                                                                    <p:ajax update="formulario_busqueda"/>
+                                                                       <p:ajax update="campo" resetValues="true" />
                                                                 </p:commandButton>
-                                                                    </div>
+                                                                    
                                                         </h:form>
                                                     </h:panelGroup> 
-                        </div>
-                                     
-                                
-                            
-                            
-                                
-                            <br/>
-				<ul class="event-list-full">
-                                    <h:panelGroup id="ListaCursos">
-                                        <c:forEach items="#{cursoController.listaCursos(cursoSubCatController.id_cSub_cat, cursoController.nombreCurso)}" var="lc"  >
-					<li class="event-wrapper event-full clearfix">
-					
-						<div class="event-date">
-                                                    <div class="event-m">#{lc.fecha.toLocaleString().subSequence(3,5)}</div>
-                                                    <div class="event-m">#{lc.fecha.toGMTString().substring(2,6)}</div>
-                                                    <div class="event-d">#{lc.fecha.toGMTString().subSequence(0,2)}</div>	
-                                                    <div class="event-m">#{lc.fecha.toGMTString().subSequence(6,11)}</div>
-                                                    
-                                                </div>
-				
-						<div class="event-info">	
-							<div class="event-meta">
-								
-                                                            <h:form id="cursoForm">
-                                                                <h4> <h:commandLink actionListener="#{cursoController.setIdCurso(lc.idCurso)}" action="#{inscripcionCursoController.cargarCurso(lc.idCurso,usuarioController.id_user)}"  value="#{lc.nomCurso}" />
-                                                                &raquo; </h4>
-                                                                <p><strong>Seguidores: </strong>#{inscripcionCursoController.seguidores(lc.idCurso)}</p>
-                                                                <p><strong>Suscripciones: </strong>#{inscripcionCursoController.suscriptores(lc.idCurso)}</p>
-                                                                <p><strong>Categoria: </strong>#{lc.idCat.idCategoria.nomCat}</p>
-                                                                <p><strong>SubCategoria: </strong>#{lc.idCat.nomSubcat}</p>
-                                                            </h:form>
-                                                        </div>
-						</div>
 				
 					<!-- END .event-wrapper -->
 					</li>
-                                        </c:forEach>
-				</h:panelGroup>
+				
 				</ul>
+				
+			<!-- END .content-block -->	
+			</div>
 			
-				<div class="pagination-wrapper" style="margin:10px 0 50px 0;">
-					<a class="selected" href="#">1</a>
-					<a href="#">2</a>
-					<a href="#">3</a>
-					<a href="#">></a>
-				</div>
-			
-			<!-- END .inner-content-wrapper -->
-			
-			
-		<!-- END .main-content -->
-		</div>
 		
-		<!-- BEGIN .sidebar-right -->
-		<div class="sidebar-right page-content">
-			
-			<!-- BEGIN .content-block -->
-			<div class="content-block">
-				
-				<h3 class="block-title">Quick Links</h3>
-				
-				<ul>
-					<li><a href="#">Students</a></li>
-					<li><a href="#">Teachers</a></li>
-					<li><a href="#">Alumni</a></li>
-					<li><a href="#">Parents</a></li>
-				</ul>
-				
-			<!-- END .content-block -->	
-			</div>
-			
-			<!-- BEGIN .content-block -->
-			<div class="content-block">
-				
-				<h3 class="block-title"><a href="events.html">Events &raquo;</a></h3>
-				
-				<ul class="event-list">
-				
-					<!-- BEGIN .event-wrapper -->
-					<li class="event-wrapper clearfix">
-					
-						<div class="event-date">
-							<div class="event-m">Feb</div>
-							<div class="event-d">08</div>	
-						</div>
-				
-						<div class="event-info">
-							<h4><a href="events-single.html">In molestie congu enim sit amet</a></h4>
-							<p>9:00am to 1:00pm</p>
-						</div>
-				
-					<!-- END .event-wrapper -->
-					</li>
-				
-					<!-- BEGIN .event-wrapper -->
-					<li class="event-wrapper clearfix">
-					
-						<div class="event-date">
-							<div class="event-m">Feb</div>
-							<div class="event-d">08</div>	
-						</div>
-				
-						<div class="event-info">
-							<h4><a href="events-single.html">In molestie congu enim sit amet</a></h4>
-							<p>9:00am to 1:00pm</p>
-						</div>
-				
-					<!-- END .event-wrapper -->
-					</li>
-					
-					<!-- BEGIN .event-wrapper -->
-					<li class="event-wrapper clearfix">
-					
-						<div class="event-date">
-							<div class="event-m">Feb</div>
-							<div class="event-d">08</div>	
-						</div>
-				
-						<div class="event-info">
-							<h4><a href="events-single.html">In molestie congu enim sit amet</a></h4>
-							<p>9:00am to 1:00pm</p>
-						</div>
-				
-					<!-- END .event-wrapper -->
-					</li>
-				
-				</ul>
-				
-			<!-- END .content-block -->	
-			</div>
-			
-			<!-- BEGIN .content-block -->
-			<div class="content-block">
-					
-				<h3 class="block-title"><a href="#">Sponsors &raquo;</a></h3>
-				
-					<!-- BEGIN .slider-blocks -->
-					<div class="slider-blocks clearfix">
-
-						<!-- BEGIN .slides -->
-						<ul class="slides slide-loader2">
-
-							<!-- BEGIN .slides li -->
-							<li>
-								
-								<div class="center-images">
-									<img src="images/sponsor_01.png" alt="" class="content-img" />
-									<img src="images/sponsor_02.png" alt="" class="content-img" />
-									<img src="images/sponsor_03.png" alt="" class="content-img" />
-									<img src="images/sponsor_04.png" alt="" class="content-img" />
-								</div>
-								
-							<!-- END .slides li -->
-							</li>
-
-							<!-- BEGIN .slides li -->
-							<li>
-
-								<div class="center-images">
-									<img src="images/sponsor_01.png" alt="" class="content-img" />
-									<img src="images/sponsor_02.png" alt="" class="content-img" />
-									<img src="images/sponsor_03.png" alt="" class="content-img" />
-									<img src="images/sponsor_04.png" alt="" class="content-img" />
-								</div>
-
-							<!-- END .slides li -->
-							</li>
-
-						<!-- END .slides -->
-						</ul>
-
-					<!-- END .slider-blocks -->
-					</div>
-				
-			<!-- END .content-block -->
-			</div>
+		
 		
 		<!-- END .sidebar-right -->
 		</div>
 	
 	<!-- END .content-wrapper -->
 	</div>
-	
+
 	<!-- BEGIN #footer-wrapper -->
 	<div id="footer-wrapper">
 		
 		<!-- BEGIN #footer -->
 		<div id="footer">
 			
-			<ul class="columns-4 clearfix">
-				
+			<ul class="columns-4 clearfix">	
+			
 				<li class="col">
 					<div class="widget-title clearfix">
 						<h4>About Us</h4>
@@ -327,8 +228,6 @@
 						<li>Twitter feed loading</li>
 					</ul>
 					
-					
-					
 				</li>
 				
 				<li class="col">
@@ -360,5 +259,7 @@
 	</div>
 
 <!-- END body -->
+ 
+
 </h:body>
 </html>
