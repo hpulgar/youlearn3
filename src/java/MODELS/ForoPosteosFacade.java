@@ -31,11 +31,35 @@ public class ForoPosteosFacade extends AbstractFacade<ForoPosteos> {
         super(ForoPosteos.class);
     }
     
-     public List<ForoPosteos> verP(int idPost)//Meotod que retorna posteo
+    public List<ForoPosteos> verP(int idPost)//Meotod que retorna posteo
     {
          EntityManager m2 =  getEntityManager();
         Query q= m2.createNamedQuery("ForoPosteos.verPost").setParameter("idPost", idPost);
         return q.getResultList();
-}
+    }
+     
+    public List<ForoPosteos> nombreForo(String titulo)
+    {
+         EntityManager m2 =  getEntityManager();
+        Query q= m2.createNamedQuery("ForoPosteos.nombreForo").setParameter("titulo",titulo);
+        return q.getResultList();
+    }
     
+    public List<ForoPosteos> foroSubcategoria(int idSubCategoria)
+    {
+         EntityManager m2 =  getEntityManager();
+        Query q= m2.createNamedQuery("ForoPosteos.subCategoriaForo").setParameter("idSubcategoria",  idSubCategoria);
+        return q.getResultList();
+    }
+    
+      public List<ForoPosteos> nombreYsubcategoria(String titulo,int idSubcategoria)
+    {
+         EntityManager m2 =  getEntityManager();
+        Query q= m2.createNamedQuery("ForoPosteos.nombreSubcategoriaForo").setParameter("titulo",titulo).setParameter("idSubcategoria", idSubcategoria);
+        return q.getResultList();
+    }
+       
+       
+       
+       
 }
