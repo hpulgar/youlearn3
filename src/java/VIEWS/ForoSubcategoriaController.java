@@ -147,6 +147,16 @@ public class ForoSubcategoriaController implements Serializable {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
         }
     }
+    
+      public String submit()
+{
+   
+    // blank out the value of the name property
+    id_subCat = 0;
+
+    // send the user back to the same page.
+    return null;
+}
 
     private void updateCurrentItem() {
         int count = getFacade().count();

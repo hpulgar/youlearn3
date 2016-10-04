@@ -35,7 +35,9 @@
 	
 <!-- END head -->
    </h:head>
-    
+    	<f:event listener="#{foroPosteosController.setTit(null)}" type="preRenderView" />
+       <f:event listener="#{foroSubcategoriaController.setId_subCat(0)}" type="preRenderView" />
+       
     <h:body id="top" class="loading">
   <!-- BEGIN #header-wrapper -->
 	<!-- BEGIN #header-wrapper -->
@@ -55,7 +57,7 @@
 		</div>
 		
 		<div class="breadcrumbs">
-			<p><a href="index-2.html">Home</a> &#187; Mi cuenta</p>
+			<p><a href="index.xhtml">Home</a> &#187; Foro</p>
 		</div>
 		
 		</div>
@@ -73,61 +75,13 @@
 			
 			<!-- BEGIN .inner-content-wrapper -->
 			<div class="inner-content-wrapper">
-			 <h:form>
+			
                                     <h:commandButton action="foro_crear.xhtml" value="Crear Foro" style="float: right"/>
                                 	
                             <h3 class="block-title">Crear foro</h3>
-                               
-                                <div class="course-finder-full clearfix">	
-                                <div class="course-finder-icon"></div>  
-                                <div class="course-finder-full-form">
-                                   
-                                    <h:panelGroup id="formulario_busqueda">
-                                    
-                                    <div class="field-row" id="algo">
-					<label for="categoria">Categoria</label>
-                                        <h:selectOneMenu value="#{foroCategoriaController.id_cat}" >
-                                                
-                                            <f:selectItem itemValue="0" itemLabel="Seleccione una Categoria" noSelectionOption="true" /> 
-                                            <p:ajax  update="subcategorias"/>
-                                                <c:forEach items="#{foroCategoriaController.listaCategorias()}" var="c"> 
-                                                    <f:selectItem itemValue="#{c.idCategoria}" itemLabel="#{c.titulo}" />  
-                                                    
-                                                </c:forEach>
-                                             </h:selectOneMenu>
-                                    </div>
-                                    
-                                    <div class="field-row">
-				  <label for="subcategoria">Subcategoria</label>
-                                  
-                                
-                                  <h:selectOneMenu value="#{foroSubcategoriaController.id_subCat}" id="subcategorias" >
-                                      <f:selectItem itemValue="0" itemLabel="Seleccione una Categoria"  noSelectionOption="true"/> 
-                                        <c:forEach items="#{foroSubcategoriaController.listaCategorias(foroCategoriaController.id_cat)}" var="fsc"  >
-                                        <f:selectItem itemValue="#{fsc.idSubcategoria}" itemLabel="#{fsc.titulo}" />                                        
-                                        </c:forEach>
-                                      <p:ajax update="foroListado"/>
-                                     </h:selectOneMenu>	
-                                  
-				</div>
-						
-                                        
-                                        
-                                        <label for="Buscar Por nombre">Subcategoria del curso</label>
-                                        <h:inputText  value="#{foroPosteosController.tit}" required="false" />
-                                        <p:commandButton  value="Buscar" update="foroListado"  process="@all" />
-                                        
-                                        <p:commandButton  value="Limpiar" update="foroListado"  process="@all" action="#{foroPosteosController.setTit(null)}" actionListener="#{foroSubcategoriaController.setId_subCat(0)}">
-                                            <p:ajax update="formulario_busqueda"/>
-                                        </p:commandButton>
-                                                                
-                                                                
-					
-                                    </h:panelGroup>
                              
-                                        </div>
-                                </div>
 				<h:panelGroup id="foroListado">
+                                    <h:form>
                                 <table style="width:100%;">
 					<thead>
 						<tr>
@@ -168,6 +122,7 @@
 						
 					</tbody>
 				</table>
+                                        </h:form>
 				</h:panelGroup>
 				<div class="pagination-wrapper" style="margin: 20px 0 50px 0;">
 					<a class="selected" href="#">1</a>
@@ -180,7 +135,7 @@
 				
 				
 				<div class="clearboth"></div>
-			</h:form>
+			
 			<!-- END .inner-content-wrapper -->
 			</div>
 			
@@ -199,6 +154,67 @@
 					<li><a href="perfil.xhtml">Mi perfil</a></li>
 					<li><a href="#">Mis mensajes</a></li>
 					<li><a href="#">Dashboard</a></li>
+				
+				</ul>
+				
+			<!-- END .content-block -->	
+			</div>
+                        
+                        <!-- BEGIN .content-block -->
+			<div class="content-block">
+				
+				<h3 class="block-title"><a href="events.html">Filtro &raquo;</a></h3>
+				
+				<ul class="event-list">
+					<!-- BEGIN .event-wrapper -->
+					<li class="event-wrapper clearfix">
+					
+						   <h:panelGroup id="formulario_busqueda">
+                                                       <h:form onreset="#{foroSubcategoriaController.submit()}" >
+                                    
+                                    <div class="field-row" id="algo">
+					<label for="categoria">Categoria</label>
+                                        <h:selectOneMenu value="#{foroCategoriaController.id_cat}"  >
+                                                
+                                            <f:selectItem itemValue="0" itemLabel="Seleccione una Categoria" noSelectionOption="true" /> 
+                                            <p:ajax  update="subcategorias"/>
+                                                <c:forEach items="#{foroCategoriaController.listaCategorias()}" var="c"> 
+                                                    <f:selectItem itemValue="#{c.idCategoria}" itemLabel="#{c.titulo}" />  
+                                                    
+                                                </c:forEach>
+                                             </h:selectOneMenu>
+                                    </div>
+                                    
+                                    <div class="field-row">
+				  <label for="subcategoria">Subcategoria</label>
+                                  
+                                
+                                  <h:selectOneMenu value="#{foroSubcategoriaController.id_subCat}" id="subcategorias" >
+                                      <f:selectItem itemValue="0" itemLabel="Seleccione una Categoria"  noSelectionOption="true"/> 
+                                        <c:forEach items="#{foroSubcategoriaController.listaCategorias(foroCategoriaController.id_cat)}" var="fsc"  >
+                                        <f:selectItem itemValue="#{fsc.idSubcategoria}" itemLabel="#{fsc.titulo}" />                                        
+                                        </c:forEach>
+                                      <p:ajax update="foroListado"/>
+                                     </h:selectOneMenu>	
+                                  
+				</div>
+						
+                                        
+                                        
+                                        <label for="Buscar Por nombre">Subcategoria del curso</label>
+                                        <h:inputText  value="#{foroPosteosController.tit}" required="false" />
+                                        <p:commandButton  value="Buscar" update="foroListado"  process="@all" />
+                                        
+                                        <p:commandButton  value="Limpiar" update="foroListado"  process="@all" action="#{foroPosteosController.setTit(null)}" actionListener="#{foroSubcategoriaController.setId_subCat(0)}">
+                                            <p:ajax update="formulario_busqueda"/>
+                                        </p:commandButton>
+                                                                
+                                                                
+					</h:form>
+                                    </h:panelGroup>
+				
+					<!-- END .event-wrapper -->
+					</li>
 				
 				</ul>
 				

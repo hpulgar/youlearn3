@@ -114,7 +114,7 @@
 						<h:panelGroup id="formulario_busqueda" >
                                                         
                                                     
-                                                      <h:form id="formularioBusqueda" onreset="#{cursoController.submit()}">
+                    <h:form id="formularioBusqueda" onreset="#{cursoController.submit()}">
                        <h:panelGrid style="left: 4%; width: 100%; height: 100%;position: absolute; display: table" columns="2" cellpadding="5">
                             <p:autoComplete  a:placeholder="Escriba una busqueda" itemValue="#{cursoController.textoBusqueda}" id="acMinLength" minQueryLength="1" value="#{cursoController.textoBusqueda}" completeMethod="#{cursoController.autoCompletado}" effect="fade">
                                 <p:ajax event="blur" listener="#{cursoController.clickCursoCompletado()}"/>
@@ -124,7 +124,7 @@
                        </h:panelGrid>
                  
                             
-                 </h:form>
+                    </h:form>
                                                     
                                                     
                                                     

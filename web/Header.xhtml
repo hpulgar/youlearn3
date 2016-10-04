@@ -74,16 +74,15 @@
                         </h:form>
 
 
-                        <li><a href="courses.html">Cursos</a>
+                        <li><a href="cursos_listado.xhtml">Cursos</a>
                             <ul>
                                 <li><h:commandLink  value="Mis cursos" rendered="#{menuController.logeado()}"></h:commandLink></li>
-                                    <li><a href="#">Buscar cursos</a></li>
                                     <li><h:commandLink  value="Crear un curso" rendered="#{menuController.logeado()}"></h:commandLink></li>
 
                                 </ul>
                             </li>
                             <li><h:form><h:commandLink  value="Foro"  action="foro.xhtml" rendered="#{menuController.logeado()}"></h:commandLink></h:form></li>
-                                <li><a href="typography.html">Caracteristicas</a>
+                              <!--  <li><a href="typography.html">Caracteristicas</a>
                                     <ul>
 
                                         <li><a href="events.html">Events</a></li>
@@ -103,18 +102,15 @@
                                         <li><a href="typography.html">Typography</a></li>
                                     </ul>
                                 </li>
-                                <li><a href="typography.html">Nosotros</a></li>
-                                <li><a href="contact.html">Contacto</a></li>
+                              -->
+                                <li><a href="nosotros.xhtml">Nosotros</a></li>
+                                <li><a href="contacto.xhtml">Contacto</a></li>
 
                                 <!-- END #main-menu -->
                             </ul>
 
-                            <div class="menu-search-button"></div>
-                            <form method="get" action="#" class="menu-search-form">
-                                <input class="menu-search-field" type="text" onBlur="if (this.value == '')
-                                            this.value = 'To search, type and hit enter';" onFocus="if (this.value == 'To search, type and hit enter')
-                                                        this.value = '';" value="Ingrese una busqueda" name="s" />
-                            </form>
+                          
+                          
 
                             <!-- END #main-menu-wrapper -->
                         </div>

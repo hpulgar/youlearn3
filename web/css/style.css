@@ -1538,8 +1538,8 @@ div.selector.disabled span, div.selector.disabled.active span {
 
 /* 7.2 - Blog */
 .news-image {
-	width: 69px;
-	height: 69px;
+	width: 20%;
+	height: 10%;
 	float: left;
 	margin: 0 20px 0 0;
 }

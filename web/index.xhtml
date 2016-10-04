@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
@@ -12,29 +12,12 @@
 
         <!--Meta Tags-->
         <meta name="viewport" content="width=device-width; initial-scale=1.0"></meta>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
 
         <!--Title-->
         <title>Youlearn - Pagina principal</title>
      
-
-
-      <link rel="stylesheet" href="css/style.css" type="text/css"  media="all" />
-	<link rel="stylesheet" href="css/colour.css" type="text/css"  media="all" />
-	<link rel="stylesheet" href="css/flexslider.css" type="text/css"  media="all" />
-	<link rel="stylesheet" href="css/superfish.css" type="text/css"  media="all" />
-	<link rel="stylesheet" href="css/responsive.css" type="text/css"  media="all" />
-	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic' rel='stylesheet' type='text/css'/>
-	<link href='http://fonts.googleapis.com/css?family=Merriweather:400,300,700,900' rel='stylesheet' type='text/css'/>
-
-        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
-        <script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js'></script>
-        <script type="text/javascript" src="js/superfish.js"></script>
-        <script type="text/javascript" src="js/jquery.flexslider-min.js"></script>
-        <script type="text/javascript" src="js/tinynav.min.js"></script>
-        <script type="text/javascript" src="js/jquery.uniform.js"></script>
-        <script type="text/javascript" src="js/scripts.js"></script>
-
+  <ui:include src="utilidades.xhtml" />
         <!-- END head -->
     </h:head>
 
@@ -105,17 +88,17 @@
                     <h2>Cursos</h2>
                 </a>
 
-                <a href="js-elements.html" class="header-block-5 header-block-style-3 clearfix">
+                <a href="#" class="header-block-5 header-block-style-3 clearfix">
                     <img src="images/header_icon_03.png" alt="" />
                     <h2>Premium</h2>
                 </a>
 
-                <a href="typography.html" class="header-block-5 header-block-style-4 clearfix">
+                <a href="#" class="header-block-5 header-block-style-4 clearfix">
                     <img src="images/header_icon_04.png" alt="" />
                     <h2>La plataforma</h2>
                 </a>
 
-                <a href="typography.html" class="header-block-5 header-block-style-5 clearfix">
+                <a href="#" class="header-block-5 header-block-style-5 clearfix">
                     <img src="images/header_icon_05.png" alt="" />
                     <h2>Tomar un tour</h2>
                 </a>
@@ -155,7 +138,7 @@
                                                                   
                                                                 <label for="subcategoria">Subcategoria del curso</label>
                                                                 <h:selectOneMenu value="#{cursoSubCatController.id_cSub_cat}" id="subcategorias">
-                                                                    <f:selectItem itemValue="0" itemLabel="Seleccione una Categoria"  noSelectionOption="true"/> 
+                                                                    <f:selectItem itemValue="0" itemLabel="Seleccione una Subcategoria    "  noSelectionOption="true"/> 
                                                                     <p:ajax event="change" listener="#{cursoSubCatController.clickCursoSelect(cursoSubCatController.id_cSub_cat)}"/>        
                                                                         <c:forEach items="#{cursoSubCatController.listaSubCategorias(cursoCategoriaController.id_curso_cat)}" var="fsc"  >
                                                                             <f:selectItem itemValue="#{fsc.idSubcat}" itemLabel="#{fsc.nomSubcat}" />
@@ -204,7 +187,7 @@
                     <!-- BEGIN .content-block -->
                     <div class="content-block">
 
-                        <h3 class="block-title"><a href="blog.html">Noticias</a></h3>
+                        <h3 class="block-title">Noticias</h3>
 
                         <!-- BEGIN .slider-blocks -->
                         <div class="slider-blocks clearfix">
@@ -219,21 +202,23 @@
                                     <ul class="news-items">
 
 
-
-                                        <li class="clearfix">
+                                        <c:forEach  begin="0" end="3" items="#{foroPosteosController.listaForos(foroPosteosController.tit, 1)}" var="f" rendered="false">
+                                       <li class="clearfix">
 
                                             <div class="news-image">
-                                                <a href="blog-single.html"><img src="images/01_demo_image.jpg" alt="" /></a>
+                                                <a href="#"><img src="images/11_demo_image.jpg" alt="" /></a>
                                             </div>
                                             <div class="news-content">
-                                                <h4><a href="blog-single.html"></a></h4>
-                                                <p class="news-date"></p>
-                                                <p class="news-date"></p>
+                                                <h:form>
+                                                <h4><h:commandLink action="#{foroPosteosController.verPost(f.idPost)}" value="#{f.titulo}"/></h4>
+                                                </h:form>
+                                                <p class="news-date">#{f.fecha}</p>
+                                                <p class="news-excerpt"><h:outputText value="#{f.contenido}" escape="false"  /></p>
 
                                             </div>
                                         </li>
 
-
+                                        </c:forEach>
 
 
 
@@ -246,49 +231,7 @@
                                 </li>
 
                                 <!-- BEGIN .slides li -->
-                                <li>
-
-                                    <!-- BEGIN .news-items -->
-                                    <ul class="news-items">
-
-                                        <li class="clearfix">
-                                            <div class="news-image">
-                                                <a href="blog-single.html"><img src="images/01_demo_image.jpg" alt="" /></a>
-                                            </div>
-                                            <div class="news-content">
-                                                <h4><a href="blog-single.html">Phasellus tempor purus sed odio metus</a></h4>
-                                                <p class="news-date">April 19th, 2013</p>
-                                                <p class="news-excerpt">Sed turpis tortor ultricies non adipiscing ultrices in orci ut a metus quis</p>
-                                            </div>
-                                        </li>
-
-                                        <li class="clearfix">
-                                            <div class="news-image">
-                                                <a href="blog-single.html"><img src="images/10_demo_image.jpg" alt="" /></a>
-                                            </div>
-                                            <div class="news-content">
-                                                <h4><a href="blog-single.html">Phasellus tempor purus sed odio metus</a></h4>
-                                                <p class="news-date">April 19th, 2013</p>
-                                                <p class="news-excerpt">Sed turpis tortor ultricies non adipiscing ultrices in orci ut a metus quis</p>
-                                            </div>
-                                        </li>
-
-                                        <li class="clearfix">
-                                            <div class="news-image">
-                                                <a href="blog-single.html"><img src="images/11_demo_image.jpg" alt="" /></a>
-                                            </div>
-                                            <div class="news-content">
-                                                <h4><a href="blog-single.html">Phasellus tempor purus sed odio metus</a></h4>
-                                                <p class="news-date">April 19th, 2013</p>
-                                                <p class="news-excerpt">Sed turpis tortor ultricies non adipiscing ultrices in orci ut a metus quis</p>
-                                            </div>
-                                        </li>
-
-                                        <!-- END .news-items -->
-                                    </ul>
-
-                                    <!-- END .slides li -->
-                                </li>
+                                
 
                                 <!-- END .slides -->
                             </ul>
@@ -314,9 +257,23 @@
                         <h3 class="block-title">Ultimos cursos nuevos</h3>
 
                         <ul>
-                            <li>
-
-                            </li>
+                            <c:forEach begin="0" end="3" items="#{cursoController.listaCursos(cursoSubCatController.id_cSub_cat, cursoController.nombreCurso)}" var="lc"  >
+					<li class="event-wrapper event-full clearfix">
+					
+				
+						<div class="event-info">	
+							<div class="event-meta">
+								
+                                                            <h:form id="cursoForm">
+                                                                <h4> <h:commandLink actionListener="#{cursoController.setIdCurso(lc.idCurso)}" action="#{inscripcionCursoController.cargarCurso(lc.idCurso,usuarioController.id_user)}"  value="#{lc.nomCurso}" /> </h4>
+                                                                <p><strong>SubCategoria: </strong>#{lc.idCat.nomSubcat}</p>
+                                                            </h:form>
+                                                        </div>
+						</div>
+				
+					<!-- END .event-wrapper -->
+					</li>
+                                        </c:forEach>
                         </ul>
 
                         <!-- END .content-block -->	

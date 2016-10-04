@@ -214,6 +214,7 @@ public class ForoCategoriaController implements Serializable {
     {
         System.out.println("aca el valor del select "+ this.getId_cat());
     }
+    
             
     
    
