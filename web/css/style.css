@@ -1306,7 +1306,9 @@ div.selector.disabled span, div.selector.disabled.active span {
 	position: relative;
 	top: 0;
 	bottom: 0;
-	right: 0;		
+	right: 0;
+        padding-left: 2.5%;
+        padding-top : 3%;
 }
 .sidebar-right2 {
 	background: url(../images/dot_border_v.png) repeat-y top left;

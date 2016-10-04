@@ -487,6 +487,15 @@ public class MasterComentarioController implements Serializable {
         return comentarios;
     }
     
+     public List<MasterComentario> cargaComentariosIndex()
+    {        
+
+          comentarios = ejbFacade.verComentarioPorID(2);
+
+
+        return comentarios;
+    }
+    
     public String mensajeComentarios(int idPublicacion,int idPtf)
     {
         comentarios = ejbFacade.verComentario(idPublicacion, idPtf);

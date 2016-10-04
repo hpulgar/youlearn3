@@ -46,5 +46,13 @@ public class MasterComentarioFacade extends AbstractFacade<MasterComentario> {
         return q.getResultList();
     }
     
+     public List<MasterComentario> verComentarioPorID(int idPtf)
+    {
+         EntityManager m2 =  getEntityManager();
+        Query q = m2.createNamedQuery("MasterComentario.buscaComentarioPorID").setParameter("idPtf", idPtf);
+        
+        return q.getResultList();
+    }
+    
     
 }
