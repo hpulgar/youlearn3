@@ -40,15 +40,17 @@
 	<script type="text/javascript" src="js/scripts.js"></script>
 	   
 
-       
           
 
+       
 <!-- END head -->
    </h:head>
-
+ 	
 <!-- BEGIN body -->
  <h:body id="top" >
-     
+     #{cursoController.setNombreCurso(null)}
+     #{cursoSubCatController.setId_cSub_cat(0)}
+     #{cursoCategoriaController.setId_curso_cat(0)}
 
 	<!-- BEGIN #header-wrapper -->
 	<div id="header" >

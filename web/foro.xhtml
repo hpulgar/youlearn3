@@ -82,8 +82,8 @@
                              
 				<h:panelGroup id="foroListado">
                                     <h:form>
-                                <table style="width:100%;">
-					<thead>
+                                        <table style="width:100%;">
+                                            <thead>
 						<tr>
 							<th>Fecha</th>
 							<th>Nombre tema</th>
@@ -91,39 +91,50 @@
 							<th>Mensajes</th>
                                                         <th>Visitas</th>
 						</tr>
-					</thead>
+                                            </thead>
 					<tbody>
-                                            
-                                            
-                                            
                                                 <c:forEach items="#{foroPosteosController.listaForos(foroPosteosController.tit, foroSubcategoriaController.id_subCat)}" var="f" rendered="false">
-                                
-                                                
-						<tr>
-                                                    
-                                                    
-                                                      
-                                                   
+                                                <tr>
                                                     <td data-title="fecha">#{f.fecha}</td>
-                                                    
-                                                    
-                                                    <td data-title="" > <h:commandLink action="#{foroPosteosController.verPost(f.idPost)}" value="#{f.titulo}"/></td>                                       
-                                                    
-                                                    
+                                                    <td data-title="" > <h:commandLink action="#{foroPosteosController.verPost(f.idPost)}" value="#{f.titulo}"/></td>      
                                                     <td data-title="iniciado_por">#{f.idUser.username}</td>
                                                     <td data-title="Mensajes">#{masterComentarioController.cuentaMensajes(f.idPost)}</td>
-                                                    
-                                                        <td data-title="Visitas">#{foroPosteosController.setIdPosteo(f.idPost)} #{f.idPost}</td>
+                                                    <td data-title="Visitas">#{foroPosteosController.setIdPosteo(f.idPost)} #{f.idPost}</td>
                                                         
 						</tr>
-                                                    
-                                             </c:forEach>
+                                                 </c:forEach>
+                                        </tbody>
+                                            
+                                    </table>
+                                        
+                                        
+                                        <p:dataTable var="fo" value="#{foroPosteosController.listaForos(foroPosteosController.tit, foroSubcategoriaController.id_subCat)}" scrollable="true" scrollHeight="300" style="width: 100%" >
+                                            <p:column headerText="Fecha">
+                                                <h:outputText value="#{fo.fecha}"/>
+                                            </p:column> 
+                                            <p:column headerText="Nombre Tema" >
+                                                <h:commandLink action="#{foroPosteosController.verPost(fo.idPost)}" value="#{fo.titulo}"/>
+                                            </p:column>
+                                            <p:column headerText="Iniciado Por">
+                                                <h:outputText value="#{fo.idUser.username}"/>
+                                            </p:column>
+                                            <p:column headerText="Mensajes">
+                                                <h:outputText value="#{masterComentarioController.cuentaMensajes(fo.idPost)}"/> 
+                                            </p:column>
+                                            <p:column headerText="Visitas">
+                                                <h:outputText value="#{fo.idPost}" />
+                                                    #{foroPosteosController.setIdPosteo(fo.idPost)}
+                                            </p:column>
                                                 
-						
-					</tbody>
-				</table>
+                                        </p:dataTable>
+                                        
+                                        
+                                            
                                         </h:form>
 				</h:panelGroup>
+                            
+                            
+                            
 				<div class="pagination-wrapper" style="margin: 20px 0 50px 0;">
 					<a class="selected" href="#">1</a>
 					<a href="#">2</a>

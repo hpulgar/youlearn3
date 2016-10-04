@@ -8,6 +8,10 @@
       xmlns:p="http://primefaces.org/ui">
     <h:head>
         <title>Facelet Title</title>
+        
+        
+     
+        
     </h:head>
     <h:body>
          
@@ -19,10 +23,12 @@
          
         
         
-        <h:panelGroup id="ListaCursos" style="color: white">
+        <h:panelGroup id="ListaCursos" style="color: white" >
             <h:outputText style="color: black" value="No se encontraron resultados" rendered="#{cursoController.mensajeVacio(cursoSubCatController.id_cSub_cat)}" />
                                         
-                                    <c:forEach items="#{cursoController.listaCursos(cursoSubCatController.id_cSub_cat, cursoController.nombreCurso)}" var="lc"  >
+            
+            <p:dataScroller   value="#{cursoController.listaCursos(cursoSubCatController.id_cSub_cat, cursoController.nombreCurso)}" var="lc" chunkSize="5" mode="inline" scrollHeight="600px ;border-color: white;"  >
+                                    
 					<li class="event-wrapper event-full clearfix">
 					
 						<div class="event-date">
@@ -36,7 +42,7 @@
 						<div class="event-info">	
 							<div class="event-meta">
 								
-                                                            <h:form id="cursoForm">
+                                                            <h:form id="cursoForm" onreset="">
                                                                 <h4> <h:commandLink actionListener="#{cursoController.setIdCurso(lc.idCurso)}" action="#{inscripcionCursoController.cargarCurso(lc.idCurso,usuarioController.id_user)}"  value="#{lc.nomCurso}" />
                                                                 &raquo; </h4>
                                                                 <p><strong>Seguidores: </strong>#{inscripcionCursoController.seguidores(lc.idCurso)}</p>
@@ -49,7 +55,7 @@
 				
 					<!-- END .event-wrapper -->
 					</li>
-                                        </c:forEach>
+                                       </p:dataScroller>
 				</h:panelGroup>
         
         
