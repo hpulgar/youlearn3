@@ -33,12 +33,10 @@
         </div>
     </h:form>
     
-    <c:forEach  items="#{publicacionPerfilController.verPublicaciones(usuarioController.id_usuario_amigo)}" var="pu" >
+            <c:forEach id="arrayPublicaciones"  items="#{publicacionPerfilController.verPublicaciones(usuarioController.id_usuario_amigo)}" var="pu" begin="0" end="#{publicacionPerfilController.largoArray}"  >
    
    <!--<p:dataScroller value="#/{publicacionPerfilController.verPublicaciones(usuarioController.id_usuario_amigo)}" var="pu" >-->
-        <f:facet name="loader">
-            <p:commandButton type="button" value="More" icon="ui-icon-circle-triangle-s"/>
-        </f:facet>
+       
         
         
         <h:panelGroup id="comms">
@@ -142,7 +140,7 @@
             </p:tab>                
      
             </p:accordionPanel>
-                    <h:form id="#{masterComentarioController.nombreForm(pu.idPublicacion)}"  rendered="#{!masterComentarioController.mostrarAcc(pu.idPublicacion,1)}" >
+                        <h:form id="#{masterComentarioController.nombreForm(pu.idPublicacion)}"  rendered="#{!masterComentarioController.mostrarAcc(pu.idPublicacion,1)}" >
                         <li>
                                 <div class="field-row" style="float:left;">
                                     
@@ -161,8 +159,10 @@
             </div> 
          </h:panelGroup>
     </c:forEach>
+            <h:form>
+            <p:commandLink value="Ver Publicaciones Anteriores" action="#{publicacionPerfilController.setLargoArray(10)}" update="parametroBody" process="@all" />
             <!--</p:dataScroller>-->
-    
+    </h:form>
 
 </h:panelGrid>
 

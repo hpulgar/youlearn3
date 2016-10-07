@@ -43,9 +43,22 @@ public class PublicacionPerfilController extends AmigosController implements Ser
     private String paginaRedirect;
     private String metodoRedirect;
     private String link;
+    private int largoArray = 9;
 
     public PublicacionPerfilController() {
     }
+    
+    public int getLargoArray() {
+        return largoArray;
+    }
+
+    public void setLargoArray(int largoArray) {
+        
+        this.largoArray = this.largoArray + largoArray;
+        System.out.println("this.largoArray");
+    }
+
+    
 
     public String getPaginaRedirect() {
         return paginaRedirect;
@@ -266,6 +279,13 @@ public class PublicacionPerfilController extends AmigosController implements Ser
 //    int idUsuario X parametro (dueño d ela pagina)
 //    
 //    
+    
+    public int agrandarLista()
+    {
+        int largo = this.largoArray  +10 ;
+        
+        return largo; 
+    }
     
     public void crearPublicacion(int publicador,int id_usuario)
     {
