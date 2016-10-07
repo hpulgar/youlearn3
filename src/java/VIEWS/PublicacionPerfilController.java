@@ -51,7 +51,11 @@ public class PublicacionPerfilController extends AmigosController implements Ser
     public int getLargoArray() {
         return largoArray;
     }
-
+    
+    public void presetLargo(int largo)
+    {
+        this.largoArray = largo;
+    }
     public void setLargoArray(int largoArray) {
         
         this.largoArray = this.largoArray + largoArray;

@@ -23,7 +23,7 @@
 
 
         <!-- BEGIN #header-wrapper -->
-        <div id="header-wrapper">
+        <div id="header-wrapper" >
 
             <!-- BEGIN #header-border -->
             <div id="header-border">
@@ -123,6 +123,48 @@
 
                     <!-- END #header-wrapper -->
                 </div>
+        
+        <p:growl id="growl" rendered="#{menuController.logeado()}">
+  <div class="chat_box" >
+	<div class="chat_head"> Chat Box</div>
+	<div class="chat_body"> 
+             <ui:repeat value="#{amigosController.listAmigos(usuarioController.id_usuario_amigo)}" var="u">
+                 <div class="user">#{u.username}</div>
+             </ui:repeat>
+	</div>
+  </div>
+         
+
+<div class="msg_box" style="right:42%">
+	<div class="msg_head">Krishna Teja
+	<div class="close">x</div>
+	</div>
+	<div class="msg_wrap">
+		<div class="msg_body">
+			<div class="msg_a">This is from A	</div>
+			<div class="msg_b">This is from B, and its amazingly kool nah... i know it even i liked it :)</div>
+			<div class="msg_a">Wow, Thats great to hear from you man </div>	
+			<div class="msg_push"></div>
+		</div>
+	<div class="msg_footer"><textarea class="msg_input" rows="4"></textarea></div>
+</div>
+</div>
+            
+<div class="msg_box" style="right:42%">
+	<div class="msg_head">Krishna Tejadsd
+	<div class="close">x</div>
+	</div>
+	<div class="msg_wrap">
+		<div class="msg_body">
+			<div class="msg_a">This is from A	</div>
+			<div class="msg_b">This is from B, and its amazingly kool nah... i know it even i liked it :)</div>
+			<div class="msg_a">Wow, Thats great to hear from you man </div>	
+			<div class="msg_push"></div>
+		</div>
+	<div class="msg_footer"><textarea class="msg_input" rows="4"></textarea></div>
+</div>
+</div>
+             </p:growl>
         
         
     </h:body>
