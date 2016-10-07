@@ -41,6 +41,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "MasterComentario.findByIdComentario", query = "SELECT m FROM MasterComentario m WHERE m.idComentario = :idComentario"),
     @NamedQuery(name = "MasterComentario.findByFechaComentario", query = "SELECT m FROM MasterComentario m WHERE m.fechaComentario = :fechaComentario"),
     @NamedQuery(name = "MasterComentario.buscaComentario", query = "SELECT m FROM MasterComentario m WHERE m.idPublicacion = :idPublicacion AND m.idPft.idPft = :idPtf"),
+    @NamedQuery(name = "MasterComentario.buscaComentarioPorID", query = "SELECT m FROM MasterComentario m WHERE m.idPft.idPft = :idPtf"),
     @NamedQuery(name = "MasterComentario.findByIdPublicacion", query = "SELECT m FROM MasterComentario m WHERE m.idPublicacion = :idPublicacion")})
 
 public class MasterComentario implements Serializable {

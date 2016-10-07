@@ -75,11 +75,14 @@
 
 
                         <li><a href="cursos_listado.xhtml">Cursos</a>
+                            <h:form rendered="#{menuController.logeado()}">
                             <ul>
-                                <li><h:commandLink  value="Mis cursos" rendered="#{menuController.logeado()}"></h:commandLink></li>
-                                    <li><h:commandLink  value="Crear un curso" rendered="#{menuController.logeado()}"></h:commandLink></li>
-
+                                
+                                <li><h:commandLink  value="Mis cursos"></h:commandLink></li>
+                                    <li><h:commandLink  value="Crear un curso"></h:commandLink></li>
+                                  
                                 </ul>
+                              </h:form>
                             </li>
                             <li><h:form><h:commandLink  value="Foro"  action="foro.xhtml" rendered="#{menuController.logeado()}"></h:commandLink></h:form></li>
                               <!--  <li><a href="typography.html">Caracteristicas</a>

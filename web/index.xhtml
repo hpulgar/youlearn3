@@ -121,9 +121,7 @@
                       
                         <h3>¡Busque un curso!</h3>
                         <br></br>
-                        <p>Seleccione un criterio de busqueda</p>
-
-                  
+                
                       
                         <h:form>
                                  <label for="categoria">Categoria del curso</label>
@@ -252,9 +250,9 @@
                 <div class="sidebar-right page-content">
 
                     <!-- BEGIN .content-block -->
-                    <div class="content-block">
+               
 
-                        <h3 class="block-title">Ultimos cursos nuevos</h3>
+                        <h3 class="block-title">Ultimos cursos</h3>
 
                         <ul>
                             <c:forEach begin="0" end="3" items="#{cursoController.listaCursos(cursoSubCatController.id_cSub_cat, cursoController.nombreCurso)}" var="lc"  >
@@ -277,21 +275,27 @@
                         </ul>
 
                         <!-- END .content-block -->	
-                    </div>
+              
 
-                    <div class="content-block">
+                   
 
-                        <h3 class="block-title">Ultimos comentarios</h3>
-
+                       <!-- <h3 class="block-title">Ultimos comentarios</h3>
+                     
                         <ul>
+                            
+                            <c:forEach begin="0" end="5" items="#/{masterComentarioController.cargaComentariosIndex()}" var="mc">
+                                   
                             <li>
-
+                                <h:form>
+                                <h:commandLink action="#/{foroPosteosController.verPost(mc.idPft.idPft)}" value="#/{mc.comentario}"/>
+                                </h:form>
                             </li>
+                                     </c:forEach>
                         </ul>
+                          -->
 
                         <!-- END .content-block -->	
-                    </div>
-
+                
 
 
 
@@ -306,59 +310,7 @@
         </div>
 
         <!-- BEGIN #footer-wrapper -->
-        <div id="footer-wrapper">
-
-            <!-- BEGIN #footer -->
-            <div id="footer">
-
-                <ul class="columns-4 clearfix">
-
-                    <li class="col">
-                        <div class="widget-title clearfix">
-                            <h4>Nosotros</h4>
-                            <div class="widget-title-block"></div>
-                        </div>
-                        <p></p>
-                    </li>
-
-                    <li class="col">
-                        <div class="widget-title clearfix">
-                            <h4>Creditos</h4>
-                            <div class="widget-title-block"></div>
-                        </div>
-                        <p></p>
-                    </li>
-
-                    <li class="col">
-                        <div class="widget-title clearfix">
-                            <h4>Mapa del sitio</h4>
-                            <div class="widget-title-block"></div>
-                        </div>
-                        <p></p>
-                    </li>
-
-
-                    <li class="col">
-                        <div class="widget-title clearfix">
-                            <h4>Redes sociales</h4>
-                            <div class="widget-title-block"></div>
-                        </div>
-                        <p></p>
-                    </li>
-
-
-                </ul>
-
-                <div id="footer-bottom" class="clearfix">
-                    <p class="fl">  <a href="#">YouLearn</a></p>
-                    <p class="go-up fr"><a href="#top" class="scrollup">Top</a></p>
-                </div>
-
-                <!-- END #footer -->
-            </div>
-
-            <!-- END #footer-wrapper -->
-        </div>
+          <ui:include src="Footer.xhtml" />
 
         <!-- END body -->
 
