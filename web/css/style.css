@@ -326,10 +326,10 @@ a {
 
 /* 2.4 - Header blocks */
 .header-block-wrapper {
-	width: 1000px;
+	width: 55%;
 	position: relative;
 	margin: 0 auto;
-	z-index: 99;
+	z-index: 0;
 }
 
 .header-block-inner {
@@ -1338,7 +1338,12 @@ div.selector.disabled span, div.selector.disabled.active span {
 	position: relative;
 	min-height: 10px;
 }
-
+.main-content2 {
+	width: 77%;
+	float: left;
+	position: relative;
+	min-height: 10px;
+}
 .perfil-content {
 	width: 100%;
 	float: left;

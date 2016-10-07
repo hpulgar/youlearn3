@@ -338,6 +338,18 @@ public class MensajeController implements Serializable {
         }
         
     }
+    public String msgBox(String nombre)
+    {
+        System.out.println("return = "+!nombre.isEmpty());
+         if(nombre.isEmpty())
+         {
+             return "hidden";
+         }else
+         {
+             return "visible";
+         }
+         
+    }
     
     
     //////////////////////////////////////////////////////////////////////

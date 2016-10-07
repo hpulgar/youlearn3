@@ -8,8 +8,10 @@
 
    
     <h:head>
+      
         <title>TODO supply a title</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    
     </h:head>
     <h:body>
         
@@ -124,32 +126,52 @@
                     <!-- END #header-wrapper -->
                 </div>
         
-        <p:growl id="growl" rendered="#{menuController.logeado()}">
+    <h:panelGroup id="growl" rendered="#{menuController.logeado()}">
   <div class="chat_box" >
 	<div class="chat_head"> Chat Box</div>
 	<div class="chat_body"> 
              <ui:repeat value="#{amigosController.listAmigos(usuarioController.id_usuario_amigo)}" var="u">
+                 <p:commandLink actionListener="#{mensajeController.setAmigo(u.username,u.idUsuario)}"  update="chatcontainer"  process="@all" >
                  <div class="user">#{u.username}</div>
+                 </p:commandLink>
              </ui:repeat>
 	</div>
   </div>
-         
-
-<div class="msg_box" style="right:42%">
-	<div class="msg_head">Krishna Teja
-	<div class="close">x</div>
-	</div>
-	<div class="msg_wrap">
-		<div class="msg_body">
-			<div class="msg_a">This is from A	</div>
-			<div class="msg_b">This is from B, and its amazingly kool nah... i know it even i liked it :)</div>
-			<div class="msg_a">Wow, Thats great to hear from you man </div>	
-			<div class="msg_push"></div>
-		</div>
-	<div class="msg_footer"><textarea class="msg_input" rows="4"></textarea></div>
-</div>
-</div>
+        <h:panelGroup id="chatcontainer" >
             
+            <div class="msg_box" style="right:15%; "><!-- Right = right +15 -->
+                        <div class="msg_head">#{mensajeController.usernameAmigo}
+                            <div class="close">x</div>
+                        </div>
+                        <div id="msg_wrap" class="msg_wrap">
+                            <div id="msg_body" class="msg_body">
+                                    <c:forEach  items="#{mensajeController.cargaChat(usuarioController.id_user,mensajeController.idAmigo)}" var="c" >
+                                    <h:form rendered="#{!mensajeController.ordenM(usuarioController.id_user, c.idReceptor.idUsuario)}">
+
+                                        <div class="msg_a">#{c.contenido}</div>
+                                    </h:form>
+                                    <h:form rendered="#{mensajeController.ordenM(usuarioController.id_user, c.idReceptor.idUsuario)}">
+                                        <div class="msg_b">#{c.contenido}</div>
+                                    </h:form>
+                                    </c:forEach>
+                                    
+                                        <div class="msg_push"></div>
+                                        
+                                </div>
+                            <div class="msg_footer">
+                                <h:form>
+                                    <h:inputText value="#{mensajeController.selected.contenido}" class="msg_input" />
+                                    <p:commandButton style=" visibility:  hidden" value ="Enviar mensaje" action="#{mensajeController.enviarMensaje(usuarioController.id_user,mensajeController.idAmigo)}" update="chatcontainer"  process="@all"/>
+                                </h:form>
+                                <!--<textarea class="msg_input" rows="4"></textarea-->
+                            </div>
+                            
+                        </div>
+                    </div>
+        
+        </h:panelGroup>
+    </h:panelGroup>
+      <!--      
 <div class="msg_box" style="right:42%">
 	<div class="msg_head">Krishna Tejadsd
 	<div class="close">x</div>
@@ -161,10 +183,10 @@
 			<div class="msg_a">Wow, Thats great to hear from you man </div>	
 			<div class="msg_push"></div>
 		</div>
-	<div class="msg_footer"><textarea class="msg_input" rows="4"></textarea></div>
-</div>
-</div>
-             </p:growl>
+            <div class="msg_footer"><textarea class="msg_input" rows="4"></textarea></div>
+        </div>
+</div>-->
+             
         
         
     </h:body>

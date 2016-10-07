@@ -333,21 +333,21 @@ public void resetValues()
                     
                 }
                 else if(!nombreCurso.isEmpty()  && idSubcat == 0)
-                                {
-                                    System.out.println("ENTRO AL IF Q DEVUELVE SEGUN EL NOMBRE"+nombreCurso);
-                                    arCurso.clear();
-                                    arCurso= ejbFacade.cursosNombres(nombreCurso);
-                                }
+                {
+                    System.out.println("ENTRO AL IF Q DEVUELVE SEGUN EL NOMBRE"+nombreCurso);
+                    arCurso.clear();
+                    arCurso= ejbFacade.cursosNombres(nombreCurso);
+                }
                     
               
                 else
-                                    {
-                                       System.out.println("ENTRO AL IF Q DEVUELVE TODO COTITO");
-                                        this.arCurso.clear();
-                                        arCurso = ejbFacade.findAll();
+                {
+                   System.out.println("ENTRO AL IF Q DEVUELVE TODO COTITO DEL CURSO");
+                    this.arCurso.clear();
+                    arCurso = ejbFacade.findAll();
 
 
-                                    }
+                }
             
             return arCurso;
         }

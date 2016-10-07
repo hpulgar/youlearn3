@@ -360,7 +360,7 @@ public class ForoPosteosController implements Serializable {
                 arForo=ejbFacade.nombreYsubcategoria(tituloForo, idSubcat);
             }else
             {
-               System.out.println("ENTRO AL IF Q DEVUELVE TODO COTITO");
+               System.out.println("ENTRO AL IF Q DEVUELVE TODO COTITO DEL FORO");
                 this.arForo.clear();
                 arForo = ejbFacade.findAll();
 
