@@ -10,27 +10,10 @@
 
 	<!--Meta Tags-->
         <meta name="viewport" content="width=device-width; initial-scale=1.0"></meta>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 		
 	<!--Title-->
 	<title>Youlearn - Tablero</title>
-
-
-	<link rel="stylesheet" href="css/style.css" type="text/css"  media="all" />
-	<link rel="stylesheet" href="css/colour.css" type="text/css"  media="all" />
-	<link rel="stylesheet" href="css/flexslider.css" type="text/css"  media="all" />
-	<link rel="stylesheet" href="css/superfish.css" type="text/css"  media="all" />
-	<link rel="stylesheet" href="css/responsive.css" type="text/css"  media="all" />
-        <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic' rel='stylesheet' type='text/css'></link>
-        <link href='http://fonts.googleapis.com/css?family=Merriweather:400,300,700,900' rel='stylesheet' type='text/css'></link>
-
-	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
-	<script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js'></script>
-	<script type="text/javascript" src="js/superfish.js"></script>
-	<script type="text/javascript" src="js/jquery.flexslider-min.js"></script>
-	<script type="text/javascript" src="js/tinynav.min.js"></script>
-	<script type="text/javascript" src="js/jquery.uniform.js"></script>
-	<script type="text/javascript" src="js/scripts.js"></script>
+  <ui:include src="utilidades.xhtml" />
 	
 <!-- END head -->
    </h:head>
@@ -126,27 +109,7 @@
 		</div>
 		
 		<!-- BEGIN .sidebar-right -->
-		<div class="sidebar-right page-content">
-			
-			<!-- BEGIN .content-block -->
-			<div class="content-block">
-				
-				<h3 class="block-title">Acceso rapido</h3>
-				
-				<ul>
-					<li><a href="perfil.xhtml">Mi perfil</a></li>
-					<li><a href="#">Mis mensajes</a></li>
-					<li><a href="#">Dashboard</a></li>
-				
-				</ul>
-				
-			<!-- END .content-block -->	
-			</div>
-			
-			
-		
-		<!-- END .sidebar-right -->
-		</div>
+	
 	
 	<!-- END .content-wrapper -->
 	</div>
@@ -154,58 +117,8 @@
       
 	
 	<!-- BEGIN #footer-wrapper -->
-	<div id="footer-wrapper">
-		
-		<!-- BEGIN #footer -->
-		<div id="footer">
-			
-			<ul class="columns-4 clearfix">
-				
-				<li class="col">
-					<div class="widget-title clearfix">
-						<h4>Nosotros</h4>
-						<div class="widget-title-block"></div>
-					</div>
-					<p></p>
-				</li>
-				
-                            <li class="col">
-					<div class="widget-title clearfix">
-						<h4>Creditos</h4>
-						<div class="widget-title-block"></div>
-					</div>
-					<p></p>
-				</li>
-				
-				<li class="col">
-					<div class="widget-title clearfix">
-						<h4>Mapa del sitio</h4>
-						<div class="widget-title-block"></div>
-					</div>
-					<p></p>
-				</li>
-				
-                            
-                            <li class="col">
-					<div class="widget-title clearfix">
-						<h4>Redes sociales</h4>
-						<div class="widget-title-block"></div>
-					</div>
-					<p></p>
-				</li>
-				
-			
-			</ul>
-			
-			<div id="footer-bottom" class="clearfix">
-				<p class="fl">  <a href="#">YouLearn</a></p>
-				<p class="go-up fr"><a href="#top" class="scrollup">Top</a></p>
-			</div>
-		<!-- END #footer -->
-		</div>
 	
-	<!-- END #footer-wrapper -->
-	</div>
+	          <ui:include src="Footer.xhtml" />
 
 <!-- END body -->
  </h:body>

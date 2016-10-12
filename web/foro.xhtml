@@ -11,27 +11,12 @@
 
 	<!--Meta Tags-->
         <meta name="viewport" content="width=device-width; initial-scale=1.0"></meta>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-		
+
 	<!--Title-->
 	<title>Youlearn - Foro</title>
 
 
-	<link rel="stylesheet" href="css/style.css" type="text/css"  media="all" />
-	<link rel="stylesheet" href="css/colour.css" type="text/css"  media="all" />
-	<link rel="stylesheet" href="css/flexslider.css" type="text/css"  media="all" />
-	<link rel="stylesheet" href="css/superfish.css" type="text/css"  media="all" />
-	<link rel="stylesheet" href="css/responsive.css" type="text/css"  media="all" />
-        <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic' rel='stylesheet' type='text/css'></link>
-        <link href='http://fonts.googleapis.com/css?family=Merriweather:400,300,700,900' rel='stylesheet' type='text/css'></link>
-
-	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
-	<script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js'></script>
-	<script type="text/javascript" src="js/superfish.js"></script>
-	<script type="text/javascript" src="js/jquery.flexslider-min.js"></script>
-	<script type="text/javascript" src="js/tinynav.min.js"></script>
-	<script type="text/javascript" src="js/jquery.uniform.js"></script>
-	<script type="text/javascript" src="js/scripts.js"></script>
+  <ui:include src="utilidades.xhtml" />
 	
 <!-- END head -->
    </h:head>
@@ -70,82 +55,25 @@
 	<!-- BEGIN .content-wrapper -->
 	<div class="content-wrapper page-content-wrapper clearfix">
 		
-		<!-- BEGIN .main-content -->
-		<div class="main-content2 page-content">
+	<!-- BEGIN .main-content -->
+		<div class="perfil-content2 page-content">
 			
 			<!-- BEGIN .inner-content-wrapper -->
 			<div class="inner-content-wrapper">
-			
-                                    <h:commandButton action="foro_crear.xhtml" value="Crear Foro" style="float: right"/>
-                                	
-                            <h3 class="block-title">Crear foro</h3>
-                             
-				<h:panelGroup id="foroListado">
-                                    <h:form>
-                                        <table style="width:100%;">
-                                            <thead>
-						<tr>
-							<th>Fecha</th>
-							<th>Nombre tema</th>
-							<th>Iniciado por</th>
-							<th>Mensajes</th>
-                                                        <th>Visitas</th>
-						</tr>
-                                            </thead>
-					<tbody>
-                                                <c:forEach items="#{foroPosteosController.listaForos(foroPosteosController.tit, foroSubcategoriaController.id_subCat)}" var="f" rendered="false">
-                                                <tr>
-                                                    <td data-title="fecha">#{f.fecha}</td>
-                                                    <td data-title="" > <h:commandLink action="#{foroPosteosController.verPost(f.idPost)}" value="#{f.titulo}"/></td>      
-                                                    <td data-title="iniciado_por">#{f.idUser.username}</td>
-                                                    <td data-title="Mensajes">#{masterComentarioController.cuentaMensajes(f.idPost)}</td>
-                                                    <td data-title="Visitas">#{foroPosteosController.setIdPosteo(f.idPost)} #{f.idPost}</td>
-                                                        
-						</tr>
-                                                 </c:forEach>
-                                        </tbody>
+				
+				<!-- BEGIN .blog-entry -->
+				<div class="blog-entry clearfix">
+                                    
+                                        
+				
+                                    <ui:include src="foro_include.xhtml"/>
+                                    
                                             
-                                    </table>
-                                        
-                                        
-                                        <p:dataTable var="fo" value="#{foroPosteosController.listaForos(foroPosteosController.tit, foroSubcategoriaController.id_subCat)}" scrollable="true" scrollHeight="300" style="width: 100%" >
-                                            <p:column headerText="Fecha">
-                                                <h:outputText value="#{fo.fecha}"/>
-                                            </p:column> 
-                                            <p:column headerText="Nombre Tema" >
-                                                <h:commandLink action="#{foroPosteosController.verPost(fo.idPost)}" value="#{fo.titulo}"/>
-                                            </p:column>
-                                            <p:column headerText="Iniciado Por">
-                                                <h:outputText value="#{fo.idUser.username}"/>
-                                            </p:column>
-                                            <p:column headerText="Mensajes">
-                                                <h:outputText value="#{masterComentarioController.cuentaMensajes(fo.idPost)}"/> 
-                                            </p:column>
-                                            <p:column headerText="Visitas">
-                                                <h:outputText value="#{fo.idPost}" />
-                                                    #{foroPosteosController.setIdPosteo(fo.idPost)}
-                                            </p:column>
-                                                
-                                        </p:dataTable>
-                                        
-                                        
-                                            
-                                        </h:form>
-				</h:panelGroup>
-                            
-                            
-                            
-				<div class="pagination-wrapper" style="margin: 20px 0 50px 0;">
-					<a class="selected" href="#">1</a>
-					<a href="#">2</a>
-					<a href="#">3</a>
-					<a href="#">></a>
+					
+					
+					
+				<!-- END .blog-entry -->
 				</div>
-				
-				
-				
-				
-				<div class="clearboth"></div>
 			
 			<!-- END .inner-content-wrapper -->
 			</div>
@@ -153,28 +81,15 @@
 		<!-- END .main-content -->
 		</div>
 		
-		<!-- BEGIN .sidebar-right -->
 		<div class="sidebar-right page-content">
 			
 			<!-- BEGIN .content-block -->
-			<div class="content-block">
-				
-				<h3 class="block-title">Acceso rapido</h3>
-				
-				<ul>
-					<li><a href="perfil.xhtml">Mi perfil</a></li>
-					<li><a href="#">Mis mensajes</a></li>
-					<li><a href="#">Dashboard</a></li>
-				
-				</ul>
-				
-			<!-- END .content-block -->	
-			</div>
+			
                         
                         <!-- BEGIN .content-block -->
 			<div class="content-block">
 				
-				<h3 class="block-title"><a href="events.html">Filtro &raquo;</a></h3>
+				<h3 class="block-title"><a>Filtro &raquo;</a></h3>
 				
 				<ul class="event-list">
 					<!-- BEGIN .event-wrapper -->
@@ -242,59 +157,7 @@
         
       
 	
-	<!-- BEGIN #footer-wrapper -->
-	<div id="footer-wrapper">
-		
-		<!-- BEGIN #footer -->
-		<div id="footer">
-			
-			<ul class="columns-4 clearfix">
-				
-				<li class="col">
-					<div class="widget-title clearfix">
-						<h4>Nosotros</h4>
-						<div class="widget-title-block"></div>
-					</div>
-					<p></p>
-				</li>
-				
-                            <li class="col">
-					<div class="widget-title clearfix">
-						<h4>Creditos</h4>
-						<div class="widget-title-block"></div>
-					</div>
-					<p></p>
-				</li>
-				
-				<li class="col">
-					<div class="widget-title clearfix">
-						<h4>Mapa del sitio</h4>
-						<div class="widget-title-block"></div>
-					</div>
-					<p></p>
-				</li>
-				
-                            
-                            <li class="col">
-					<div class="widget-title clearfix">
-						<h4>Redes sociales</h4>
-						<div class="widget-title-block"></div>
-					</div>
-					<p></p>
-				</li>
-				
-			
-			</ul>
-			
-			<div id="footer-bottom" class="clearfix">
-				<p class="fl">  <a href="#">YouLearn</a></p>
-				<p class="go-up fr"><a href="#top" class="scrollup">Top</a></p>
-			</div>
-		<!-- END #footer -->
-		</div>
-	
-	<!-- END #footer-wrapper -->
-	</div>
+	          <ui:include src="Footer.xhtml" />
 
 <!-- END body -->
  </h:body>

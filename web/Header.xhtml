@@ -137,11 +137,13 @@
              </ui:repeat>
 	</div>
   </div>
-        <h:panelGroup id="chatcontainer" >
+          <h:panelGroup id="chatcontainer" >
             
-            <div class="msg_box" style="right:15%; "><!-- Right = right +15 -->
+            <div class="msg_box" style="right:280px; visibility:#{mensajeController.msgBox(mensajeController.usernameAmigo)} "><!-- Right = right +15 -->
                         <div class="msg_head">#{mensajeController.usernameAmigo}
-                            <div class="close">x</div>
+                            <div class="close">
+                                <p:commandLink value="X" actionListener="#{mensajeController.setAmigo(null,0)}" update="chatcontainer" process="@all"/>
+                            </div>
                         </div>
                         <div id="msg_wrap" class="msg_wrap">
                             <div id="msg_body" class="msg_body">
