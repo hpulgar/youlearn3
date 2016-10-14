@@ -18,8 +18,8 @@
       <!--  <iframe src="cursos_listado.xhtml" frameborder="0" resizable="true"></iframe>
         -->
         
-      
-    
+
+            
           
                          <!-- BEGIN body -->
 
@@ -126,7 +126,7 @@
                     <!-- END #header-wrapper -->
                 </div>
         
-    <h:panelGroup id="growl" rendered="#{menuController.logeado()}">
+    <h:panelGroup  id="chatcontainer" rendered="#{menuController.logeado()}">
   <div class="chat_box" >
 	<div class="chat_head"> Chat Box</div>
 	<div class="chat_body"> 
@@ -137,7 +137,7 @@
              </ui:repeat>
 	</div>
   </div>
-          <h:panelGroup id="chatcontainer" >
+          
             
             <div class="msg_box" style="right:280px; visibility:#{mensajeController.msgBox(mensajeController.usernameAmigo)} "><!-- Right = right +15 -->
                         <div class="msg_head">#{mensajeController.usernameAmigo}
@@ -147,15 +147,15 @@
                         </div>
                         <div id="msg_wrap" class="msg_wrap">
                             <div id="msg_body" class="msg_body">
-                                    <c:forEach  items="#{mensajeController.cargaChat(usuarioController.id_user,mensajeController.idAmigo)}" var="c" >
-                                    <h:form rendered="#{!mensajeController.ordenM(usuarioController.id_user, c.idReceptor.idUsuario)}">
+                                    <ui:repeat  value="#{mensajeController.cargaChat(usuarioController.id_user,mensajeController.idAmigo)}" var="c" >
+                                        <h:form rendered="#{!mensajeController.ordenM(usuarioController.id_user, c.idReceptor.idUsuario)}">
 
-                                        <div class="msg_a">#{c.contenido}</div>
-                                    </h:form>
-                                    <h:form rendered="#{mensajeController.ordenM(usuarioController.id_user, c.idReceptor.idUsuario)}">
-                                        <div class="msg_b">#{c.contenido}</div>
-                                    </h:form>
-                                    </c:forEach>
+                                            <div class="msg_a">#{c.contenido}</div>
+                                        </h:form>
+                                        <h:form rendered="#{mensajeController.ordenM(usuarioController.id_user, c.idReceptor.idUsuario)}">
+                                            <div class="msg_b">#{c.contenido}</div>
+                                        </h:form>
+                                    </ui:repeat>
                                     
                                         <div class="msg_push"></div>
                                         
@@ -171,7 +171,7 @@
                         </div>
                     </div>
         
-        </h:panelGroup>
+        
     </h:panelGroup>
       <!--      
 <div class="msg_box" style="right:42%">
