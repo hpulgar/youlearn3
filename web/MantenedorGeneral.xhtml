@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+
+   
+    <h:head>
+        <title>Mantenedor</title>
+        
+          <meta name="viewport" content="width=device-width; initial-scale=1.0"></meta>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        
+         <link rel="stylesheet" href="css/style.css" type="text/css"  media="all" />
+	<link rel="stylesheet" href="css/colour.css" type="text/css"  media="all" />
+	<link rel="stylesheet" href="css/flexslider.css" type="text/css"  media="all" />
+	<link rel="stylesheet" href="css/superfish.css" type="text/css"  media="all" />
+	<link rel="stylesheet" href="css/responsive.css" type="text/css"  media="all" />
+        <link rel="stylesheet" href="css/chat.css" type="text/css"  media="all" />
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic' rel='stylesheet' type='text/css'/>
+	<link href='http://fonts.googleapis.com/css?family=Merriweather:400,300,700,900' rel='stylesheet' type='text/css'/>
+        
+        
+   </h:head>
+    <h:body >
+        
+        <div id="header" >
+                        
+                  <ui:include src="header.xhtml" />
+        </div>
+	
+	<!-- BEGIN .page-header -->
+	<div class="page-header clearfix">
+		
+		<div class="page-header-inner clearfix">
+                    <div class="page-title">	
+                            <h2>Mi Perfil</h2>
+                            <div class="page-title-block"></div>
+                    </div>
+		</div>
+		
+	<!-- END .page-header -->
+	</div>
+	
+	<!-- BEGIN .content-wrapper -->
+	<div class="content-wrapper page-content-wrapper clearfix">
+		
+		<!-- BEGIN .main-content -->
+		<div class="perfil-content page-content">
+                    
+                    <p:layout style="min-width:500px;min-height:700px;margin-bottom: 100px">
+                        <p:layoutUnit position="west" resizable="true" size="350" minSize="40" maxSize="200">
+                            <h:form id="men">
+                                <p:menu >
+                                    <p:submenu label="Ajax">
+                                        <c:forEach items="#{menuController.cargarMenu()}" var="menu">
+                                            <p:menuitem value="#{menu.nombre}" actionListener="#{menuController.setNombreMenu(menu.url)}" update="paginas"/>
+                                            
+                                        </c:forEach>
+                                    </p:submenu>
+
+                                </p:menu>
+                            </h:form>
+                        </p:layoutUnit>
+
+                        <p:layoutUnit position="center" >
+                            <h:form id="paginas" >
+                           
+                                
+                                <ui:include src="#{menuController.nombreMenu}" />
+                                
+                            </h:form>
+                            
+                        </p:layoutUnit>
+                    </p:layout>
+                    
+                    
+                    
+                    
+                </div>
+        </div>
+        
+    </h:body>
+</html>

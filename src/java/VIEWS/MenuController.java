@@ -6,6 +6,8 @@ import VIEWS.util.PaginationHelper;
 import MODELS.MenuFacade;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 import javax.ejb.EJB;
 import javax.inject.Named;
@@ -29,6 +31,15 @@ public class MenuController implements Serializable {
     private MODELS.MenuFacade ejbFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
+    private String nombreMenu;
+
+    public String getNombreMenu() {
+        return nombreMenu;
+    }
+
+    public void setNombreMenu(String nombreMenu) {
+        this.nombreMenu = nombreMenu;
+    }
 
     public MenuController() {
     }
@@ -209,6 +220,11 @@ public class MenuController implements Serializable {
 
     public Menu getMenu(java.lang.Integer id) {
         return ejbFacade.find(id);
+    }
+    public List<Menu> cargarMenu()
+    {
+        List<Menu> arMenu = ejbFacade.findAll();
+        return arMenu;
     }
 
     @FacesConverter(forClass = Menu.class)

@@ -18,6 +18,7 @@ import java.util.ResourceBundle;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
@@ -25,6 +26,8 @@ import javax.faces.convert.FacesConverter;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
+import org.primefaces.event.CellEditEvent;
+import org.primefaces.event.RowEditEvent;
 
 @Named("publicacionPerfilController")
 @SessionScoped
@@ -181,6 +184,19 @@ public class PublicacionPerfilController extends AmigosController implements Ser
         } catch (Exception e) {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
             return null;
+        }
+    }
+    
+    public void creacion()
+    {
+        System.out.println("Dentra o no Dentra");
+        try{
+            System.out.println("Antes de Crear");
+            ejbFacade.create(current);
+            System.out.println(".. de Crear");
+        }catch(Exception e)
+        {
+            System.out.println("ERRRROOORR "+e);
         }
     }
 
@@ -477,7 +493,7 @@ public class PublicacionPerfilController extends AmigosController implements Ser
             for(int o=0;o<arAmigos.size();o++)
             {
                 //System.out.println("ID "+arAmigos.get(o).getIdUsuario());
-                if(arPerfil.get(i).getIdUsuario().getIdUsuario() == arAmigos.get(o).getIdUsuario())
+                if(Objects.equals(arPerfil.get(i).getIdUsuario().getIdUsuario(), arAmigos.get(o).getIdUsuario()))
                 {
                    arPerfil2.add(arPerfil.get(i));
                 }
@@ -487,21 +503,52 @@ public class PublicacionPerfilController extends AmigosController implements Ser
         }
         return arPerfil2;
     }
+    ////////PARA EDITAR MANTENEDOR (TEST)
     
-//    public List<PublicacionPerfil> ordenar(List<PublicacionPerfil> pp)
-//    {
-//        arPerfil =pp;
-//        pp.
-//        return null;
-//    }
+    public List<PublicacionPerfil> todasPublicaciones()
+    {
+        return ejbFacade.findAll();
+    }
+    
+    
+    public void onRowEdit(RowEditEvent event) {
+        FacesMessage msg = new FacesMessage("Car Edited", ((PublicacionPerfil) event.getObject()).getIdPublicacion().toString());
+        FacesContext.getCurrentInstance().addMessage(null, msg);
+        
+        ((PublicacionPerfil) event.getObject()).setPublicacion(current.getPublicacion());
+        //((PublicacionPerfil) event.getObject()).setIdPublicacion(current.getIdPublicacion());
+        System.out.println("Imprime publicacion q llega por evento: "+((PublicacionPerfil) event.getObject()).getPublicacion());
+        //System.out.println("Imprime publicacion q llega por evento: "+((PublicacionPerfil) event.getObject()).getIdPublicacion());
+        //current = ((PublicacionPerfil) event.getObject());
+        ejbFacade.edit(((PublicacionPerfil) event.getObject()));
+        
+        
+    }
+    
+    public void onRowCancel(RowEditEvent event) {
+        FacesMessage msg = new FacesMessage("Edit Cancelled", ((PublicacionPerfil) event.getObject()).getIdPublicacion().toString());
+        FacesContext.getCurrentInstance().addMessage(null, msg);
+    }
+    
+   
+    public void eliminarPublicacion(int id)
+    {
+        current.setIdPublicacion(id);
+        ejbFacade.remove(current);
+        
+    }
+    
+    //////////////////////FIN EDITAR MANTENEDOR
       
     
     
 
+    @Override
     public SelectItem[] getItemsAvailableSelectMany() {
         return JsfUtil.getSelectItems(ejbFacade.findAll(), false);
     }
 
+    @Override
     public SelectItem[] getItemsAvailableSelectOne() {
         return JsfUtil.getSelectItems(ejbFacade.findAll(), true);
     }
