@@ -322,11 +322,11 @@ public void resetValues()
         
         public List<Curso> listaCursos(int idSubcat,String nombreCurso)
         {
-            System.out.println("ENTRA AL METODO");
+           
             
                 if(idSubcat != 0 && nombreCurso.isEmpty())
                 {
-                     System.out.println("ENTRO AL IF Q DEVUELVE SEGUN EL ID"+idSubcat);
+                     
                     
                     arCurso.clear();
                     arCurso = ejbFacade.cursosSubcategorias(idSubcat);
@@ -334,7 +334,7 @@ public void resetValues()
                 }
                 else if(!nombreCurso.isEmpty()  && idSubcat == 0)
                 {
-                    System.out.println("ENTRO AL IF Q DEVUELVE SEGUN EL NOMBRE"+nombreCurso);
+                    
                     arCurso.clear();
                     arCurso= ejbFacade.cursosNombres(nombreCurso);
                 }
@@ -342,7 +342,7 @@ public void resetValues()
               
                 else
                 {
-                   System.out.println("ENTRO AL IF Q DEVUELVE TODO COTITO DEL CURSO");
+                  
                     this.arCurso.clear();
                     arCurso = ejbFacade.findAll();
 

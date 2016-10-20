@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+
+   
+    <h:head>
+        <title>Mantenedor</title>
+        
+          <meta name="viewport" content="width=device-width; initial-scale=1.0"></meta>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        
+        
+   </h:head>
+    <h:body >
+        <h:form id="formgeneral">
+       <p:panelGrid  id="formCrear" >
+         
+           <p:commandButton id="btoMostrarCrear" value="Nuevo" actionListener="#{publicacionPerfilController.setVerCrear(true)}" update="formCrear" process="@all"   rendered="#{!publicacionPerfilController.getVerCrear()}" />
+        
+        
+        <h:form id="formC" rendered="#{publicacionPerfilController.getVerCrear()}" > 
+            
+             <h:outputLabel  value="idPublicacion" />
+                    <p:inputText  value="#{publicacionPerfilController.selected.idPublicacion}" />
+                    <h:outputLabel  value="publicacion" />
+                    <p:inputText  value="#{publicacionPerfilController.selected.publicacion}" />
+                   <p:outputLabel for="popup" value="fecha publicacion" />
+                    <p:calendar id="popup" value="#{publicacionPerfilController.selected.fechaPublicacion}" />
+ 
+                    
+                    <h:outputLabel  value="idPublicador" />
+                    <p:selectOneMenu value="#{publicacionPerfilController.selected.idPublicador}" >
+                        <f:selectItems value="#{usuarioController.itemsAvailableSelectOne}"/>
+                    </p:selectOneMenu>
+                    
+                    <h:outputLabel  value="idUsuario" />
+                    <p:selectOneMenu  value="#{publicacionPerfilController.selected.idUsuario}"  >
+                        <f:selectItems value="#{usuarioController.itemsAvailableSelectOne}"/>
+                    </p:selectOneMenu>
+                
+                    
+                    <h:outputLabel  value="tipoPublicacion" />
+                    <p:selectOneMenu  value="#{publicacionPerfilController.selected.idTipoPublicacion}"  >
+                        <f:selectItems value="#{tipoPublicacionController.itemsAvailableSelectOne}"/>
+                    </p:selectOneMenu>
+                
+                    
+                <h:outputLabel  value="Curso" />
+                <p:selectOneMenu value="#{publicacionPerfilController.selected.idCurso}"  >
+                        <f:selectItems value="#{cursoController.itemsAvailableSelectOne}"/>
+                    </p:selectOneMenu>
+                
+                
+                 <p:outputLabel  value="Foro" />
+                 <p:selectOneMenu value="#{publicacionPerfilController.selected.idForo}"  >
+                     <f:selectItems value="#{foroPosteosController.itemsAvailableSelectOne}"/>
+                    </p:selectOneMenu>
+                   
+                 <p:commandButton id="btoCrear" value="crea"  action="#{publicacionPerfilController.creacion()}" update="formgeneral">
+                     
+                 </p:commandButton>
+                 
+        </h:form>
+        
+        </p:panelGrid>
+        </h:form>
+        
+    </h:body>
+</html>

@@ -20,23 +20,76 @@
         
    </h:head>
     <h:body >
-     
+        
+    <h:form id="formgeneral">
+       <p:panelGrid  id="formCrear" >
+         
+           <p:commandButton id="btoMostrarCrear" value="Nuevo" actionListener="#{publicacionPerfilController.setVerCrear(true)}" update="paginas:formgeneral:formCrear" process="@all"   rendered="#{!publicacionPerfilController.getVerCrear()}" />
+        
+        
+        <h:form id="formC" rendered="#{publicacionPerfilController.getVerCrear()}" > 
+            
+             <h:outputLabel  value="idPublicacion" />
+                    <p:inputText  value="#{publicacionPerfilController.selected.idPublicacion}" />
+                    <h:outputLabel  value="publicacion" />
+                    <p:inputText  value="#{publicacionPerfilController.selected.publicacion}" />
+                   <p:outputLabel for="popup" value="fecha publicacion" />
+                    <p:calendar id="popup" value="#{publicacionPerfilController.selected.fechaPublicacion}" />
+ 
                     
+                    <h:outputLabel  value="idPublicador" />
+                    <p:selectOneMenu value="#{publicacionPerfilController.selected.idPublicador}" >
+                        <f:selectItems value="#{usuarioController.itemsAvailableSelectOne}"/>
+                    </p:selectOneMenu>
+                    
+                    <h:outputLabel  value="idUsuario" />
+                    <p:selectOneMenu  value="#{publicacionPerfilController.selected.idUsuario}"  >
+                        <f:selectItems value="#{usuarioController.itemsAvailableSelectOne}"/>
+                    </p:selectOneMenu>
+                
+                    
+                    <h:outputLabel  value="tipoPublicacion" />
+                    <p:selectOneMenu  value="#{publicacionPerfilController.selected.idTipoPublicacion}"  >
+                        <f:selectItems value="#{tipoPublicacionController.itemsAvailableSelectOne}"/>
+                    </p:selectOneMenu>
+                
+                    
+                <h:outputLabel  value="Curso" />
+                <p:selectOneMenu value="#{publicacionPerfilController.selected.idCurso}"  >
+                        <f:selectItems value="#{cursoController.itemsAvailableSelectOne}"/>
+                    </p:selectOneMenu>
+                
+                
+                 <p:outputLabel  value="Foro" />
+                 <p:selectOneMenu value="#{publicacionPerfilController.selected.idForo}"  >
+                     <f:selectItems value="#{foroPosteosController.itemsAvailableSelectOne}"/>
+                    </p:selectOneMenu>
+                   
+                 <p:commandButton id="btoCrear" value="crea"  action="#{publicacionPerfilController.creacion()}" update="paginas:formgeneral">
+                     <p:ajax listener="#{publicacionPerfilController.setVerCrear(false)}"/>
+                 </p:commandButton>
+                 
+        </h:form>
+        
+        </p:panelGrid>
+        </h:form>
+        
+        
         
         <h:form id="form">
             <p:growl id="msgs" showDetail="true"/>
-            
             <p:dataTable id="general" var="p" value="#{publicacionPerfilController.todasPublicaciones()}" editable="true" style="margin-bottom:20px;width: 100%; height: 100%" 
-                         rows="10"
-                         paginator="true"
-                         paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-                         rowsPerPageTemplate="5,10,15">
+            rows="10"
+            paginator="true"
+            paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+            rowsPerPageTemplate="5,10,15">
                 <f:facet name="header">
-           Publicaciones
-       </f:facet>
+                Publicaciones
+                </f:facet>
+
                 <p:ajax event="rowEdit" listener="#{publicacionPerfilController.onRowEdit}" update="paginas:form:msgs" />
                 <p:ajax event="rowEditCancel" listener="#{publicacionPerfilController.onRowCancel}" update="paginas:form:msgs" />
-                
+
                 <p:column headerText="id" style="width: 20px" >
                     <p:cellEditor>
                         <f:facet name="output"><h:outputText value="#{p.idPublicacion}" /></f:facet>
@@ -67,7 +120,6 @@
                         <f:facet name="input"><p:inputText  value="#{p.idTipoPublicacion}" style="width: 100%"/></f:facet>
                     </p:cellEditor>
                 </p:column>
-                
                 <p:column headerText="id_curso">
                     <p:cellEditor>
                         <f:facet name="output"><h:outputText value="#{p.idCurso.nomCurso}"/></f:facet>
@@ -80,84 +132,25 @@
                         <f:facet name="input"><p:inputText  value="#{p.idForo}" style="width: 100%"/></f:facet>
                     </p:cellEditor>
                 </p:column>
-                
                 <p:column  headerText="Acciones" style="width:50px">
-                   
+                    
                     <p:rowEditor  />
                     
-                    <p:commandLink value="Eliminar" actionListener="#{publicacionPerfilController.eliminarPublicacion(p.idPublicacion)}" update="general">
-                        <p:confirm header="Confirmation" message="¿Estas Seguro?" icon="ui-icon-alert" />
-                    </p:commandLink>
-                    
-                    
-                    <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
-                        <p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
-                        <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
-                    </p:confirmDialog>
-                    
+                            <p:commandLink value="Eliminar" actionListener="#{publicacionPerfilController.eliminarPublicacion(p.idPublicacion)}" update="general">
+                                <p:confirm header="Confirmation" message="¿Estas Seguro?" icon="ui-icon-alert" />
+                            </p:commandLink>
+                            <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                                <p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                                <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                            </p:confirmDialog>
+                      
                     
                     
                 </p:column>
-
-              
-                     
-                    
-        
-                
             </p:dataTable>
-            <h:form>
-              <p:commandButton value="Nuevo" type="button" onclick="PF('dlg1').show();" />
-              
-                <p:dialog header="Modal Dialog" widgetVar="dlg1">
-                    
-                    <h:panelGrid columns="2">
-                       
-                    <h:outputLabel  value="idPublicacion" />
-                    <h:inputText id="idPublicacion" value="#{publicacionPerfilController.selected.idPublicacion}" />
-                    <h:outputLabel  value="publicacion" />
-                    <h:inputText id="publicacion" value="#{publicacionPerfilController.selected.publicacion}" />
-                    <h:outputLabel  value="fechaPublicacion" />
-                    <h:inputText id="fechaPublicacion" value="#{publicacionPerfilController.selected.fechaPublicacion}" >
-                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
-                    </h:inputText>
-                    <h:outputLabel  value="idPublicador" />
-                    <h:selectOneMenu id="idPublicador" value="#{publicacionPerfilController.selected.idPublicador}" >
-                        <f:selectItems value="#{usuarioController.itemsAvailableSelectOne}"/>
-                    </h:selectOneMenu>
-                    
-                    <h:outputLabel  value="idUsuario" />
-                    <h:selectOneMenu id="idUsuario" value="#{publicacionPerfilController.selected.idUsuario}"  >
-                        <f:selectItems value="#{usuarioController.itemsAvailableSelectOne}"/>
-                    </h:selectOneMenu>
-                
-                    
-                    <h:outputLabel  value="tipoPublicacion" />
-                    <h:selectOneMenu id="tipoPublicacion" value="#{publicacionPerfilController.selected.idTipoPublicacion}"  >
-                        <f:selectItems value="#{tipoPublicacionController.itemsAvailableSelectOne}"/>
-                    </h:selectOneMenu>
-                
-                    
-                <h:outputLabel  value="Curso" />
-                <h:selectOneMenu id="Curso" value="#{publicacionPerfilController.selected.idCurso}"  >
-                        <f:selectItems value="#{cursoController.itemsAvailableSelectOne}"/>
-                    </h:selectOneMenu>
-                
-                
-                 <h:outputLabel  value="Foro" />
-                 <h:selectOneMenu id="foro" value="#{publicacionPerfilController.selected.idForo}"  >
-                     <f:selectItems value="#{foroPosteosController.itemsAvailableSelectOne}"/>
-                    </h:selectOneMenu>
-                 <f:facet name="footer">
-                 <p:commandButton value="crear" actionListener="#{publicacionPerfilController.creacion}" update="paginas:form:general"/>
-                 </f:facet>
-                </h:panelGrid>
-                    
-                    
-                </p:dialog> 
-                  </h:form>
-            
+          
+           
         </h:form>
-         
-        
-    </h:body>
+        </h:body>
+  
 </html>

@@ -339,28 +339,28 @@ public class ForoPosteosController implements Serializable {
     }
    public List<ForoPosteos> listaForos(String tituloForo,int idSubcat)
     {
-        System.out.println("ENTRA AL METODO");
+        
 
             if(idSubcat != 0 && tituloForo.isEmpty())
             {
-                 System.out.println("ENTRO AL IF Q DEVUELVE SEGUN EL ID"+idSubcat);
+                 
 
                 arForo.clear();
                 arForo = ejbFacade.foroSubcategoria(idSubcat);
             }else if(!tituloForo.isEmpty()  && idSubcat == 0)
             {
-                System.out.println("ENTRO AL IF Q DEVUELVE SEGUN EL NOMBRE"+tituloForo);
+                
                 arForo.clear();
                 arForo= ejbFacade.nombreForo(tituloForo);
             }
             else if(!tituloForo.isEmpty() && idSubcat != 0)
             {
-                System.out.println("Entro al IF que devuelve segui nombre y idsubcat");
+                
                 arForo.clear();
                 arForo=ejbFacade.nombreYsubcategoria(tituloForo, idSubcat);
             }else
             {
-               System.out.println("ENTRO AL IF Q DEVUELVE TODO COTITO DEL FORO");
+             
                 this.arForo.clear();
                 arForo = ejbFacade.findAll();
 

@@ -189,6 +189,7 @@ public class UsuarioController implements Serializable {
     public String crearUsuario()
     {
         try{
+            System.out.println("Crea usuario");
                 SimpleDateFormat sdf = new SimpleDateFormat();
                 sdf.setTimeZone(new SimpleTimeZone(-3, "GMT"));
                 sdf.applyPattern("yyyy/mm/dd");
@@ -206,6 +207,7 @@ public class UsuarioController implements Serializable {
                 current.setImagen_foto_perfil("https://i.ytimg.com/vi/1WiGCe7QZGI/maxresdefault.jpg");
                 
                 getFacade().create(current);
+                current = null;
                 
                 return "/index.xhtml";
                 

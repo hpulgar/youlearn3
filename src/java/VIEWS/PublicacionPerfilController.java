@@ -26,7 +26,7 @@ import javax.faces.convert.FacesConverter;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
-import org.primefaces.event.CellEditEvent;
+
 import org.primefaces.event.RowEditEvent;
 
 @Named("publicacionPerfilController")
@@ -47,8 +47,17 @@ public class PublicacionPerfilController extends AmigosController implements Ser
     private String metodoRedirect;
     private String link;
     private int largoArray = 9;
+    private boolean verCrear = false;
 
     public PublicacionPerfilController() {
+    }
+
+    public boolean getVerCrear() {
+        return verCrear;
+    }
+
+    public void setVerCrear(boolean verCrear) {
+        this.verCrear = verCrear;
     }
     
     public int getLargoArray() {
@@ -192,11 +201,18 @@ public class PublicacionPerfilController extends AmigosController implements Ser
         System.out.println("Dentra o no Dentra");
         try{
             System.out.println("Antes de Crear");
+            System.out.println("fecha publicacion "+current.getFechaPublicacion());
+            System.out.println("Publicacion "+current.getPublicacion());
+            System.out.println("Publicacion "+current.getPublicacion());
             ejbFacade.create(current);
-            System.out.println(".. de Crear");
+            current = null;
+            setVerCrear(false);
+            //return "/MantenedorGeneral.xhtml";
+            
         }catch(Exception e)
         {
             System.out.println("ERRRROOORR "+e);
+           // return "/publicacionDialog.xhtml";
         }
     }
 
@@ -505,6 +521,12 @@ public class PublicacionPerfilController extends AmigosController implements Ser
     }
     ////////PARA EDITAR MANTENEDOR (TEST)
     
+    
+    
+    
+    
+    
+    
     public List<PublicacionPerfil> todasPublicaciones()
     {
         return ejbFacade.findAll();
@@ -512,6 +534,10 @@ public class PublicacionPerfilController extends AmigosController implements Ser
     
     
     public void onRowEdit(RowEditEvent event) {
+        
+      
+        
+        
         FacesMessage msg = new FacesMessage("Car Edited", ((PublicacionPerfil) event.getObject()).getIdPublicacion().toString());
         FacesContext.getCurrentInstance().addMessage(null, msg);
         
@@ -521,7 +547,7 @@ public class PublicacionPerfilController extends AmigosController implements Ser
         //System.out.println("Imprime publicacion q llega por evento: "+((PublicacionPerfil) event.getObject()).getIdPublicacion());
         //current = ((PublicacionPerfil) event.getObject());
         ejbFacade.edit(((PublicacionPerfil) event.getObject()));
-        
+      
         
     }
     
