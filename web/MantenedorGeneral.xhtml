@@ -52,13 +52,13 @@
 		<!-- BEGIN .main-content -->
 		<div class="perfil-content page-content">
                     
-                    <p:layout style="min-width:500px;min-height:700px;margin-bottom: 100px">
+                    <p:layout style="min-width:500px;min-height:700px;margin-bottom: 150px">
                         <p:layoutUnit position="west" resizable="true" size="350" minSize="40" maxSize="200">
                             <h:form id="men">
                                 <p:menu >
                                     <p:submenu label="Ajax">
                                         <c:forEach items="#{menuController.cargarMenu()}" var="menu">
-                                            <p:menuitem value="#{menu.nombre}" actionListener="#{menuController.setNombreMenu(menu.url)}" update="paginas"/>
+                                            <p:menuitem value="#{menu.nombre}"  actionListener="#{menuController.setNombreMenu(menu.url)}" update="paginas" process="@all"/>
                                             
                                         </c:forEach>
                                     </p:submenu>

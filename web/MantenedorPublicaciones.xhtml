@@ -19,12 +19,13 @@
         
         
    </h:head>
-    <h:body >
+    <h:body  >
         
-    <h:form id="formgeneral">
+    <h:form id="form">
+        
        <p:panelGrid  id="formCrear" >
-         
-           <p:commandButton id="btoMostrarCrear" value="Nuevo" actionListener="#{publicacionPerfilController.setVerCrear(true)}" update="paginas:formgeneral:formCrear" process="@all"   rendered="#{!publicacionPerfilController.getVerCrear()}" />
+           
+           <p:commandButton id="btoMostrarCrear" value="Nuevo" actionListener="#{publicacionPerfilController.setVerCrear(true)}" update="paginas" process="@all" rendered="#{!publicacionPerfilController.getVerCrear()}" />
         
         
         <h:form id="formC" rendered="#{publicacionPerfilController.getVerCrear()}" > 
@@ -33,7 +34,8 @@
                     <p:inputText  value="#{publicacionPerfilController.selected.idPublicacion}" />
                     <h:outputLabel  value="publicacion" />
                     <p:inputText  value="#{publicacionPerfilController.selected.publicacion}" />
-                   <p:outputLabel for="popup" value="fecha publicacion" />
+                   
+                    <p:outputLabel for="popup" value="fecha publicacion" />
                     <p:calendar id="popup" value="#{publicacionPerfilController.selected.fechaPublicacion}" />
  
                     
@@ -65,18 +67,18 @@
                      <f:selectItems value="#{foroPosteosController.itemsAvailableSelectOne}"/>
                     </p:selectOneMenu>
                    
-                 <p:commandButton id="btoCrear" value="crea"  action="#{publicacionPerfilController.creacion()}" update="paginas:formgeneral">
+                 <p:commandButton id="btoCrear" value="crea"  action="#{publicacionPerfilController.creacion()}" update="paginas">
                      <p:ajax listener="#{publicacionPerfilController.setVerCrear(false)}"/>
                  </p:commandButton>
                  
         </h:form>
         
         </p:panelGrid>
-        </h:form>
         
         
         
-        <h:form id="form">
+        
+        
             <p:growl id="msgs" showDetail="true"/>
             <p:dataTable id="general" var="p" value="#{publicacionPerfilController.todasPublicaciones()}" editable="true" style="margin-bottom:20px;width: 100%; height: 100%" 
             rows="10"

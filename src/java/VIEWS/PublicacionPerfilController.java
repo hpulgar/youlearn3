@@ -200,10 +200,10 @@ public class PublicacionPerfilController extends AmigosController implements Ser
     {
         System.out.println("Dentra o no Dentra");
         try{
-            System.out.println("Antes de Crear");
-            System.out.println("fecha publicacion "+current.getFechaPublicacion());
-            System.out.println("Publicacion "+current.getPublicacion());
-            System.out.println("Publicacion "+current.getPublicacion());
+//            System.out.println("Antes de Crear");
+//            System.out.println("fecha publicacion "+current.getFechaPublicacion());
+//            System.out.println("Publicacion "+current.getPublicacion());
+//            System.out.println("Publicacion "+current.getPublicacion());
             ejbFacade.create(current);
             current = null;
             setVerCrear(false);
@@ -534,10 +534,6 @@ public class PublicacionPerfilController extends AmigosController implements Ser
     
     
     public void onRowEdit(RowEditEvent event) {
-        
-      
-        
-        
         FacesMessage msg = new FacesMessage("Car Edited", ((PublicacionPerfil) event.getObject()).getIdPublicacion().toString());
         FacesContext.getCurrentInstance().addMessage(null, msg);
         

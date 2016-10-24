@@ -20,6 +20,7 @@ import java.util.SimpleTimeZone;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
@@ -27,6 +28,7 @@ import javax.faces.convert.FacesConverter;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
+import org.primefaces.event.RowEditEvent;
 import org.primefaces.event.SelectEvent;
 
 @Named("cursoController")
@@ -472,6 +474,82 @@ public void resetValues()
  
 }
          
+         
+         
+         //////////////// INICIO MANTENEDOR
+         
+         public List<Curso> tablaCursos()
+         {
+             return ejbFacade.findAll();
+         }
+         
+        public void onRowEdit(RowEditEvent event) 
+        {
+            FacesMessage msg = new FacesMessage("Car Edited", ((Curso) event.getObject()).getIdCurso().toString());
+            FacesContext.getCurrentInstance().addMessage(null, msg);
+
+            //((Curso) event.getObject()).setPublicacion(current.getPublicacion());
+            //((PublicacionPerfil) event.getObject()).setIdPublicacion(current.getIdPublicacion());
+            System.out.println("Imprime publicacion q llega por evento: "+((Curso) event.getObject()).getIdCurso());
+            //System.out.println("Imprime publicacion q llega por evento: "+((PublicacionPerfil) event.getObject()).getIdPublicacion());
+            //current = ((Curso) event.getObject());
+            ejbFacade.edit(current); //REFORMULAR?????
+        }
+          
+          
+        public void eliminarCurso(int id)
+        {
+            current.setIdCurso(id);
+            ejbFacade.remove(current);
+        
+        }
+        public String verCont(int id)
+        {
+            return "cont"+id;
+        }
+        public String verIntr(int id)
+        {
+            return "intr"+id;
+        }
+        public String verDesc(int id)
+        {
+            return "desc"+id;
+        }
+        public String verIMG(int id)
+        {
+            return "img"+id;
+        }
+        
+        
+        
+        public void creacionC()
+    {
+        System.out.println("Dentra o no Dentra");
+        try{
+            System.out.println("Antes de Crear");
+            System.out.println("fecha publicacion "+current.getNomCurso());
+          
+            ejbFacade.create(current);
+            current = null;
+           
+            //return "/MantenedorGeneral.xhtml";
+            
+        }catch(Exception e)
+        {
+            System.out.println("ERRRROOORR "+e);
+           // return "/publicacionDialog.xhtml";
+        }
+    }
+        
+        
+        
+           /////////////////////////////////////////////////////////////////////
+          
+    
+    public void onRowCancel(RowEditEvent event) {
+        FacesMessage msg = new FacesMessage("Edit Cancelled", ((Curso) event.getObject()).getIdCurso().toString());
+        FacesContext.getCurrentInstance().addMessage(null, msg);
+    }
         
         
     @FacesConverter(forClass = Curso.class)
