@@ -541,15 +541,15 @@ public void resetValues()
         }
     }
         
-        
+        public void onRowCancel(RowEditEvent event) {
+        FacesMessage msg = new FacesMessage("Edit Cancelled", ((Curso) event.getObject()).getIdCurso().toString());
+        FacesContext.getCurrentInstance().addMessage(null, msg);
+    }
         
            /////////////////////////////////////////////////////////////////////
           
     
-    public void onRowCancel(RowEditEvent event) {
-        FacesMessage msg = new FacesMessage("Edit Cancelled", ((Curso) event.getObject()).getIdCurso().toString());
-        FacesContext.getCurrentInstance().addMessage(null, msg);
-    }
+    
         
         
     @FacesConverter(forClass = Curso.class)

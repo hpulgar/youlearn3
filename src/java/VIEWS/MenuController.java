@@ -12,6 +12,7 @@ import java.util.ResourceBundle;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
@@ -20,6 +21,7 @@ import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
 import javax.servlet.http.HttpSession;
+import org.primefaces.event.RowEditEvent;
 
 @Named("menuController")
 @SessionScoped
@@ -32,6 +34,7 @@ public class MenuController implements Serializable {
     private PaginationHelper pagination;
     private int selectedItemIndex;
     private String nombreMenu;
+    private Menu objMenu;
 
     public String getNombreMenu() {
         return nombreMenu;
@@ -42,6 +45,14 @@ public class MenuController implements Serializable {
     }
 
     public MenuController() {
+    }
+
+    public Menu getObjMenu() {
+        return objMenu;
+    }
+
+    public void setObjMenu(Menu objMenu) {
+        this.objMenu = objMenu;
     }
 
     public Menu getSelected() {
@@ -221,11 +232,78 @@ public class MenuController implements Serializable {
     public Menu getMenu(java.lang.Integer id) {
         return ejbFacade.find(id);
     }
+    
+    ////////////////////MANTENEDOR
+    
     public List<Menu> cargarMenu()
     {
-        List<Menu> arMenu = ejbFacade.findAll();
-        return arMenu;
+        return ejbFacade.findAll();
     }
+    
+    public void onRowEdit(RowEditEvent event) 
+    {
+        FacesMessage msg = new FacesMessage("Car Edited", ((Menu) event.getObject()).getIdMenu().toString());
+        FacesContext.getCurrentInstance().addMessage(null, msg);
+        try{
+        //((Curso) event.getObject()).setPublicacion(current.getPublicacion());
+        //((PublicacionPerfil) event.getObject()).setIdPublicacion(current.getIdPublicacion());
+        
+        //System.out.println("Imprime publicacion q llega por evento: "+((PublicacionPerfil) event.getObject()).getIdPublicacion());
+        current.setIdMenu(((Menu) event.getObject()).getIdMenu()); 
+        System.out.println("Imprime publicacion q llega por evento: "+current.getIdMenu());
+        ejbFacade.edit(current); //REFORMULAR?????
+        current = null;
+        }
+        catch(Exception e)
+        {
+             System.out.println(e+" Imprime publicacion q llega por evento: "+((Menu) event.getObject()).getIdMenu());
+        }
+    }
+    
+    
+     public void onRowCancel(RowEditEvent event) {
+        FacesMessage msg = new FacesMessage("Edit Cancelled", ((Menu) event.getObject()).getIdMenu().toString());
+        FacesContext.getCurrentInstance().addMessage(null, msg);
+    }
+     
+     
+     
+     public void eliminarMenu()
+        {
+            try
+            {
+                System.out.println("imrpime q "+objMenu.getNombre());
+                System.out.println("imrpime q "+objMenu.getIdMenu());
+                System.out.println("imrpime q "+objMenu.getUrl());
+                System.out.println("imrpime q "+objMenu.getIdPerfil());
+
+                
+                getFacade().remove(objMenu);
+            }
+            catch(Exception e)
+            {
+                System.out.println("Error en Eliminacion "+e);
+            }
+        }
+     
+     public void crearMenu()
+     {
+         try{
+            System.out.println("Antes de Crear");
+            System.out.println("DATO MENU "+current.getNombre());
+          
+            ejbFacade.create(current);
+            current = null;
+           
+            //return "/MantenedorGeneral.xhtml";
+            
+        }catch(Exception e)
+        {
+            System.out.println("ERRRROOORR "+e);
+           // return "/publicacionDialog.xhtml";
+        }
+     }
+    ////////////////////////////////////////////
 
     @FacesConverter(forClass = Menu.class)
     public static class MenuControllerConverter implements Converter {

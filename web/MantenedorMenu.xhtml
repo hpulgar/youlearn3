@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+
+   
+    <h:head>
+        <title>Mantenedor</title>
+        
+          <meta name="viewport" content="width=device-width; initial-scale=1.0"></meta>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        
+         
+        
+        
+   </h:head>
+    <h:body>
+        
+        <!--FORM GENERAL-->
+         <p:commandButton id="btoMostrarCrear" value="Nuevo" actionListener="#{publicacionPerfilController.setVerCrear(true)}" update="paginas" process="@all" rendered="#{!publicacionPerfilController.getVerCrear()}" />
+        
+        
+     <h:form id="form"  > 
+        
+        <!-- INICIO DE FORMULARIO CREACION -->
+       
+                    <p:outputLabel  value="ID Menu" rendered="#{publicacionPerfilController.getVerCrear()}" />
+                    <p:inputText id="modelInput" value="#{menuController.selected.idMenu}" readonly="true" rendered="#{publicacionPerfilController.getVerCrear()}"/>
+                    
+                    <p:outputLabel for="nombreMenu"  value="NombreMenu" rendered="#{publicacionPerfilController.getVerCrear()}"/>
+                    <p:inputText id="nombreMenu" value="#{menuController.selected.nombre}"  rendered="#{publicacionPerfilController.getVerCrear()}"/>
+                    
+                    <p:outputLabel for="url"  value="Url" rendered="#{publicacionPerfilController.getVerCrear()}"/>
+                    <p:inputText id="url" value="#{menuController.selected.url}"  rendered="#{publicacionPerfilController.getVerCrear()}"/>
+                    
+                    <p:outputLabel  value="id Perfil" rendered="#{publicacionPerfilController.getVerCrear()}"/>
+                    <h:selectOneMenu value="#{menuController.selected.idPerfil}" rendered="#{publicacionPerfilController.getVerCrear()}">
+                        <f:selectItems value="#{menuController.itemsAvailableSelectOne}" />
+                    </h:selectOneMenu>
+                    
+                    
+                    
+                    
+                    
+                   <br/>
+                   <p:commandButton id="btoCrear" value="crea"  action="#{menuController.crearMenu()}" actionListener="#{publicacionPerfilController.setVerCrear(false)}" update="paginas" process="@all" rendered="#{publicacionPerfilController.getVerCrear()}">
+                     
+                 </p:commandButton>
+                    
+                   <p:commandButton value="Cancelar"  action="#{publicacionPerfilController.setVerCrear(false)}" update="paginas" process="@this" rendered="#{publicacionPerfilController.getVerCrear()}" />
+                 
+        
+           
+           
+        
+        
+        <!-- FIN FORMULARIO CREACION -->
+        
+       
+        <!-- INICIO DATATABLE -->
+            <p:growl id="msgs" showDetail="true"/>
+            
+            <p:dataTable id="general" var="p" value="#{menuController.cargarMenu()}" editable="true" style="margin-bottom:20px;width: 100%; height: 100%" 
+            rows="10"
+            paginator="true"
+            paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+            rowsPerPageTemplate="5,10,15" selectionMode="single" selection="#{menuController.objMenu}" rowKey="#{p.idMenu}">
+                <f:facet name="header">
+                Cursos
+                </f:facet>
+
+                <p:ajax event="rowEdit" listener="#{menuController.onRowEdit}" update="paginas:form:msgs" />
+                <p:ajax event="rowEditCancel" listener="#{menuController.onRowCancel}" update="paginas:form:msgs" />
+
+                <p:column headerText="Id Menu" style="width: 20px" >
+                    <p:cellEditor>
+                        <f:facet name="output"><h:outputText value="#{p.idMenu}" /></f:facet>
+                        <f:facet name="input"><p:inputText id="modelInput" value="#{p.idMenu}" readonly="true" style="width: 100%"/></f:facet>
+                    </p:cellEditor>
+                </p:column>
+                
+                <p:column headerText="Nombre Menu">
+                    <p:cellEditor>
+                        <f:facet name="output"><h:outputText value="#{p.nombre}"/></f:facet>
+                        <f:facet name="input"><p:inputText  value="#{menuController.selected.nombre}" style="width: 100%"/></f:facet>
+                    </p:cellEditor>
+                </p:column>
+                
+                 <p:column headerText="Url">
+                    <p:cellEditor>
+                        <f:facet name="output"><h:outputText value="#{p.url}"/></f:facet>
+                        <f:facet name="input"><p:inputText  value="#{menuController.selected.url}" style="width: 100%"/></f:facet>
+                    </p:cellEditor>
+                </p:column>
+                
+                <p:column headerText="Perfil">
+                    <p:cellEditor>
+                        <f:facet name="output"><h:outputText value="#{p.idPerfil.nomPerfil}"/></f:facet>
+                        <f:facet name="input">
+                            <h:selectOneMenu value="#{menuController.selected.idPerfil}" style="width:100%">
+                                <f:selectItems value="#{perfilController.itemsAvailableSelectOne}" />
+                            </h:selectOneMenu>
+                        </f:facet>
+                    </p:cellEditor>
+                </p:column>
+                
+                
+                <p:column  headerText="Acciones" style="width:50px">
+                    
+                    <p:rowEditor  />
+                    
+                    <p:commandButton icon="ui-icon-close"   action="#{menuController.eliminarMenu()}" update="paginas">
+                                 <p:confirm header="Confirmation" message="¿Estas Seguro?" icon="ui-icon-alert" />
+                            </p:commandButton>
+                    
+                            <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                                <p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                                <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                            </p:confirmDialog>
+                      
+                    
+                    
+                </p:column>
+            </p:dataTable>
+          <!-- FIN DATATABLE -->
+           
+        </h:form>
+        <!-- FIN FORM GENERAL -->
+           
+        </h:body>
+  
+</html>
