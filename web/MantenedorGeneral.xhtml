@@ -56,9 +56,9 @@
                         <p:layoutUnit position="west" resizable="true" size="350" minSize="40" maxSize="200">
                             <h:form id="men">
                                 <p:menu >
-                                    <p:submenu label="Ajax">
+                                    <p:submenu label="Ajax" >
                                         <c:forEach items="#{menuController.cargarMenu()}" var="menu">
-                                            <p:menuitem value="#{menu.nombre}"  actionListener="#{menuController.setNombreMenu(menu.url)}" update="paginas" process="@all"/>
+                                            <p:menuitem value="#{menu.nombre}"  actionListener="#{menuController.setNombreMenu(menu.url)}" update="paginas" process="@all" action="#{util.setVerCrear(false)}"/>
                                             
                                         </c:forEach>
                                     </p:submenu>
@@ -70,8 +70,7 @@
                         <p:layoutUnit position="center" >
                             <h:form id="paginas" >
                            
-                                
-                                <ui:include src="#{menuController.nombreMenu}" />
+                                                               <ui:include src="#{menuController.nombreMenu}"  />
                                 
                             </h:form>
                             

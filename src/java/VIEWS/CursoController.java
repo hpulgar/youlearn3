@@ -29,7 +29,7 @@ import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
 import org.primefaces.event.RowEditEvent;
-import org.primefaces.event.SelectEvent;
+
 
 @Named("cursoController")
 @SessionScoped
@@ -288,6 +288,8 @@ public void resetValues()
 
     public SelectItem[] getItemsAvailableSelectOne() {
         return JsfUtil.getSelectItems(ejbFacade.findAll(), true);
+        
+       
     }
 
     public Curso getCurso(java.lang.Integer id) {
@@ -493,14 +495,18 @@ public void resetValues()
             System.out.println("Imprime publicacion q llega por evento: "+((Curso) event.getObject()).getIdCurso());
             //System.out.println("Imprime publicacion q llega por evento: "+((PublicacionPerfil) event.getObject()).getIdPublicacion());
             //current = ((Curso) event.getObject());
+            current.setIdCurso(((Curso) event.getObject()).getIdCurso());
             ejbFacade.edit(current); //REFORMULAR?????
+            current = null;
         }
           
           
         public void eliminarCurso(int id)
         {
-            current.setIdCurso(id);
-            ejbFacade.remove(current);
+           System.out.println("ENTRA AL ELIMINAR "+id);
+            System.out.println("asdasd "+ejbFacade.eliminarCurso(id));
+            System.out.println("fin AL ELIMINAR");
+            
         
         }
         public String verCont(int id)
@@ -522,7 +528,7 @@ public void resetValues()
         
         
         
-        public void creacionC()
+    public void creacionC()
     {
         System.out.println("Dentra o no Dentra");
         try{

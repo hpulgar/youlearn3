@@ -38,6 +38,7 @@ public abstract class AbstractFacade<T> {
     public void remove(T entity) {
         System.out.println("ENTRA ==?????");
         getEntityManager().remove(getEntityManager().merge(entity));
+        
         System.out.println("PASA ==?????");
     }
     
@@ -72,5 +73,11 @@ public abstract class AbstractFacade<T> {
     public void crear(T entity) {
         getEntityManager().merge(entity);
     }
-    
+//    public void borrarCurso(Curso e)
+//    {
+//        EntityManager em2= getEntityManager();
+//        Curso  b = em2.getReference(Curso.class,e.getIdCurso());
+//               
+//        em2.remove(b);
+//    }
 }

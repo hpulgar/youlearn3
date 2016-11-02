@@ -19,6 +19,8 @@ import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
 import java.util.*;
+import javax.faces.application.FacesMessage;
+import org.primefaces.event.RowEditEvent;
 import org.primefaces.event.SelectEvent;
 
 @Named("cursoSubCatController")
@@ -264,25 +266,75 @@ public class CursoSubCatController implements Serializable {
     }
     
        
-               public void clickCursoSelect(String idcategoria) throws IOException {
-                System.out.println("******************************************");
-                   System.out.println("valor categoria->"+idcategoria);
-                    System.out.println("******************************************");
-    
-    FacesContext.getCurrentInstance().getExternalContext().redirect("cursos_listado.xhtml");
-    FacesContext.getCurrentInstance().responseComplete();
+    public void clickCursoSelect(String idcategoria) throws IOException 
+    {
+        System.out.println("******************************************");
+        System.out.println("valor categoria->"+idcategoria);
+        System.out.println("******************************************");
 
-    
-     
- 
+        FacesContext.getCurrentInstance().getExternalContext().redirect("cursos_listado.xhtml");
+        FacesContext.getCurrentInstance().responseComplete();
 }
                
-               public void handleSelect(SelectEvent event) {  
- String value = (String) event.getObject();
- System.out.println("selected "+value);
+    public void handleSelect(SelectEvent event) 
+    {  
+        String value = (String) event.getObject();
+        System.out.println("selected "+value);
 
-}
+    }
+    
+    public List<CursoSubCat> tablaCursoSubCat()
+    {
+        return ejbFacade.findAll();
+    }
+    
+    public void creacionCursoSubCat()
+    {
+        System.out.println("Dentra o no Dentra");
+        try{
+            System.out.println("Antes de Crear");
+            System.out.println("fecha publicacion "+current.getNomSubcat());
+          
+            ejbFacade.create(current);
+            current = null;
+           
+            
+            
+        }catch(Exception e)
+        {
+            System.out.println("ERRRROOORR "+e);
+          
+        }
+    }
+               
+    public void eliminarCategoriaCurso(int id)
+    {
+        current.setIdSubcat(id_cSub_cat);
+        ejbFacade.remove(current);
+        current=null;
+        
+    }
+    
+    public void onRowEdit(RowEditEvent event) 
+    {
 
+        FacesMessage msg = new FacesMessage("Car Edited", ((CursoSubCat) event.getObject()).getIdSubcat().toString());
+        FacesContext.getCurrentInstance().addMessage(null, msg);
+
+        //((Curso) event.getObject()).setPublicacion(current.getPublicacion());
+        //((PublicacionPerfil) event.getObject()).setIdPublicacion(current.getIdPublicacion());
+        System.out.println("Imprime publicacion q llega por evento: "+((CursoSubCat) event.getObject()).getIdSubcat());
+        current.setIdSubcat(((CursoSubCat) event.getObject()).getIdSubcat());
+        //System.out.println("Imprime publicacion q llega por evento: "+((PublicacionPerfil) event.getObject()).getIdPublicacion());
+        //current = ((Curso) event.getObject());
+        ejbFacade.edit(current); //REFORMULAR?????
+        current = null;
+    }
+               
+    public void onRowCancel(RowEditEvent event) {
+        FacesMessage msg = new FacesMessage("Edit Cancelled", ((CursoSubCat) event.getObject()).getIdSubcat().toString());
+        FacesContext.getCurrentInstance().addMessage(null, msg);
+    }
                
            
     

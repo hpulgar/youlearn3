@@ -21,6 +21,8 @@ import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
 import java.util.*;
+import javax.faces.application.FacesMessage;
+import org.primefaces.event.RowEditEvent;
 
 @Named("contenidosController")
 @SessionScoped
@@ -320,7 +322,59 @@ public class ContenidosController implements Serializable {
     
     /////////////////////////////////////////////////////////////////////
     
+    //MANTENEDOR
+
+    public List<Contenidos> tablaContenidos()
+    {
+        return ejbFacade.findAll();
+    }
     
+    
+    public void onRowEdit(RowEditEvent event)
+    {
+        FacesMessage msg = new FacesMessage("Contenido Editado",((Contenidos) event.getObject()).getIdContenido().toString());
+        FacesContext.getCurrentInstance().addMessage(null, msg);
+        current.setIdContenido(((Contenidos) event.getObject()).getIdContenido());
+        ejbFacade.edit(current);
+        current= null;
+        
+        
+    }
+    
+    public void onRowCancel(RowEditEvent event)
+    {
+        FacesMessage msg = new FacesMessage("Edicion Cancelada",((Contenidos) event.getObject()).getIdContenido().toString());
+        FacesContext.getCurrentInstance().addMessage(null, msg);
+        
+    }
+    
+    public void crearCont()
+    {
+        try
+        {
+            ejbFacade.crear(current);
+            current = null;
+        }catch(Exception e)
+        {
+            System.out.println("Error al crear contenido "+e);
+        }
+    }
+    
+    
+    public void eliminarContenido(int id)
+    {
+        current.setIdContenido(id);
+        ejbFacade.remove(current);
+        current= null;
+    }
+    
+    public String verContenido(int id)
+    {
+        return "conte"+id;
+    }
+    
+    
+    //////////////////////////////////////////////////
     
     
     

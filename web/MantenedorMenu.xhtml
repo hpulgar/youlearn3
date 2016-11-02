@@ -22,37 +22,37 @@
     <h:body>
         
         <!--FORM GENERAL-->
-         <p:commandButton id="btoMostrarCrear" value="Nuevo" actionListener="#{publicacionPerfilController.setVerCrear(true)}" update="paginas" process="@all" rendered="#{!publicacionPerfilController.getVerCrear()}" />
+         <p:commandButton id="btoMostrarCrear" value="Nuevo" actionListener="#{util.setVerCrear(true)}" update="paginas" process="@all" rendered="#{!util.getVerCrear()}" />
         
         
      <h:form id="form"  > 
         
         <!-- INICIO DE FORMULARIO CREACION -->
        
-                    <p:outputLabel  value="ID Menu" rendered="#{publicacionPerfilController.getVerCrear()}" />
-                    <p:inputText id="modelInput" value="#{menuController.selected.idMenu}" readonly="true" rendered="#{publicacionPerfilController.getVerCrear()}"/>
+                    <p:outputLabel  value="ID Menu" rendered="#{util.getVerCrear()}" />
+                    <p:inputText  value="#{menuController.selected.idMenu}" readonly="true" rendered="#{util.getVerCrear()}"/>
                     
-                    <p:outputLabel for="nombreMenu"  value="NombreMenu" rendered="#{publicacionPerfilController.getVerCrear()}"/>
-                    <p:inputText id="nombreMenu" value="#{menuController.selected.nombre}"  rendered="#{publicacionPerfilController.getVerCrear()}"/>
+                    <p:outputLabel for="nombreMenu"  value="NombreMenu" rendered="#{util.getVerCrear()}"/>
+                    <p:inputText id="nombreMenu" value="#{menuController.selected.nombre}"  rendered="#{util.getVerCrear()}"/>
                     
-                    <p:outputLabel for="url"  value="Url" rendered="#{publicacionPerfilController.getVerCrear()}"/>
-                    <p:inputText id="url" value="#{menuController.selected.url}"  rendered="#{publicacionPerfilController.getVerCrear()}"/>
+                    <p:outputLabel for="url"  value="Url" rendered="#{util.getVerCrear()}"/>
+                    <p:inputText id="url" value="#{menuController.selected.url}"  rendered="#{util.getVerCrear()}"/>
                     
-                    <p:outputLabel  value="id Perfil" rendered="#{publicacionPerfilController.getVerCrear()}"/>
-                    <h:selectOneMenu value="#{menuController.selected.idPerfil}" rendered="#{publicacionPerfilController.getVerCrear()}">
-                        <f:selectItems value="#{menuController.itemsAvailableSelectOne}" />
-                    </h:selectOneMenu>
+                    <p:outputLabel for="idperfil" value="id Perfil" rendered="#{util.getVerCrear()}"/>
+                    <p:selectOneMenu id="idperfil" value="#{menuController.selected.idPerfil}" rendered="#{util.getVerCrear()}">
+                        <f:selectItems value="#{perfilController.itemsAvailableSelectOne}" />
+                    </p:selectOneMenu>
                     
                     
                     
                     
                     
                    <br/>
-                   <p:commandButton id="btoCrear" value="crea"  action="#{menuController.crearMenu()}" actionListener="#{publicacionPerfilController.setVerCrear(false)}" update="paginas" process="@all" rendered="#{publicacionPerfilController.getVerCrear()}">
+                   <p:commandButton id="btoCrear" value="crea"  action="#{menuController.crearMenu()}" actionListener="#{util.setVerCrear(false)}" update="paginas" process="@all" rendered="#{util.getVerCrear()}">
                      
                  </p:commandButton>
                     
-                   <p:commandButton value="Cancelar"  action="#{publicacionPerfilController.setVerCrear(false)}" update="paginas" process="@this" rendered="#{publicacionPerfilController.getVerCrear()}" />
+                   <p:commandButton value="Cancelar"  action="#{util.setVerCrear(false)}" update="paginas" process="@this" rendered="#{util.getVerCrear()}" />
                  
         
            
@@ -69,7 +69,7 @@
             rows="10"
             paginator="true"
             paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-            rowsPerPageTemplate="5,10,15" selectionMode="single" selection="#{menuController.objMenu}" rowKey="#{p.idMenu}">
+            rowsPerPageTemplate="5,10,15" >
                 <f:facet name="header">
                 Cursos
                 </f:facet>
@@ -114,7 +114,7 @@
                     
                     <p:rowEditor  />
                     
-                    <p:commandButton icon="ui-icon-close"   action="#{menuController.eliminarMenu()}" update="paginas">
+                    <p:commandButton icon="ui-icon-close"   action="#{menuController.eliminarMenu(p.idMenu)}" update="paginas">
                                  <p:confirm header="Confirmation" message="¿Estas Seguro?" icon="ui-icon-alert" />
                             </p:commandButton>
                     

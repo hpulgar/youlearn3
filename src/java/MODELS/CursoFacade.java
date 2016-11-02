@@ -63,6 +63,14 @@ public class CursoFacade extends AbstractFacade<Curso> {
         return q.getResultList();
     }
     
+    public int eliminarCurso(int idCurso)
+    {
+        EntityManager m2 = getEntityManager();
+        Query q=m2.createNamedQuery("Curso.Delete").setParameter("idCurso",idCurso);
+        
+        
+        return q.getFirstResult(); //return q.getResultList();
+    }
     
     
     

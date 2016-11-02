@@ -22,62 +22,62 @@
     <h:body>
         
         <!--FORM GENERAL-->
-         <p:commandButton id="btoMostrarCrear" value="Nuevo" actionListener="#{publicacionPerfilController.setVerCrear(true)}" update="paginas" process="@all" rendered="#{!publicacionPerfilController.getVerCrear()}" />
+         <p:commandButton id="btoMostrarCrear" value="Nuevo" actionListener="#{util.setVerCrear(true)}" update="paginas" process="@all" rendered="#{!util.getVerCrear()}" />
         
         
      <h:form id="form"  > 
         
         <!-- INICIO DE FORMULARIO CREACION -->
        
-                    <p:outputLabel  value="ID Curso" rendered="#{publicacionPerfilController.getVerCrear()}" />
-                    <p:inputText id="modelInput" value="#{p.idCurso}" readonly="true" rendered="#{publicacionPerfilController.getVerCrear()}"/>
+                    <p:outputLabel  value="ID Curso" rendered="#{util.getVerCrear()}" />
+                    <p:inputText id="modelInput" value="" readonly="true" rendered="#{util.getVerCrear()}"/>
                     
-                    <p:outputLabel  value="Sub Categoria" rendered="#{publicacionPerfilController.getVerCrear()}"/>
-                    <h:selectOneMenu value="#{cursoController.selected.idCat}" rendered="#{publicacionPerfilController.getVerCrear()}">
+                    <p:outputLabel  value="Sub Categoria" rendered="#{util.getVerCrear()}"/>
+                    <h:selectOneMenu value="#{cursoController.selected.idCat}" rendered="#{util.getVerCrear()}">
                         <f:selectItems value="#{cursoSubCatController.itemsAvailableSelectOne}" />
                     </h:selectOneMenu>
                     
-                    <p:outputLabel  value="Usuario" rendered="#{publicacionPerfilController.getVerCrear()}"/>
-                    <h:selectOneMenu value="#{cursoController.selected.idUsuario}" rendered="#{publicacionPerfilController.getVerCrear()}">
+                    <p:outputLabel  value="Usuario" rendered="#{util.getVerCrear()}"/>
+                    <h:selectOneMenu value="#{cursoController.selected.idUsuario}" rendered="#{util.getVerCrear()}">
                         <f:selectItems value="#{usuarioController.itemsAvailableSelectOne}" />
                     </h:selectOneMenu>
                     
-                    <p:outputLabel for="popup" value="fecha creacion" rendered="#{publicacionPerfilController.getVerCrear()}"/>
-                    <p:calendar id="popup" value="#{cursoController.selected.fecha}" rendered="#{publicacionPerfilController.getVerCrear()}"/> 
+                    <p:outputLabel for="popup" value="fecha creacion" rendered="#{util.getVerCrear()}"/>
+                    <p:calendar id="popup" value="#{cursoController.selected.fecha}" rendered="#{util.getVerCrear()}"/> 
                     
-                    <p:outputLabel for="nombre"  value="Nombre" rendered="#{publicacionPerfilController.getVerCrear()}"/>
-                    <p:inputText id="nombre" value="#{cursoController.selected.nomCurso}" required="false" rendered="#{publicacionPerfilController.getVerCrear()}"/>
+                    <p:outputLabel for="nombre"  value="Nombre" rendered="#{util.getVerCrear()}"/>
+                    <p:inputText id="nombre" value="#{cursoController.selected.nomCurso}" required="false" rendered="#{util.getVerCrear()}"/>
                     
-                    <p:outputLabel   value="Inscripciones" rendered="#{publicacionPerfilController.getVerCrear()}"/>
-                    <p:inputText   value="#{cursoController.selected.personasInscritas}" rendered="#{publicacionPerfilController.getVerCrear()}"/>
+                    <p:outputLabel   value="Inscripciones" rendered="#{util.getVerCrear()}"/>
+                    <p:inputText   value="#{cursoController.selected.personasInscritas}" rendered="#{util.getVerCrear()}"/>
                     
-                    <p:outputLabel  value="Seguidores" rendered="#{publicacionPerfilController.getVerCrear()}"/>
-                    <p:inputText  value="#{cursoController.selected.seguidores}" rendered="#{publicacionPerfilController.getVerCrear()}"/>
+                    <p:outputLabel  value="Seguidores" rendered="#{util.getVerCrear()}"/>
+                    <p:inputText  value="#{cursoController.selected.seguidores}" rendered="#{util.getVerCrear()}"/>
                     
-                    <p:outputLabel for="desc" value="Descripcion" rendered="#{publicacionPerfilController.getVerCrear()}"/>
-                    <p:inputTextarea id="desc" value="#{cursoController.selected.descripcionCurso}" rendered="#{publicacionPerfilController.getVerCrear()}"/>
+                    <p:outputLabel for="desc" value="Descripcion" rendered="#{util.getVerCrear()}"/>
+                    <p:inputTextarea id="desc" value="#{cursoController.selected.descripcionCurso}" rendered="#{util.getVerCrear()}"/>
                     
-                    <p:outputLabel  value="Autorizado" rendered="#{publicacionPerfilController.getVerCrear()}"/>
-                    <p:selectOneRadio id="console" value="#{cursoController.selected.autorizado}" rendered="#{publicacionPerfilController.getVerCrear()}">
+                    <p:outputLabel  value="Autorizado" rendered="#{util.getVerCrear()}"/>
+                    <p:selectOneRadio id="console" value="#{cursoController.selected.autorizado}" rendered="#{util.getVerCrear()}">
                         <f:selectItem itemLabel="Si" itemValue="True" />
                         <f:selectItem itemLabel="No" itemValue="False" />
                     </p:selectOneRadio>
                     
-                    <p:outputLabel for="cont"  value="Contenido" rendered="#{publicacionPerfilController.getVerCrear()}"/>
-                    <p:inputTextarea id="cont" value="#{cursoController.selected.contenidos}" rendered="#{publicacionPerfilController.getVerCrear()}"/>
+                    <p:outputLabel for="cont"  value="Contenido" rendered="#{util.getVerCrear()}"/>
+                    <p:inputTextarea id="cont" value="#{cursoController.selected.contenidos}" rendered="#{util.getVerCrear()}"/>
                     
-                    <p:outputLabel for="intr"  value="Introduccion" rendered="#{publicacionPerfilController.getVerCrear()}"/>
-                    <p:inputTextarea id="intr" value="#{cursoController.selected.introduccionCurso}" rendered="#{publicacionPerfilController.getVerCrear()}"/>
+                    <p:outputLabel for="intr"  value="Introduccion" rendered="#{util.getVerCrear()}"/>
+                    <p:inputTextarea id="intr" value="#{cursoController.selected.introduccionCurso}" rendered="#{util.getVerCrear()}"/>
                     
-                    <p:outputLabel  for="img" value="Imagen Portada" rendered="#{publicacionPerfilController.getVerCrear()}"/>
-                    <p:inputText id="img"  value="#{cursoController.selected.imagenPortadaCurso}" rendered="#{publicacionPerfilController.getVerCrear()}"/>
+                    <p:outputLabel  for="img" value="Imagen Portada" rendered="#{util.getVerCrear()}"/>
+                    <p:inputText id="img"  value="#{cursoController.selected.imagenPortadaCurso}" rendered="#{util.getVerCrear()}"/>
                     
                    <br/>
-                    <p:commandButton id="btoCrear" value="crea"  action="#{cursoController.creacionC()}" actionListener="#{publicacionPerfilController.setVerCrear(false)}" update="paginas" process="@all" rendered="#{publicacionPerfilController.getVerCrear()}">
+                    <p:commandButton id="btoCrear" value="crea"  action="#{cursoController.creacionC()}" actionListener="#{util.setVerCrear(false)}" update="paginas" process="@all" rendered="#{util.getVerCrear()}">
                      
                  </p:commandButton>
                     
-                   <p:commandButton value="Cancelar"  action="#{publicacionPerfilController.setVerCrear(false)}" update="paginas" process="@this" rendered="#{publicacionPerfilController.getVerCrear()}" />
+                   <p:commandButton value="Cancelar"  action="#{util.setVerCrear(false)}" update="paginas" process="@this" rendered="#{util.getVerCrear()}" />
                  
         
            

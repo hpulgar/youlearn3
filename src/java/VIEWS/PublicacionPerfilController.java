@@ -47,18 +47,12 @@ public class PublicacionPerfilController extends AmigosController implements Ser
     private String metodoRedirect;
     private String link;
     private int largoArray = 9;
-    private boolean verCrear = false;
+    
 
     public PublicacionPerfilController() {
     }
 
-    public boolean getVerCrear() {
-        return verCrear;
-    }
-
-    public void setVerCrear(boolean verCrear) {
-        this.verCrear = verCrear;
-    }
+    
     
     public int getLargoArray() {
         return largoArray;
@@ -206,7 +200,7 @@ public class PublicacionPerfilController extends AmigosController implements Ser
 //            System.out.println("Publicacion "+current.getPublicacion());
             ejbFacade.create(current);
             current = null;
-            setVerCrear(false);
+            
             //return "/MantenedorGeneral.xhtml";
             
         }catch(Exception e)

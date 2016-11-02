@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+
+   
+    <h:head>
+        <title>Mantenedor</title>
+        
+          <meta name="viewport" content="width=device-width; initial-scale=1.0"></meta>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        
+         
+        
+        
+   </h:head>
+    <h:body>
+        
+        <!--FORM GENERAL-->
+        <p:commandButton id="btoMostrarCrear" value="Nuevo" actionListener="#{util.setVerCrear(true)}" update="paginas" process="@all" rendered="#{!util.getVerCrear()}" />
+        
+        
+     <h:form id="form"  > 
+        
+        <!-- INICIO DE FORMULARIO CREACION -->
+       
+                    <p:outputLabel  value="ID Contenido" rendered="#{util.getVerCrear()}" />
+                    <p:inputText  value="" readonly="true" rendered="#{util.getVerCrear()}"/>
+                    
+                    
+                    <p:outputLabel for="unidad"  value="Unidad" rendered="#{util.getVerCrear()}"/>
+                    <p:inputText id="unidad" value="#{contenidosController.selected.unidad}"  rendered="#{util.getVerCrear()}"/>
+                    
+                     <p:outputLabel for="NombreUnidad"  value="Nombre Unidad" rendered="#{util.getVerCrear()}"/>
+                    <p:inputText id="NombreUnidad" value="#{contenidosController.selected.nombreUnidad}"  rendered="#{util.getVerCrear()}"/>
+                    
+                    <p:outputLabel for="calendarioUnidad" value="fecha_creacion" rendered="#{util.getVerCrear()}"/>
+                    <p:calendar id="calendarioUnidad" value="#{contenidosController.selected.fecha}" rendered="#{util.getVerCrear()}"/> 
+                    
+                    <p:outputLabel for="Contenido"  value="Contenido" rendered="#{util.getVerCrear()}"/>
+                    <p:inputTextarea id="Contenido" value="#{contenidosController.selected.contenido}"  rendered="#{util.getVerCrear()}"/>
+                    
+                    <p:outputLabel  value="id Curso" rendered="#{util.getVerCrear()}"/>
+                    <h:selectOneMenu value="#{contenidosController.selected.idCurso}" rendered="#{util.getVerCrear()}">
+                        <f:selectItems value="#{cursoController.tablaCursos()}" var="c" itemValue="#{c.idCurso}" itemLabel="#{c.nomCurso}"  />
+                    </h:selectOneMenu>
+                    
+                    
+                    
+                   <br/>
+                   <p:commandButton id="btoCrear" value="crea"  action="#{contenidosController.crearCont()}" actionListener="#{util.setVerCrear(false)}" update="paginas" process="@all" rendered="#{util.getVerCrear()}">
+                     
+                 </p:commandButton>
+                    
+                   <p:commandButton value="Cancelar"  action="#{util.setVerCrear(false)}" update="paginas" process="@this" rendered="#{util.getVerCrear()}" />
+                 
+        
+           
+           
+        
+        
+        <!-- FIN FORMULARIO CREACION -->
+        
+       
+        <!-- INICIO DATATABLE -->
+            <p:growl id="msgs" showDetail="true"/>
+            
+            <p:dataTable id="general" var="p" value="#{contenidosController.tablaContenidos()}" editable="true" style="margin-bottom:20px;width: 100%; height: 100%" 
+            rows="10"
+            paginator="true"
+            paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+            rowsPerPageTemplate="5,10,15">
+                <f:facet name="header">
+                Cursos
+                </f:facet>
+
+                <p:ajax event="rowEdit" listener="#{contenidosController.onRowEdit}" update="paginas:form:msgs" />
+                <p:ajax event="rowEditCancel" listener="#{contenidosController.onRowCancel}" update="paginas:form:msgs" />
+
+                <p:column headerText="Id Contenido" style="width: 20px" >
+                    <p:cellEditor>
+                        <f:facet name="output"><h:outputText value="#{p.idContenido}" /></f:facet>
+                        <f:facet name="input"><p:inputText value="#{p.idContenido}" readonly="true" style="width: 100%"/></f:facet>
+                    </p:cellEditor>
+                </p:column>
+                
+                <p:column headerText="Unidad">
+                    <p:cellEditor>
+                        <f:facet name="output"><h:outputText value="#{p.unidad}"/></f:facet>
+                        <f:facet name="input"><p:inputText  value="#{contenidosController.selected.unidad}" /></f:facet>
+                    </p:cellEditor>
+                </p:column>
+                
+                <p:column headerText="Nombre Unidad">
+                    <p:cellEditor>
+                        <f:facet name="output"><h:outputText value="#{p.nombreUnidad}"/></f:facet>
+                        <f:facet name="input"><p:inputText  value="#{contenidosController.selected.nombreUnidad}" /></f:facet>
+                    </p:cellEditor>
+                </p:column>
+                
+                <p:column headerText="Fecha">
+                    <p:cellEditor>
+                        <f:facet name="output"><h:outputText value="#{p.fecha}"/></f:facet>
+                        <f:facet name="input">
+                            <p:outputLabel for="fechaContenidos" value="fecha Contenidos" />
+                            <p:calendar id="fechaContenidos" value="#{contenidosController.selected.fecha}" /> 
+                        </f:facet>
+                    </p:cellEditor>
+                </p:column>
+                
+                <p:column headerText="Contenidos">
+                    <p:cellEditor>
+                        <f:facet name="output">
+                            
+                            <p:commandButton value="Ver" type="button" onclick="PF('#{contenidosController.verContenido(p.idContenido)}').show();" />
+                            
+                            <p:dialog header="Basic Dialog" widgetVar="#{contenidosController.verContenido(p.idContenido)}"  >
+                           
+                                <h:outputText value="#{p.contenido}"/>
+                            </p:dialog>
+                            
+                        </f:facet>
+                        <f:facet name="input"><p:inputTextarea value="#{contenidosController.selected.contenido}" /></f:facet>
+                    </p:cellEditor>
+                </p:column>
+                
+                
+                <p:column headerText="Id Categoria">
+                    <p:cellEditor>
+                        <f:facet name="output"><h:outputText value="#{p.idCurso.nomCurso}"/></f:facet>
+                        <f:facet name="input">
+                            <h:selectOneMenu value="#{contenidosController.selected.idCurso}" style="width:100%">
+                                <f:selectItems value="#{cursoController.itemsAvailableSelectOne}" />
+                            </h:selectOneMenu>
+                        </f:facet>
+                    </p:cellEditor>
+                </p:column>
+                
+                
+              
+                
+            
+                
+              
+                
+               
+                
+                
+                
+                
+                <p:column  headerText="Acciones" style="width:50px">
+                    
+                    <p:rowEditor  />
+                    
+                    <p:commandLink value="Eliminar" actionListener="#{contenidosController.eliminarContenido(p.idContenido)}" update="general">
+                                <p:confirm header="Confirmation" message="¿Estas Seguro?" icon="ui-icon-alert" />
+                            </p:commandLink>
+                    
+                            <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                                <p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                                <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                            </p:confirmDialog>
+                      
+                    
+                    
+                </p:column>
+            </p:dataTable>
+          <!-- FIN DATATABLE -->
+           
+        </h:form>
+        <!-- FIN FORM GENERAL -->
+           
+        </h:body>
+  
+</html>

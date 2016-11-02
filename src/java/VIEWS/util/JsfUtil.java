@@ -24,6 +24,8 @@ public class JsfUtil {
         return items;
     }
     
+    
+    
      public static SelectItem[] getSelectItemsCiudad(List<Ciudad> entities, boolean selectOne) {
         int size = selectOne ? entities.size() + 1 : entities.size();
         SelectItem[] items = new SelectItem[size];

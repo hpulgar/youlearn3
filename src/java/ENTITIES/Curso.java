@@ -40,6 +40,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Curso.findAll", query = "SELECT c FROM Curso c"),
     @NamedQuery(name = "Curso.subcategoria", query = "SELECT c FROM Curso c WHERE c.idCat.idSubcat LIKE :idSubCat"),
     @NamedQuery(name = "Curso.name", query = "SELECT c.nomCurso FROM Curso c WHERE c.idCurso = :idCurso "),
+    @NamedQuery(name = "Curso.Delete", query = "DELETE FROM Curso c Where c.idCurso = :idCurso "),
     @NamedQuery(name = "Curso.buscarIdCurso", query = "SELECT c FROM Curso c WHERE c.idCurso = :idCurso"),
     @NamedQuery(name = "Curso.findByNomCurso", query = "SELECT c FROM Curso c WHERE c.nomCurso = :nomCurso"),
     @NamedQuery(name = "Curso.nombres", query = "SELECT c.nomCurso FROM Curso c WHERE c.nomCurso = :nomCurso"),

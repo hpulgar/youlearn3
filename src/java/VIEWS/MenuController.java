@@ -268,17 +268,14 @@ public class MenuController implements Serializable {
      
      
      
-     public void eliminarMenu()
+     public void eliminarMenu(int idm)
         {
             try
             {
-                System.out.println("imrpime q "+objMenu.getNombre());
-                System.out.println("imrpime q "+objMenu.getIdMenu());
-                System.out.println("imrpime q "+objMenu.getUrl());
-                System.out.println("imrpime q "+objMenu.getIdPerfil());
+                current.setIdMenu(idm);
 
                 
-                getFacade().remove(objMenu);
+                getFacade().remove(current);
             }
             catch(Exception e)
             {

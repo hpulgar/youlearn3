@@ -10,12 +10,26 @@ package VIEWS;
  * @author hpulgar.externo
  */
 
+import java.io.Serializable;
+import javax.enterprise.context.SessionScoped;
 import javax.faces.context.FacesContext;
+import javax.inject.Named;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
  
- 
-public class Util {
+@Named("util")
+@SessionScoped
+public class Util implements Serializable {
+    
+     private boolean verCrear = false;
+     
+     public boolean getVerCrear() {
+        return verCrear;
+    }
+
+    public void setVerCrear(boolean verCrear) {
+        this.verCrear = verCrear;
+    }
  
       public static HttpSession getSession() {
         return (HttpSession)
@@ -54,6 +68,11 @@ public class Util {
         else
             return null;
       }
+      
+      
+      
+      
+      
       
       
       
