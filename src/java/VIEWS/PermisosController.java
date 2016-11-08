@@ -6,10 +6,12 @@ import VIEWS.util.PaginationHelper;
 import MODELS.PermisosFacade;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.ResourceBundle;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
@@ -17,6 +19,7 @@ import javax.faces.convert.FacesConverter;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
+import org.primefaces.event.RowEditEvent;
 
 @Named("permisosController")
 @SessionScoped
@@ -191,6 +194,65 @@ public class PermisosController implements Serializable {
     public Permisos getPermisos(java.lang.Integer id) {
         return ejbFacade.find(id);
     }
+    
+    /////////////////////////////////////////////MANTENEDOR
+    
+    public List<Permisos> tablaPermisos()
+    {
+        return ejbFacade.findAll();
+    }    
+    
+    public void onRowEdit(RowEditEvent event)
+    {
+        FacesMessage msg = new FacesMessage("Inscripcion Editada",((Permisos) event.getObject()).getIdMenu().toString());
+        FacesContext.getCurrentInstance().addMessage(null, msg);
+        current.setIdMenu(((Permisos) event.getObject()).getIdMenu());
+        ejbFacade.edit(current);
+        current= null;
+        
+    }
+    
+    public void onRowCancel(RowEditEvent event)
+    {
+        FacesMessage msg = new FacesMessage("Edicion Cancelada",((Permisos) event.getObject()).getIdMenu().toString());
+        FacesContext.getCurrentInstance().addMessage(null, msg);
+    }
+    
+    public void crearPermisos()
+    {
+        
+        try
+        {
+            current.setIdMenu(null);
+            ejbFacade.create(current);
+            current = null;
+            
+        }catch(Exception e)
+        {
+            System.out.println("Error al crear el Permiso "+e);
+        }
+    }
+    
+    public void eliminarPermiso(int id)
+    {
+        current.setIdMenu(id);
+        ejbFacade.remove(current);
+        current = null;
+    }
+    
+    public void cargaDatos(int id)
+    {
+        current = ejbFacade.find(id);
+    }
+    
+    public void prepararCrear()
+    {
+        current = null;
+    }
+    
+    //////////////////////////////////////////
+    
+    
 
     @FacesConverter(forClass = Permisos.class)
     public static class PermisosControllerConverter implements Converter {

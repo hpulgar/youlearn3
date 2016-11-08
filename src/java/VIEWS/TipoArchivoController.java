@@ -6,10 +6,12 @@ import VIEWS.util.PaginationHelper;
 import MODELS.TipoArchivoFacade;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.ResourceBundle;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
@@ -17,6 +19,7 @@ import javax.faces.convert.FacesConverter;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
+import org.primefaces.event.RowEditEvent;
 
 @Named("tipoArchivoController")
 @SessionScoped
@@ -192,6 +195,76 @@ public class TipoArchivoController implements Serializable {
         return ejbFacade.find(id);
     }
 
+    
+    
+    /////////////////////////////////////////////MANTENEDOR
+    
+    public List<TipoArchivo> tablaTipoArchivo()
+    {
+        return ejbFacade.findAll();
+    }    
+    
+    public void onRowEdit(RowEditEvent event)
+    {
+        FacesMessage msg = new FacesMessage("Inscripcion Editada",((TipoArchivo) event.getObject()).getIdTipo().toString());
+        FacesContext.getCurrentInstance().addMessage(null, msg);
+        current.setIdTipo(((TipoArchivo) event.getObject()).getIdTipo());
+        ejbFacade.edit(current);
+        current= null;
+        
+    }
+    
+    public void onRowCancel(RowEditEvent event)
+    {
+        FacesMessage msg = new FacesMessage("Edicion Cancelada",((TipoArchivo) event.getObject()).getIdTipo().toString());
+        FacesContext.getCurrentInstance().addMessage(null, msg);
+    }
+    
+    public void crearTipoArchivo()
+    {
+        
+        try
+        {
+            current.setIdTipo(null);
+            ejbFacade.create(current);
+            current = null;
+            
+        }catch(Exception e)
+        {
+            System.out.println("Error al crear el Permiso "+e);
+        }
+    }
+    
+    public void eliminarTipoArchivo(int id)
+    {
+        current.setIdTipo(id);
+        ejbFacade.remove(current);
+        current = null;
+    }
+    
+    public void cargaDatos(int id)
+    {
+        current = ejbFacade.find(id);
+    }
+    
+    public void prepararCrear()
+    {
+        current = null;
+    }
+    
+    //////////////////////////////////////////
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     @FacesConverter(forClass = TipoArchivo.class)
     public static class TipoArchivoControllerConverter implements Converter {
 

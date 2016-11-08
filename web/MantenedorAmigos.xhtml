@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+
+   
+    <h:head>
+        <title>Mantenedor</title>
+        
+          <meta name="viewport" content="width=device-width; initial-scale=1.0"></meta>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        
+         
+        
+        
+   </h:head>
+    <h:body>
+        
+        <!--FORM GENERAL-->
+        <p:commandButton id="btoMostrarCrear" value="Nuevo" actionListener="#{util.setVerCrear(true)}" update="paginas" process="@all" rendered="#{!util.getVerCrear()}" action="#{amigosController.prepararCrear()}" />
+        
+        
+     <h:form id="form"  > 
+        
+        <!-- INICIO DE FORMULARIO CREACION -->
+       
+                    <p:outputLabel  value="ID Amistad" rendered="#{util.getVerCrear()}" />
+                    <p:inputText  value="" readonly="true" rendered="#{util.getVerCrear()}"/>
+                    
+                    
+                    <p:outputLabel  value="Usuario" rendered="#{util.getVerCrear()}"/>
+                    <h:selectOneMenu value="#{amigosController.amig.idUsuario1}" rendered="#{util.getVerCrear()}">
+                        <f:selectItems value="#{usuarioController.tablaUsuario()}" var="d"  itemLabel="#{d.username}"  />
+                    </h:selectOneMenu>
+                    
+                    <p:outputLabel  value="Usuario" rendered="#{util.getVerCrear()}"/>
+                    <h:selectOneMenu value="#{amigosController.amig.idUsuario2}" rendered="#{util.getVerCrear()}">
+                        <f:selectItems value="#{usuarioController.tablaUsuario()}" var="c"  itemLabel="#{c.username}"  />
+                    </h:selectOneMenu>
+                    
+                     <p:outputLabel  value="Autorizado" rendered="#{util.getVerCrear()}"/>
+                     <p:selectOneRadio id="aceptado" value="#{amigosController.amig.aprobado}" rendered="#{util.getVerCrear()}">
+                        <f:selectItem itemLabel="Si" itemValue="True" />
+                        <f:selectItem itemLabel="No" itemValue="False" />
+                    </p:selectOneRadio>
+                    
+                                        
+                    <p:outputLabel for="fechaAmist" value="fecha amistad" rendered="#{util.getVerCrear()}" />
+                    <p:calendar id="fechaAmist" value="#{amigosController.amig.fechaAmistad}" rendered="#{util.getVerCrear()}" /> 
+                    
+                    
+                    
+                   <br/>
+                   <p:commandButton id="btoCrear" value="crea"  action="#{amigosController.crearAmistad()}" actionListener="#{util.setVerCrear(false)}" update="paginas" process="@all" rendered="#{util.getVerCrear()}">
+                     
+                 </p:commandButton>
+                    
+                   <p:commandButton value="Cancelar"  action="#{util.setVerCrear(false)}" update="paginas" process="@this" rendered="#{util.getVerCrear()}" />
+                 
+        
+           
+           
+        
+        
+        <!-- FIN FORMULARIO CREACION -->
+        
+       
+        <!-- INICIO DATATABLE -->
+            <p:growl id="msgs" showDetail="true"/>
+            
+            <p:dataTable id="general" var="p" value="#{amigosController.tablaAmigos()}" editable="true" style="margin-bottom:20px;width: 100%; height: 100%" 
+            rows="10"
+            paginator="true"
+            paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+            rowsPerPageTemplate="5,10,15">
+                <f:facet name="header">
+                Cursos
+                </f:facet>
+
+                <p:ajax event="rowEdit" listener="#{amigosController.onRowEdit}" update="paginas:form:msgs" />
+                <p:ajax event="rowEditCancel" listener="#{amigosController.onRowCancel}" update="paginas:form:msgs" />
+
+                <p:column headerText="Id Amistad" style="width: 20px" >
+                    <p:cellEditor>
+                        <f:facet name="output"><h:outputText value="#{p.idAmistad}" /></f:facet>
+                        <f:facet name="input"><p:inputText value="#{p.idAmistad}" readonly="true" style="width: 100%"/></f:facet>
+                    </p:cellEditor>
+                </p:column>
+                
+                <p:column headerText="Usuario1">
+                    <p:cellEditor>
+                        <f:facet name="output"><h:outputText value="#{p.idUsuario1.username}"/></f:facet>
+                        <f:facet name="input">
+                            <h:selectOneMenu value="#{amigosController.amig.idUsuario1}" >
+                                <f:selectItems value="#{usuarioController.tablaUsuario()}" var="c"  itemLabel="#{c.username}"  />
+                            </h:selectOneMenu>
+                        </f:facet>
+                    </p:cellEditor>
+                </p:column>
+                
+                <p:column headerText="Usuario2">
+                    <p:cellEditor>
+                        <f:facet name="output"><h:outputText value="#{p.idUsuario1.username}"/></f:facet>
+                        <f:facet name="input">
+                            <h:selectOneMenu value="#{amigosController.amig.idUsuario2}" >
+                                <f:selectItems value="#{usuarioController.tablaUsuario()}" var="u"  itemLabel="#{u.username}"  />
+                            </h:selectOneMenu>
+                        </f:facet>
+                    </p:cellEditor>
+                </p:column>
+                
+                <p:column headerText="Descripcion">
+                    <p:cellEditor>
+                        <f:facet name="output">
+                            <h:outputText value="#{p.aprobado}" />
+                            
+                        </f:facet>
+                        <f:facet name="input"> 
+                            <p:selectOneRadio id="apr" value="#{amigosController.amig.aprobado}" >
+                                <f:selectItem itemLabel="Si" itemValue="True" />
+                                <f:selectItem itemLabel="No" itemValue="False" />
+                            </p:selectOneRadio>
+                        </f:facet>
+                    </p:cellEditor>
+                </p:column>
+                
+                <p:column headerText="Fecha amistad">
+                    <p:cellEditor>
+                        <f:facet name="output"><h:outputText value="#{p.fechaAmistad}"/></f:facet>
+                        <f:facet name="input">
+                            <p:outputLabel for="fechaami" value="fecha Contenidos" />
+                            <p:calendar id="fechaami" value="#{amigosController.amig.fechaAmistad}"  /> 
+                        </f:facet>
+                    </p:cellEditor>
+                </p:column>
+                
+                
+                
+              
+                <p:column  headerText="Acciones" style="width:50px">
+                    
+                    <p:rowEditor> 
+                        #{amigosController.cargaDatos(p.idAmistad)}
+                    </p:rowEditor>
+                    
+                    <p:commandLink value="Eliminar" actionListener="#{amigosController.eliminarAmistad(p.idAmistad)}" update="general">
+                                <p:confirm header="Confirmation" message="¿Estas Seguro?" icon="ui-icon-alert" />
+                            </p:commandLink>
+                    
+                            <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                                <p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                                <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                            </p:confirmDialog>
+                      
+                </p:column>
+            </p:dataTable>
+          <!-- FIN DATATABLE -->
+           
+        </h:form>
+        <!-- FIN FORM GENERAL -->
+           
+        </h:body>
+  
+</html>

@@ -475,6 +475,13 @@ public class UsuarioController implements Serializable {
         return "List";
     }
 
+    public List<Usuario> tablaUsuario()
+    {
+        return ejbFacade.findAll();
+    }
+    
+    
+    
     public SelectItem[] getItemsAvailableSelectMany() {
         return JsfUtil.getSelectItems(ejbFacade.findAll(), false);
     }
@@ -486,6 +493,7 @@ public class UsuarioController implements Serializable {
     public Usuario getUsuario(java.lang.Integer id) {
         return ejbFacade.find(id);
     }
+    
 
     @FacesConverter(forClass = Usuario.class)
     public static class UsuarioControllerConverter implements Converter {

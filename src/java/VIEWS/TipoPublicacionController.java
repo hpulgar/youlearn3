@@ -6,6 +6,7 @@ import VIEWS.util.PaginationHelper;
 import MODELS.TipoPublicacionFacade;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.ResourceBundle;
 import javax.ejb.EJB;
 import javax.inject.Named;
@@ -192,6 +193,13 @@ public class TipoPublicacionController implements Serializable {
         return ejbFacade.find(id);
     }
 
+    
+    public List<TipoPublicacion> tablaTipoP()
+    {
+        return ejbFacade.findAll();
+    }
+    
+    
     @FacesConverter(forClass = TipoPublicacion.class)
     public static class TipoPublicacionControllerConverter implements Converter {
 

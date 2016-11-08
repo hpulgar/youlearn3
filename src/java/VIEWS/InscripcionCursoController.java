@@ -19,6 +19,7 @@ import java.util.ResourceBundle;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
@@ -26,6 +27,7 @@ import javax.faces.convert.FacesConverter;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
+import org.primefaces.event.RowEditEvent;
 
 @Named("inscripcionCursoController")
 @SessionScoped
@@ -417,6 +419,82 @@ public class InscripcionCursoController implements Serializable {
         {
             System.out.println("Error al crear suscripcion = "+e);
         }
+    }
+    
+    
+    
+    ///////////////////////////////INICIO MANTENEDOR
+    
+    
+    public List<InscripcionCurso> tablaInscripcion()
+    {
+        return ejbFacade.findAll();
+    }
+    
+    public void onRowEdit(RowEditEvent event)
+    {
+        FacesMessage msg = new FacesMessage("Inscripcion Editada",((InscripcionCurso) event.getObject()).getIdInsc().toString());
+        FacesContext.getCurrentInstance().addMessage(null, msg);
+        current.setIdInsc((((InscripcionCurso) event.getObject()).getIdInsc()));
+        ejbFacade.edit(current);
+        current= null;
+        
+    }
+    
+    public void onborrar(RowEditEvent event)
+    {
+        
+        current = ((InscripcionCurso) event.getObject());
+        ejbFacade.remove(current);
+        current= null;
+        
+    }
+    
+    
+    public void onRowCancel(RowEditEvent event)
+    {
+        FacesMessage msg = new FacesMessage("Edicion Cancelada",((InscripcionCurso) event.getObject()).getIdInsc().toString());
+        FacesContext.getCurrentInstance().addMessage(null, msg);
+    }
+    
+    public void crearInscripciones()
+    {
+        try{
+        ejbFacade.create(current);
+        current = null;
+        }catch(Exception e){
+        System.out.println("Error al crear la inscripcion "+e);
+        }
+    }
+    
+    public void eliminarInscripcion(int id)
+    {
+       
+       current.setIdInsc(id);
+       System.out.println("id a eliminar "+current.getIdInsc());
+       ejbFacade.remove(current);
+       current = null;
+      
+    }
+    
+    
+    public String verDescripcion(int id)
+    {
+        return "descInsc"+id;
+    }
+       
+    
+    public void cargaDatos(int id)
+    {
+        
+        current = ejbFacade.find(id);
+        
+    }
+    
+    
+    public void prepararCrear()
+    {
+        current = null;
     }
     //////////////////////////////////////////////
     @FacesConverter(forClass = InscripcionCurso.class)

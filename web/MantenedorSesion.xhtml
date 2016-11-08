@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+
+   
+    <h:head>
+        <title>Mantenedor</title>
+        
+          <meta name="viewport" content="width=device-width; initial-scale=1.0"></meta>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        
+         
+        
+        
+   </h:head>
+    <h:body>
+        
+        <!--FORM GENERAL-->
+        <p:commandButton id="btoMostrarCrear" value="Nuevo" actionListener="#{util.setVerCrear(true)}" update="paginas" process="@all" rendered="#{!util.getVerCrear()}" action="#{sesionController.prepararCrear()}" />
+        
+        
+     <h:form id="form"  > 
+        
+        <!-- INICIO DE FORMULARIO CREACION -->
+       
+                    <p:outputLabel  value="ID sesion" rendered="#{util.getVerCrear()}" />
+                    <p:inputText  value="" readonly="true" rendered="#{util.getVerCrear()}"/>
+                    
+                    <p:outputLabel  value="Usuario" rendered="#{util.getVerCrear()}"/>
+                    <h:selectOneMenu value="#{sesionController.selected.idUsuario}" rendered="#{util.getVerCrear()}">
+                        <f:selectItems value="#{usuarioController.tablaUsuario()}" var="d"  itemLabel="#{d.username}"  />
+                    </h:selectOneMenu>
+                    
+                     <p:outputLabel  value="ip user" rendered="#{util.getVerCrear()}" />
+                     <p:inputText  value="#{sesionController.selected.ip}"  rendered="#{util.getVerCrear()}"/>
+                                        
+                    <p:outputLabel for="fechainicio" value="fecha inicio" rendered="#{util.getVerCrear()}" />
+                    <p:calendar id="fechainicio" value="#{sesionController.selected.inicio}" rendered="#{util.getVerCrear()}" /> 
+                    
+                     <p:outputLabel for="fechafin" value="fecha fin" rendered="#{util.getVerCrear()}" />
+                     <p:calendar id="fechafin" value="#{sesionController.selected.fin}" rendered="#{util.getVerCrear()}" /> 
+                    
+                    
+                   <br/>
+                   <p:commandButton id="btoCrear" value="crea"  action="#{sesionController.crearSesion()}" actionListener="#{util.setVerCrear(false)}" update="paginas" process="@all" rendered="#{util.getVerCrear()}">
+                     
+                 </p:commandButton>
+                    
+                   <p:commandButton value="Cancelar"  action="#{util.setVerCrear(false)}" update="paginas" process="@this" rendered="#{util.getVerCrear()}" />
+                 
+        
+           
+           
+        
+        
+        <!-- FIN FORMULARIO CREACION -->
+        
+       
+        <!-- INICIO DATATABLE -->
+            <p:growl id="msgs" showDetail="true"/>
+            
+            <p:dataTable id="general" var="p" value="#{sesionController.tablaSesion()}" editable="true" style="margin-bottom:20px;width: 100%; height: 100%" 
+            rows="10"
+            paginator="true"
+            paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+            rowsPerPageTemplate="5,10,15">
+                <f:facet name="header">
+                Cursos
+                </f:facet>
+
+                <p:ajax event="rowEdit" listener="#{sesionController.onRowEdit}" update="paginas:form:msgs" />
+                <p:ajax event="rowEditCancel" listener="#{sesionController.onRowCancel}" update="paginas:form:msgs" />
+
+                <p:column headerText="Id session" style="width: 20px" >
+                    <p:cellEditor>
+                        <f:facet name="output"><h:outputText value="#{p.idSesion}" /></f:facet>
+                        <f:facet name="input"><p:inputText value="#{p.idSesion}" readonly="true" style="width: 100%"/></f:facet>
+                    </p:cellEditor>
+                </p:column>
+                
+                <p:column headerText="Usuario">
+                    <p:cellEditor>
+                        <f:facet name="output"><h:outputText value="#{p.idUsuario.username}"/></f:facet>
+                        <f:facet name="input">
+                            <h:selectOneMenu value="#{sesionController.selected.idUsuario}" >
+                                <f:selectItems value="#{usuarioController.tablaUsuario()}" var="c"  itemLabel="#{c.username}"  />
+                            </h:selectOneMenu>
+                        </f:facet>
+                    </p:cellEditor>
+                </p:column>
+                
+               
+                
+               <p:column headerText="ip">
+                    <p:cellEditor>
+                        <f:facet name="output"><h:outputText value="#{p.ip}"/></f:facet>
+                        <f:facet name="input"><p:inputText  value="#{sesionController.selected.ip}"/></f:facet>
+                    </p:cellEditor>
+                </p:column>
+               
+                
+                <p:column headerText="Fecha inicio">
+                    <p:cellEditor>
+                        <f:facet name="output"><h:outputText value="#{p.inicio}"/></f:facet>
+                        <f:facet name="input">
+                            <p:outputLabel for="fehcai" value="fecha Inicio" />
+                            <p:calendar id="fehcai" value="#{sesionController.selected.inicio}"  /> 
+                        </f:facet>
+                    </p:cellEditor>
+                </p:column>
+                
+                <p:column headerText="Fecha fin">
+                    <p:cellEditor>
+                        <f:facet name="output"><h:outputText value="#{p.fin}"/></f:facet>
+                        <f:facet name="input">
+                            <p:outputLabel for="fechaf" value="fecha Fin" />
+                            <p:calendar id="fechaf" value="#{sesionController.selected.fin}"  /> 
+                        </f:facet>
+                    </p:cellEditor>
+                </p:column>
+                
+              
+                <p:column  headerText="Acciones" style="width:50px">
+                    
+                    <p:rowEditor> 
+                        #{sesionController.cargaDatos(p.idSesion)}
+                    </p:rowEditor>
+                    
+                    <p:commandLink value="Eliminar" actionListener="#{sesionController.eliminarSesion(p.idSesion)}" update="general">
+                                <p:confirm header="Confirmation" message="¿Estas Seguro?" icon="ui-icon-alert" />
+                            </p:commandLink>
+                    
+                            <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                                <p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                                <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                            </p:confirmDialog>
+                      
+                </p:column>
+            </p:dataTable>
+          <!-- FIN DATATABLE -->
+           
+        </h:form>
+        <!-- FIN FORM GENERAL -->
+           
+        </h:body>
+  
+</html>

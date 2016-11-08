@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+
+   
+    <h:head>
+        <title>Mantenedor</title>
+        
+          <meta name="viewport" content="width=device-width; initial-scale=1.0"></meta>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        
+         
+        
+        
+   </h:head>
+    <h:body>
+        
+        <!--FORM GENERAL-->
+        <p:commandButton id="btoMostrarCrear" value="Nuevo" actionListener="#{util.setVerCrear(true)}" update="paginas" process="@all" rendered="#{!util.getVerCrear()}" action="#{inscripcionCursoController.prepararCrear()}" />
+        
+        
+     <h:form id="form"  > 
+        
+        <!-- INICIO DE FORMULARIO CREACION -->
+       
+                    <p:outputLabel  value="ID inscripcion" rendered="#{util.getVerCrear()}" />
+                    <p:inputText  value="" readonly="true" rendered="#{util.getVerCrear()}"/>
+                    
+                    
+                    <p:outputLabel  value="Usuario" rendered="#{util.getVerCrear()}"/>
+                    <h:selectOneMenu value="#{inscripcionCursoController.selected.idUsuario}" rendered="#{util.getVerCrear()}">
+                        <f:selectItems value="#{usuarioController.tablaUsuario()}" var="c"  itemLabel="#{c.username}"  />
+                    </h:selectOneMenu>
+                    
+                    <p:outputLabel  value="Curso" rendered="#{util.getVerCrear()}"/>
+                    <h:selectOneMenu value="#{inscripcionCursoController.selected.idCurso}" rendered="#{util.getVerCrear()}">
+                        <f:selectItems value="#{cursoController.tablaCursos()}" var="cur"  itemLabel="#{cur.nomCurso}"  />
+                    </h:selectOneMenu>
+                                        
+                    <p:outputLabel for="fechainscripcion" value="fecha inscripcion" rendered="#{util.getVerCrear()}" />
+                    <p:calendar id="fechainscripcion" value="#{inscripcionCursoController.selected.fechaInsc}" rendered="#{util.getVerCrear()}" /> 
+                    
+                     <p:outputLabel for="descripcionInscripcion"  value="Descripcion" rendered="#{util.getVerCrear()}"/>
+                     <p:inputText id="descripcionInscripcion" value="#{inscripcionCursoController.selected.descripcion}"  rendered="#{util.getVerCrear()}"/>
+                    
+                     <p:outputLabel  value="Curso" rendered="#{util.getVerCrear()}"/>
+                     <h:selectOneMenu value="#{inscripcionCursoController.selected.tipoAlumno}" rendered="#{util.getVerCrear()}">
+                         <f:selectItems value="#{tipoAlumnoController.tablaTipoAlumno()}" var="ta"  itemLabel="#{ta.nombreTipo}"  />
+                    </h:selectOneMenu>
+                     
+                    
+                   <br/>
+                   <p:commandButton id="btoCrear" value="crea"  action="#{inscripcionCursoController.crearInscripciones()}" actionListener="#{util.setVerCrear(false)}" update="paginas" process="@all" rendered="#{util.getVerCrear()}">
+                     
+                 </p:commandButton>
+                    
+                   <p:commandButton value="Cancelar"  action="#{util.setVerCrear(false)}" update="paginas" process="@this" rendered="#{util.getVerCrear()}" />
+                 
+        
+           
+           
+        
+        
+        <!-- FIN FORMULARIO CREACION -->
+        
+       
+        <!-- INICIO DATATABLE -->
+            <p:growl id="msgs" showDetail="true"/>
+            
+            <p:dataTable id="general" var="p" value="#{inscripcionCursoController.tablaInscripcion()}" editable="true" style="margin-bottom:20px;width: 100%; height: 100%" 
+            rows="10"
+            paginator="true"
+            paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+            rowsPerPageTemplate="5,10,15">
+                <f:facet name="header">
+                Cursos
+                </f:facet>
+
+                <p:ajax event="rowEdit" listener="#{inscripcionCursoController.onRowEdit}" update="paginas:form:msgs" />
+                <p:ajax event="rowEditCancel" listener="#{inscripcionCursoController.onRowCancel}" update="paginas:form:msgs" />
+
+                <p:column headerText="Id inscripcion" style="width: 20px" >
+                    <p:cellEditor>
+                        <f:facet name="output"><h:outputText value="#{p.idInsc}" /></f:facet>
+                        <f:facet name="input"><p:inputText value="#{p.idInsc}" readonly="true" style="width: 100%"/></f:facet>
+                    </p:cellEditor>
+                </p:column>
+                
+                <p:column headerText="Unidad">
+                    <p:cellEditor>
+                        <f:facet name="output"><h:outputText value="#{p.idUsuario.username}"/></f:facet>
+                        <f:facet name="input">
+                            <h:selectOneMenu value="#{inscripcionCursoController.selected.idUsuario}" >
+                                <f:selectItems value="#{usuarioController.tablaUsuario()}" var="c"  itemLabel="#{c.username}"  />
+                            </h:selectOneMenu>
+                        </f:facet>
+                    </p:cellEditor>
+                </p:column>
+                
+                <p:column headerText="Curso">
+                    <p:cellEditor>
+                        <f:facet name="output"><h:outputText value="#{p.idCurso.nomCurso}"/></f:facet>
+                        <f:facet name="input">
+                            <h:selectOneMenu value="#{inscripcionCursoController.selected.idCurso}" >
+                                <f:selectItems value="#{cursoController.tablaCursos()}" var="cur"  itemLabel="#{cur.nomCurso}"  />
+                            </h:selectOneMenu>
+                        </f:facet>
+                    </p:cellEditor>
+                </p:column>
+                
+                <p:column headerText="Fecha">
+                    <p:cellEditor>
+                        <f:facet name="output"><h:outputText value="#{p.fechaInsc}"/></f:facet>
+                        <f:facet name="input">
+                            <p:outputLabel for="fechaIns" value="fecha Contenidos" />
+                            <p:calendar id="fechaIns" value="#{inscripcionCursoController.selected.fechaInsc}"  /> 
+                        </f:facet>
+                    </p:cellEditor>
+                </p:column>
+                
+                <p:column headerText="Descripcion">
+                    <p:cellEditor>
+                        <f:facet name="output">
+                            
+                            <p:commandButton value="Ver" type="button" onclick="PF('#{inscripcionCursoController.verDescripcion(idInsc)}').show();" />
+                            
+                            <p:dialog header="Basic Dialog" widgetVar="#{inscripcionCursoController.verDescripcion(idInsc)}"  >
+                           
+                                <h:outputText value="#{p.descripcion}" />
+                            </p:dialog>
+                            
+                        </f:facet>
+                        <f:facet name="input"> <p:inputTextarea value="#{inscripcionCursoController.selected.descripcion}" /></f:facet>
+                    </p:cellEditor>
+                </p:column>
+                
+                
+                <p:column headerText="Tipo Alumno">
+                    <p:cellEditor>
+                        <f:facet name="output"><h:outputText value="#{p.tipoAlumno.nombreTipo}"/></f:facet>
+                        <f:facet name="input">
+                            <h:selectOneMenu value="#{inscripcionCursoController.selected.tipoAlumno}" >
+                         <f:selectItems value="#{tipoAlumnoController.tablaTipoAlumno()}" var="ta"  itemLabel="#{ta.nombreTipo}"  />
+                    </h:selectOneMenu>
+                        </f:facet>
+                    </p:cellEditor>
+                </p:column>
+                
+                
+              
+                <p:column  headerText="Acciones" style="width:50px">
+                    
+                    <p:rowEditor> 
+                        #{inscripcionCursoController.cargaDatos(p.idInsc)}
+                    </p:rowEditor>
+                    
+                    <p:commandLink value="Eliminar" actionListener="#{inscripcionCursoController.eliminarInscripcion(p.idInsc)}" update="general">
+                                <p:confirm header="Confirmation" message="¿Estas Seguro?" icon="ui-icon-alert" />
+                            </p:commandLink>
+                    
+                            <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                                <p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                                <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                            </p:confirmDialog>
+                      
+                </p:column>
+            </p:dataTable>
+          <!-- FIN DATATABLE -->
+           
+        </h:form>
+        <!-- FIN FORM GENERAL -->
+           
+        </h:body>
+  
+</html>

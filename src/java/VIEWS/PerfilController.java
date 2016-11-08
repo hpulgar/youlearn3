@@ -6,6 +6,7 @@ import VIEWS.util.PaginationHelper;
 import MODELS.PerfilFacade;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.ResourceBundle;
 import javax.ejb.EJB;
 import javax.inject.Named;
@@ -165,6 +166,16 @@ public class PerfilController implements Serializable {
             return ejbFacade.find(idperfil).getNomPerfil();// este metodo devuleve el tipo de usuario
         }
     }
+      
+      public List<Perfil> tablaPerfil()
+      {
+          return ejbFacade.findAll();
+      }
+      
+      
+      
+      
+      
 
     public DataModel getItems() {
         if (items == null) {
@@ -205,6 +216,10 @@ public class PerfilController implements Serializable {
         return ejbFacade.find(id);
     }
 
+    
+    
+    
+    
     @FacesConverter(forClass = Perfil.class)
     public static class PerfilControllerConverter implements Converter {
 

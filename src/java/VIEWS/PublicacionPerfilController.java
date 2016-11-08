@@ -1,6 +1,6 @@
 package VIEWS;
 
-import ENTITIES.Amigos;
+
 import ENTITIES.Curso;
 import ENTITIES.ForoPosteos;
 import ENTITIES.PublicacionPerfil;
@@ -190,25 +190,7 @@ public class PublicacionPerfilController extends AmigosController implements Ser
         }
     }
     
-    public void creacion()
-    {
-        System.out.println("Dentra o no Dentra");
-        try{
-//            System.out.println("Antes de Crear");
-//            System.out.println("fecha publicacion "+current.getFechaPublicacion());
-//            System.out.println("Publicacion "+current.getPublicacion());
-//            System.out.println("Publicacion "+current.getPublicacion());
-            ejbFacade.create(current);
-            current = null;
-            
-            //return "/MantenedorGeneral.xhtml";
-            
-        }catch(Exception e)
-        {
-            System.out.println("ERRRROOORR "+e);
-           // return "/publicacionDialog.xhtml";
-        }
-    }
+    
 
     public String prepareEdit() {
         current = (PublicacionPerfil) getItems().getRowData();
@@ -517,26 +499,12 @@ public class PublicacionPerfilController extends AmigosController implements Ser
     
     
     
-    
-    
-    
-    
-    public List<PublicacionPerfil> todasPublicaciones()
-    {
-        return ejbFacade.findAll();
-    }
-    
-    
-    public void onRowEdit(RowEditEvent event) {
+     public void onRowEdit(RowEditEvent event) {
         FacesMessage msg = new FacesMessage("Car Edited", ((PublicacionPerfil) event.getObject()).getIdPublicacion().toString());
         FacesContext.getCurrentInstance().addMessage(null, msg);
         
-        ((PublicacionPerfil) event.getObject()).setPublicacion(current.getPublicacion());
-        //((PublicacionPerfil) event.getObject()).setIdPublicacion(current.getIdPublicacion());
-        System.out.println("Imprime publicacion q llega por evento: "+((PublicacionPerfil) event.getObject()).getPublicacion());
-        //System.out.println("Imprime publicacion q llega por evento: "+((PublicacionPerfil) event.getObject()).getIdPublicacion());
-        //current = ((PublicacionPerfil) event.getObject());
-        ejbFacade.edit(((PublicacionPerfil) event.getObject()));
+        current.setIdPublicacion(((PublicacionPerfil) event.getObject()).getIdPublicacion());
+        ejbFacade.edit(current);
       
         
     }
@@ -554,17 +522,54 @@ public class PublicacionPerfilController extends AmigosController implements Ser
         
     }
     
+    
+    public void cargaDatos(int id)
+    {
+        current = ejbFacade.find(id);
+    }
+    
+    public void prepararCrear()
+    {
+        current = null;
+    }
+    
+    
+    
+    public List<PublicacionPerfil> todasPublicaciones()
+    {
+        return ejbFacade.findAll();
+    }
+    
+    public void creacion()
+    {
+        System.out.println("Dentra o no Dentra");
+        try{
+         
+            current.setIdPublicacion(null);
+            ejbFacade.create(current);
+            current = null;
+            
+            //return "/MantenedorGeneral.xhtml";
+            
+        }catch(Exception e)
+        {
+            System.out.println("ERRRROOORR "+e);
+           // return "/publicacionDialog.xhtml";
+        }
+    }
+   
     //////////////////////FIN EDITAR MANTENEDOR
       
     
     
+    
 
-    @Override
+    
     public SelectItem[] getItemsAvailableSelectMany() {
         return JsfUtil.getSelectItems(ejbFacade.findAll(), false);
     }
 
-    @Override
+    
     public SelectItem[] getItemsAvailableSelectOne() {
         return JsfUtil.getSelectItems(ejbFacade.findAll(), true);
     }

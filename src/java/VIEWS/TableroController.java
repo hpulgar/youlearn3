@@ -22,6 +22,8 @@ import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
 import java.util.*;
+import javax.faces.application.FacesMessage;
+import org.primefaces.event.RowEditEvent;
 
 @Named("tableroController")
 @SessionScoped
@@ -321,7 +323,62 @@ public class TableroController implements Serializable {
             
     }
     
+    /////////////////////////////////////////////MANTENEDOR
     
+    public List<Tablero> tablaTablero()
+    {
+        return ejbFacade.findAll();
+    }    
+    
+    public void onRowEdit(RowEditEvent event)
+    {
+        FacesMessage msg = new FacesMessage("Inscripcion Editada",((Tablero) event.getObject()).getIdTablero().toString());
+        FacesContext.getCurrentInstance().addMessage(null, msg);
+        current.setIdTablero(((Tablero) event.getObject()).getIdTablero());
+        ejbFacade.edit(current);
+        current= null;
+        
+    }
+    
+    public void onRowCancel(RowEditEvent event)
+    {
+        FacesMessage msg = new FacesMessage("Edicion Cancelada",((Tablero) event.getObject()).getIdTablero().toString());
+        FacesContext.getCurrentInstance().addMessage(null, msg);
+    }
+    
+    public void creacionTablero()
+    {
+        
+        try
+        {
+            current.setIdTablero(null);
+            ejbFacade.create(current);
+            current = null;
+            
+        }catch(Exception e)
+        {
+            System.out.println("Error al crear el Permiso "+e);
+        }
+    }
+    
+    public void eliminarTablero(int id)
+    {
+        current.setIdTablero(id);
+        ejbFacade.remove(current);
+        current = null;
+    }
+    
+    public void cargaDatos(int id)
+    {
+        current = ejbFacade.find(id);
+    }
+    
+    public void prepararCrear()
+    {
+        current = null;
+    }
+    
+    //////////////////////////////////////////
     
     
     @FacesConverter(forClass = Tablero.class)

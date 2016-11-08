@@ -11,6 +11,7 @@ import java.util.ResourceBundle;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
@@ -18,6 +19,7 @@ import javax.faces.convert.FacesConverter;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
+import org.primefaces.event.RowEditEvent;
 
 @Named("paisController")
 @SessionScoped
@@ -200,17 +202,66 @@ public class PaisController implements Serializable {
         recreateModel();
         return "List";
     }
-
+    /////////////////////////////////////////////// MANTENEDOR 
     
     public List<Pais> verPaises()
     {
         
-        arPais.clear();
-        return arPais = ejbFacade.findAll();
+        return ejbFacade.findAll();
+        
+    }
+    
+    public void onRowEdit(RowEditEvent event)
+    {
+        FacesMessage msg = new FacesMessage("Inscripcion Editada",((Pais) event.getObject()).getIdPais().toString());
+        FacesContext.getCurrentInstance().addMessage(null, msg);
+        current.setIdPais(((Pais) event.getObject()).getIdPais());
+        ejbFacade.edit(current);
+        current= null;
+        
+    }
+    
+    public void onRowCancel(RowEditEvent event)
+    {
+        FacesMessage msg = new FacesMessage("Edicion Cancelada",((Pais) event.getObject()).getIdPais().toString());
+        FacesContext.getCurrentInstance().addMessage(null, msg);
+    }
+    
+    public void crearPais()
+    {
+        try{
+            current.setIdPais(null);
+            ejbFacade.create(current);
+            current = null;
+        }catch(Exception e){
+            System.out.println("Error al crear la inscripcion "+e);
+        }
+    }
+    
+    public void eliminarPais(int id)
+    {
+       
+       current.setIdPais(id);
+       System.out.println("id a eliminar "+current.getIdPais());
+       ejbFacade.remove(current);
+       current = null;
+      
+    }
+    
+    public void cargaDatos(int id)
+    {
+        
+        current = ejbFacade.find(id);
         
     }
     
     
+    public void prepararCrear()
+    {
+        current = null;
+    }
+    
+    //////////////////////////////////////////////////////
     
     public SelectItem[] getItemsAvailableSelectMany() {
         return JsfUtil.getSelectItems(ejbFacade.findAll(), false);

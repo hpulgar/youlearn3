@@ -47,7 +47,7 @@
                     
                     <p:outputLabel  value="id Curso" rendered="#{util.getVerCrear()}"/>
                     <h:selectOneMenu value="#{contenidosController.selected.idCurso}" rendered="#{util.getVerCrear()}">
-                        <f:selectItems value="#{cursoController.tablaCursos()}" var="c" itemValue="#{c.idCurso}" itemLabel="#{c.nomCurso}"  />
+                        <f:selectItems value="#{cursoController.tablaCursos()}" var="c"  itemLabel="#{c.nomCurso}"  />
                     </h:selectOneMenu>
                     
                     
@@ -135,7 +135,7 @@
                         <f:facet name="output"><h:outputText value="#{p.idCurso.nomCurso}"/></f:facet>
                         <f:facet name="input">
                             <h:selectOneMenu value="#{contenidosController.selected.idCurso}" style="width:100%">
-                                <f:selectItems value="#{cursoController.itemsAvailableSelectOne}" />
+                                <f:selectItems value="#{cursoController.tablaCursos()}" itemLabel="#{c.nomCurso}" var="c" />
                             </h:selectOneMenu>
                         </f:facet>
                     </p:cellEditor>

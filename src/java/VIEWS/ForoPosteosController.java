@@ -369,6 +369,12 @@ public class ForoPosteosController implements Serializable {
 
         return arForo;
     }
+   
+   
+   public List<ForoPosteos> tablaForo()
+   {
+       return ejbFacade.findAll();
+   }
        
        
        

@@ -21,6 +21,8 @@ import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
 import java.util.*;
+import javax.faces.application.FacesMessage;
+import org.primefaces.event.RowEditEvent;
 
 @Named("amigosController")
 @SessionScoped
@@ -72,6 +74,15 @@ public class AmigosController implements Serializable {
 //        return current;
 //    }
 
+    
+        public Amigos getAmig() {
+        if (current == null) {
+            current = new Amigos();
+            selectedItemIndex = -1;
+        }
+        return current;
+    }
+    
     private AmigosFacade getFacade() {
         return ejbFacade;
     }
@@ -368,7 +379,62 @@ public class AmigosController implements Serializable {
     
     
     
-    ////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////// INICIO MANTENEDOR
+    
+    public List<Amigos> tablaAmigos()
+    {
+        return ejbFacade.findAll();
+    }
+    
+    public void onRowEdit(RowEditEvent event)
+    {
+        FacesMessage msg = new FacesMessage("Inscripcion Editada",((Amigos) event.getObject()).getIdAmistad().toString());
+        FacesContext.getCurrentInstance().addMessage(null, msg);
+        current.setIdAmistad((((Amigos) event.getObject()).getIdAmistad()));
+        ejbFacade.edit(current);
+        current= null;
+        
+    }
+    
+    public void onRowCancel(RowEditEvent event)
+    {
+        FacesMessage msg = new FacesMessage("Edicion Cancelada",((Amigos) event.getObject()).getIdAmistad().toString());
+        FacesContext.getCurrentInstance().addMessage(null, msg);
+    }
+    
+    public void crearAmistad()
+    {
+        
+        try
+        {
+            current.setIdAmistad(null);
+            ejbFacade.create(current);
+            current = null;
+            
+        }catch(Exception e)
+        {
+            System.out.println("Error al crear la Amistad "+e);
+        }
+    }
+    
+    public void eliminarAmistad(int id)
+    {
+        current.setIdAmistad(id);
+        ejbFacade.remove(current);
+        current = null;
+    }
+    
+    public void cargaDatos(int id)
+    {
+        current = ejbFacade.find(id);
+    }
+    
+    public void prepararCrear()
+    {
+        current = null;
+    }
+    
+    ///////////////////////////////////////////////////////////////
     @FacesConverter(forClass = Amigos.class)
     public static class AmigosControllerConverter implements Converter {
 

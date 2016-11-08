@@ -72,6 +72,10 @@ public abstract class AbstractFacade<T> {
     
     public void crear(T entity) {
         getEntityManager().merge(entity);
+        
+        
+        
+        
     }
 //    public void borrarCurso(Curso e)
 //    {
