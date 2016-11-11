@@ -289,6 +289,7 @@ public class MenuController implements Serializable {
             System.out.println("Antes de Crear");
             System.out.println("DATO MENU "+current.getNombre());
           
+            current.setIdMenu(null);
             ejbFacade.create(current);
             current = null;
            
@@ -300,6 +301,24 @@ public class MenuController implements Serializable {
            // return "/publicacionDialog.xhtml";
         }
      }
+     
+     public void cargaDatos(int id)
+    {
+        
+        current = ejbFacade.find(id);
+        
+    }
+    
+    public void prepararCrear()
+    {
+        current = null;
+    }
+     
+     
+     
+     
+     
+     
     ////////////////////////////////////////////
 
     @FacesConverter(forClass = Menu.class)

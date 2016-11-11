@@ -535,6 +535,7 @@ public void resetValues()
             System.out.println("Antes de Crear");
             System.out.println("fecha publicacion "+current.getNomCurso());
           
+            current.setIdCurso(null);
             ejbFacade.create(current);
             current = null;
            
@@ -550,6 +551,19 @@ public void resetValues()
         public void onRowCancel(RowEditEvent event) {
         FacesMessage msg = new FacesMessage("Edit Cancelled", ((Curso) event.getObject()).getIdCurso().toString());
         FacesContext.getCurrentInstance().addMessage(null, msg);
+    }
+        
+        
+        public void cargaDatos(int id)
+    {
+        
+        current = ejbFacade.find(id);
+        
+    }
+    
+    public void prepararCrear()
+    {
+        current = null;
     }
         
            /////////////////////////////////////////////////////////////////////

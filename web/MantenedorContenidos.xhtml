@@ -22,7 +22,7 @@
     <h:body>
         
         <!--FORM GENERAL-->
-        <p:commandButton id="btoMostrarCrear" value="Nuevo" actionListener="#{util.setVerCrear(true)}" update="paginas" process="@all" rendered="#{!util.getVerCrear()}" />
+        <p:commandButton id="btoMostrarCrear" value="Nuevo" actionListener="#{util.setVerCrear(true)}" update="paginas" process="@all" rendered="#{!util.getVerCrear()}" action="#{contenidosController.prepararCrear()}" />
         
         
      <h:form id="form"  > 
@@ -76,9 +76,11 @@
             paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
             rowsPerPageTemplate="5,10,15">
                 <f:facet name="header">
-                Cursos
+                Contenidos
                 </f:facet>
 
+                
+                <p:ajax event="rowEditInit" listener="#{contenidosController.cargaDatos(p.idContenido)}"  />
                 <p:ajax event="rowEdit" listener="#{contenidosController.onRowEdit}" update="paginas:form:msgs" />
                 <p:ajax event="rowEditCancel" listener="#{contenidosController.onRowCancel}" update="paginas:form:msgs" />
 
@@ -140,16 +142,6 @@
                         </f:facet>
                     </p:cellEditor>
                 </p:column>
-                
-                
-              
-                
-            
-                
-              
-                
-               
-                
                 
                 
                 

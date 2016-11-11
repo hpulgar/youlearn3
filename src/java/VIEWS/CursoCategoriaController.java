@@ -237,6 +237,7 @@ public class CursoCategoriaController implements Serializable {
             System.out.println("Antes de Crear");
             System.out.println("fecha publicacion "+current.getNomCat());
           
+            current.setIdCat(null);
             ejbFacade.create(current);
             current = null;
            
@@ -277,6 +278,18 @@ public class CursoCategoriaController implements Serializable {
             ejbFacade.edit(current); //REFORMULAR?????
             current = null;
         }
+     
+    public void cargaDatos(int id)
+    {
+        
+        current = ejbFacade.find(id);
+        
+    }
+    
+    public void prepararCrear()
+    {
+        current = null;
+    }
      
     ////////////////////////////////
     

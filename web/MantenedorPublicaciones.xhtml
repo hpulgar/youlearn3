@@ -86,13 +86,16 @@
             rows="10"
             paginator="true"
             paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-            rowsPerPageTemplate="5,10,15">
+            rowsPerPageTemplate="5,10,15" rendered="#{!util.getVerCrear()}"  > 
                 <f:facet name="header">
                 Publicaciones
                 </f:facet>
 
-                <p:ajax event="rowEdit" listener="#{publicacionPerfilController.onRowEdit}" update="paginas:form:msgs" />
+                
+                <p:ajax event="rowEditInit" listener="#{publicacionPerfilController.cargaDatos(p.idPublicacion)}"  />
+                <p:ajax event="rowEdit" listener="#{publicacionPerfilController.onRowEdit}"  update="paginas:form:msgs"  />
                 <p:ajax event="rowEditCancel" listener="#{publicacionPerfilController.onRowCancel}" update="paginas:form:msgs" />
+                
 
                 <p:column headerText="id" style="width: 20px" >
                     <p:cellEditor>
@@ -171,11 +174,12 @@
                 </p:column>
                 
                 <p:column  headerText="Acciones" style="width:50px">
-                    
-                    <p:rowEditor  >
-                         #{publicacionPerfilController.cargaDatos(p.idPublicacion)}
-                    </p:rowEditor>
+                       
+                            <p:rowEditor >
+                            
+                            </p:rowEditor>      
                         
+                   
                     
                             <p:commandLink value="Eliminar" actionListener="#{publicacionPerfilController.eliminarPublicacion(p.idPublicacion)}" update="general">
                                 <p:confirm header="Confirmation" message="¿Estas Seguro?" icon="ui-icon-alert" />

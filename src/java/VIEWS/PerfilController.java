@@ -203,6 +203,10 @@ public class PerfilController implements Serializable {
         recreateModel();
         return "List";
     }
+    
+    
+    
+    
 
     public SelectItem[] getItemsAvailableSelectMany() {
         return JsfUtil.getSelectItems(ejbFacade.findAll(), false);

@@ -509,6 +509,9 @@ public class PublicacionPerfilController extends AmigosController implements Ser
         
     }
     
+     
+     
+     
     public void onRowCancel(RowEditEvent event) {
         FacesMessage msg = new FacesMessage("Edit Cancelled", ((PublicacionPerfil) event.getObject()).getIdPublicacion().toString());
         FacesContext.getCurrentInstance().addMessage(null, msg);
@@ -522,11 +525,12 @@ public class PublicacionPerfilController extends AmigosController implements Ser
         
     }
     
-    
     public void cargaDatos(int id)
     {
+        System.out.println("ID POR PARAMETRO "+id);
         current = ejbFacade.find(id);
     }
+    
     
     public void prepararCrear()
     {

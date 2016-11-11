@@ -22,7 +22,7 @@
     <h:body>
         
         <!--FORM GENERAL-->
-         <p:commandButton id="btoMostrarCrear" value="Nuevo" actionListener="#{util.setVerCrear(true)}" update="paginas" process="@all" rendered="#{!util.getVerCrear()}" />
+        <p:commandButton id="btoMostrarCrear" value="Nuevo" actionListener="#{util.setVerCrear(true)}" update="paginas" process="@all" rendered="#{!util.getVerCrear()}" action="#{cursoSubCatController.prepararCrear()}" />
         
         
      <h:form id="form"  > 
@@ -34,7 +34,7 @@
                     
                     <p:outputLabel for="idCat" value="id Categoria" rendered="#{util.getVerCrear()}"/>
                     <p:selectOneMenu id="idCat" value="#{cursoSubCatController.selected.idCategoria}" rendered="#{util.getVerCrear()}">
-                        <f:selectItems value="#{cursoCategoriaController.itemsAvailableSelectOne}"  />
+                        <f:selectItems value="#{cursoCategoriaController.tablaCategoriasCurso()}" var="cca" itemLabel="#{cca.nomCat}"  />
                     </p:selectOneMenu>
                     
                     <p:outputLabel for="nombre_Subcat"  value="Nombre Sub Categoria" rendered="#{util.getVerCrear()}"/>
@@ -68,9 +68,10 @@
             paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
             rowsPerPageTemplate="5,10,15">
                 <f:facet name="header">
-                Categorias Curso
+                Cursos Sub Categorias
                 </f:facet>
-
+                
+                <p:ajax event="rowEditInit" listener="#{cursoSubCatController.cargaDatos(p.idSubcat)}"  />
                 <p:ajax event="rowEdit" listener="#{cursoSubCatController.onRowEdit}"  update="paginas:form:msgs" />
                 <p:ajax event="rowEditCancel" listener="#{cursoSubCatController.onRowCancel}" update="paginas:form:msgs" />
 
@@ -85,7 +86,7 @@
                     <p:cellEditor>
                         <f:facet name="output"><h:outputText value="#{p.idCategoria.nomCat}"/></f:facet>
                         <f:facet name="input"><p:selectOneMenu  value="#{cursoSubCatController.selected.idCategoria}" >
-                        <f:selectItems value="#{cursoCategoriaController.itemsAvailableSelectOne}" />
+                                <f:selectItems value="#{cursoCategoriaController.tablaCategoriasCurso()}" var="ca" itemLabel="#{ca.nomCat}" />
                     </p:selectOneMenu></f:facet>
                     </p:cellEditor>
                 </p:column>

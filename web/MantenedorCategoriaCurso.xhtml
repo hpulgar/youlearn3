@@ -22,7 +22,7 @@
     <h:body>
         
         <!--FORM GENERAL-->
-         <p:commandButton id="btoMostrarCrear" value="Nuevo" actionListener="#{util.setVerCrear(true)}" update="paginas" process="@all" rendered="#{!util.getVerCrear()}" />
+        <p:commandButton id="btoMostrarCrear" value="Nuevo" actionListener="#{util.setVerCrear(true)}" update="paginas" process="@all" rendered="#{!util.getVerCrear()}" action="#{cursoCategoriaController.prepararCrear()}" />
         
         
      <h:form id="form"  > 
@@ -66,6 +66,7 @@
                 Categorias Curso
                 </f:facet>
 
+                <p:ajax event="rowEditInit" listener="#{cursoCategoriaController.cargaDatos(p.idCat)}"  />
                 <p:ajax event="rowEdit" listener="#{cursoCategoriaController.onRowEdit}"  update="paginas:form:msgs" />
                 <p:ajax event="rowEditCancel" listener="#{cursoCategoriaController.onRowCancel}" update="paginas:form:msgs" />
 

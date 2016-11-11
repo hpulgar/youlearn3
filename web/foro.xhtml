@@ -118,7 +118,7 @@
                                   <h:selectOneMenu value="#{foroSubcategoriaController.id_subCat}" id="subcategorias" >
                                       <f:selectItem itemValue="0" itemLabel="Seleccione una Categoria"  noSelectionOption="true"/> 
                                         <c:forEach items="#{foroSubcategoriaController.listaCategorias(foroCategoriaController.id_cat)}" var="fsc"  >
-                                        <f:selectItem itemValue="#{fsc.idSubcategoria}" itemLabel="#{fsc.titulo}" />                                        
+                                            <f:selectItem itemValue="#{fsc.idSubcategoria}" itemLabel="#{fsc.titulo}" />                                        
                                         </c:forEach>
                                       <p:ajax update="foroListado"/>
                                      </h:selectOneMenu>	

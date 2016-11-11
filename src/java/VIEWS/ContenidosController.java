@@ -352,6 +352,7 @@ public class ContenidosController implements Serializable {
     {
         try
         {
+            current.setIdContenido(null);
             ejbFacade.crear(current);
             current = null;
         }catch(Exception e)
@@ -371,6 +372,18 @@ public class ContenidosController implements Serializable {
     public String verContenido(int id)
     {
         return "conte"+id;
+    }
+    
+    public void cargaDatos(int id)
+    {
+        
+        current = ejbFacade.find(id);
+        
+    }
+    
+    public void prepararCrear()
+    {
+        current = null;
     }
     
     

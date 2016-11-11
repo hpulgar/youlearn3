@@ -460,6 +460,7 @@ public class InscripcionCursoController implements Serializable {
     public void crearInscripciones()
     {
         try{
+        current.setIdInsc(null);
         ejbFacade.create(current);
         current = null;
         }catch(Exception e){
@@ -490,7 +491,6 @@ public class InscripcionCursoController implements Serializable {
         current = ejbFacade.find(id);
         
     }
-    
     
     public void prepararCrear()
     {
