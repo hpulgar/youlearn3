@@ -58,7 +58,7 @@
                                 <p:menu >
                                     <p:submenu label="Ajax" >
                                         <c:forEach items="#{menuController.cargarMenu()}" var="menu">
-                                            <p:menuitem value="#{menu.nombre}"  actionListener="#{menuController.setNombreMenu(menu.url)}" update="paginas" process="@all" action="#{util.setVerCrear(false)}"/>
+                                            <p:menuitem value="#{menu.nombre}"  actionListener="#{menuController.setNombreMenu(menu.url)}" update="paginas" process="@all" action="#{util.setTabla(false)}"/>
                                             
                                         </c:forEach>
                                     </p:submenu>

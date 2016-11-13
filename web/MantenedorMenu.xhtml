@@ -19,19 +19,24 @@
         
         
    </h:head>
-    <h:body>
+    <h:body >
         
         <!--FORM GENERAL-->
-         <p:commandButton id="btoMostrarCrear" value="Nuevo" actionListener="#{util.setVerCrear(true)}" update="paginas" process="@all" rendered="#{!util.getVerCrear()}" action="#{menuController.prepararCrear()}"/>
+       
         
+        <p:commandButton id="btoMostrarCrear" value="Nuevo" actionListener="#{util.setVerCrear(true)}" update="paginas" process="@all" rendered="#{!util.tabla}" action="#{menuController.prepararCrear()}" />
         
-     <h:form id="form"  > 
+        <p:commandButton id="btoVerTabla" value="Tabla" actionListener="#{util.setTabla(true)}" update="paginas" process="@all" rendered="#{!util.getVerCrear()}" action="#{menuController.precarga()}" />
+         
+         <p:commandButton value="Cancelar"  action="#{util.setTabla(false)}" update="paginas" process="@this" rendered="#{util.tabla}" />
+        
+         <h:form id="form" >  
         
         <!-- INICIO DE FORMULARIO CREACION -->
        
                     <p:outputLabel  value="ID Menu" rendered="#{util.getVerCrear()}" />
                     <p:inputText  value="#{menuController.selected.idMenu}" readonly="true" rendered="#{util.getVerCrear()}"/>
-                    
+                     
                     <p:outputLabel for="nombreMenu"  value="NombreMenu" rendered="#{util.getVerCrear()}"/>
                     <p:inputText id="nombreMenu" value="#{menuController.selected.nombre}"  rendered="#{util.getVerCrear()}"/>
                     
@@ -39,12 +44,10 @@
                     <p:inputText id="url" value="#{menuController.selected.url}"  rendered="#{util.getVerCrear()}"/>
                     
                     <p:outputLabel for="idperfil" value="id Perfil" rendered="#{util.getVerCrear()}"/>
-                    <p:selectOneMenu id="idperfil" value="#{menuController.selected.idPerfil}" rendered="#{util.getVerCrear()}">
+                    <p:selectOneMenu id="idperfil" value="#{menuController.selected.idPerfil}" rendered="#{util.getVerCrear()}" >
+                        <f:selectItem itemLabel="Select One" itemValue="" />
                         <f:selectItems value="#{perfilController.tablaPerfil()}" var="pe" itemLabel="#{pe.nomPerfil}" />
                     </p:selectOneMenu>
-                    
-                    
-                    
                     
                     
                    <br/>
@@ -54,9 +57,6 @@
                     
                    <p:commandButton value="Cancelar"  action="#{util.setVerCrear(false)}" update="paginas" process="@this" rendered="#{util.getVerCrear()}" />
                  
-        
-           
-           
         
         
         <!-- FIN FORMULARIO CREACION -->
@@ -69,26 +69,28 @@
             rows="10"
             paginator="true"
             paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-            rowsPerPageTemplate="5,10,15" >
+            rowsPerPageTemplate="5,10,15"  rendered="#{util.tabla}"  >
                 <f:facet name="header">
                 Menu
                 </f:facet>
 
-                <p:ajax event="rowEditInit" listener="#{menuController.cargaDatos(p.idMenu)}"  />
+                <p:ajax event="rowEditInit" listener="#{menuController.cargaDatos(p.idMenu)}" />
+                
                 <p:ajax event="rowEdit" listener="#{menuController.onRowEdit}" update="paginas:form:msgs" />
                 <p:ajax event="rowEditCancel" listener="#{menuController.onRowCancel}" update="paginas:form:msgs" />
 
-                <p:column headerText="Id Menu" style="width: 20px" >
+                
+                <p:column headerText="Id Menu" style="width: 20px"  >
                     <p:cellEditor>
                         <f:facet name="output"><h:outputText value="#{p.idMenu}" /></f:facet>
-                        <f:facet name="input"><p:inputText id="modelInput" value="#{p.idMenu}" readonly="true" style="width: 100%"/></f:facet>
+                        <f:facet name="input"><p:inputText  value="#{p.idMenu}" readonly="true" style="width: 100%"/></f:facet>
                     </p:cellEditor>
                 </p:column>
                 
-                <p:column headerText="Nombre Menu">
+                <p:column headerText="Nombre Menu" >
                     <p:cellEditor>
                         <f:facet name="output"><h:outputText value="#{p.nombre}"/></f:facet>
-                        <f:facet name="input"><p:inputText  value="#{menuController.selected.nombre}" style="width: 100%"/></f:facet>
+                        <f:facet name="input" ><p:inputText  value="#{menuController.selected.nombre}" style="width: 100%"/></f:facet>
                     </p:cellEditor>
                 </p:column>
                 
@@ -101,7 +103,7 @@
                 
                 <p:column headerText="Perfil">
                     <p:cellEditor>
-                        <f:facet name="output"><h:outputText value="#{p.idPerfil.nomPerfil}"/></f:facet>
+                        <f:facet name="output" ><h:outputText value="#{p.idPerfil.nomPerfil}" /></f:facet>
                         <f:facet name="input">
                             <h:selectOneMenu value="#{menuController.selected.idPerfil}" style="width:100%">
                                 <f:selectItems value="#{perfilController.tablaPerfil()}" var="pp" itemLabel="#{pp.nomPerfil}" />
@@ -111,11 +113,10 @@
                 </p:column>
                 
                 
-                <p:column  headerText="Acciones" style="width:50px">
-                    
-                    <p:rowEditor  />
-                    
-                    <p:commandButton icon="ui-icon-close"   action="#{menuController.eliminarMenu(p.idMenu)}" update="paginas">
+                <p:column  headerText="Acciones" style="width:50px" id="acc"   >
+                        <p:rowEditor />
+                        
+                        <p:commandButton icon="ui-icon-close"   action="#{menuController.eliminarMenu(p.idMenu)}" update="general">
                                  <p:confirm header="Confirmation" message="¿Estas Seguro?" icon="ui-icon-alert" />
                             </p:commandButton>
                     
@@ -123,11 +124,15 @@
                                 <p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
                                 <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
                             </p:confirmDialog>
-                      
-                    
-                    
                 </p:column>
+                    
+                 
+               
             </p:dataTable>
+            
+            
+           
+                 
           <!-- FIN DATATABLE -->
            
         </h:form>

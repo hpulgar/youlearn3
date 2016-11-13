@@ -9,6 +9,7 @@ import ENTITIES.Menu;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -27,6 +28,14 @@ public class MenuFacade extends AbstractFacade<Menu> {
 
     public MenuFacade() {
         super(Menu.class);
+    }
+    
+    public Menu verMenu(int idmenu)
+    {
+        EntityManager m2 = getEntityManager();
+        Query q=m2.createNamedQuery("Menu.findByIdMenu").setParameter("idMenu", idmenu);
+        
+        return (Menu) q.getSingleResult();
     }
     
 }

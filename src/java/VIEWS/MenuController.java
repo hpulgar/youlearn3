@@ -304,8 +304,8 @@ public class MenuController implements Serializable {
      
      public void cargaDatos(int id)
     {
-        
-        current = ejbFacade.find(id);
+        System.out.println("id q llega "+id);
+        current = ejbFacade.verMenu(id);
         
     }
     
@@ -315,6 +315,17 @@ public class MenuController implements Serializable {
     }
      
      
+    public void precarga()
+    {
+        List<Menu> arMe;
+        arMe = ejbFacade.findAll();
+       
+        for(int i =0;i<arMe.size();i++)
+        {
+            current = arMe.get(i);
+        }
+                
+    }
      
      
      

@@ -22,14 +22,26 @@ import javax.servlet.http.HttpSession;
 public class Util implements Serializable {
     
      private boolean verCrear = false;
+     private boolean tabla;
      
      public boolean getVerCrear() {
         return verCrear;
     }
 
     public void setVerCrear(boolean verCrear) {
+        System.out.println("crear ? "+verCrear);
         this.verCrear = verCrear;
     }
+
+    public boolean isTabla() {
+        return tabla;
+    }
+
+    public void setTabla(boolean tabla) {
+        this.tabla = tabla;
+    }
+    
+    
  
       public static HttpSession getSession() {
         return (HttpSession)

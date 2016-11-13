@@ -64,6 +64,7 @@
                 Pais
                 </f:facet>
 
+                <p:ajax event="rowEditInit" listener="#{paisController.cargaDatos(p.idPais)}" />
                 <p:ajax event="rowEdit" listener="#{paisController.onRowEdit}" update="paginas:form:msgs" />
                 <p:ajax event="rowEditCancel" listener="#{paisController.onRowCancel}" update="paginas:form:msgs" />
 
@@ -84,7 +85,6 @@
                 <p:column  headerText="Acciones" style="width:50px" >
                     
                     <p:rowEditor    >   
-                        #{paisController.cargaDatos(p.idPais)}
                     </p:rowEditor>
                     
                     <p:commandLink value="Eliminar" actionListener="#{paisController.eliminarPais(p.idPais)}" update="general">
