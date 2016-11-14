@@ -74,7 +74,7 @@
                 Menu
                 </f:facet>
 
-                <p:ajax event="rowEditInit" listener="#{menuController.cargaDatos(p.idMenu)}" />
+                <p:ajax event="rowEditInit" listener="#{menuController.cargaDatos(p.idMenu)}" /> <!-- turirurururuu-->
                 
                 <p:ajax event="rowEdit" listener="#{menuController.onRowEdit}" update="paginas:form:msgs" />
                 <p:ajax event="rowEditCancel" listener="#{menuController.onRowCancel}" update="paginas:form:msgs" />
